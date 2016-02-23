@@ -1,0 +1,19 @@
+
+<html>
+<body xmlns:th="http://www.w3.org/1999/thymeleaf">
+<form action="#" th:action="@{/}" th:object="${diseaseSymptoms}" method="post">
+    <table>
+        <p>Please enter disease symptoms seperated by a comma</p>
+        <tr>
+            <td>symptoms:</td>
+            <td><input type="text" th:field="*{input}" /></td>
+            <!--<td th:if="${#fields.hasErrors('input')}" th:errors="*{input}">input Error</td>-->
+        </tr>
+        <tr>
+
+            <td><button type="submit">Submit</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
