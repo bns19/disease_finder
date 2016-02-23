@@ -10,6 +10,7 @@ import java.util.logging.Level;
 //import nl.bioinf.DiseaseFinder.bodyFeatures.FeatureCollection;
 //import nl.bioinf.DiseaseFinder.connection.OmimDataRetriever;
 //import nl.bioinf.DiseaseFinder.disease.Disease;
+import bodyFeatures.FeatureCollection;
 import connection.OmimDataRetriever;
 import disease.Disease;
 import org.json.JSONException;

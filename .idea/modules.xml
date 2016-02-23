@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SpringDiseaseFinderDemoI.iml" filepath="$PROJECT_DIR$/SpringDiseaseFinderDemoI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/diseasefinderspringport.iml" filepath="$PROJECT_DIR$/diseasefinderspringport.iml" />
     </modules>
   </component>
 </project>
