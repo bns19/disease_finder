@@ -35,38 +35,41 @@ import java.util.Map;
 public class FirstControllerClass {
     @RequestMapping(value="/trythis", method = RequestMethod.GET)
     public String indexPage(DiseaseSymptoms diseaseSymptoms, SymptomSet symptomSet) {
-        String groet = "hallo dan";
         return "frontpage";
-        //link to testPage
+        //link to formPage
     }
 
 
 
-//
-//    @RequestMapping(value="/",  method= RequestMethod.POST)
-//    public void processInput(DiseaseSymptoms diseaseSymptoms, Model model) {
-//        try {
-//            //PrintWriter out = response.getWriter();
-//
-//            String[] symptoms = diseaseSymptoms.getSymptomList();
-//            DiseaseCollection diseases = new DiseaseCollection(symptoms);
-//            ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
-//            HashMap<String, Disease> hashMapOfDiseases = diseases
-//                    .getDiseaseCollection();
-//            Iterator it = hashMapOfDiseases.entrySet().iterator();
-//            while (it.hasNext()) {
-//                Map.Entry pair = (Map.Entry) it.next();
-//                Disease disease = (Disease) pair.getValue();
-//                //out.println(disease.printSummary());
-//                disease.printSummary();
-//                it.remove(); // avoids a ConcurrentModificationException
-//        }
-//    } catch (JSONException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//        //out.close();
-//    }
-//    }
+
+    @RequestMapping(value="/diseaseResults",  method= RequestMethod.POST)
+    public void processInput(DiseaseSymptoms diseaseSymptoms, Model model) {
+        try {
+            //PrintWriter out = response.getWriter();
+            /**
+             * The problem has to do with the storing of the inputted symptoms.
+             */
+            String[] symptoms = diseaseSymptoms.getSymptomList();
+            System.out.println(symptoms);
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            DiseaseCollection diseases = new DiseaseCollection(symptoms);
+            ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
+            HashMap<String, Disease> hashMapOfDiseases = diseases
+                    .getDiseaseCollection();
+            Iterator it = hashMapOfDiseases.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry) it.next();
+                Disease disease = (Disease) pair.getValue();
+                //out.println(disease.printSummary());
+                disease.printSummary();
+                it.remove(); // avoids a ConcurrentModificationException
+        }
+    } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+        //out.close();
+    }
+    }
 }

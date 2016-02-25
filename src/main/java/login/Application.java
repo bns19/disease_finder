@@ -36,7 +36,7 @@ public class Application implements CommandLineRunner {
 
         log.info("Creating tables");
 
-        jdbcTemplate.update("CREATE TABLE customers(" + "id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255))", new MapSqlParameterSource());
+//        jdbcTemplate.update("CREATE TABLE customers(" + "id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255))", new MapSqlParameterSource());
 
 //        jdbcTemplate.execute("DROP TABLE customers IF EXISTS");
 //        jdbcTemplate.execute("CREATE TABLE customers(" + "id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255))");
