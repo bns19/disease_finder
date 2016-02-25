@@ -1,4 +1,4 @@
-package Controllers;
+package login;
 
 import Beans.DiseaseSymptoms;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class FirstControllerClass {
-    @RequestMapping(value="/", method = RequestMethod.GET)
+    @RequestMapping(value="/trythis", method = RequestMethod.GET)
     public String indexPage(DiseaseSymptoms diseaseSymptoms) {
         String groet = "hallo dan";
         return "indexTest";

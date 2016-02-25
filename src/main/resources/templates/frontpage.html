@@ -1,8 +1,8 @@
 <html>
 <body xmlns:th="http://www.w3.org/1999/thymeleaf">
-<form action="#" th:action="@{/}" th:object="${diseaseSymptoms}" method="post">
+<form action="#" th:action="@{/}" th:object="${symptomSet}" method="post">
     <table>
-        <p>Please enter disease symptoms seperated by a comma</p>
+        <p>Please add symptoms seperated by comma.</p>
         <tr>
             <td>symptoms:</td>
             <td><input type="text" th:field="*{input}" /></td>
