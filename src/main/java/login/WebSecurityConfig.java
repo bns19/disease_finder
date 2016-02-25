@@ -15,7 +15,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
 //                When adding websites to the antMatcher, these websites are not mandatory to be logged in (/** is all)
-                .antMatchers("/", "/home", "/form", "/results", "/index", "/indexTest").permitAll()
+                .antMatchers("/", "/home", "/form", "/results", "/index", "/indexTest", "/frontpage", "/trythis", "/diseaseResults").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

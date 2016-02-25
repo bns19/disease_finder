@@ -1,11 +1,11 @@
 <html>
 <body xmlns:th="http://www.w3.org/1999/thymeleaf">
-<form action="#" th:action="@{/}" th:object="${symptomSet}" method="post">
+<form action="#" th:action="@{/diseaseResults}" th:object="${symptomSet}" method="post">
     <table>
         <p>Please add symptoms seperated by comma.</p>
         <tr>
             <td>symptoms:</td>
-            <td><input type="text" th:field="*{input}" /></td>
+            <td><input type="text" th:field="*{symptoms}" /></td>
             <!--<td th:if="${#fields.hasErrors('input')}" th:errors="*{input}">input Error</td>-->
         </tr>
         <tr>

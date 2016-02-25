@@ -1,10 +1,21 @@
 package login;
 
 import Beans.DiseaseSymptoms;
+import disease.Disease;
+import disease.DiseaseCollection;
+import org.json.JSONException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import score.ScoreCalculator;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by bnsikkema on 23-2-16.
@@ -23,18 +34,20 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class FirstControllerClass {
     @RequestMapping(value="/trythis", method = RequestMethod.GET)
-    public String indexPage(DiseaseSymptoms diseaseSymptoms) {
+    public String indexPage(DiseaseSymptoms diseaseSymptoms, SymptomSet symptomSet) {
         String groet = "hallo dan";
-        return "indexTest";
+        return "frontpage";
         //link to testPage
     }
 
 
 
-
+//
 //    @RequestMapping(value="/",  method= RequestMethod.POST)
 //    public void processInput(DiseaseSymptoms diseaseSymptoms, Model model) {
 //        try {
+//            //PrintWriter out = response.getWriter();
+//
 //            String[] symptoms = diseaseSymptoms.getSymptomList();
 //            DiseaseCollection diseases = new DiseaseCollection(symptoms);
 //            ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
@@ -44,7 +57,8 @@ public class FirstControllerClass {
 //            while (it.hasNext()) {
 //                Map.Entry pair = (Map.Entry) it.next();
 //                Disease disease = (Disease) pair.getValue();
-//                out.println(disease.printSummary());
+//                //out.println(disease.printSummary());
+//                disease.printSummary();
 //                it.remove(); // avoids a ConcurrentModificationException
 //        }
 //    } catch (JSONException e) {
@@ -52,7 +66,7 @@ public class FirstControllerClass {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        } finally {
-//        out.close();
+//        //out.close();
 //    }
 //    }
 }
