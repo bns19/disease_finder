@@ -13,6 +13,7 @@ import score.ScoreCalculator;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -46,12 +47,8 @@ public class FirstControllerClass {
     public void processInput(DiseaseSymptoms diseaseSymptoms, Model model) {
         try {
             //PrintWriter out = response.getWriter();
-            /**
-             * The problem has to do with the storing of the inputted symptoms.
-             */
             String[] symptoms = diseaseSymptoms.getSymptomList();
-            System.out.println(symptoms);
-            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            System.out.println(Arrays.toString(symptoms));
             DiseaseCollection diseases = new DiseaseCollection(symptoms);
             ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
             HashMap<String, Disease> hashMapOfDiseases = diseases
