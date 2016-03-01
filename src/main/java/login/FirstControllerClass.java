@@ -8,11 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 import score.ScoreCalculator;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -21,11 +21,9 @@ import java.util.Map;
 /**
  * Created by bnsikkema on 23-2-16.
  * In progress
- * The connection to the classes is made and they slumber in the application
- * The connections and classpaths do work, but a controller/application process has not been created yet
- * The application does compile however. The controller links to a "testIndex" because of some thymeleaf-errors
- * that I have not yet solved.
- *
+ * The application now prints the founded diseases based on the provided symptoms to screen in a mechanical way.
+ * The first servlet is therefore sucesfully implemented.
+ * Implementing the next servlet is in progress.
  * The code that has been silenced by comments is the content of the servlet with a few alterations to made it fit Spring.
  * It has not yet been fixed however.
  *
@@ -37,18 +35,18 @@ public class FirstControllerClass {
     @RequestMapping(value="/trythis", method = RequestMethod.GET)
     public String indexPage(DiseaseSymptoms diseaseSymptoms, SymptomSet symptomSet) {
         return "frontpage";
-        //link to formPage
+        /**link to formPage**/
     }
 
 
 
 
     @RequestMapping(value="/diseaseResults",  method= RequestMethod.POST)
-    public void processInput(DiseaseSymptoms diseaseSymptoms, Model model) {
+    @ResponseBody
+    public String processInput(HttpServletResponse response, DiseaseSymptoms diseaseSymptoms, Model model) {
         try {
             //PrintWriter out = response.getWriter();
             String[] symptoms = diseaseSymptoms.getSymptomList();
-            System.out.println(Arrays.toString(symptoms));
             DiseaseCollection diseases = new DiseaseCollection(symptoms);
             ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
             HashMap<String, Disease> hashMapOfDiseases = diseases
@@ -58,15 +56,24 @@ public class FirstControllerClass {
                 Map.Entry pair = (Map.Entry) it.next();
                 Disease disease = (Disease) pair.getValue();
                 //out.println(disease.printSummary());
-                disease.printSummary();
+                /*The summary gives the de disease-results based on the given symptoms in a html output!!!!!*/
+                /**Results do work**/
+                response.getWriter().println("<html><body>");
+                response.getWriter().println(disease.printSummary());
+                response.getWriter().println("</body></html>");
+
+                System.out.println(disease.printSummary());
                 it.remove(); // avoids a ConcurrentModificationException
         }
+
     } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
         //out.close();
-    }
+        }
+
+        return null;
     }
 }
