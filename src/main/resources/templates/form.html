@@ -42,11 +42,6 @@
             <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</td>
         </tr>
         <tr>
-            <td>Password:</td>
-            <td><input type="text" th:field="*{password2}"/></td>
-            <td th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}">Name Error</td>
-        </tr>
-        <tr>
 
             <td>
                 <button type="submit">Submit post</button>

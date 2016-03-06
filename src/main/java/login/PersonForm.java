@@ -1,14 +1,14 @@
 package login;
 
-/**
- * Created by hjdupon on 24-2-16.
- */
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+/**
+ * Created by hjdupon on 24-2-16.
+ */
 
 public class PersonForm {
 
@@ -16,7 +16,7 @@ public class PersonForm {
     @Size(min = 2, max = 30)
     private String username;
 
-//    @Min(18)
+    @Min(18)
     private Integer age;
 
     private String firstName;
@@ -27,12 +27,10 @@ public class PersonForm {
     private String password;
 
     @NotNull
-    private String password2;
-
-    @NotNull
     private String email;
 
-    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
+    // DD/MM/YYYY
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private String bDate;
 
     public Integer getAge() {
@@ -65,14 +63,6 @@ public class PersonForm {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getPassword2() {
-        return password2;
-    }
-
-    public void setPassword2(String password2) {
-        this.password2 = password2;
     }
 
     public String getEmail() {
