@@ -16,6 +16,8 @@ import java.util.Properties;
 import connection.OmimDataRetriever;
 import dataFinder.DiseasePhenotypeGetter;
 import org.json.JSONException;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
 /**
  * This class collects all the possible diseases which are found.
@@ -44,6 +46,7 @@ public class DiseaseCollection {
      */
     public DiseaseCollection(final String[] features) throws JSONException,
             IOException {
+
         HashMap diseaseMatches = this.getOmimNumbers(features);
         this.fillDiseaseCollection(diseaseMatches);
     }
@@ -114,10 +117,18 @@ public class DiseaseCollection {
     private HashMap<String, String> getOmimNumbers(final String[] features)
             throws JSONException, IOException {
         // Using the config files for security reasons made by aroeters
+
+
         Properties config = new Properties();
+
         InputStream in = getClass().getResourceAsStream(
                 "/config/config.properties");
+
+       // System.out.println("this is the result of the inputstream: "+ in);
+
+
         config.load(in);
+       // System.out.println("this is the result of the properties: "+ config);
         String url = config.getProperty("omimUrlNumbers");
         String apiKey = config.getProperty("omimKey");
         in.close();
