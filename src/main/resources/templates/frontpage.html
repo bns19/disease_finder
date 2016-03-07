@@ -1,5 +1,10 @@
-<html>
-<body xmlns:th="http://www.w3.org/1999/thymeleaf">
+
+<!--<html xmlns:th="http://www.w3.org/1999/thymeleaf">-->
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<script type="text/javascript" th:src="@{/javascript/getSymptoms.js}"></script>
+<body>
 <form action="#" th:action="@{/diseaseResults}" th:object="${diseaseSymptoms}" method="post">
     <table>
         <p>Please add symptoms seperated by comma.</p>
@@ -10,7 +15,7 @@
         </tr>
         <tr>
 
-            <td><button type="submit">Submit</button></td>
+            <td><button id="sendSymproms" type="submit">Submit</button></td>
         </tr>
     </table>
 </form>
