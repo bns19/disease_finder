@@ -28,10 +28,6 @@
             <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</td>
         </tr>
         <tr>
-            <td>Age:</td>
-            <td><input type="text" th:field="*{age}"/></td>
-        </tr>
-        <tr>
             <td>Username:</td>
             <td><input type="text" th:field="*{username}"/></td>
             <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</td>
