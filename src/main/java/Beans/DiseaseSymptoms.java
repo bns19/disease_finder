@@ -7,10 +7,12 @@ public class DiseaseSymptoms {
     private String[] symptomList;
 
     public String[] getSymptomList() {
+
         return symptomList;
     }
 
     public void setSymptomList(String[] symptomList) {
+
         this.symptomList = symptomList;
     }
 }

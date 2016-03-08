@@ -70,10 +70,12 @@
     /**
      * bovenstaande is allemaal gelinkt aan de selectie van symptomen en de boom
      * In onze eerste versie wordt dit achterwege gelaten gezien alle symptomen hardcode worden ingevoerd
-     * 
-     * 
+     *
+     *
      */
+
     $("#search-button").click(function() {
+
         sendSymptoms();
     });
 
@@ -146,7 +148,7 @@ function loadDisease() {
         });
         //go to the disease tab
         $('.nav-tabs a[href="#' + id + '"]').tab('show');
-        //set the bootstrap styling on the tooltip 
+        //set the bootstrap styling on the tooltip
         $("body").tooltip({selector: '[data-toggle=tooltip]'});
         $("#highlightButton").click(function() {
             $(".highlight").toggleClass("highlighted");

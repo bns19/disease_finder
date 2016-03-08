@@ -33,7 +33,7 @@ import java.util.Map;
 @Controller
 public class FirstControllerClass {
     @RequestMapping(value="/trythis", method = RequestMethod.GET)
-    public String indexPage(DiseaseSymptoms diseaseSymptoms, SymptomSet symptomSet) {
+    public String indexPage(DiseaseSymptoms diseaseSymptoms) {
         return "frontpage";
         /**link to formPage**/
     }
