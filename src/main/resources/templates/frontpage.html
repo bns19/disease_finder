@@ -1,27 +1,87 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/bootstrap.css.map}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/bootstrap-theme.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/bootstrap-theme.css.map}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/disease_matcher_layout.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/css/testStyle.css}" rel="stylesheet" type="text/css"/>
     <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js}"></script>
     <script th:src="@{http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js}" type="text/javascript"></script>
-    <!--<script type="text/js" th:src="@{/js/getSymptoms.js}"></script>-->
     <script type="text/javascript" th:src="@{js/test.js}"></script>
 
 
 </head>
-<body>
-<form action="#" th:action="@{/diseaseResults}" th:object="${diseaseSymptoms}" method="post">
-    <table>
-        <p>Please add symptoms seperated by comma.</p>
-        <tr>
-            <td>symptoms:</td>
-            <td><input type="text" th:field="*{symptomList}" /></td>
-            <!--<td th:if="${#fields.hasErrors('input')}" th:errors="*{input}">input Error</td>-->
-        </tr>
-        <tr>
+<!--<body>-->
+<!--<form action="#" th:action="@{/diseaseResults}" th:object="${diseaseSymptoms}" method="post">-->
+    <!--<table>-->
+        <!--<p>Please add symptoms seperated by comma.</p>-->
+        <!--<tr>-->
+            <!--<td>symptoms:</td>-->
+            <!--<td><input type="text" th:field="*{symptomList}" /></td>-->
+            <!--&lt;!&ndash;<td th:if="${#fields.hasErrors('input')}" th:errors="*{input}">input Error</td>&ndash;&gt;-->
+        <!--</tr>-->
+        <!--<tr>-->
 
-            <td><button id="search-button" type="submit">Submit</button></td>
-        </tr>
-    </table>
-</form>
+            <!--<td><button id="search-button" type="submit">Submit</button></td>-->
+        <!--</tr>-->
+    <!--</table>-->
+<!--</form>-->
+<!--</body>-->
+
+<body>
+<div id="container">
+    <div id="wrapper" class ="col-md-10 col-xs-10 col-sm-10 col-lg-10">
+        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id = "search">
+            <h2>Select symptoms</h2>
+            <!--<div id="search-bar" class="inner-addon right-addon">-->
+                <!--<input type="text" id="search-symptom" value="Search symptoms" class="input form-control" />-->
+                <!--<i id = "glyph" class="glyphicon glyphicon-search" aria-hidden="true"></i>-->
+
+            <form action="#" th:action="@{/diseaseResults}" th:object="${diseaseSymptoms}" method="post">
+                <table>
+                    <p>Please add symptoms seperated by comma.</p>
+                    <tr>
+                        <td>symptoms:</td>
+                        <td><input type="text" th:field="*{symptomList}" /></td>
+                        <!--<td th:if="${#fields.hasErrors('input')}" th:errors="*{input}">input Error</td>-->
+                    </tr>
+                    <tr>
+
+                        <td><button id="search-button" type="submit">Submit</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id ="result">
+            <div role="tabpanel">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist" id ="tablist">
+                    <li role="presentation" class="active"><a href="#searchTab" aria-controls="searchTab" role="tab" data-toggle="tab" class = "tab">Search</a></li>
+                    <li role="presentation" ><a href="#resultTab" aria-controls="resultTab" role="tab" data-toggle="tab" class = "tab">Results</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content" id="tabcontent">
+                    <div role="tabpanel" class="tab-pane active" id="searchTab">
+                        <br/><br/>
+                        <div id="event_result">Select symptoms on the right side of the page.</div>
+                        <button id="search-button" class="button btn btn-info">Search for diseases</button>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="resultTab">
+                        <br/><br/>
+                        Click in the search-tab on the search button to get results here.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
 </body>
 </html>

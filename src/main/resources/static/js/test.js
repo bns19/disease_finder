@@ -4,3 +4,7 @@
 $(document).ready(
     console.log("hoi")
 );
+
+$("#search-button").submit(function () {
+    console.log("testtest");
+})
