@@ -1,7 +1,9 @@
 package nl.bioinf.diseasefinderSpring.login;
 
+import nl.bioinf.diseasefinderSpring.login.password.PasswordUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -10,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
+import java.util.List;
 
 
 /*
@@ -56,10 +60,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .usersByUsernameQuery("select username, password, enabled from User where username = ?")
 //                .authoritiesByUsernameQuery("select username, authority from User where username = ?");
 
-        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
-        auth.inMemoryAuthentication().withUser("henri").password("12345").roles("USER");
 
-    }
-}
+        String sql = "select username from User";
+        Object mysqlSelectUser = jdbcTemplate.queryForList(sql, new MapSqlParameterSource());
+        mysqlSelectUser = mysqlSelectUser.toString().replace("[","");
+        mysqlSelectUser = mysqlSelectUser.toString().replace("]","");
+
+        System.out.println(mysqlSelectUser.toString());
+
+        List<String> usernameList = Arrays.asList(mysqlSelectUser.toString().split(","));
+
+        for (String items : usernameList){
+            String AdjustedItem = PasswordUser.PasswordPass(items);
+            System.out.println(AdjustedItem);
+
+        }
+}}
 
 
