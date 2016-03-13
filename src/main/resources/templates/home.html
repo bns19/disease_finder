@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <title>Spring Security Example</title>
+<head th:replace="includes/header :: head">
+    <title>Title</title>
 </head>
 <body>
 <h1>Welcome!</h1>
@@ -12,4 +12,8 @@
 <p>Click <a th:href="@{/trythis}">here</a> to insert symtoms.</p>
 <p>Click <a th:href="@{/login2}">here</a> Login 2.</p>
 </body>
+
+<footer th:replace="includes/footer :: foot">
+    <title>Title</title>
+</footer>
 </html>
