@@ -74,12 +74,22 @@
      *
      */
 
-    $("#search-button").submit(function () {
+
+    $( document ).ready(function() {
+
+    });
+    $("#search-button").click(function () {
+        console.log("hier");
         sendSymptoms();
     });
 
+
+    function testFunction() {
+        console.log("bericht");
+    }
 //by mkslofstra: this function will send data to the servlet and get diseases back
     function sendSymptoms(symptoms) {
+        console.log("ja??");
         $('.nav-tabs a[href="#resultTab"]').tab('show');
 //the name of the servlet
         var servlet = "getDisease.do";
