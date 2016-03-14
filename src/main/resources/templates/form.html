@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+<!--/*@thymesVar id="personForm" type=""*/-->
 <form action="#" th:action="@{/form}" th:object="${personForm}" method="post">
     <table>
 
@@ -36,6 +37,16 @@
             <td>Password:</td>
             <td><input type="text" th:field="*{password}"/></td>
             <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</td>
+        </tr>
+        <tr>
+            <td>authority:</td>
+            <td><input type="text" th:field="*{authority}"/></td>
+            <td th:if="${#fields.hasErrors('authority')}" th:errors="*{authority}">Name Error</td>
+        </tr>
+        <tr>
+            <td>authority:</td>
+            <td><input type="text" th:field="*{enabled}"/></td>
+            <td th:if="${#fields.hasErrors('enabled')}" th:errors="*{enabled}">Name Error</td>
         </tr>
         <tr>
 

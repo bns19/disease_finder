@@ -16,9 +16,6 @@ public class PersonForm {
     @Size(min = 2, max = 30)
     private String username;
 
-    @Min(18)
-    private Integer age;
-
     private String firstName;
 
     private String lastName;
@@ -26,20 +23,18 @@ public class PersonForm {
     @NotNull
     private String password;
 
-    @NotNull
     private String email;
+
+    @NotNull
+    private String authority;
+
+    @NotNull
+    private String enabled;
+
 
     // DD/MM/YYYY
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private String bDate;
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -82,14 +77,37 @@ public class PersonForm {
     }
 
     public String toString() {
-        return "Person(Name: " + this.username + ", Age: " + this.age + ")";
+        return "Person(Name: " + this.username + ")";
     }
 
     public String getUsername() {
+
         return username;
     }
 
     public void setUsername(String username) {
+
         this.username = username;
     }
+
+    public void setAuthority(String authority) {
+
+        this.authority = authority;
+
+    }
+
+    public String getAuthority(){
+
+        return authority;}
+
+
+    public void setEnabled(String enabled) {
+
+        this.enabled = enabled;
+
+    }
+
+    public String getEnabled(){
+
+        return enabled;}
 }

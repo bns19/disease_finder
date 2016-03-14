@@ -52,21 +52,22 @@ public class FirstControllerClass {
             HashMap<String, Disease> hashMapOfDiseases = diseases
                     .getDiseaseCollection();
             Iterator it = hashMapOfDiseases.entrySet().iterator();
+            response.getWriter().println("<html><body>");
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry) it.next();
                 Disease disease = (Disease) pair.getValue();
                 //out.println(disease.printSummary());
                 /*The summary gives the de disease-results based on the given symptoms in a html output!!!!!*/
                 /**Results do work**/
-                response.getWriter().println("<html><body>");
                 response.getWriter().println(disease.printSummary());
-                response.getWriter().println("</body></html>");
 
                 System.out.println(disease.printSummary());
                 it.remove(); // avoids a ConcurrentModificationException
         }
+            response.getWriter().println("</body></html>");
 
-    } catch (JSONException e) {
+
+        } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -76,4 +77,6 @@ public class FirstControllerClass {
 
         return null;
     }
+
+
 }
