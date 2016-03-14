@@ -1,3 +1,4 @@
+
 package nl.bioinf.diseasefinderSpring.login;
 
 import nl.bioinf.diseasefinderSpring.login.password.PasswordUser;
@@ -62,5 +63,3 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         }
 }
-
-
