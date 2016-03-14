@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Controller
@@ -41,12 +38,11 @@ public class WebController extends WebMvcConfigurerAdapter {
     NamedParameterJdbcTemplate jdbcTemplate;
 
     /**
-     *
-     * @param User data from the
+     * @param User          data from the
      * @param bindingResult
      * @return the result page
      */
-     @PreAuthorize("Admin") //
+    @PreAuthorize("Admin") //
     @RequestMapping(value = "/form", method = RequestMethod.POST)
     public String checkPersonInfo(@Valid PersonForm User, BindingResult bindingResult) {
 
@@ -69,10 +65,33 @@ public class WebController extends WebMvcConfigurerAdapter {
     }
 
 
-
-
-
-
+//    @RequestMapping(value = "/SearchDB", method = RequestMethod.GET)
+//    public String searchDB(DataBase DB) {
+//
+//        return "searchresults";
+//    }
+//
+//    @PreAuthorize("Admin") //
+//    @RequestMapping(value = "/SearchDB", method = RequestMethod.POST)
+//
+//    public String addToUserDatabase(@Valid Database DB, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            return "searchresults"; //TODO or error page
+//        }
+//
+//
+//        jdbcTemplate.update("CREATE TABLE IF NOT EXISTS UserDatabase(" + "id SERIAL, symptoms VARCHAR(255), DATE VARCHAR(255))"
+//                , new MapSqlParameterSource());
+//
+//        // input the searchresult data //
+//        String inputMysqlDatabase = String.format("INSERT INTO User (symptoms, DATE) VALUES ('%s', '%s')",
+//                DB.getSearchvalues(), DB.getDate());
+//        jdbcTemplate.update(inputMysqlDatabase, new MapSqlParameterSource());
+//
+//
+//        return "searchresults"; //must be made
+//
+//    }
 }
 
 
