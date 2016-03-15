@@ -38,38 +38,26 @@
     <div id="wrapper" class ="col-md-10 col-xs-10 col-sm-10 col-lg-10">
         <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id = "search">
             <h2>Select symptoms</h2>
-            <!--<div id="search-bar" class="inner-addon right-addon">-->
-            <!--<input type="text" id="search-symptom" value="Search symptoms" class="input form-control" />-->
-            <!--<i id = "glyph" class="glyphicon glyphicon-search" aria-hidden="true"></i>-->
 
-            <!--<form action="#" th:action="@{/diseaseResults}" th:object="${diseaseSymptoms}" method="post">-->
-                <!--<table>-->
-                    <!--<p>Please add symptoms seperated by comma.</p>-->
-                    <!--<tr>-->
-                        <!--<td>symptoms:</td>-->
-                        <!--<td><input type="text" th:field="*{symptomList}" /></td>-->
-                        <!--&lt;!&ndash;<td th:if="${#fields.hasErrors('input')}" th:errors="*{input}">input Error</td>&ndash;&gt;-->
-                    <!--</tr>-->
-                    <!--<tr>-->
+            <div>
 
-                        <!--<td><button id="search-button" type="submit">Submit</button></td>-->
-                    <!--</tr>-->
-                <!--</table>-->
-            <!--</form>-->
-        <!--</div>-->
-        <div>
-            <!--<form action="/" th:action="@{/diseaseResults}" method = "get">-->
-            <!--<input type="text" id="symptoms" />-->
-            <!--<input type = "submit"value="search for diseases" th.onclick="javascript:sendSymptoms('$symptoms')"/>-->
-             <!--</form>-->
-            <form>
-                <input type="text" id="symptoms" name="symptoms"/>
-                <button id="searchButton" name="searchButton" onclick="sendSymptoms(symptoms.value);" type="button">
-                    Search button</button>
-            </form>
+                <form>
+                    <input type="text" id="symptoms" name="symptoms"/>
+                    <button id="searchButton" name="searchButton" onclick="sendSymptoms(symptoms.value);" type="button">
+                        Search button</button>
+                </form>
+
+            </div>
+            <div id = "testoutput"></div>
+
+            <div id="search-bar" class="inner-addon right-addon">
+                <input type="text" id="search-symptom" value="Search symptoms" class="input form-control" />
+                <i id = "glyph" class="glyphicon glyphicon-search" aria-hidden="true"></i>
+            </div>
+
+            <div id="ontology-tree" class="demo" style="margin-top:2em;"></div>
 
         </div>
-
         <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id ="result">
             <div role="tabpanel">
 
@@ -98,7 +86,5 @@
     </div>
 
 </div>
-    </div>
-
 </body>
 </html>

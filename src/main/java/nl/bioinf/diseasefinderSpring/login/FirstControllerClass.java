@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import nl.bioinf.diseasefinderSpring.score.ScoreCalculator;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
@@ -40,14 +41,17 @@ public class FirstControllerClass {
 
     @RequestMapping(value="/sendSymptoms",  method= RequestMethod.POST)
     @ResponseBody
-    public String processInput(String[] symptoms) {
-        ArrayList<String> diseaseList = new ArrayList();
+    public String processInput(String symptoms1) {
+        //symptoms1 is null for some reason
+        String symptoms = "pain, cough";
+        //hardcode for test
         StringBuilder sb = new StringBuilder();
+        String[] symptomsList = symptoms.split(",");
         try {
-            System.out.println("testt");
             //PrintWriter out = response.getWriter();
             //String[] symptoms = diseaseSymptoms.getSymptomList();
-            DiseaseCollection diseases = new DiseaseCollection(symptoms);
+
+            DiseaseCollection diseases = new DiseaseCollection(symptomsList);
             ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
             HashMap<String, Disease> hashMapOfDiseases = diseases
                     .getDiseaseCollection();
@@ -61,7 +65,6 @@ public class FirstControllerClass {
                 /*The summary gives the de disease-results based on the given symptoms in a html output!!!!!*/
                 /**Results do work**/
                // response.getWriter().println(disease.printSummary());
-                diseaseList.add(disease.printSummary());
                 sb.append(disease.printSummary());
                 System.out.println(disease.printSummary());
                 it.remove(); // avoids a ConcurrentModificationException
@@ -80,6 +83,21 @@ public class FirstControllerClass {
         return sb.toString();
     }
 
+    @RequestMapping(value="/diseaseInformation", method = RequestMethod.POST)
+    public String loadDisease(String omimNumber, String[] symptoms) throws JSONException, IOException{
+
+       // response.setContentType("text/html;charset=UTF-8");
+       // String omimNumber = request.getParameter("omimNumber");
+        DiseaseCollection diseases = new DiseaseCollection(("symptoms[]").split(","));
+        ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
+        String information = diseases.getInfoOfDisease(omimNumber);
+        //PrintWriter out = response.getWriter();
+        //out.println(information);
+        return information;
+    }
+
+}
+
 //    @RequestMapping(value="/diseaseResults",  method= RequestMethod.POST)
 //    @ResponseBody
 //    public String processInput(HttpServletResponse response, DiseaseSymptoms diseaseSymptoms) {
@@ -91,7 +109,7 @@ public class FirstControllerClass {
 //            HashMap<String, Disease> hashMapOfDiseases = diseases
 //                    .getDiseaseCollection();
 //            Iterator it = hashMapOfDiseases.entrySet().iterator();
-//            //response.getWriter().println("<html><body>");
+//            response.getWriter().println("<html><body>");
 //            while (it.hasNext()) {
 //                Map.Entry pair = (Map.Entry) it.next();
 //                Disease disease = (Disease) pair.getValue();
@@ -103,7 +121,7 @@ public class FirstControllerClass {
 //                System.out.println(disease.printSummary());
 //                it.remove(); // avoids a ConcurrentModificationException
 //        }
-//            //response.getWriter().println("</body></html>");
+//            response.getWriter().println("</body></html>");
 //
 //
 //        } catch (JSONException e) {
@@ -118,4 +136,4 @@ public class FirstControllerClass {
 //    }
 
 
-}
+
