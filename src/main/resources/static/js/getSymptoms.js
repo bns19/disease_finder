@@ -84,17 +84,19 @@
     });
 
 
-    function testFunction() {
-        console.log("bericht");
-    }
+
 //by mkslofstra: this function will send data to the servlet and get diseases back
     function sendSymptoms(symptoms) {
-        console.log("ja??");
-        $('.nav-tabs a[href="#resultTab"]').tab('show');
+        console.log(symptoms);
+        var symptomSet = symptoms;
+       // $('.nav-tabs a[href="#resultTab"]').tab('show');
+
 //the name of the servlet
-        var servlet = "getDisease.do";
+        var controller = "/sendSymptoms";
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
         //use the servlet
-        $.get(servlet, {"symptoms[]": localStorage.getItem("symptoms")}, function (diseases) {
+        $.post(controller, {"symptoms[]": symptomSet, _csrf:token}, function (diseases) {
             $("#resultTab").text("");
             $("#resultTab").append("<br/><br/><ul>");
             $("#resultTab").append(diseases);

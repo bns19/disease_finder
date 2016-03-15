@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import nl.bioinf.diseasefinderSpring.score.ScoreCalculator;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by bnsikkema on 23-2-16.
@@ -40,31 +38,35 @@ public class FirstControllerClass {
 
 
 
-
-    @RequestMapping(value="/diseaseResults",  method= RequestMethod.POST)
+    @RequestMapping(value="/sendSymptoms",  method= RequestMethod.POST)
     @ResponseBody
-    public String processInput(HttpServletResponse response, DiseaseSymptoms diseaseSymptoms, Model model) {
+    public String processInput(String[] symptoms) {
+        ArrayList<String> diseaseList = new ArrayList();
+        StringBuilder sb = new StringBuilder();
         try {
+            System.out.println("testt");
             //PrintWriter out = response.getWriter();
-            String[] symptoms = diseaseSymptoms.getSymptomList();
+            //String[] symptoms = diseaseSymptoms.getSymptomList();
             DiseaseCollection diseases = new DiseaseCollection(symptoms);
             ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
             HashMap<String, Disease> hashMapOfDiseases = diseases
                     .getDiseaseCollection();
             Iterator it = hashMapOfDiseases.entrySet().iterator();
-            response.getWriter().println("<html><body>");
+            //response.getWriter().println("<html><body>");
+
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry) it.next();
                 Disease disease = (Disease) pair.getValue();
                 //out.println(disease.printSummary());
                 /*The summary gives the de disease-results based on the given symptoms in a html output!!!!!*/
                 /**Results do work**/
-                response.getWriter().println(disease.printSummary());
-
+               // response.getWriter().println(disease.printSummary());
+                diseaseList.add(disease.printSummary());
+                sb.append(disease.printSummary());
                 System.out.println(disease.printSummary());
                 it.remove(); // avoids a ConcurrentModificationException
-        }
-            response.getWriter().println("</body></html>");
+            }
+            //response.getWriter().println("</body></html>");
 
 
         } catch (JSONException e) {
@@ -72,11 +74,48 @@ public class FirstControllerClass {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-        //out.close();
+            //out.close();
         }
 
-        return null;
+        return sb.toString();
     }
+
+//    @RequestMapping(value="/diseaseResults",  method= RequestMethod.POST)
+//    @ResponseBody
+//    public String processInput(HttpServletResponse response, DiseaseSymptoms diseaseSymptoms) {
+//        try {
+//            //PrintWriter out = response.getWriter();
+//            String[] symptoms = diseaseSymptoms.getSymptomList();
+//            DiseaseCollection diseases = new DiseaseCollection(symptoms);
+//            ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
+//            HashMap<String, Disease> hashMapOfDiseases = diseases
+//                    .getDiseaseCollection();
+//            Iterator it = hashMapOfDiseases.entrySet().iterator();
+//            //response.getWriter().println("<html><body>");
+//            while (it.hasNext()) {
+//                Map.Entry pair = (Map.Entry) it.next();
+//                Disease disease = (Disease) pair.getValue();
+//                //out.println(disease.printSummary());
+//                /*The summary gives the de disease-results based on the given symptoms in a html output!!!!!*/
+//                /**Results do work**/
+//                response.getWriter().println(disease.printSummary());
+//
+//                System.out.println(disease.printSummary());
+//                it.remove(); // avoids a ConcurrentModificationException
+//        }
+//            //response.getWriter().println("</body></html>");
+//
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//        //out.close();
+//        }
+//
+//        return null;
+//    }
 
 
 }
