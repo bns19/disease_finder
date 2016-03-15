@@ -4,6 +4,7 @@
 <head>
     <title>Register</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script type="text/javascript" th:src="@{js/checkpw.js}"></script>
 </head>
 <body>
 <!--/*@thymesVar id="personForm" type=""*/-->
@@ -13,7 +14,6 @@
         <tr>
             <td>First Name :</td>
             <td><input type="text" th:field="*{firstName}"/></td>
-            <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Name Error</td>
         </tr>
         <tr>
             <td>Last Name :</td>
@@ -25,33 +25,36 @@
         </tr>
         <tr>
             <td>Email :</td>
-            <td><input type="text" th:field="*{email}"/></td>
-            <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</td>
+            <td><input type="text" th:field="*{email}" id="email"/><span id="emailError" class="errmsg"></span></td>
+
         </tr>
         <tr>
             <td>Username:</td>
-            <td><input type="text" th:field="*{username}"/></td>
-            <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</td>
+            <td><input type="text" th:field="*{username}" id="username"/><span id="usernameError" class="errmsg"></span></td>
+
         </tr>
         <tr>
             <td>Password:</td>
-            <td><input type="text" th:field="*{password}"/></td>
-            <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</td>
+            <td><input type="password" th:field="*{password}" if="password"/><span id="passwordError" class="errmsg"></span></td>
+
         </tr>
+            <td>conform password:<span id="passwordError"></span></td>
+            <td><input type="password" id="txtConfirmPassword"/></td>
+
         <tr>
             <td>authority:</td>
             <td><input type="text" th:field="*{authority}"/></td>
-            <td th:if="${#fields.hasErrors('authority')}" th:errors="*{authority}">Name Error</td>
+
         </tr>
         <tr>
-            <td>authority:</td>
+            <td>enabled:</td>
             <td><input type="text" th:field="*{enabled}"/></td>
-            <td th:if="${#fields.hasErrors('enabled')}" th:errors="*{enabled}">Name Error</td>
+
         </tr>
         <tr>
 
             <td>
-                <button type="submit">Submit post</button>
+                <input type="button" id="btnSubmit" value="Submit" onclick="Handleinput();Validate();" />
             </td>
         </tr>
     </table>
