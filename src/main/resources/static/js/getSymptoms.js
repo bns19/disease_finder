@@ -84,23 +84,30 @@
     });
 
 
-    function testFunction() {
-        console.log("bericht");
-    }
+
 //by mkslofstra: this function will send data to the servlet and get diseases back
     function sendSymptoms(symptoms) {
-        console.log("ja??");
-        $('.nav-tabs a[href="#resultTab"]').tab('show');
-//the name of the servlet
-        var servlet = "getDisease.do";
-        //use the servlet
-        $.get(servlet, {"symptoms[]": localStorage.getItem("symptoms")}, function (diseases) {
-            $("#resultTab").text("");
-            $("#resultTab").append("<br/><br/><ul>");
-            $("#resultTab").append(diseases);
-            $("#resultTab").append("</ul>");
-            $("#resultTab").append("<button id = \"save\" class=\"btn btn-default\">Save this result</button>");
-            $("body").tooltip({selector: '[data-toggle=tooltip]'});
+
+        var symptomSet = symptoms;
+        console.log(symptomSet);
+        //$('.nav-tabs a[href="#resultTab"]').tab('show');
+
+        //HTMLpage that the spring controller has mapped.
+        var controller = "/sendSymptoms";
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+
+        //use the mapped controller
+        $.post(controller, {"symptoms[]": symptomSet, _csrf:token}, function (diseases) {
+            //$("#resultTab").text("");
+            //$("#resultTab").append("<br/><br/><ul>");
+            //$("#resultTab").append(diseases);
+            //$("#resultTab").append("</ul>");
+            //$("#resultTab").append("<button id = \"save\" class=\"btn btn-default\">Save this result</button>");
+
+            document.getElementById("testoutput").innerHTML = diseases;
+            console.log(diseases);
+            //$("body").tooltip({selector: '[data-toggle=tooltip]'});
             $(".clickTitle").click(function () {
                 localStorage.setItem("omimNumber", $(this).attr("id"));
                 loadDisease();
@@ -113,10 +120,13 @@
 
 //by mkslofstra
     function loadDisease() {
-        var diseaseServlet = "RetrieveDisease.do";
-        $.get(diseaseServlet, {
+        var diseaseServlet = "/diseaseInformation";
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        $.post(diseaseServlet, {
             "omimNumber": localStorage.getItem("omimNumber"),
-            "symptoms[]": localStorage.getItem("symptoms")
+            "symptoms[]": localStorage.getItem("symptoms"),
+            _csrf:token
         }, function (disease) {
             var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
             var title = disease.match(pattern)[1];
@@ -154,6 +164,8 @@
                     localStorage.setItem("ids", firstPart + lastPart);
                 }
             });
+
+
             $(".saveDisease").click(function () {
                 localStorage.setItem("disease2save", $(this).data("disease_id"));
                 saveDisease();
