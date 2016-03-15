@@ -12,23 +12,19 @@ import javax.validation.constraints.Size;
 
 public class PersonForm {
 
-    @NotNull
-    @Size(min = 2, max = 30)
+
     private String username;
 
     private String firstName;
 
     private String lastName;
 
-    @NotNull
     private String password;
 
     private String email;
 
-    @NotNull
     private String authority;
 
-    @NotNull
     private String enabled;
 
 

@@ -55,7 +55,7 @@ public class WebController extends WebMvcConfigurerAdapter {
         log.info("Creating tables");
         jdbcTemplate.update("CREATE TABLE IF NOT EXISTS User(" + "id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255), password VARCHAR(255), " +
                         "email VARCHAR(255), username VARCHAR(255), birthdate VARCHAR(10), authority VARCHAR(10), enabled VARCHAR(10))"
-                , new MapSqlParameterSource());
+                        , new MapSqlParameterSource());
 
         // input the form data //
         String inputMysql = String.format("INSERT INTO User (first_name, last_name, password, email, username, birthdate, authority, enabled) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",

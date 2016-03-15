@@ -13,8 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 import javax.sql.DataSource;
-import java.util.Arrays;
-import java.util.List;
 
 
 /*
@@ -33,7 +31,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
+//                .antMatchers("/**").permitAll()
+                .antMatchers("/home", "/index", "/", "/form", "/indexTest", "/frontpage", "/trythis", "/css/**", "/js/**", "/jsLibs/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -59,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery("select username, password, enabled from User where username = ?")
-                .authoritiesByUsernameQuery( "select username, authority from User where username = ?");
+                .authoritiesByUsernameQuery("select username, authority from User where username = ?");
 
-        }
+    }
 }
