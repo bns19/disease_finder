@@ -41,12 +41,13 @@ public class FirstControllerClass {
 
     @RequestMapping(value="/sendSymptoms",  method= RequestMethod.POST)
     @ResponseBody
-    public String processInput(String symptoms1) {
+    public String processInput(String symptoms) {
+
         //symptoms1 is null for some reason
-        String symptoms = "pain, cough";
+        String symptoms1 = "pain, cough";
         //hardcode for test
         StringBuilder sb = new StringBuilder();
-        String[] symptomsList = symptoms.split(",");
+        String[] symptomsList = symptoms1.split(",");
         try {
             //PrintWriter out = response.getWriter();
             //String[] symptoms = diseaseSymptoms.getSymptomList();

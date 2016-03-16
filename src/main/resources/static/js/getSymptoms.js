@@ -96,9 +96,10 @@
         var controller = "/sendSymptoms";
         var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
-
+        console.log(symptomSet);
         //use the mapped controller
-        $.post(controller, {"symptoms[]": symptomSet, _csrf:token}, function (diseases) {
+        $.post(controller, {"symptoms": symptomSet, _csrf:token}, function (diseases) {
+
             //$("#resultTab").text("");
             //$("#resultTab").append("<br/><br/><ul>");
             //$("#resultTab").append(diseases);
