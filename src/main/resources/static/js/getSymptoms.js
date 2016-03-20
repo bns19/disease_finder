@@ -79,7 +79,6 @@
 
     });
     $("#search-button").click(function () {
-        console.log("hier");
         sendSymptoms();
     });
 
@@ -87,27 +86,24 @@
 
 //by mkslofstra: this function will send data to the servlet and get diseases back
     function sendSymptoms(symptoms) {
-
+        localStorage.setItem("symptoms", symptoms);
         var symptomSet = symptoms;
-        console.log(symptomSet);
         //$('.nav-tabs a[href="#resultTab"]').tab('show');
 
         //HTMLpage that the spring controller has mapped.
         var controller = "/sendSymptoms";
         var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
-        console.log(symptomSet);
         //use the mapped controller
         $.post(controller, {"symptoms": symptomSet, _csrf:token}, function (diseases) {
 
-            //$("#resultTab").text("");
-            //$("#resultTab").append("<br/><br/><ul>");
-            //$("#resultTab").append(diseases);
-            //$("#resultTab").append("</ul>");
-            //$("#resultTab").append("<button id = \"save\" class=\"btn btn-default\">Save this result</button>");
+            $("#resultTab").text("");
+            $("#resultTab").append("<br/><br/><ul>");
+            $("#resultTab").append(diseases);
+            $("#resultTab").append("</ul>");
+            $("#resultTab").append("<button id = \"save\" class=\"btn btn-default\">Save this result</button>");
 
             document.getElementById("testoutput").innerHTML = diseases;
-            console.log(diseases);
             //$("body").tooltip({selector: '[data-toggle=tooltip]'});
             $(".clickTitle").click(function () {
                 localStorage.setItem("omimNumber", $(this).attr("id"));
@@ -126,29 +122,33 @@
         var header = $("meta[name='_csrf_header']").attr("content");
         $.post(diseaseServlet, {
             "omimNumber": localStorage.getItem("omimNumber"),
-            "symptoms[]": localStorage.getItem("symptoms"),
+            "symptoms": localStorage.getItem("symptoms"),
             _csrf:token
         }, function (disease) {
             var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
             var title = disease.match(pattern)[1];
             var id = title.replace(/[ ,;.-]* /g, "");
             var idPat = new RegExp(id);
-            var matchId = localStorage.getItem("ids").match(idPat);
-            //make sure, the tab is only created one time
-            if (matchId === null) {
-                localStorage.setItem("ids", localStorage.getItem("ids") + id);
-                title = title.charAt(0) + title.substring(1, title.length).toLowerCase();
-                if (title.length > 15) {
-                    title = title.substring(0, 12) + "...";
-                }
-                //put the data in an extra tab
-                $("#tablist").append("<li role=\"presentation\"><a href=\"#" + id + "\" aria-controls=\"" + id
-                    + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\" class=\"tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
-                $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
-                $("#" + id).append("<br/><br/>");
-                $("#" + id).append(disease);
-                $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease</button>");
-            }
+            //***litterary output works, so the backend system does its job. Now the output should be fixed***//
+            document.getElementById("testoutput").innerHTML = disease;
+           //// var matchId = localStorage.getItem("ids").match(idPat);
+
+
+           // //make sure, the tab is only created one time
+           // if (matchId === null) {
+           //     localStorage.setItem("ids", localStorage.getItem("ids") + id);
+           //     title = title.charAt(0) + title.substring(1, title.length).toLowerCase();
+           //     if (title.length > 15) {
+           //         title = title.substring(0, 12) + "...";
+           //     }
+           //     //put the data in an extra tab
+           //     $("#tablist").append("<li role=\"presentation\"><a href=\"#" + id + "\" aria-controls=\"" + id
+           //         + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\" class=\"tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
+           //     $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
+           //     $("#" + id).append("<br/><br/>");
+           //     $("#" + id).append(disease);
+           //     $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease</button>");
+           // }
             $(".closeDiseaseTab").click(function () {
                 matchId = localStorage.getItem("ids").match(idPat);
                 var close_id = $(this).data("close");
@@ -159,10 +159,10 @@
                     tab.parentNode.removeChild(tab);
                     $('.nav-tabs a[href="#resultTab"]').tab('show');
                     //remove string from id list, so that it can be opened again
-                    var idString = localStorage.getItem("ids");
+                   // var idString = localStorage.getItem("ids");
                     var firstPart = idString.substring(0, matchId.index);
                     var lastPart = idString.substring(matchId.index + id.length, idString.length);
-                    localStorage.setItem("ids", firstPart + lastPart);
+                   // localStorage.setItem("ids", firstPart + lastPart);
                 }
             });
 

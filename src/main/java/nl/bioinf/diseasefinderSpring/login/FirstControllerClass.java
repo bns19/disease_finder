@@ -43,11 +43,8 @@ public class FirstControllerClass {
     @ResponseBody
     public String processInput(String symptoms) {
 
-        //symptoms1 is null for some reason
-        String symptoms1 = "pain, cough";
-        //hardcode for test
         StringBuilder sb = new StringBuilder();
-        String[] symptomsList = symptoms1.split(",");
+        String[] symptomsList = symptoms.split(",");
         try {
             //PrintWriter out = response.getWriter();
             //String[] symptoms = diseaseSymptoms.getSymptomList();
@@ -67,7 +64,6 @@ public class FirstControllerClass {
                 /**Results do work**/
                // response.getWriter().println(disease.printSummary());
                 sb.append(disease.printSummary());
-                System.out.println(disease.printSummary());
                 it.remove(); // avoids a ConcurrentModificationException
             }
             //response.getWriter().println("</body></html>");
@@ -85,56 +81,16 @@ public class FirstControllerClass {
     }
 
     @RequestMapping(value="/diseaseInformation", method = RequestMethod.POST)
-    public String loadDisease(String omimNumber, String[] symptoms) throws JSONException, IOException{
-
-       // response.setContentType("text/html;charset=UTF-8");
-       // String omimNumber = request.getParameter("omimNumber");
-        DiseaseCollection diseases = new DiseaseCollection(("symptoms[]").split(","));
+    @ResponseBody
+    public String loadDisease(String omimNumber, String symptoms) throws JSONException, IOException{
+        String[] symptomSet = symptoms.split(",");
+        DiseaseCollection diseases = new DiseaseCollection(symptomSet);
         ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
         String information = diseases.getInfoOfDisease(omimNumber);
-        //PrintWriter out = response.getWriter();
-        //out.println(information);
         return information;
     }
 
 }
-
-//    @RequestMapping(value="/diseaseResults",  method= RequestMethod.POST)
-//    @ResponseBody
-//    public String processInput(HttpServletResponse response, DiseaseSymptoms diseaseSymptoms) {
-//        try {
-//            //PrintWriter out = response.getWriter();
-//            String[] symptoms = diseaseSymptoms.getSymptomList();
-//            DiseaseCollection diseases = new DiseaseCollection(symptoms);
-//            ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
-//            HashMap<String, Disease> hashMapOfDiseases = diseases
-//                    .getDiseaseCollection();
-//            Iterator it = hashMapOfDiseases.entrySet().iterator();
-//            response.getWriter().println("<html><body>");
-//            while (it.hasNext()) {
-//                Map.Entry pair = (Map.Entry) it.next();
-//                Disease disease = (Disease) pair.getValue();
-//                //out.println(disease.printSummary());
-//                /*The summary gives the de disease-results based on the given symptoms in a html output!!!!!*/
-//                /**Results do work**/
-//                response.getWriter().println(disease.printSummary());
-//
-//                System.out.println(disease.printSummary());
-//                it.remove(); // avoids a ConcurrentModificationException
-//        }
-//            response.getWriter().println("</body></html>");
-//
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//        //out.close();
-//        }
-//
-//        return null;
-//    }
 
 
 
