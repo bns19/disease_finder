@@ -1,63 +1,64 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <title>Register</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <script type="text/javascript" th:src="@{js/checkpw.js}"></script>
+<head th:replace="includes/header :: head">
+
 </head>
+
 <body>
-<!--/*@thymesVar id="personForm" type=""*/-->
-<form action="#" th:action="@{/form}" th:object="${personForm}" method="post">
-    <table>
 
-        <tr>
-            <td>First Name :</td>
-            <td><input type="text" th:field="*{firstName}"/></td>
-        </tr>
-        <tr>
-            <td>Last Name :</td>
-            <td><input type="text" th:field="*{lastName}"/></td>
-        </tr>
-        <tr>
-            <td>Birth date yyyy-MM-dd :</td>
-            <td><input type="text" th:field="*{bDate}"/></td>
-        </tr>
-        <tr>
-            <td>Email :</td>
-            <td><input type="text" th:field="*{email}" id="email"/><span id="emailError" class="errmsg"></span></td>
+<div class="textcon">
 
-        </tr>
-        <tr>
-            <td>Username:</td>
-            <td><input type="text" th:field="*{username}" id="username"/><span id="usernameError" class="errmsg"></span></td>
+    <form action="#" th:action="@{/form}" th:object="${personForm}" method="post">
+        <table>
 
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type="password" th:field="*{password}" if="password"/><span id="passwordError" class="errmsg"></span></td>
-
-        </tr>
-            <td>conform password:<span id="passwordError"></span></td>
-            <td><input type="password" id="txtConfirmPassword"/></td>
-
-        <tr>
-            <td>authority:</td>
-            <td><input type="text" th:field="*{authority}"/></td>
-
-        </tr>
-        <tr>
-            <td>enabled:</td>
-            <td><input type="text" th:field="*{enabled}"/></td>
-
-        </tr>
-        <tr>
-
-            <td>
-                <input type="button" id="btnSubmit" value="Submit" onclick="Handleinput();Validate();" />
-            </td>
-        </tr>
-    </table>
-</form>
+            <tr>
+                <td>firstName:</td>
+                <td><input type="text" th:field="*{firstName}"/></td>
+                <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Email</td>
+            </tr>
+            <tr>
+                <td>lastName:</td>
+                <td><input type="text" th:field="*{lastName}"/></td>
+                <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName</td>
+            </tr>
+            <tr>
+                <td>authority:</td>
+                <td><input type="text" th:field="*{authority}"/></td>
+                <td th:if="${#fields.hasErrors('authority')}" th:errors="*{authority}">authority</td>
+            </tr>
+            <tr>
+                <td>enabled:</td>
+                <td><input type="text" th:field="*{enabled}"/></td>
+                <td th:if="${#fields.hasErrors('enabled')}" th:errors="*{enabled}">enabled</td>
+            </tr>
+            <tr>
+                <td>Username:</td>
+                <td><input type="text" th:field="*{username}"/></td>
+                <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" th:field="*{email}"/></td>
+                <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email</td>
+            </tr>
+            <tr>
+                <td>password:</td>
+                <td><input type="text" th:field="*{password}"/></td>
+                <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password</td>
+            </tr>
+            <tr>
+                <td>confirm password:</td>
+                <td><input type="text" th:field="*{password2}"/></td>
+                <td th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}">confirm password</td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit">Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
 </body>
 </html>

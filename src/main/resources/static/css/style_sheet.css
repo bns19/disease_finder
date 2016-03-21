@@ -1,0 +1,51 @@
+footer {
+    position: fixed;
+    width:100%;
+    left: 1px;
+    right: 1px;
+    bottom: 0;
+    background-color: white;
+    border: 1px solid #808080;
+    margin: auto;
+    padding: 0;
+    text-align: center;
+}
+
+.textcon{
+    border-radius: 25px;
+    margin: auto;
+    border: 1px solid #808080;
+    border-radius:3px;
+    top: 300px;
+    width:30%;
+    background-color: white;
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    opacity: 0.8;
+}
+
+table {
+    border-collapse: collapse;
+    width: 90%;
+    background-color: white;
+    text-align: left;
+}
+
+header {
+    width:100%;
+    background-color: white;
+    border: 1px solid #808080;
+    left: 1px;
+    right: 1px;
+    list-style: none outside none;
+    margin: auto;
+    padding: 0;
+    text-align: center;
+}
+
+body{
+    background-image:url("https://hirewallpapers.com/wp-content/uploads/2016/02/light_blue_1920x1080_wallpaper.jpg");
+}
+

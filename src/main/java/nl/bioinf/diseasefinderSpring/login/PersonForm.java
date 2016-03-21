@@ -13,11 +13,14 @@ import javax.validation.constraints.Size;
 public class PersonForm {
 
 
+
     private String username;
 
     private String firstName;
 
     private String lastName;
+
+    private String password2;
 
     private String password;
 
@@ -88,7 +91,7 @@ public class PersonForm {
 
     public void setAuthority(String authority) {
 
-        this.authority = authority;
+        this.authority = "USER";
 
     }
 
@@ -99,11 +102,25 @@ public class PersonForm {
 
     public void setEnabled(String enabled) {
 
-        this.enabled = enabled;
+        this.enabled = "true";
 
     }
 
     public String getEnabled(){
 
-        return enabled;}
+        return enabled;
+
+    }
+
+
+    public void setPassword2(String password2) {
+
+        this.password2 = password2;
+
+    }
+
+    public String getPassword2(){
+
+        return password2;}
+
 }
