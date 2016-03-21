@@ -103,7 +103,7 @@
             $("#resultTab").append("</ul>");
             $("#resultTab").append("<button id = \"save\" class=\"btn btn-default\">Save this result</button>");
 
-            document.getElementById("testoutput").innerHTML = diseases;
+            //document.getElementById("testoutput").innerHTML = diseases;
             //$("body").tooltip({selector: '[data-toggle=tooltip]'});
             $(".clickTitle").click(function () {
                 localStorage.setItem("omimNumber", $(this).attr("id"));
@@ -129,7 +129,6 @@
             var title = disease.match(pattern)[1];
             var id = title.replace(/[ ,;.-]* /g, "");
             var idPat = new RegExp(id);
-            //***litterary output works, so the backend system does its job. Now the output should be fixed***//
             document.getElementById("testoutput").innerHTML = disease;
            //// var matchId = localStorage.getItem("ids").match(idPat);
 
@@ -142,8 +141,8 @@
            //         title = title.substring(0, 12) + "...";
            //     }
            //     //put the data in an extra tab
-           //     $("#tablist").append("<li role=\"presentation\"><a href=\"#" + id + "\" aria-controls=\"" + id
-           //         + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\" class=\"tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
+                $("#tablist").append("<li role=\"presentation\"><a href=\"#" + id + "\" aria-controls=\"" + id
+                    + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\" class=\"tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
            //     $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
            //     $("#" + id).append("<br/><br/>");
            //     $("#" + id).append(disease);
