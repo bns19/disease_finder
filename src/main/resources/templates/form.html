@@ -2,12 +2,27 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="includes/header :: head">
-
 </head>
 
 <body>
 
 <div class="textcon">
+
+    <div class="menu">
+
+
+        <form th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" class="myButton"/>
+
+            <a th:href="@{/login}" class="myButton">Login </a>
+
+            <a th:href="@{/form}" class="myButton">Register</a>
+
+            <a th:href="@{/trythis}" class="myButton">Symptoms</a>
+
+            <a th:href="@{/trylanguage}" class="myButton">language</a>
+
+        </form>
+    </div>
 
     <form action="#" th:action="@{/form}" th:object="${personForm}" method="post">
         <table>
@@ -55,5 +70,8 @@
         </table>
     </form>
 </div>
+
+
 </body>
+<footer th:replace="includes/footer :: foot"></footer>
 </html>
