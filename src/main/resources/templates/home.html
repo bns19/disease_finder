@@ -1,18 +1,26 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="includes/header :: head">
     <title>Title</title>
 </head>
-<body background="https://hirewallpapers.com/wp-content/uploads/2016/02/light_blue_1920x1080_wallpaper.jpg">
 
-<h1>Welcome!</h1>
+    <body background="https://hirewallpapers.com/wp-content/uploads/2016/02/light_blue_1920x1080_wallpaper.jpg">
 
-<p>Click <a th:href="@{/login}">here</a> to Login.</p>
-<p>Click <a th:href="@{/form}">here</a> to Register.</p>
-<p>Click <a th:href="@{/frontpage}">here</a> to insert symtoms.</p>
-</body>
 
-<footer th:replace="includes/footer :: foot">
-    <title>Title</title>
-</footer>
+
+    <div class="textcon">
+        <form>
+            <input type="text" id="symptoms" name="symptoms"/>
+            <button id="searchButton" name="searchButton" onclick="sendSymptoms(symptoms.value);" type="button">
+                Search button</button>
+        </form>
+    </div>
+
+
+    </body>
+
+    <footer th:replace="includes/footer :: foot">
+        <title>Title</title>
+    </footer>
 </html>
