@@ -13,43 +13,38 @@
         <table>
 
             <tr>
-                <td>firstName:</td>
+                <td>First name:</td>
                 <td><input type="text" th:field="*{firstName}"/></td>
                 <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Email</td>
             </tr>
             <tr>
-                <td>lastName:</td>
+                <td>Last name:</td>
                 <td><input type="text" th:field="*{lastName}"/></td>
                 <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName</td>
             </tr>
             <tr>
-                <td>authority:</td>
-                <td><input type="text" th:field="*{authority}"/></td>
-                <td th:if="${#fields.hasErrors('authority')}" th:errors="*{authority}">authority</td>
-            </tr>
-            <tr>
-                <td>enabled:</td>
-                <td><input type="text" th:field="*{enabled}"/></td>
-                <td th:if="${#fields.hasErrors('enabled')}" th:errors="*{enabled}">enabled</td>
-            </tr>
-            <tr>
-                <td>Username:</td>
+                <td>Username:*</td>
                 <td><input type="text" th:field="*{username}"/></td>
                 <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username</td>
             </tr>
             <tr>
-                <td>Email</td>
+                <td>Email:*</td>
                 <td><input type="text" th:field="*{email}"/></td>
                 <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email</td>
             </tr>
             <tr>
-                <td>password:</td>
-                <td><input type="text" th:field="*{password}"/></td>
+                <td>Birthdate:</td>
+                <td><input type="password" th:field="*{bDate}"/></td>
+                <td th:if="${#fields.hasErrors('bDate')}" th:errors="*{bDate}">password</td>
+            </tr>
+            <tr>
+                <td>Password:*</td>
+                <td><input type="password" th:field="*{password}"/></td>
                 <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password</td>
             </tr>
             <tr>
-                <td>confirm password:</td>
-                <td><input type="text" th:field="*{password2}"/></td>
+                <td>Confirm password:*</td>
+                <td><input type="password" th:field="*{password2}"/></td>
                 <td th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}">confirm password</td>
             </tr>
             <tr>

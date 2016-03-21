@@ -1,5 +1,6 @@
 package nl.bioinf.diseasefinderSpring.login;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
@@ -12,23 +13,26 @@ import javax.validation.constraints.Size;
 
 public class PersonForm {
 
-
-
+    @NotEmpty
+    @Size(min=5, max=30)
     private String username;
 
     private String firstName;
 
     private String lastName;
 
-    private String password2;
-
+    @Size(min=5)
     private String password;
 
+    @NotNull(message="passwords do not match")
+    private String password2;
+
+    @NotEmpty
     private String email;
 
-    private String authority;
+    private String authority = "USER";
 
-    private String enabled;
+    private String enabled = "true";
 
 
     // DD/MM/YYYY
@@ -55,9 +59,6 @@ public class PersonForm {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getEmail() {
         return email;
@@ -80,47 +81,49 @@ public class PersonForm {
     }
 
     public String getUsername() {
-
         return username;
     }
 
     public void setUsername(String username) {
-
         this.username = username;
     }
 
     public void setAuthority(String authority) {
-
-        this.authority = "USER";
-
+        this.authority = authority;
     }
 
     public String getAuthority(){
-
-        return authority;}
-
+        return authority;
+    }
 
     public void setEnabled(String enabled) {
-
-        this.enabled = "true";
-
+        this.enabled = enabled;
     }
 
     public String getEnabled(){
-
         return enabled;
-
-    }
-
-
-    public void setPassword2(String password2) {
-
-        this.password2 = password2;
-
     }
 
     public String getPassword2(){
+        return password2;
+    }
 
-        return password2;}
+    public void setPassword(String password) {
+        this.password = password;
+        checkPassword();//check
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+        checkPassword();//check
+    }
+
+    private void checkPassword() {
+        if(this.password == null || this.password2 == null){
+            return;
+        }else if(!this.password.equals(password2)){
+            this.password2 = null;
+        }
+    }
 
 }
