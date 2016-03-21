@@ -5,14 +5,13 @@ package nl.bioinf.diseasefinderSpring.login;
  * Created by hjdupon on 24-2-16.
  */
 
+import nl.bioinf.diseasefinderSpring.login.password.EncryptPassword;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,6 +52,9 @@ public class WebController extends WebMvcConfigurerAdapter {
         }
         if (! bindingResult.hasErrors()) {
 
+            EncryptPassword pw = new EncryptPassword();
+            String encrypted = pw.EncryptPassword(personForm.getPassword());
+
             // create table User if it not exists with the properties //
             log.info("Creating tables");
             jdbcTemplate.update("CREATE TABLE IF NOT EXISTS User(" + "id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255), password VARCHAR(255), " +
@@ -63,7 +65,7 @@ public class WebController extends WebMvcConfigurerAdapter {
             String inputMysql = String.format("INSERT INTO User (first_name, last_name, password, email, username, birthdate, authority, enabled) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
                     personForm.getFirstName(),
                     personForm.getLastName(),
-                    personForm.getPassword(),
+                    encrypted,
                     personForm.getEmail(),
                     personForm.getUsername(),
                     personForm.getbDate(),
