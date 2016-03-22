@@ -1,9 +1,9 @@
 package nl.bioinf.diseasefinderSpring.login;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -21,13 +21,14 @@ public class PersonForm {
 
     private String lastName;
 
-    @Size(min=5)
+    @Size(min=5, max=30)
     private String password;
 
     @NotNull(message="passwords do not match")
     private String password2;
 
     @NotEmpty
+    @Email
     private String email;
 
     private String authority = "USER";
