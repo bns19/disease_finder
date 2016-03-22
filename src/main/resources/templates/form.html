@@ -10,18 +10,14 @@
 
     <div class="menu">
 
+        <div sec:authorize="hasRole('USER')">
+            This content is only shown to administrators.
+        </div>
 
-        <form th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" class="myButton"/>
+        <span sec:authentication="peprsonForm.firstName"></span>
 
-            <a th:href="@{/login}" class="myButton">Login </a>
+        <menu th:replace="includes/menu :: menu"></menu>
 
-            <a th:href="@{/form}" class="myButton">Register</a>
-
-            <a th:href="@{/trythis}" class="myButton">Symptoms</a>
-
-            <a th:href="@{/trylanguage}" class="myButton">language</a>
-
-        </form>
     </div>
 
     <form action="#" th:action="@{/form}" th:object="${personForm}" method="post">

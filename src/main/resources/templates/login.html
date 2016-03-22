@@ -18,17 +18,8 @@
 
     <div class="menu">
 
-        <form th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" class="myButton"/>
+        <menu th:replace="includes/menu :: menu"></menu>
 
-            <a th:href="@{/login}" class="myButton">Login </a>
-
-            <a th:href="@{/form}" class="myButton">Register</a>
-
-            <a th:href="@{/trythis}" class="myButton">Symptoms</a>
-
-            <a th:href="@{/trylanguage}" class="myButton">language</a>
-
-        </form>
     </div>
 
     <table>
