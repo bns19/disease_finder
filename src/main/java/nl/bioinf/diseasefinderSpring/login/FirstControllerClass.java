@@ -19,13 +19,8 @@ import java.util.*;
 
 /**
  * Created by bnsikkema on 23-2-16.
- * In progress
- * The application now prints the founded diseases based on the provided symptoms to screen in a mechanical way.
- * The first servlet is therefore sucesfully implemented.
- * Implementing the next servlet is in progress.
- * The code that has been silenced by comments is the content of the servlet with a few alterations to made it fit Spring.
- * It has not yet been fixed however.
- *
+ *This class now contains the two controllers responsible for finding diseases based on symptoms given by the user.
+ * The functionality is succesfully ported.
  */
 
 
@@ -36,47 +31,31 @@ public class FirstControllerClass {
         return "frontpage";
         /**link to formPage**/
     }
-
+    //Remove this!
 
 
     @RequestMapping(value="/sendSymptoms",  method= RequestMethod.POST)
     @ResponseBody
     public String processInput(String symptoms) {
-
         StringBuilder sb = new StringBuilder();
         String[] symptomsList = symptoms.split(",");
         try {
-            //PrintWriter out = response.getWriter();
-            //String[] symptoms = diseaseSymptoms.getSymptomList();
-
             DiseaseCollection diseases = new DiseaseCollection(symptomsList);
             ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
             HashMap<String, Disease> hashMapOfDiseases = diseases
                     .getDiseaseCollection();
             Iterator it = hashMapOfDiseases.entrySet().iterator();
-            //response.getWriter().println("<html><body>");
-
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry) it.next();
                 Disease disease = (Disease) pair.getValue();
-                //out.println(disease.printSummary());
-                /*The summary gives the de disease-results based on the given symptoms in a html output!!!!!*/
-                /**Results do work**/
-               // response.getWriter().println(disease.printSummary());
                 sb.append(disease.printSummary());
                 it.remove(); // avoids a ConcurrentModificationException
             }
-            //response.getWriter().println("</body></html>");
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            //out.close();
         }
-
         return sb.toString();
     }
 

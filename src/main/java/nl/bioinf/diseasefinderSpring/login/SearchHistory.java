@@ -18,7 +18,7 @@ public class SearchHistory {
     NamedParameterJdbcTemplate jdbcTemplate;
 
 
-    @RequestMapping(value="/sendSymptoms", method = RequestMethod.GET)
+    @RequestMapping(value = "/sendSymptoms", method = RequestMethod.GET)
     public void processSearchSymptoms(String symptoms) {
 
         this.history = symptoms;
@@ -32,17 +32,17 @@ public class SearchHistory {
         System.out.println("symptoms2");
         jdbcTemplate.update("CREATE TABLE IF NOT EXISTS History(" + "id SERIAL, username VARCHAR(255)," +
                         "email VARCHAR(255),history VARCHAR(255))"
-                        , new MapSqlParameterSource());
+                , new MapSqlParameterSource());
 
-            // input the form data //
-            String inputMysql = String.format("INSERT INTO User (username, email, history) VALUES ('%s', '%s', '%s')",
-                    "Henri",
-                    "hjdupon@gmail.com",
-                    this.history);
+        // input the form data //
+        String inputMysql = String.format("INSERT INTO User (username, email, history) VALUES ('%s', '%s', '%s')",
+                "Henri",
+                "hjdupon@gmail.com",
+                this.history);
 
-            jdbcTemplate.update(inputMysql, new MapSqlParameterSource());
+        jdbcTemplate.update(inputMysql, new MapSqlParameterSource());
 
-            return "/sendSymptoms";
-        }
+        return "/sendSymptoms";
+    }
+
 }
-

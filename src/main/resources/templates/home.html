@@ -10,11 +10,20 @@
 
 
     <div class="textcon">
+
+        <div class="menu">
+
+            <menu th:replace="includes/menu :: menu"></menu>
+
+        </div>
+
         <form>
             <input type="text" id="symptoms" name="symptoms"/>
             <button id="searchButton" name="searchButton" onclick="sendSymptoms(symptoms.value);" type="button">
                 Search button</button>
         </form>
+
+
     </div>
 
 

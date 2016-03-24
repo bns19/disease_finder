@@ -88,7 +88,7 @@
     function sendSymptoms(symptoms) {
         localStorage.setItem("symptoms", symptoms);
         var symptomSet = symptoms;
-        //$('.nav-tabs a[href="#resultTab"]').tab('show');
+        $('.nav-tabs a[href="#resultTab"]').tab('show');
 
         //HTMLpage that the spring controller has mapped.
         var controller = "/sendSymptoms";
@@ -102,9 +102,7 @@
             $("#resultTab").append(diseases);
             $("#resultTab").append("</ul>");
             $("#resultTab").append("<button id = \"save\" class=\"btn btn-default\">Save this result</button>");
-
-            //document.getElementById("testoutput").innerHTML = diseases;
-            //$("body").tooltip({selector: '[data-toggle=tooltip]'});
+            $("body").tooltip({selector: '[data-toggle=tooltip]'});
             $(".clickTitle").click(function () {
                 localStorage.setItem("omimNumber", $(this).attr("id"));
                 loadDisease();
@@ -129,7 +127,6 @@
             var title = disease.match(pattern)[1];
             var id = title.replace(/[ ,;.-]* /g, "");
             var idPat = new RegExp(id);
-            document.getElementById("testoutput").innerHTML = disease;
            //// var matchId = localStorage.getItem("ids").match(idPat);
 
 
@@ -143,13 +140,13 @@
            //     //put the data in an extra tab
                 $("#tablist").append("<li role=\"presentation\"><a href=\"#" + id + "\" aria-controls=\"" + id
                     + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\" class=\"tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
-           //     $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
-           //     $("#" + id).append("<br/><br/>");
-           //     $("#" + id).append(disease);
-           //     $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease</button>");
+                $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
+                $("#" + id).append("<br/><br/>");
+                $("#" + id).append(disease);
+                $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease</button>");
            // }
             $(".closeDiseaseTab").click(function () {
-                matchId = localStorage.getItem("ids").match(idPat);
+               // matchId = localStorage.getItem("ids").match(idPat);
                 var close_id = $(this).data("close");
                 var elem = document.getElementById(close_id);
                 if (elem !== null) {
@@ -159,8 +156,8 @@
                     $('.nav-tabs a[href="#resultTab"]').tab('show');
                     //remove string from id list, so that it can be opened again
                    // var idString = localStorage.getItem("ids");
-                    var firstPart = idString.substring(0, matchId.index);
-                    var lastPart = idString.substring(matchId.index + id.length, idString.length);
+                   // var firstPart = idString.substring(0, matchId.index);
+                   // var lastPart = idString.substring(matchId.index + id.length, idString.length);
                    // localStorage.setItem("ids", firstPart + lastPart);
                 }
             });
