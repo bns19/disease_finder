@@ -12,17 +12,19 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'spring-boot' 
 
 jar {
-	baseName = 'demo'
-	version = '0.0.1-SNAPSHOT'
+	baseName = 'gs-accessing-data-jpa'
+	version =  '0.1.0'
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	maven { url "https://repository.jboss.org/nexus/content/repositories/releases" }
 }
 
 
@@ -37,7 +39,7 @@ dependencies {
 	compile('org.springframework.session:spring-session')
 	compile('org.json:json:20160212')
 	runtime("mysql:mysql-connector-java")
-	compile("com.h2database:h2")
+//	compile("com.h2database:h2")
 
 }
 

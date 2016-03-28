@@ -6,11 +6,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.persistence.Entity;
 
 /**
  * Created by hjdupon on 24-2-16.
  */
 
+@Entity
 public class PersonForm {
 
     @NotEmpty
