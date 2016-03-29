@@ -1,4 +1,12 @@
-//Created by mkslofstra and aroeters
+/**
+ * Created by mkslofstra and aroeters, addditions and adjustments by bnsikkema
+ * This code is still under construction because the tree and symptom systems are not yet implemented.
+ * All the code that is commented out is part of that and will be implemented later and adjusted when necessary.
+ *
+ */
+
+
+
 //$(document).ready(initialize);
 //function initialize() {
 //    var symptoms;
@@ -68,23 +76,20 @@
 //        });
 //    });
     /**
-     * bovenstaande is allemaal gelinkt aan de selectie van symptomen en de boom
-     * In onze eerste versie wordt dit achterwege gelaten gezien alle symptomen hardcode worden ingevoerd
+     * The code above is irrelevant at the moment because the symproms will be added hardcoded in this part of the project.
      *
      *
      */
 
 
-    $( document ).ready(function() {
 
-    });
     $("#search-button").click(function () {
         sendSymptoms();
     });
 
 
 
-//by mkslofstra: this function will send data to the servlet and get diseases back
+//by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
     function sendSymptoms(symptoms) {
         localStorage.setItem("symptoms", symptoms);
         var symptomSet = symptoms;
@@ -113,7 +118,7 @@
         });
     }
 
-//by mkslofstra
+//by mkslofstra and bnsikkema
     function loadDisease() {
         var diseaseServlet = "/diseaseInformation";
         var token = $("meta[name='_csrf']").attr("content");
