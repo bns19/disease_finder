@@ -46,7 +46,7 @@ public class DiseaseCollection {
      */
     public DiseaseCollection(final String[] features) throws JSONException,
             IOException {
-
+        //for( i : features){ if(!i = String) {throw illegal argument exception}
         HashMap diseaseMatches = this.getOmimNumbers(features);
         this.fillDiseaseCollection(diseaseMatches);
     }
