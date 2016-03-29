@@ -21,7 +21,7 @@ public class SearchHistory extends WebMvcConfigurerAdapter {
         System.out.println("symptoms: " + searchhistory);
 
         // input the form data //
-        String inputMysql = String.format("INSERT INTO History (username, history) VALUES ('%s', '%s')", "Henri", searchhistory);
+        //String inputMysql = String.format("INSERT INTO History (username, history) VALUES ('%s', '%s')", "Henri", searchhistory);
 
 //                String inputMysql = String.format("INSERT INTO User (username) VALUES ('%s')", searchhistory);
 

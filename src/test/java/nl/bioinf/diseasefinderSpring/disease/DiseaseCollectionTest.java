@@ -19,7 +19,7 @@ public class DiseaseCollectionTest {
         System.out.println("getDiseaseCollection");
         String mimNumber = "666666";
         TreeMap features = new TreeMap();
-        features.put("Horns", "fgsg");
+        features.put("Horns", "yes");
         features.put("Evil", "yes");
         Disease devilsDisease = new Disease("666666", "devils disease",
                 features);
