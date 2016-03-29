@@ -1,5 +1,6 @@
 package nl.bioinf.diseasefinderSpring.controllers;
 
+import nl.bioinf.diseasefinderSpring.Beans.DiseaseSymptoms;
 import nl.bioinf.diseasefinderSpring.disease.Disease;
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
 import org.json.JSONException;
@@ -21,7 +22,11 @@ import java.util.*;
  */
 @Controller
 public class SymptomProsessingController {
-
+    @RequestMapping(value="/trythis", method = RequestMethod.GET)
+    public String indexPage(DiseaseSymptoms diseaseSymptoms) {
+        return "frontpage";
+        /**link to formPage**/
+    }
     /**
      * processInput.
      * This requestmapping method takes the symptom(s) provided by the user and uses them to find the corresponding disease(s).
