@@ -1,4 +1,4 @@
-package nl.bioinf.diseasefinderSpring.Database;
+package nl.bioinf.diseasefinderSpring.controllers;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

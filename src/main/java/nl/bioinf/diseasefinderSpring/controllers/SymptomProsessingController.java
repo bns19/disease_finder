@@ -3,6 +3,7 @@ package nl.bioinf.diseasefinderSpring.controllers;
 import nl.bioinf.diseasefinderSpring.Beans.DiseaseSymptoms;
 import nl.bioinf.diseasefinderSpring.disease.Disease;
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
+import nl.bioinf.diseasefinderSpring.login.SearchHistory;
 import org.json.JSONException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,11 @@ public class SymptomProsessingController {
         StringBuilder sb = new StringBuilder();
         /**Splits added dummy symptoms**/
         String[] symptomsList = symptoms.split(",");
+
+        /* Save the search history of the user */
+        SearchHistory sh = new SearchHistory();
+        sh.SearchHistory(symptoms);
+
         try {
             DiseaseCollection diseases = new DiseaseCollection(symptomsList);
             ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
