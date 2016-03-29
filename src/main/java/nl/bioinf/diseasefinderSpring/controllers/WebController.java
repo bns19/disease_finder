@@ -5,8 +5,6 @@ package nl.bioinf.diseasefinderSpring.controllers;
  * Created by hjdupon on 24-2-16.
  */
 
-import nl.bioinf.diseasefinderSpring.login.Application;
-import nl.bioinf.diseasefinderSpring.login.PersonForm;
 import nl.bioinf.diseasefinderSpring.login.password.EncryptPassword;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
