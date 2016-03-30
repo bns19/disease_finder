@@ -1,4 +1,4 @@
-package nl.bioinf.diseasefinderSpring.login.password;
+package nl.bioinf.diseasefinderSpring.login;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -8,6 +8,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class EncryptPassword {
 
 
+    /**
+     * Method that encrypts the user password
+     * @param password
+     * @return a hashed password
+     */
     public static String EncryptPassword(String password){
 
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

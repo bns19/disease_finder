@@ -5,7 +5,9 @@ package nl.bioinf.diseasefinderSpring.controllers;
  * Created by hjdupon on 24-2-16.
  */
 
-import nl.bioinf.diseasefinderSpring.login.password.EncryptPassword;
+import nl.bioinf.diseasefinderSpring.Database.MySQLCreateTables;
+import nl.bioinf.diseasefinderSpring.Database.RegisterUserMySQL;
+import nl.bioinf.diseasefinderSpring.login.EncryptPassword;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,7 @@ public class WebController extends WebMvcConfigurerAdapter {
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
 
+
     /**
      * @param personForm data from the
      * @param bindingResult
@@ -55,32 +58,15 @@ public class WebController extends WebMvcConfigurerAdapter {
             EncryptPassword pw = new EncryptPassword();
             String encrypted = pw.EncryptPassword(personForm.getPassword());
 
-            // create table User if it not exists with the properties //
-            log.info("Creating tables");
-            jdbcTemplate.update("CREATE TABLE IF NOT EXISTS User(" + "id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255), password VARCHAR(255), " +
-                            "email VARCHAR(255), username VARCHAR(255), birthdate VARCHAR(10), authority VARCHAR(10), enabled VARCHAR(10))"
-                    , new MapSqlParameterSource());
+            MySQLCreateTables MySQLCreateTables = new MySQLCreateTables();
+            MySQLCreateTables.CreateUserTableMySQL(jdbcTemplate);
 
-
-            jdbcTemplate.update("CREATE TABLE IF NOT EXISTS History(" + "id SERIAL, searchfield VARCHAR(255))"
-                , new MapSqlParameterSource());
-
-            // input the form data //
-            String inputMysql = String.format("INSERT INTO User (first_name, last_name, password, email, username, birthdate, authority, enabled) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
-                    personForm.getFirstName(),
-                    personForm.getLastName(),
-                    encrypted,
-                    personForm.getEmail(),
-                    personForm.getUsername(),
-                    personForm.getbDate(),
-                    personForm.getAuthority(),
-                    personForm.getEnabled());
-
-            jdbcTemplate.update(inputMysql, new MapSqlParameterSource());
+            RegisterUserMySQL RegisterUser = new RegisterUserMySQL();
+            RegisterUser.RegisterUserMySQL(encrypted, personForm, jdbcTemplate);
 
             return "/login";
         }
-        // return the next page
+
         return "/login";
     }
 
