@@ -16,17 +16,18 @@ public class SearchHistory extends WebMvcConfigurerAdapter {
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
 
-    public String SearchHistory(String searchhistory) {
+    /**
+     * @param searchhistory
+     * @return website
+     */
+    public String SearchHistory(String searchhistory, NamedParameterJdbcTemplate jdbcTemplate) {
 
         System.out.println("symptoms: " + searchhistory);
 
         // input the form data //
-        //String inputMysql = String.format("INSERT INTO History (username, history) VALUES ('%s', '%s')", "Henri", searchhistory);
+        String inputMysql = String.format("INSERT INTO History (username, searchedsymptoms) VALUES ('%s', '%s')", "Henri", searchhistory);
 
-//                String inputMysql = String.format("INSERT INTO User (username) VALUES ('%s')", searchhistory);
-
-
-//        jdbcTemplate.update(inputMysql, new MapSqlParameterSource());
+        jdbcTemplate.update(inputMysql, new MapSqlParameterSource());
 
         return "/sendSymptoms";
     }

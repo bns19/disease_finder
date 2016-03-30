@@ -5,11 +5,13 @@ import nl.bioinf.diseasefinderSpring.disease.Disease;
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
 import nl.bioinf.diseasefinderSpring.login.SearchHistory;
 import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import nl.bioinf.diseasefinderSpring.score.ScoreCalculator;
+import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
 import java.io.IOException;
 import java.util.*;
 
@@ -28,6 +30,15 @@ public class SymptomProsessingController {
         return "frontpage";
         /**link to formPage**/
     }
+
+    /**
+     * Make the jdbcTemplate approachable
+     * There can only be one jdbcTemplate be made, in the WebSecurityConfig the Autowiring caused errors
+     */
+    @Autowired
+    NamedParameterJdbcTemplate jdbcTemplate;
+
+
     /**
      * processInput.
      * This requestmapping method takes the symptom(s) provided by the user and uses them to find the corresponding disease(s).
@@ -43,7 +54,7 @@ public class SymptomProsessingController {
 
         /* Save the search history of the user */
         SearchHistory sh = new SearchHistory();
-        sh.SearchHistory(symptoms);
+        sh.SearchHistory(symptoms, jdbcTemplate);
 
         try {
             DiseaseCollection diseases = new DiseaseCollection(symptomsList);
