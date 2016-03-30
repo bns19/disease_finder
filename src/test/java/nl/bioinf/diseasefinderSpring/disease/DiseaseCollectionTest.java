@@ -13,6 +13,18 @@ import static org.junit.Assert.*;
 public class DiseaseCollectionTest {
 
 
+    @Test
+    public void testDiseaseCollectonConstructor() throws Exception {
+        String mimNumber = "666666";
+        TreeMap features = new TreeMap();
+        features.put("Horns", "yes");
+        features.put("Evil", "yes");
+        Disease devilsDisease = new Disease("666666", "devils disease",
+                features);
+        String[] givenFeatures = new String[]{"dizziness", "blurry vision",
+                "ptosis"};
+        DiseaseCollection instance = new DiseaseCollection(givenFeatures);
+    }
 
     @Test
     public void testGetDiseaseCollection() throws Exception {

@@ -66,7 +66,7 @@ public class DiseasePhenotypeGetter {
             this.collectPhenotypes(featuresToFind);
             String title = this.getTitleOfDisease();
             this.saveDisease(omimNumber, title);
-        } catch (org.json.JSONException ex) {
+        } catch (JSONException ex) {
             //when the clinical synopsis of a disease is not available, this disease
             //is not interesting for the application.
             Logger logger = Logger.getLogger(DiseasePhenotypeGetter.class

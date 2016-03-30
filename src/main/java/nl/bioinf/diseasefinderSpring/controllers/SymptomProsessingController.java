@@ -55,7 +55,7 @@ public class SymptomProsessingController {
                 Map.Entry pair = (Map.Entry) it.next();
                 Disease disease = (Disease) pair.getValue();
                 sb.append(disease.printSummary());
-                it.remove(); // avoids a ConcurrentModificationException
+                //it.remove(); // avoids a ConcurrentModificationException
             }
         } catch (JSONException e) {
             e.printStackTrace();
