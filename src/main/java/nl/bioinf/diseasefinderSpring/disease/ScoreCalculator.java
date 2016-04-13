@@ -1,4 +1,4 @@
-package nl.bioinf.diseasefinderSpring.score;
+package nl.bioinf.diseasefinderSpring.disease;
 
 import nl.bioinf.diseasefinderSpring.disease.Disease;
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;

@@ -24,9 +24,17 @@ public class Disease implements Comparable {
     public Disease(final String mimNumberValue,
             final String titleOfDisease, final TreeMap featuresHashMap) {
         //the mimNumber length should always be 6, otherwise, it is invalid.
-        if (mimNumberValue.length() != 6) {
+        if (mimNumberValue == null || mimNumberValue.length() != 6) {
             throw new IllegalArgumentException("The omimNumber should be a"
                     + "String of exactly six characters.");
+        }
+
+        if (featuresHashMap == null || featuresHashMap.isEmpty()) {
+            throw new IllegalArgumentException("The map cannot be empty");
+        }
+
+        if (titleOfDisease.isEmpty() || titleOfDisease.length() < 1) {
+            throw new IllegalArgumentException("The title of the disease cannot be null");
         }
         this.mimNumber = mimNumberValue;
         this.title = titleOfDisease;

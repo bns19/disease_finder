@@ -1,15 +1,16 @@
 package nl.bioinf.diseasefinderSpring.controllers;
 
-import nl.bioinf.diseasefinderSpring.disease.Disease;
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
+import nl.bioinf.diseasefinderSpring.login.SearchHistory;
 import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import nl.bioinf.diseasefinderSpring.score.ScoreCalculator;
+import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
 import java.io.IOException;
-import java.util.*;
 
 /**
  * Created by bnsikkema on 23-2-16.
@@ -21,6 +22,13 @@ import java.util.*;
  */
 @Controller
 public class SymptomProsessingController {
+    /**
+     * Make the jdbcTemplate approachable
+     * There can only be one jdbcTemplate be made, in the WebSecurityConfig the Autowiring caused errors
+     */
+    @Autowired
+    NamedParameterJdbcTemplate jdbcTemplate;
+
 
     /**
      * processInput.
@@ -31,27 +39,11 @@ public class SymptomProsessingController {
     @RequestMapping(value="/sendSymptoms",  method= RequestMethod.POST)
     @ResponseBody
     public String processInput(String symptoms) {
-        StringBuilder sb = new StringBuilder();
-        /**Splits added dummy symptoms**/
-        String[] symptomsList = symptoms.split(",");
-        try {
-            DiseaseCollection diseases = new DiseaseCollection(symptomsList);
-            ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
-            HashMap<String, Disease> hashMapOfDiseases = diseases
-                    .getDiseaseCollection();
-            Iterator it = hashMapOfDiseases.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry pair = (Map.Entry) it.next();
-                Disease disease = (Disease) pair.getValue();
-                sb.append(disease.printSummary());
-                it.remove(); // avoids a ConcurrentModificationException
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return sb.toString();
+        /* Save the search history of the user */
+        SearchHistory sh = new SearchHistory();
+        //sh.SearchHistory(symptoms, jdbcTemplate);
+        SymptomProcessor sp = new SymptomProcessor(symptoms);
+        return sp.getDiseases();
     }
 
     /**

@@ -1,4 +1,4 @@
-package nl.bioinf.diseasefinderSpring.login;
+package nl.bioinf.diseasefinderSpring.controllers;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -18,7 +18,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/login").setViewName("login");
         registry.addViewController("/form").setViewName("form");
         registry.addViewController("/frontpage").setViewName("frontpage");
-        registry.addViewController("/trythis").setViewName("trythis");
         registry.addViewController("/diseaseResults").setViewName("diseaseResults");
     }
 

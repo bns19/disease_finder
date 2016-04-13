@@ -2,15 +2,7 @@ package nl.bioinf.diseasefinderSpring.disease;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 //import nl.bioinf.DiseaseFinder.connection.OmimDataRetriever;
 //import nl.bioinf.DiseaseFinder.dataFinder.DiseasePhenotypeGetter;
 import nl.bioinf.diseasefinderSpring.connection.OmimDataRetriever;
@@ -46,7 +38,19 @@ public class DiseaseCollection {
      */
     public DiseaseCollection(final String[] features) throws JSONException,
             IOException {
-
+        try {
+            for (String i : features) {
+                if(features.length < 2 && i.isEmpty()) {
+                    throw new IllegalStateException("there has to be at least one feature");
+                } else if(features.length <2 && !i.matches(".*[a-zA-Z]+.*")) {
+                    throw new IllegalArgumentException("At least one feature containing a possible term is required (no letters detected)");
+                }
+            }
+        } catch(AssertionError ae) {
+            throw ae;
+        } catch(StringIndexOutOfBoundsException siobe) {
+            throw siobe;
+        }
         HashMap diseaseMatches = this.getOmimNumbers(features);
         this.fillDiseaseCollection(diseaseMatches);
     }
