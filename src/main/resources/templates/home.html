@@ -5,31 +5,26 @@
     <title>Title</title>
 </head>
 
-    <body background="https://hirewallpapers.com/wp-content/uploads/2016/02/light_blue_1920x1080_wallpaper.jpg">
-
-
+<body background="https://hirewallpapers.com/wp-content/uploads/2016/02/light_blue_1920x1080_wallpaper.jpg">
 
     <div class="textcon">
 
         <div class="menu">
-
             <menu th:replace="includes/menu :: menu"></menu>
-
         </div>
 
         <form>
             <input type="text" id="symptoms" name="symptoms"/>
             <button id="searchButton" name="searchButton" onclick="sendSymptoms(symptoms.value);" type="button">
-                Search button</button>
+                Search button
+            </button>
         </form>
 
-
     </div>
+</body>
 
+<footer th:replace="includes/footer :: foot">
+    <title>Title</title>
+</footer>
 
-    </body>
-
-    <footer th:replace="includes/footer :: foot">
-        <title>Title</title>
-    </footer>
 </html>

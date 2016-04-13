@@ -1,4 +1,4 @@
-package nl.bioinf.diseasefinderSpring.login;
+package nl.bioinf.diseasefinderSpring.controllers;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -6,13 +6,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.persistence.Entity;
 
 /**
  * Created by hjdupon on 24-2-16.
  */
 
-@Entity
+//@Entity
 public class PersonForm {
 
     @NotEmpty

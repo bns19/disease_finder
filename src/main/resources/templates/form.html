@@ -8,18 +8,6 @@
 
 <div class="textcon">
 
-    <div class="menu">
-
-        <div sec:authorize="hasRole('USER')">
-            This content is only shown to administrators.
-        </div>
-
-        <span sec:authentication="peprsonForm.firstName"></span>
-
-        <menu th:replace="includes/menu :: menu"></menu>
-
-    </div>
-
     <form action="#" th:action="@{/form}" th:object="${personForm}" method="post">
         <table>
 
