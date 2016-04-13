@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -131,14 +132,30 @@ public class OmimDataRetriever {
     private String getSiteContent(final String omimSite)
             throws IOException {
         URL omim = new URL(omimSite);
-        BufferedReader omimContent = new BufferedReader(
-                new InputStreamReader(omim.openStream()));
-        String inputLine;
         StringBuilder resultBuilder = new StringBuilder();
-        while ((inputLine = omimContent.readLine()) != null) {
-            resultBuilder.append(inputLine);
+        try {
+            BufferedReader omimContent = new BufferedReader(
+                    new InputStreamReader(omim.openStream()));
+            String inputLine;
+
+            while ((inputLine = omimContent.readLine()) != null) {
+                resultBuilder.append(inputLine);
+            }
+            omimContent.close();
+        } catch (UnknownHostException uhe) {
+            System.out.println("Could not connect to website; your OMIM key might be expired, " +
+                    "the OMIM site might be down or their are issues with the internet connection: " + uhe);
+            System.exit(0);
+
         }
-        omimContent.close();
+//        BufferedReader omimContent = new BufferedReader(
+//                new InputStreamReader(omim.openStream()));
+//        String inputLine;
+//        StringBuilder resultBuilder = new StringBuilder();
+//        while ((inputLine = omimContent.readLine()) != null) {
+//            resultBuilder.append(inputLine);
+//        }
+//        omimContent.close();
         return resultBuilder.toString();
     }
 
