@@ -1,17 +1,24 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by Mariska Slofstra & Arne Roeters
+ * Adjusted by Bas Sikkema & Henri du Pon
+ */
 package nl.bioinf.diseasefinderSpring.dataFinder;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.TreeMap;
-import java.util.Iterator;
-import java.util.Properties;
-import java.util.logging.Level;
 import nl.bioinf.diseasefinderSpring.bodyFeatures.FeatureCollection;
 import nl.bioinf.diseasefinderSpring.connection.OmimDataRetriever;
 import nl.bioinf.diseasefinderSpring.disease.Disease;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Properties;
+import java.util.TreeMap;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**

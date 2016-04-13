@@ -1,3 +1,8 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by bnsikkema on 23-2-16.
+ */
 package nl.bioinf.diseasefinderSpring.controllers;
 
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
@@ -13,7 +18,6 @@ import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
 import java.io.IOException;
 
 /**
- * Created by bnsikkema on 23-2-16.
  *This class now contains the controller responsible for finding diseases based on (dummy) symptoms given by the user.
  * The functionality is succesfully ported.
  *

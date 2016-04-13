@@ -1,3 +1,8 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by bnsikkema on 8-4-16.
+ */
 package nl.bioinf.diseasefinderSpring.controllers;
 
 import nl.bioinf.diseasefinderSpring.disease.Disease;
@@ -11,7 +16,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Created by bnsikkema on 8-4-16.
  * This class regulates the processing of disease terms and gets the corresponding diseases which it will return to the
  * SymptomProcessingController.
  */
@@ -22,7 +26,7 @@ public class SymptomProcessor {
      * @param symptoms the given symptoms as string
      */
 
-    public SymptomProcessor(String symptoms) {
+    public SymptomProcessor(final String symptoms) {
         processSymptoms(symptoms);
     }
 
@@ -35,7 +39,7 @@ public class SymptomProcessor {
      * this method regulates the core processingpart.
      * @param symptoms the given symptoms as string
      */
-    private void processSymptoms(String symptoms) {
+    private void processSymptoms(final String symptoms) {
         StringBuilder sb = new StringBuilder();
         /**Splits added dummy symptoms**/
         String[] symptomsList = symptoms.split(",");

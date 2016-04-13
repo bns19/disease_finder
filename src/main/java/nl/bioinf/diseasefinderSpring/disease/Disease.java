@@ -1,3 +1,9 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by Mariska Slofstra & Arne Roeters
+ * Adjusted by Bas Sikkema & Henri du Pon
+ */
 package nl.bioinf.diseasefinderSpring.disease;
 
 import java.util.Iterator;

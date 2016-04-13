@@ -1,3 +1,9 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Bas Sikkema & Henri du Pon
+ */
+
 package nl.bioinf.diseasefinderSpring.controllers;
 
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +15,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
     /**
      * Map a view controller to the given URL path (or pattern) in order to render a response with a pre-configured status code and view.
+     * @ViewControllerRegistry Assists with the registration of simple automated controllers pre-configured with status code and/or a view.
      * @param registry
      */
     @Override

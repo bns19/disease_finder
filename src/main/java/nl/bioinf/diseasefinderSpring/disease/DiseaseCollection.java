@@ -1,15 +1,21 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by Mariska Slofstra & Arne Roeters
+ * Adjusted by Bas Sikkema & Henri du Pon
+ */
 package nl.bioinf.diseasefinderSpring.disease;
+
+import nl.bioinf.diseasefinderSpring.connection.OmimDataRetriever;
+import nl.bioinf.diseasefinderSpring.dataFinder.DiseasePhenotypeGetter;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
+
 //import nl.bioinf.DiseaseFinder.connection.OmimDataRetriever;
 //import nl.bioinf.DiseaseFinder.dataFinder.DiseasePhenotypeGetter;
-import nl.bioinf.diseasefinderSpring.connection.OmimDataRetriever;
-import nl.bioinf.diseasefinderSpring.dataFinder.DiseasePhenotypeGetter;
-import org.json.JSONException;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 
 /**
  * This class collects all the possible diseases which are found.

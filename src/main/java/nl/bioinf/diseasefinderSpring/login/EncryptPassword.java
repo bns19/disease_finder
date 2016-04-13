@@ -1,17 +1,22 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by henridupon on 3/1/2016.
+ */
 package nl.bioinf.diseasefinderSpring.login;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
- * Created by henridupon on 3/1/2016.
+ * Encrypts the input password from the user.
  */
 public class EncryptPassword {
 
 
     /**
-     * Method that encrypts the user password
-     * @param password
-     * @return a hashed password
+     * Method that encrypts the user password.
+     * @param password from the user.
+     * @return a hashed password.
      */
     public static String EncryptPassword(String password){
 
