@@ -129,16 +129,15 @@ public class LoginForm {
     final public void setAuthority(final String authority) {
 
         this.authority = "USER";
-
     }
 
     /**
      * @return the authorty level.
      */
-    final public String getAuthority(){
+    final public String getAuthority() {
 
-        return authority;}
-
+        return authority;
+    }
 
     /**
      * @param enabled = shows if the user account is enabled.
@@ -146,18 +145,15 @@ public class LoginForm {
     final public void setEnabled(final String enabled) {
 
         this.enabled = "true";
-
     }
 
     /**
      * @return enabled.
      */
-    final public String getEnabled(){
+    final public String getEnabled() {
 
         return enabled;
-
     }
-
 
     /**
      * @param password2 = confirm password.
@@ -165,14 +161,13 @@ public class LoginForm {
     final public void setPassword2(final String password2) {
 
         this.password2 = password2;
-
     }
 
     /**
      * @return the confirmation password.
      */
-    final public String getPassword2(){
+    final public String getPassword2() {
 
-        return password2;}
-
+        return password2;
+    }
 }

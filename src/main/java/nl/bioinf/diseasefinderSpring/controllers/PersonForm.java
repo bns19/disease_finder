@@ -79,6 +79,9 @@ public class PersonForm {
         return firstName;
     }
 
+    /**
+     * @param firstName
+     */
     final public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
@@ -90,6 +93,9 @@ public class PersonForm {
         return lastName;
     }
 
+    /**
+     * @param lastName
+     */
     final public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
@@ -109,6 +115,9 @@ public class PersonForm {
         return email;
     }
 
+    /**
+     * @param email
+     */
     final public void setEmail(final String email) {
         this.email = email;
     }
@@ -120,10 +129,16 @@ public class PersonForm {
         return bDate;
     }
 
+    /**
+     * @param bDate
+     */
     final public void setbDate(final String bDate) {
         this.bDate = bDate;
     }
 
+    /**
+     * @return Username
+     */
     final public String toString() {
         return "Person(Name: " + this.username + ")";
     }
@@ -135,10 +150,16 @@ public class PersonForm {
         return username;
     }
 
+    /**
+     * @param username needed.
+     */
     final public void setUsername(final String username) {
         this.username = username;
     }
 
+    /**
+     * @param authority level needed.
+     */
     final public void setAuthority(final String authority) {
         this.authority = authority;
     }
@@ -150,6 +171,9 @@ public class PersonForm {
         return authority;
     }
 
+    /**
+     * @param enabled enable account.
+     */
     final public void setEnabled(final String enabled) {
         this.enabled = enabled;
     }
@@ -161,15 +185,24 @@ public class PersonForm {
         return enabled;
     }
 
+    /**
+     * @return confirmation password.
+     */
     final public String getPassword2(){
         return password2;
     }
 
+    /**
+     * @param password
+     */
     final public void setPassword(final String password) {
         this.password = password;
         checkPassword();//check
     }
 
+    /**
+     * @param password2 = confimation password.
+     */
     final public void setPassword2(final String password2) {
         this.password2 = password2;
         checkPassword();//check

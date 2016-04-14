@@ -57,8 +57,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
+    
     /**
-     * Provides a utility class for easy DataSource access, a PlatformTransactionManager for a single DataSource, and various simple DataSource implementations.
+     * Provides a utility class for easy DataSource access, a PlatformTransactionManager for a single DataSource,
+     * and various simple DataSource implementations.
      */
     @Autowired
     DataSource dataSource;
@@ -66,7 +68,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * The @Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished.
-     * The @Autowired annotation can be used to autowire bean on the setter method just like @Required annotation, constructor,
+     * The annotation can be used to autowire bean on the setter method just like @Required annotation, constructor,
      * a property or methods with arbitrary names and/or multiple arguments.
      */
     @Autowired
@@ -79,6 +81,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery("select username, password, enabled from User where username = ?")
                 .authoritiesByUsernameQuery("select username, authority from User where username = ?");
     }
+
 
     /**
      * passwordEncoder encodes the password given by the user.
