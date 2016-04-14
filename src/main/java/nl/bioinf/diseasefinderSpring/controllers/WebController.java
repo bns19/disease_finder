@@ -26,10 +26,18 @@ import javax.validation.Valid;
 @Controller
 public class WebController extends WebMvcConfigurerAdapter {
 
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+    /**
+     * A logger.
+     */
+    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
+    /**
+     * Initializes the Personform bean and maps id on /form.
+     * @param personForm personForm.
+     * @return  the form template.
+     */
     @RequestMapping(value = "/form", method = RequestMethod.GET)
-    public String showForm(PersonForm personForm) {
+    public String showForm(final PersonForm personForm) {
 
         return "form";
     }
@@ -44,26 +52,26 @@ public class WebController extends WebMvcConfigurerAdapter {
 
     /**
      * @param personForm data from the registration form.
-     * @param bindingResult
+     * @param bindingResult bindingResult.
      * @return the result page.
      */
     // @PreAuthorize("Admin")
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    public String checkPersonInfo(@Valid PersonForm personForm, BindingResult bindingResult) {
+    public String checkPersonInfo(@Valid final PersonForm personForm, final BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "form";
         }
-        if (! bindingResult.hasErrors()) {
+        if (!bindingResult.hasErrors()) {
 
             EncryptPassword pw = new EncryptPassword();
             String encrypted = pw.EncryptPassword(personForm.getPassword());
 
-            MySQLCreateTables MySQLCreateTables = new MySQLCreateTables();
-            MySQLCreateTables.CreateUserTableMySQL(jdbcTemplate);
+            MySQLCreateTables mySQLCreateTables = new MySQLCreateTables();
+            mySQLCreateTables.CreateUserTableMySQL(jdbcTemplate);
 
-            RegisterUserMySQL RegisterUser = new RegisterUserMySQL();
-            RegisterUser.RegisterUserMySQL(encrypted, personForm, jdbcTemplate);
+            RegisterUserMySQL registerUser = new RegisterUserMySQL();
+            registerUser.RegisterUserMySQL(encrypted, personForm, jdbcTemplate);
 
             return "/login";
         }

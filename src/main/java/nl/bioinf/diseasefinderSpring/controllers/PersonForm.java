@@ -13,7 +13,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-//@Entity
+/**
+ *This class regulates the control of the registrationbean.
+ * It checks the input of the user and fills in neccesary default values.
+ */
 public class PersonForm {
 
     /**
@@ -21,29 +24,29 @@ public class PersonForm {
      * Username size needs to be between 5 and 30 characters in size.
      */
     @NotEmpty
-    @Size(min=5, max=30)
+    @Size(min = 5, max = 30)
     private String username;
 
     /**
-     * firstname of the User.
+     * Firstname of the User.
      */
     private String firstName;
 
     /**
-     * lastname of the User.
+     * Lastname of the User.
      */
     private String lastName;
 
     /**
      * Password needs to be between 5 and 30 characters in size.
      */
-    @Size(min=5, max=30)
+    @Size(min = 5, max = 30)
     private String password;
 
     /**
      * Second password may not be null.
      */
-    @NotNull(message="passwords do not match")
+    @NotNull(message = "passwords do not match")
     private String password2;
 
     /**
@@ -68,120 +71,170 @@ public class PersonForm {
     /**
      * Date must have a Date structure.
      */
-    // DD/MM/YYYY
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private String bDate;
 
     /**
+     * Get first name.
      * @return FirstName of the User.
      */
-    final public String getFirstName() {
+     public String getFirstName() {
         return firstName;
     }
 
-    final public void setFirstName(final String firstName) {
+    /**
+     * Set first name.
+     * @param firstName firstname.
+     */
+     public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
     /**
+     * Get last name.
      * @return Lastname of the User.
      */
-    final public String getLastName() {
+     public String getLastName() {
         return lastName;
     }
 
-    final public void setLastName(final String lastName) {
+    /**
+     *Set last name.
+     * @param lastName lastname.
+     */
+     public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
     /**
+     * Get password.
      * @return the Password.
      */
-    final public String getPassword() {
+     public String getPassword() {
         return password;
     }
 
 
     /**
+     * Get email adres.
      * @return Email adress.
      */
-    final public String getEmail() {
+     public String getEmail() {
         return email;
     }
 
-    final public void setEmail(final String email) {
+    /**
+     * Set email adress.
+     * @param email email.
+     */
+     public void setEmail(final String email) {
         this.email = email;
     }
 
     /**
+     * Get date of birth.
      * @return date of birth.
      */
-    final public String getbDate() {
+     public String getbDate() {
         return bDate;
     }
 
-    final public void setbDate(final String bDate) {
+    /**
+     * Set day of birth.
+     * @param bDate bDate.
+     */
+     public void setbDate(final String bDate) {
         this.bDate = bDate;
     }
 
-    final public String toString() {
+    /**
+     * toString.
+     * @return person.
+     */
+     public String toString() {
         return "Person(Name: " + this.username + ")";
     }
 
     /**
+     * Get username.
      * @return Username.
      */
-    final public String getUsername() {
+     public String getUsername() {
         return username;
     }
 
-    final public void setUsername(final String username) {
+    /**
+     * Set username.
+     * @param username  username.
+     */
+     public void setUsername(final String username) {
         this.username = username;
     }
 
-    final public void setAuthority(final String authority) {
+    /**
+     * Set authority.
+     * @param authority authority.
+     */
+     public void setAuthority(final String authority) {
         this.authority = authority;
     }
 
     /**
      * @return Authority level.
      */
-    final public String getAuthority(){
+     public String getAuthority(){
         return authority;
     }
 
-    final public void setEnabled(final String enabled) {
+    /**
+     * Set enabled.
+     * @param enabled enabled
+     */
+     public void setEnabled(final String enabled) {
         this.enabled = enabled;
     }
 
     /**
+     * Get enabled.
      * @return if the User account is enabled.
      */
-    final public String getEnabled(){
+     public String getEnabled(){
         return enabled;
     }
 
-    final public String getPassword2(){
+    /**
+     * Get password2.
+     * @return password2
+     */
+     public String getPassword2(){
         return password2;
     }
 
-    final public void setPassword(final String password) {
+    /**
+     * Set password.
+     * @param password password.
+     */
+     public void setPassword(final String password) {
         this.password = password;
-        checkPassword();//check
+        checkPassword(); //check
     }
 
-    final public void setPassword2(final String password2) {
+    /**
+     * Set password2.
+     * @param password2 password2..
+     */
+     public void setPassword2(final String password2) {
         this.password2 = password2;
-        checkPassword();//check
+        checkPassword(); //check
     }
 
     /**
      * Checks if the password is the same as the confirmed (password2) password.
      */
-    final private void checkPassword() {
-        if(this.password == null || this.password2 == null){
+     private void checkPassword() {
+        if (this.password == null || this.password2 == null){
             return;
-        }else if(!this.password.equals(password2)){
+        } else if (!this.password.equals(password2)){
             this.password2 = null;
         }
     }

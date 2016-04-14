@@ -10,6 +10,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+/**
+ * This class regulates some  view buisness.
+ */
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
@@ -19,7 +22,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
      * @param registry
      */
     @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
+    public void addViewControllers(final ViewControllerRegistry registry) {
         registry.addViewController("/home").setViewName("home");
         registry.addViewController("/").setViewName("home");
         registry.addViewController("/login").setViewName("login");

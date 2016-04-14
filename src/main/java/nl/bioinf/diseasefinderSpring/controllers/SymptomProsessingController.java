@@ -40,9 +40,9 @@ public class SymptomProsessingController {
      * @param symptoms the given symptoms (in plain text)
      * @return The disease(s) in HTML-format (for now).
      */
-    @RequestMapping(value="/sendSymptoms",  method= RequestMethod.POST)
+    @RequestMapping(value = "/sendSymptoms",  method= RequestMethod.POST)
     @ResponseBody
-    public String processInput(String symptoms) {
+    public String processInput(final String symptoms) {
         /* Save the search history of the user */
         SearchHistory sh = new SearchHistory();
         //sh.SearchHistory(symptoms, jdbcTemplate);
@@ -59,9 +59,9 @@ public class SymptomProsessingController {
      * @throws JSONException
      * @throws IOException
      */
-    @RequestMapping(value="/diseaseInformation", method = RequestMethod.POST)
+    @RequestMapping(value = "/diseaseInformation", method = RequestMethod.POST)
     @ResponseBody
-    public String loadDisease(String omimNumber, String symptoms) throws JSONException, IOException{
+    public String loadDisease(final String omimNumber, final String symptoms) throws JSONException, IOException{
         String[] symptomSet = symptoms.split(",");
         DiseaseCollection diseases = new DiseaseCollection(symptomSet);
         ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);

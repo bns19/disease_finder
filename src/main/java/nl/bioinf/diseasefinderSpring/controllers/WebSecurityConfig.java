@@ -19,9 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.sql.DataSource;
 
 /**
- * @Configuration indicates that the class can be used by the Spring IoC container as a source of bean definitions.
- * @EnableWebSecurity enables websecurity.
- * @EnableGlobalMethodSecurity easily secures methods with java configuration.
+ * "@Configuration indicates that the class can be used by the Spring IoC container as a source of bean definitions.
+ * "@EnableWebSecurity enables websecurity.
+ * "@EnableGlobalMethodSecurity easily secures methods with java configuration.
  */
 @Configuration
 @EnableWebSecurity
@@ -65,12 +65,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     /**
+     * @Param auth auth.
+     * @Throws Exception an exception.
      * The @Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished.
      * The @Autowired annotation can be used to autowire bean on the setter method just like @Required annotation, constructor,
      * a property or methods with arbitrary names and/or multiple arguments.
      */
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    public void configureGlobal(final AuthenticationManagerBuilder auth) throws Exception {
 
         auth.
                 jdbcAuthentication()

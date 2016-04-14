@@ -134,11 +134,7 @@ public class DiseaseCollection {
         InputStream in = getClass().getResourceAsStream(
                 "/config/config.properties");
 
-       // System.out.println("this is the result of the inputstream: "+ in);
-
-
         config.load(in);
-       // System.out.println("this is the result of the properties: "+ config);
         String url = config.getProperty("omimUrlNumbers");
         String apiKey = config.getProperty("omimKey");
         in.close();

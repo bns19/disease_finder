@@ -8,109 +8,138 @@ package nl.bioinf.diseasefinderSpring.controllers;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+/**
+ * This class represents the bean that contains all the information of the registrationform.
+ */
 public class LoginForm {
 
+    /**
+     * username.
+     */
     private String username;
 
+    /**
+     * firstname.
+     */
     private String firstName;
 
+    /**
+     * lastname.
+      */
     private String lastName;
 
+    /**
+     * password
+     */
     private String password2;
 
+    /**
+     * password (check).
+     */
     private String password;
 
+    /**
+     * email.
+     */
     private String email;
 
+    /**
+     * authority (default = Non-admin)
+     */
     private String authority;
 
+    /**
+     * enabled(default = true)
+     */
     private String enabled;
 
-    // DD/MM/YYYY
+    /**
+     * birthdate
+     */
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private String bDate;
 
     /**
      * @return first name of the user.
      */
-    final public String getFirstName() {
+     public String getFirstName() {
         return firstName;
     }
 
     /**
      * @param firstName = first name of the user.
      */
-    final public void setFirstName(final String firstName) {
+     public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
     /**
      * @return last name of the user.
      */
-    final public String getLastName() {
+     public String getLastName() {
         return lastName;
     }
 
     /**
      * @param lastName = last name of the user.
      */
-    final public void setLastName(final String lastName) {
+     public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
     /**
      * @return password from the user.
      */
-    final public String getPassword() {
+     public String getPassword() {
         return password;
     }
 
     /**
      * @param password = password from the user.
      */
-    final public void setPassword(final String password) {
+     public void setPassword(final String password) {
         this.password = password;
     }
 
     /**
      * @return email adress of the user.
      */
-    final public String getEmail() {
+     public String getEmail() {
         return email;
     }
 
     /**
      * @param email = email adress of the user.
      */
-    final public void setEmail(final String email) {
+     public void setEmail(final String email) {
         this.email = email;
     }
 
     /**
      * @return birth date of the user.
      */
-    final public String getbDate() {
+     public String getbDate() {
         return bDate;
     }
 
     /**
      * @param bDate = set birth date.
      */
-    final public void setbDate(final String bDate) {
+     public void setbDate(final String bDate) {
         this.bDate = bDate;
     }
 
     /**
      * @return person's ma,e
      */
-    final public String toString() {
+     public String toString() {
         return "Person(Name: " + this.username + ")";
     }
 
     /**
      * @return username.
      */
-    final public String getUsername() {
+     public String getUsername() {
 
         return username;
     }
@@ -118,7 +147,7 @@ public class LoginForm {
     /**
      * @param username = set the username.
      */
-    final public void setUsername(final String username) {
+     public void setUsername(final String username) {
 
         this.username = username;
     }
@@ -126,7 +155,7 @@ public class LoginForm {
     /**
      * @param authority = authority level can be changed in the future.
      */
-    final public void setAuthority(final String authority) {
+     public void setAuthority(final String authority) {
 
         this.authority = "USER";
 
@@ -135,7 +164,7 @@ public class LoginForm {
     /**
      * @return the authorty level.
      */
-    final public String getAuthority(){
+     public String getAuthority(){
 
         return authority;}
 
@@ -143,7 +172,7 @@ public class LoginForm {
     /**
      * @param enabled = shows if the user account is enabled.
      */
-    final public void setEnabled(final String enabled) {
+     public void setEnabled(final String enabled) {
 
         this.enabled = "true";
 
@@ -152,7 +181,7 @@ public class LoginForm {
     /**
      * @return enabled.
      */
-    final public String getEnabled(){
+     public String getEnabled(){
 
         return enabled;
 
@@ -162,7 +191,7 @@ public class LoginForm {
     /**
      * @param password2 = confirm password.
      */
-    final public void setPassword2(final String password2) {
+     public void setPassword2(final String password2) {
 
         this.password2 = password2;
 
@@ -171,7 +200,7 @@ public class LoginForm {
     /**
      * @return the confirmation password.
      */
-    final public String getPassword2(){
+     public String getPassword2(){
 
         return password2;}
 
