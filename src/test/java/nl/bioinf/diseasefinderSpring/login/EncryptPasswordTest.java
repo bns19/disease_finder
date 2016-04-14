@@ -38,10 +38,10 @@ public class EncryptPasswordTest {
     }
 
     /**
-     * test input with strange symbols
+     * test input with only strange characters
      * @throws Exception
      */
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void TestEncryptPasswordStrangeSymbols() throws Exception {
         System.out.println("input = strange symbols");
         String password = "&*^!@*(!^#(*!*^#(!^(#(!^(#*!(^";
@@ -52,7 +52,7 @@ public class EncryptPasswordTest {
     }
 
     /**
-     * test input with normal password
+     * test input with a normal password (numbers, letters, characters)
      * @throws Exception
      */
     @Test
@@ -83,7 +83,23 @@ public class EncryptPasswordTest {
     }
 
     /**
-     * test input with more than 30 characters
+     * test input with less than 5 characters
+     * @throws Exception
+     */
+    @Test
+    public void TestEncryptPasswordisFiveLong() throws Exception {
+        System.out.println("input = 5 characters long");
+        String password = "12345";
+        EncryptPassword encryptpw = new EncryptPassword();
+        encryptpw.EncryptPassword(password);
+
+        String results = encryptpw.EncryptPassword(password);
+
+        assertNotEquals(password, results);
+    }
+
+    /**
+     * test input is more than 30 characters
      * @throws Exception
      */
     @Test(expected = IndexOutOfBoundsException.class)

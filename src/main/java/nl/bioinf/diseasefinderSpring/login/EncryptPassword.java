@@ -21,7 +21,7 @@ public class EncryptPassword {
      */
     public static String EncryptPassword(String password) {
 
-        if (password.length() <= 5 || password.length() >= 30) {
+        if (password.length() < 5 || password.length() > 30) {
             throw new IndexOutOfBoundsException();
         } else {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
