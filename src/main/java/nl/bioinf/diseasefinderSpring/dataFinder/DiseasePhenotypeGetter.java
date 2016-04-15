@@ -49,6 +49,7 @@ public class DiseasePhenotypeGetter {
 
     /**
      * The getter of the created diseaseobject.
+     *
      * @return disease the disease object.
      */
     public final Disease getDisease() {
@@ -59,10 +60,10 @@ public class DiseasePhenotypeGetter {
      * The constructor of this class.
      *
      * @param omimNumber the id of the disease to get information from.
-     * @throws IOException thrown when the url from the connector is
-     * invalid.
+     * @throws IOException            thrown when the url from the connector is
+     *                                invalid.
      * @throws org.json.JSONException when the structure of the website is not
-     * valid json.
+     *                                valid json.
      * @author mkslofstra
      */
     public DiseasePhenotypeGetter(final String omimNumber)
@@ -84,14 +85,15 @@ public class DiseasePhenotypeGetter {
         }
 
     }
+
     /**
      * getOmimData gets all the data from the omim page of a given omim number
      * in a String.
      *
-     * @throws IOException when the string of the website cannot be made.
-     * @throws JSONException if the stirng from the website is not valid json.
-     * @return omimData the webpage of omim in a string.
      * @param omimNr the number of the disease.
+     * @return omimData the webpage of omim in a string.
+     * @throws IOException   when the string of the website cannot be made.
+     * @throws JSONException if the stirng from the website is not valid json.
      * @author mkslofstra and aroeters
      */
     private JSONObject getOmimData(final String omimNr)
@@ -114,8 +116,8 @@ public class DiseasePhenotypeGetter {
      * checkFeature: checks if the given feature is true in the json structure.
      *
      * @param feature the feature which should be checked.
-     * @throws JSONException when the website has not a valid json structure.
      * @return check tells if the given feature in this disease is true or not.
+     * @throws JSONException when the website has not a valid json structure.
      * @author mkslofstra
      */
     private Boolean checkFeature(final String feature) throws JSONException {
@@ -131,8 +133,8 @@ public class DiseasePhenotypeGetter {
      * website in the json structure.
      *
      * @param feature the feature wherefrom the fenotype is needed.
-     * @throws JSONException when the website has not a vali json structure.
      * @return fenotpe the phenotype of the feature.
+     * @throws JSONException when the website has not a vali json structure.
      * @author mkslofstra
      */
     private String getPhenotypeOfFeature(final String feature)
@@ -147,7 +149,7 @@ public class DiseasePhenotypeGetter {
      * collectPhenotypes collects all the phenotypes of a disease.
      *
      * @param allFeatures an arraylist which contains all the features which can
-     * be true.
+     *                    be true.
      * @throws JSONException when the website has not a valid json structure.
      * @author mkslofstra
      */
@@ -170,7 +172,7 @@ public class DiseasePhenotypeGetter {
      * features of these parent and adds this to featuresToFind.
      *
      * @throws JSONException when the website is not a valid json structure.
-     * possible true.
+     *                       possible true.
      * @author mkslofstra
      */
     private void getFeatures() throws JSONException {
@@ -212,8 +214,8 @@ public class DiseasePhenotypeGetter {
      * getTitleOfDisease gets the title of a disease from the json structure.
      *
      * @return title is the title of the disease.
-     * @author mkslofstra
      * @throws JSONException when json is not properly structured.
+     * @author mkslofstra
      */
     private String getTitleOfDisease() throws JSONException {
         String title = features.getString("preferredTitle");
@@ -225,11 +227,11 @@ public class DiseasePhenotypeGetter {
      * object.
      *
      * @param mimNumber is the id of the disease
-     * @param title is the name of the disease
+     * @param title     is the name of the disease
      * @author mkslofstra
      */
     private void saveDisease(final String mimNumber,
-            final String title) {
+                             final String title) {
         disease = new Disease(mimNumber, title, phenotypes);
     }
 }

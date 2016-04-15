@@ -24,6 +24,7 @@ public class SymptomProcessor {
 
     /**
      * public constructor.
+     *
      * @param symptoms the given symptoms as string
      */
 
@@ -38,6 +39,7 @@ public class SymptomProcessor {
 
     /**
      * this method regulates the core processingpart.
+     *
      * @param symptoms the given symptoms as string
      */
     private void processSymptoms(final String symptoms) {
@@ -65,7 +67,8 @@ public class SymptomProcessor {
     }
 
     /**
-     * diseasegetter
+     * diseasegetter.
+     *
      * @return the diseases
      */
     public String getDiseases() {

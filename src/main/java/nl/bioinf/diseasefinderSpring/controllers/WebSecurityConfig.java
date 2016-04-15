@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.sql.DataSource;
 
 /**
@@ -37,16 +38,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     /**
-     * @param http  is similar to Spring Security's XML element in the namespace configuration.
-     * It allows configuring web based security for specific http requests.
+     * @param http is similar to Spring Security's XML element in the namespace configuration.
+     *             It allows configuring web based security for specific http requests.
      * @throws Exception
      */
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 .antMatchers("/**").permitAll()
-//                .antMatchers("/home", "/index", "/", "/form", "/indexTest", "/frontpage", "/trythis", "/css/**", "/js/**", "/jsLibs/**").permitAll()
+//                .antMatchers("/home", "/index", "/", "/form", "/indexTest", "/frontpage", "/trythis",
+// "/css/**", "/js/**", "/jsLibs/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -57,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-    
+
     /**
      * Provides a utility class for easy DataSource access, a PlatformTransactionManager for a single DataSource,
      * and various simple DataSource implementations.
@@ -67,9 +69,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     /**
-     * @Param auth auth.
-     * @Throws Exception an exception.
-     * The @Autowired annotation provides more fine-grained control over where and how autowiring should be accomplished.
+     * @param auth auth.
+     * @throws Exception an exception.
+     * The @Autowired annotation provides fine-grained control over where and how autowiring should be accomplished.
      * The annotation can be used to autowire bean on the setter method just like @Required annotation, constructor,
      * a property or methods with arbitrary names and/or multiple arguments.
      */
@@ -87,10 +89,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * passwordEncoder encodes the password given by the user.
+     *
      * @return encoded password
      */
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder;
     }

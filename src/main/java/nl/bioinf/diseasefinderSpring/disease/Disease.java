@@ -23,12 +23,12 @@ public class Disease implements Comparable {
     /**
      * constructor of the class disease.
      *
-     * @param mimNumberValue is the id of the disease.
-     * @param titleOfDisease is the most common title of the disease.
+     * @param mimNumberValue  is the id of the disease.
+     * @param titleOfDisease  is the most common title of the disease.
      * @param featuresHashMap are the properties of the disease.
      */
     public Disease(final String mimNumberValue,
-            final String titleOfDisease, final TreeMap featuresHashMap) {
+                   final String titleOfDisease, final TreeMap featuresHashMap) {
         //the mimNumber length should always be 6, otherwise, it is invalid.
         if (mimNumberValue == null || mimNumberValue.length() != 6) {
             throw new IllegalArgumentException("The omimNumber should be a"
@@ -47,6 +47,7 @@ public class Disease implements Comparable {
         this.features = featuresHashMap;
         this.hits++;
     }
+
     /**
      * matches is the list of matches found with the symptoms.
      */
@@ -230,7 +231,7 @@ public class Disease implements Comparable {
                         + "symptoms.\"data-placement=\"right\">Hits: "
                         + "</a></td><td class=\"value\">").append(hits)
                 .append("</td></tr>").append("<tr><td class=\"label\">Matches: "
-                        + "</td><td class=\"value\">").append(matches)
+                + "</td><td class=\"value\">").append(matches)
                 .append("</td></tr>");
         diseaseSummary.append("</table>");
         diseaseSummary.append("</li><br/>");
@@ -264,7 +265,7 @@ public class Disease implements Comparable {
      * The compare function to compare two disease objects.
      *
      * @param otherDisease the disease object which should be compared with this
-     * one.
+     *                     one.
      * @return if the comparison is the same more or less.
      */
     @Override

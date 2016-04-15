@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
 import javax.validation.Valid;
 
 
@@ -33,8 +34,9 @@ public class WebController extends WebMvcConfigurerAdapter {
 
     /**
      * Initializes the Personform bean and maps id on /form.
+     *
      * @param personForm personForm.
-     * @return  the form template.
+     * @return the form template.
      */
     @RequestMapping(value = "/form", method = RequestMethod.GET)
     public String showForm(final PersonForm personForm) {
@@ -51,7 +53,7 @@ public class WebController extends WebMvcConfigurerAdapter {
 
 
     /**
-     * @param personForm data from the registration form.
+     * @param personForm    data from the registration form.
      * @param bindingResult bindingResult.
      * @return the result page.
      */
@@ -64,14 +66,14 @@ public class WebController extends WebMvcConfigurerAdapter {
         }
         if (!bindingResult.hasErrors()) {
 
-            EncryptPassword pw = new EncryptPassword();
-            String encrypted = pw.EncryptPassword(personForm.getPassword());
+           // EncryptPassword pw = new EncryptPassword();
+            String encrypted = EncryptPassword.encryptPassword(personForm.getPassword());
 
             MySQLCreateTables mySQLCreateTables = new MySQLCreateTables();
-            mySQLCreateTables.CreateUserTableMySQL(jdbcTemplate);
+            mySQLCreateTables.createUserTableMySQL(jdbcTemplate);
 
             RegisterUserMySQL registerUser = new RegisterUserMySQL();
-            registerUser.RegisterUserMySQL(encrypted, personForm, jdbcTemplate);
+            registerUser.registerUserMySQL(encrypted, personForm, jdbcTemplate);
 
             return "/login";
         }

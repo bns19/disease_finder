@@ -21,7 +21,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * "@ComponentScan tells spring to look for specific configuration and services and allows it to find the controllers.
  */
 @SpringBootApplication
-public class Application{
+public class Application {
     /**
      * A logger.
      */
@@ -29,11 +29,12 @@ public class Application{
 
     /**
      * Main class.
+     *
      * @param args args.
      */
     public static void main(final String args[]) {
         SpringApplication.run(Application.class, args);
     }
-    }
+}
 
 

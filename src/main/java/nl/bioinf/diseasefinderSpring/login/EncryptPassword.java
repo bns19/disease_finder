@@ -10,8 +10,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 /**
  * Encrypts the input password from the user.
  */
-public class EncryptPassword {
+public final class EncryptPassword {
 
+    /**
+     * private constructor (utility).
+     */
+    private EncryptPassword() { }
 
     /**
      * Method that encrypts the user password.
@@ -19,7 +23,7 @@ public class EncryptPassword {
      * @param password from the user.
      * @return a hashed password.
      */
-    public static String EncryptPassword(String password) {
+    public static String encryptPassword(final String password) {
 
         if (password.length() < 5 || password.length() > 30) {
             throw new IndexOutOfBoundsException();

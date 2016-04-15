@@ -21,14 +21,12 @@ import java.io.IOException;
  *This class now contains the controller responsible for finding diseases based on (dummy) symptoms given by the user.
  * The functionality is succesfully ported.
  *
- * TODO: the output of the controllers should not be HTML, the HTML code will be deleted from the classes.
- *
  */
 @Controller
 public class SymptomProsessingController {
     /**
      * Make the jdbcTemplate approachable
-     * There can only be one jdbcTemplate be made, in the WebSecurityConfig the Autowiring caused errors
+     * There can only be one jdbcTemplate be made, in the WebSecurityConfig the Autowiring caused errors.
      */
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
@@ -36,16 +34,17 @@ public class SymptomProsessingController {
 
     /**
      * processInput.
-     * This requestmapping method takes the symptom(s) provided by the user and uses them to find the corresponding disease(s).
+     * This requestmapping method takes the symptom(s) provided by the user and uses them to find the corresponding
+     * disease(s).
      * @param symptoms the given symptoms (in plain text)
      * @return The disease(s) in HTML-format (for now).
      */
-    @RequestMapping(value = "/sendSymptoms",  method= RequestMethod.POST)
+    @RequestMapping(value = "/sendSymptoms",  method = RequestMethod.POST)
     @ResponseBody
     public String processInput(final String symptoms) {
         /* Save the search history of the user */
         SearchHistory sh = new SearchHistory();
-        //sh.SearchHistory(symptoms, jdbcTemplate);
+        //sh.searchHistory(symptoms, jdbcTemplate);
         SymptomProcessor sp = new SymptomProcessor(symptoms);
         return sp.getDiseases();
     }
@@ -56,12 +55,12 @@ public class SymptomProsessingController {
      * @param omimNumber the omimnumber of the disease.
      * @param symptoms the symptoms of the disease.
      * @return The information of the disease in HTML-format.
-     * @throws JSONException
-     * @throws IOException
+     * @throws JSONException JSONException.
+     * @throws IOException JSONException.
      */
     @RequestMapping(value = "/diseaseInformation", method = RequestMethod.POST)
     @ResponseBody
-    public String loadDisease(final String omimNumber, final String symptoms) throws JSONException, IOException{
+    public String loadDisease(final String omimNumber, final String symptoms) throws JSONException, IOException {
         String[] symptomSet = symptoms.split(",");
         DiseaseCollection diseases = new DiseaseCollection(symptomSet);
         ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
