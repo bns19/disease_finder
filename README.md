@@ -13,11 +13,14 @@
 
 ###How to run the application###
 Running the application is simple, all necessary software has already been provided by this repository, just follow the following steps. 
-1. Clone the application to IntellIJ. 
-2. Run the application by pressing the right mouse button on the ```application``` class (this class can be found under the directory ```src/main/java/nl.bioinf.diseaseFinderSpring/controllers```.
-3: Open a browser and type: localhost:8087.
 
-***note: in the case that running the application results in an error: press the refresh button (rotating arrows) in the ```Gradle``` tab. Then press the OK button on the appearing pop-up. Then repeat steps 2 and 3 described above. Everything should work now.***
+1. Clone the application to IntellIJ. 
+2. Run the application by pressing the right mouse button on the ```application``` class (this class can be found under the directory ```src/main/java/nl.bioinf.diseaseFinderSpring/controllers```).
+3. Open a browser and type: localhost:8087.
+
+***important note: in the case that running the application results in an error: press the refresh button (rotating arrows) in the ```Gradle``` tab. Then press the OK button on the appearing pop-up. Then repeat steps 2 and 3 described above. Everything should work now.***
+
+***important note: when the search functionality (when used correctly) does not return anything while results are expected it might be the case that the omim-key is expired. May this be the case, please get a new one from the OMIM-website (it's free) and replace the old one with the new one in the ```config.properties``` file (under the directory ```src/main/recources/config).***
 
 The application is now ready to be used.
 
