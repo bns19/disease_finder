@@ -41,7 +41,7 @@ public class SymptomProsessingController {
     public String processInput(String symptoms) {
         /* Save the search history of the user */
         SearchHistory sh = new SearchHistory();
-        sh.SearchHistory(symptoms, jdbcTemplate);
+        //sh.SearchHistory(symptoms, jdbcTemplate);
         SymptomProcessor sp = new SymptomProcessor(symptoms);
         return sp.getDiseases();
     }

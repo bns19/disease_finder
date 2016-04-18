@@ -29,12 +29,12 @@ public class MySQLCreateTables {
     public void CreateUserTableMySQL(NamedParameterJdbcTemplate jdbcTemplate){
 
         /* Create User table */
-        jdbcTemplate.update("CREATE TABLE IF NOT EXISTS User(" + "id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255), password VARCHAR(255), " +
+        jdbcTemplate.update("CREATE TABLE IF NOT EXISTS User(id SERIAL, first_name VARCHAR(255), last_name VARCHAR(255), password VARCHAR(255), " +
                         "email VARCHAR(255), username VARCHAR(255), birthdate VARCHAR(10), authority VARCHAR(10), enabled VARCHAR(10))"
                 , new MapSqlParameterSource());
 
         /* Create history table */
-        jdbcTemplate.update("CREATE TABLE IF NOT EXISTS History(" + "id SERIAL, searchedsymptoms VARCHAR(255), username VARCHAR(255))"
+        jdbcTemplate.update("CREATE TABLE IF NOT EXISTS History(id SERIAL, searchedsymptoms VARCHAR(255), username VARCHAR(255))"
                 , new MapSqlParameterSource());
     }
 }
