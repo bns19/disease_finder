@@ -1,9 +1,9 @@
-
-package nl.bioinf.diseasefinderSpring.controllers;
-
 /**
+ * Project: Disease Finder
+ * Theme 11/12
  * Created by hjdupon on 24-2-16.
  */
+package nl.bioinf.diseasefinderSpring.controllers;
 
 import nl.bioinf.diseasefinderSpring.Database.MySQLCreateTables;
 import nl.bioinf.diseasefinderSpring.Database.RegisterUserMySQL;
@@ -11,7 +11,6 @@ import nl.bioinf.diseasefinderSpring.login.EncryptPassword;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -22,47 +21,59 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import javax.validation.Valid;
 
 
+/**
+ * Gets the information from the registration form and saves this in the PersonForm class.
+ */
 @Controller
 public class WebController extends WebMvcConfigurerAdapter {
 
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+    /**
+     * A logger.
+     */
+    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
 
+    /**
+     * Initializes the Personform bean and maps id on /form.
+     *
+     * @param personForm personForm.
+     * @return the form template.
+     */
     @RequestMapping(value = "/form", method = RequestMethod.GET)
-    public String showForm(PersonForm personForm) {
+    public String showForm(final PersonForm personForm) {
 
         return "form";
     }
 
     /**
-     * Make the jdbcTemplate approachable
-     * There can only be one jdbcTemplate be made, in the WebSecurityConfig the Autowiring caused errors
+     * Make the jdbcTemplate usable in the class.
+     * This is the database connector.
      */
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
 
 
     /**
-     * @param personForm data from the
-     * @param bindingResult
-     * @return the result page
+     * @param personForm    data from the registration form.
+     * @param bindingResult bindingResult.
+     * @return the result page.
      */
     // @PreAuthorize("Admin")
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    public String checkPersonInfo(@Valid PersonForm personForm, BindingResult bindingResult) {
+    public String checkPersonInfo(@Valid final PersonForm personForm, final BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "form";
         }
-        if (! bindingResult.hasErrors()) {
+        if (!bindingResult.hasErrors()) {
 
-            EncryptPassword pw = new EncryptPassword();
-            String encrypted = pw.EncryptPassword(personForm.getPassword());
+           // EncryptPassword pw = new EncryptPassword();
+            String encrypted = EncryptPassword.encryptPassword(personForm.getPassword());
 
-            MySQLCreateTables MySQLCreateTables = new MySQLCreateTables();
-            MySQLCreateTables.CreateUserTableMySQL(jdbcTemplate);
+            MySQLCreateTables mySQLCreateTables = new MySQLCreateTables();
+            mySQLCreateTables.createUserTableMySQL(jdbcTemplate);
 
-            RegisterUserMySQL RegisterUser = new RegisterUserMySQL();
-            RegisterUser.RegisterUserMySQL(encrypted, personForm, jdbcTemplate);
+            RegisterUserMySQL registerUser = new RegisterUserMySQL();
+            registerUser.registerUserMySQL(encrypted, personForm, jdbcTemplate);
 
             return "/login";
         }

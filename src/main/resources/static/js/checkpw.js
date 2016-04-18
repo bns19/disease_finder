@@ -44,13 +44,13 @@ function Handleinput() {
     }
 
 
-
-
 }
 
 function clearErrors() {
     Array.prototype.forEach.call(
         document.getElementsByClassName("errmsg"),
-        function(el) { el.style.display = "none"; }
+        function (el) {
+            el.style.display = "none";
+        }
     );
 }

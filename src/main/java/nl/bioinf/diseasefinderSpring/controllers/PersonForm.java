@@ -1,99 +1,119 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by hjdupon on 24-2-16.
+ */
+
 package nl.bioinf.diseasefinderSpring.controllers;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.context.annotation.Bean;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * Created by hjdupon on 24-2-16.
+ * This class regulates the control of the registrationbean.
+ * It checks the input of the user and fills in neccesary default values.
  */
-
 public class PersonForm {
 
     /**
-     * Username may not be empty
-     * Username size needs to be between 5 and 30
+     * Username may not be empty.
+     * Username size needs to be between 5 and 30 characters in size.
      */
     @NotEmpty
-    @Size(min=5, max=30)
+    @Size(min = 5, max = 30)
     private String username;
 
     /**
-     * firstname of the User
+     * Firstname of the User.
      */
     private String firstName;
 
     /**
-     * lastname of the User
+     * Lastname of the User.
      */
     private String lastName;
 
     /**
-     * Password needs to be between 5 and 30 characters in size
+     * Password needs to be between 5 and 30 characters in size.
      */
-    @Size(min=5, max=30)
+    @Size(min = 5, max = 30)
     private String password;
 
     /**
-     * Second password may not be null
+     * Second password may not be null.
      */
-    @NotNull(message="passwords do not match")
+    @NotNull(message = "passwords do not match")
     private String password2;
 
     /**
-     * Email may not be empty
-     * Email needs to have an Email structure
+     * Email may not be empty.
+     * Email needs to have an Email structure.
      */
     @NotEmpty
     @Email
     private String email;
 
     /**
-     * Authority must be USER of can be something different when specified
+     * Authority must be USER of can be something different when specified.
      */
     private String authority = "USER";
 
     /**
-     * The account needs to be enabled to work
+     * The account needs to be enabled to work.
      */
     private String enabled = "true";
 
 
     /**
-     * Date must have a Date structure
+     * Date must have a Date structure.
      */
-    // DD/MM/YYYY
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private String bDate;
 
     /**
-     * @return FirstName of the User
+     * Get first name.
+     *
+     * @return FirstName of the User.
      */
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    /**
+     * Set first name.
+     *
+     * @param firstName firstname.
+     */
+    public void setFirstName(final String firstName) {
         this.firstName = firstName;
     }
 
     /**
-     * @return Lastname of the User
+     * Get last name.
+     *
+     * @return Lastname of the User.
      */
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    /**
+     * Set last name.
+     *
+     * @param lastName lastname.
+     */
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
     /**
-     * @return the Password
+     * Get password.
+     *
+     * @return the Password.
      */
     public String getPassword() {
         return password;
@@ -101,85 +121,138 @@ public class PersonForm {
 
 
     /**
-     * @return Email adress
+     * Get email adres.
+     *
+     * @return Email adress.
      */
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    /**
+     * Set email adress.
+     *
+     * @param email email.
+     */
+    public void setEmail(final String email) {
         this.email = email;
     }
 
     /**
-     * @return date of birth
+     * Get date of birth.
+     *
+     * @return date of birth.
      */
     public String getbDate() {
         return bDate;
     }
 
-    public void setbDate(String bDate) {
+    /**
+     * Set day of birth.
+     *
+     * @param bDate bDate.
+     */
+    public void setbDate(final String bDate) {
         this.bDate = bDate;
     }
 
+    /**
+     * toString.
+     *
+     * @return person.
+     */
     public String toString() {
         return "Person(Name: " + this.username + ")";
     }
 
     /**
-     * @return Username
+     * Get username.
+     *
+     * @return Username.
      */
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    /**
+     * Set username.
+     *
+     * @param username username.
+     */
+    public void setUsername(final String username) {
         this.username = username;
     }
 
-    public void setAuthority(String authority) {
+    /**
+     * Set authority.
+     *
+     * @param authority authority.
+     */
+    public void setAuthority(final String authority) {
         this.authority = authority;
     }
 
     /**
-     * @return Authority level
+     * @return Authority level.
      */
-    public String getAuthority(){
+    public String getAuthority() {
         return authority;
     }
 
-    public void setEnabled(String enabled) {
+    /**
+     * Set enabled.
+     *
+     * @param enabled enabled
+     */
+    public void setEnabled(final String enabled) {
         this.enabled = enabled;
     }
 
     /**
-     * @return if the User account is enabled
+     * Get enabled.
+     *
+     * @return if the User account is enabled.
      */
-    public String getEnabled(){
+    public String getEnabled() {
         return enabled;
     }
 
-    public String getPassword2(){
+    /**
+     * Get password2.
+     *
+     * @return password2
+     */
+    public String getPassword2() {
         return password2;
     }
 
-    public void setPassword(String password) {
+    /**
+     * Set password.
+     *
+     * @param password password.
+     */
+    public void setPassword(final String password) {
         this.password = password;
-        checkPassword();//check
-    }
-
-    public void setPassword2(String password2) {
-        this.password2 = password2;
-        checkPassword();//check
+        checkPassword(); //check
     }
 
     /**
-     * Checks if the password is the same as the confirmed (password2) password
+     * Set password2.
+     *
+     * @param password2 password2..
+     */
+    public void setPassword2(final String password2) {
+        this.password2 = password2;
+        checkPassword(); //check
+    }
+
+    /**
+     * Checks if the password is the same as the confirmed (password2) password.
      */
     private void checkPassword() {
-        if(this.password == null || this.password2 == null){
+        if (this.password == null || this.password2 == null) {
             return;
-        }else if(!this.password.equals(password2)){
+        } else if (!this.password.equals(password2)) {
             this.password2 = null;
         }
     }

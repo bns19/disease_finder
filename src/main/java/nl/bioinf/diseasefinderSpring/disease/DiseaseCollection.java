@@ -1,15 +1,19 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by Mariska Slofstra & Arne Roeters
+ * Adjusted by Bas Sikkema & Henri du Pon
+ */
 package nl.bioinf.diseasefinderSpring.disease;
+
+import nl.bioinf.diseasefinderSpring.connection.OmimDataRetriever;
+import nl.bioinf.diseasefinderSpring.dataFinder.DiseasePhenotypeGetter;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
-//import nl.bioinf.DiseaseFinder.connection.OmimDataRetriever;
-//import nl.bioinf.DiseaseFinder.dataFinder.DiseasePhenotypeGetter;
-import nl.bioinf.diseasefinderSpring.connection.OmimDataRetriever;
-import nl.bioinf.diseasefinderSpring.dataFinder.DiseasePhenotypeGetter;
-import org.json.JSONException;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
+
 
 /**
  * This class collects all the possible diseases which are found.
@@ -33,22 +37,23 @@ public class DiseaseCollection {
      *
      * @param features the features to look for
      * @throws JSONException when the page is not valid JSON
-     * @throws IOException if the URL is invalid.
+     * @throws IOException   if the URL is invalid.
      * @author mkslofstra
      */
     public DiseaseCollection(final String[] features) throws JSONException,
             IOException {
         try {
             for (String i : features) {
-                if(features.length < 2 && i.isEmpty()) {
+                if (features.length < 2 && i.isEmpty()) {
                     throw new IllegalStateException("there has to be at least one feature");
-                } else if(features.length <2 && !i.matches(".*[a-zA-Z]+.*")) {
-                    throw new IllegalArgumentException("At least one feature containing a possible term is required (no letters detected)");
+                } else if (features.length < 2 && !i.matches(".*[a-zA-Z]+.*")) {
+                    throw new IllegalArgumentException("At least one feature containing a possible "
+                            + "term is required (no letters detected)");
                 }
             }
-        } catch(AssertionError ae) {
+        } catch (AssertionError ae) {
             throw ae;
-        } catch(StringIndexOutOfBoundsException siobe) {
+        } catch (StringIndexOutOfBoundsException siobe) {
             throw siobe;
         }
         HashMap diseaseMatches = this.getOmimNumbers(features);
@@ -59,7 +64,7 @@ public class DiseaseCollection {
      * This void fills the diseasecollection.
      *
      * @param diseaseMatches the matches a disease has.
-     * @throws IOException when URL is malformed.
+     * @throws IOException   when URL is malformed.
      * @throws JSONException when json structure is invalid.
      * @author mkslofstra
      */
@@ -113,9 +118,9 @@ public class DiseaseCollection {
      * getOmimNumbers gets the id's of the possible diseases.
      *
      * @param features is the list of features to look for.
-     * @throws JSONException when page is invalid JSON.
-     * @throws IOException when URL is invalid.
      * @return diseases, an ArrayList of diseases.
+     * @throws JSONException when page is invalid JSON.
+     * @throws IOException   when URL is invalid.
      * @author mkslofstra and aroeters
      */
     private HashMap<String, String> getOmimNumbers(final String[] features)
@@ -128,11 +133,7 @@ public class DiseaseCollection {
         InputStream in = getClass().getResourceAsStream(
                 "/config/config.properties");
 
-       // System.out.println("this is the result of the inputstream: "+ in);
-
-
         config.load(in);
-       // System.out.println("this is the result of the properties: "+ config);
         String url = config.getProperty("omimUrlNumbers");
         String apiKey = config.getProperty("omimKey");
         in.close();
@@ -148,7 +149,7 @@ public class DiseaseCollection {
      *
      * @param disease the disease to get the content from
      * @return a disease Object
-     * @throws IOException if the URL is malformed
+     * @throws IOException   if the URL is malformed
      * @throws JSONException if the JSON format is not correct
      * @author mkslofstra
      */
@@ -162,7 +163,7 @@ public class DiseaseCollection {
     /**
      * the setter of diseaseCollection.
      *
-     * @param disease the disease of the id.
+     * @param disease   the disease of the id.
      * @param mimNumber the id of the disease.
      * @author mkslofstra
      */
@@ -180,9 +181,9 @@ public class DiseaseCollection {
      * disease.
      *
      * @param omimNumber is the OMIM number of the disease a person wants
-     * information of.
-     * @author mkslofstra
+     *                   information of.
      * @return info the information about the disease.
+     * @author mkslofstra
      */
     public final String getInfoOfDisease(final String omimNumber) {
         String info = this.diseaseCollection.get(omimNumber).toString();

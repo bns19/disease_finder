@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 
 /**
  * Created by bnsikkema on 29-3-16.
+ * The two tests at the bottom written by mslofstra
  */
 public class DiseaseCollectionTest {
 
@@ -43,7 +44,7 @@ public class DiseaseCollectionTest {
     }
 
     /**
-     * test constructor with tree valid features.
+     * test constructor with three valid features.
      * @throws Exception
      */
     @Test

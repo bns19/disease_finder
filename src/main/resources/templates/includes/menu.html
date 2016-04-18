@@ -1,15 +1,9 @@
 <menu th:fragment="menu">
 
     <form th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" class="myButton"/>
-
         <a th:href="@{/login}" class="myButton">Login </a>
-
         <a th:href="@{/form}" class="myButton">Register</a>
-
-
         <a th:href="@{/frontpage}" class="myButton">Symptoms</a>
-
-        <a th:href="@{/trylanguage}" class="myButton">Language</a>
 
     </form>
 
@@ -18,18 +12,11 @@
 <logmenu th:fragment="logmenu">
 
     <form th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" class="myButton"/>
-
         <a th:href="@{/login}" class="myButton">Login </a>
-
         <a th:href="@{/form}" class="myButton">Register</a>
-
-
         <a th:href="@{/frontpage}" class="myButton">Symptoms</a>
-
         <a th:href="@{/trylanguage}" class="myButton">Language</a>
-
         <a th:href="@{/searchhistory}" class="myButton">History</a>
-
     </form>
 
 </logmenu>

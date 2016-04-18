@@ -1,5 +1,10 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by Mariska Slofstra & Arne Roeters
+ * Adjusted by Bas Sikkema & Henri du Pon
+ */
 package nl.bioinf.diseasefinderSpring.connection;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,7 +14,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
