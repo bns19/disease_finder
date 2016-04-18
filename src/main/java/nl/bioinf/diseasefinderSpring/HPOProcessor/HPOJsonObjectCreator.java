@@ -31,6 +31,7 @@ public class HPOJsonObjectCreator {
         String path = HPOJsonObjectCreator.class.getClassLoader()
                 .getResource(File.separator + "config" + File.separator
                         + "hp.obo").toString();
+        System.out.println(path);
         HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
         this.hpoCollection = hr.readFile().getHPOHashMap();
 
