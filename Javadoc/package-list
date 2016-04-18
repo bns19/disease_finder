@@ -1,0 +1,8 @@
+nl.bioinf.diseasefinderSpring.Database
+nl.bioinf.diseasefinderSpring.HPOProcessor
+nl.bioinf.diseasefinderSpring.bodyFeatures
+nl.bioinf.diseasefinderSpring.connection
+nl.bioinf.diseasefinderSpring.controllers
+nl.bioinf.diseasefinderSpring.dataFinder
+nl.bioinf.diseasefinderSpring.disease
+nl.bioinf.diseasefinderSpring.login
