@@ -19,7 +19,7 @@ function initialize() {
             console.log(request)
             $.ajax({
                 url: "/autocompleteSymptoms",
-            //    type: "GET",
+                type: "GET",
                 dataType: "json",
                 data: request,
                 success: function(data) {
