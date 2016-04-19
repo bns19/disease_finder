@@ -7,6 +7,7 @@
 package nl.bioinf.diseasefinderSpring.HPOProcessor;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ public class HPOFileReader {
      * Contains the name of the file including the path to the file.
      */
     private final String file;
-
+  //  private final File file;
     /**
      * The constructor of the class.
      *
@@ -30,6 +31,8 @@ public class HPOFileReader {
      * @throws IOException when file not found
      */
     public HPOFileReader(final String inFile) throws IOException {
+       // File hpFile = new File(inFile);
+       // file = hpFile;
         file = inFile;
         if (inFile == null) {
             throw new NullPointerException();
