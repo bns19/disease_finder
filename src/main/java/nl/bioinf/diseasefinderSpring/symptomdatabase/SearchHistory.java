@@ -3,7 +3,7 @@
  * Theme 11/12
  * Created by henridupon on 3/21/2016.
  */
-package nl.bioinf.diseasefinderSpring.login;
+package nl.bioinf.diseasefinderSpring.symptomdatabase;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

@@ -13,8 +13,17 @@
         <menu th:replace="includes/menu :: menu"></menu>
     </div>
 
+
+    <div th:if="${#httpServletRequest.remoteUser}"> <!-- if customer is anonymous-->
+
+        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+
+        <validlogin th:replace="includes/validlogin :: functionality"></validlogin>
+    </div>
+
     <form>
         <input type="text" id="symptoms" name="symptoms"/>
+
         <button id="searchButton" name="searchButton" onclick="sendSymptoms(symptoms.value);" type="button">
             Search button
         </button>

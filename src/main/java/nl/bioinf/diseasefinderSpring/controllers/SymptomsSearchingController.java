@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.File;
@@ -24,21 +25,14 @@ public class SymptomsSearchingController {
 
     @RequestMapping(value = "/autocompleteSymptoms")
     @ResponseBody
-    public String processRequest(String query) throws IOException {
-
+    public String processRequest(@RequestParam("term") String query) throws IOException {
+        boolean test = true;
+/////Hoe geven we een argument mee?
         HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
-//        String path = JsTreePasserServlet.class.getClassLoader()
-//                .getResource(File.separator + "config" + File.separator
-//                        + "hp.obo").toString();
 
-//
-//                String path = SymptomProsessingController.class.getClassLoader()
-//                .getResource("resources"+File.separator + "config" + File.separator
-//                        + "hp.obo").toString();
-
-      //  String path = "/config/hp.obo";
-      //  HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
-                             HPOFileReader hr = new HPOFileReader("/config/hp.obo");
+        String path = HPOJsonObjectCreator.class.getClassLoader()
+                .getResource("config/hp.obo").toString();
+        HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
         HashMap collection = hr.readFile().getHPOHashMap();
         ArrayList<String> terms = new ArrayList<String>();
         for (Object term : collection.values()) {
@@ -51,9 +45,11 @@ public class SymptomsSearchingController {
 //        response.setHeader("Expires", "-1");
         JSONArray arrayObj = new JSONArray();
         //String query = request.getParameter("term");
-        //query = query.toLowerCase();
+        query = query.toLowerCase();
+        System.out.println(query);
         for (String term : terms) {
             String country = term.toLowerCase();
+            System.out.println(country);
             if (country.startsWith(query.toLowerCase())) {
                 arrayObj.put(term);
             }

@@ -9,7 +9,9 @@ package nl.bioinf.diseasefinderSpring.controllers;
 import nl.bioinf.diseasefinderSpring.disease.Disease;
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
 import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
+import org.apache.tomcat.util.net.jsse.openssl.Authentication;
 import org.json.JSONException;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -27,10 +29,10 @@ public class SymptomProcessor {
      *
      * @param symptoms the given symptoms as string
      */
-
     public SymptomProcessor(final String symptoms) {
         processSymptoms(symptoms);
     }
+
 
     /**
      * the retrieved diseases based on the given symptoms.
