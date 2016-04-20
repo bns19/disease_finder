@@ -131,10 +131,11 @@ function loadDisease() {
     }, function (disease) {
         var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
         var title = disease.match(pattern)[1];
+        //sommige ziekten worden niet gematched
+        console.log(title)
         var id = title.replace(/[ ,;.-]* /g, "");
         var idPat = new RegExp(id);
         //// var matchId = localStorage.getItem("ids").match(idPat);
-
 
         // //make sure, the tab is only created one time
         // if (matchId === null) {

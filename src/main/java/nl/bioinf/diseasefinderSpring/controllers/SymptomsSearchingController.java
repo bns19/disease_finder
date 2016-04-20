@@ -25,8 +25,7 @@ public class SymptomsSearchingController {
 
     @RequestMapping(value = "/autocompleteSymptoms")
     @ResponseBody
-    public String processRequest(String query) throws IOException {
-        System.out.println(query + "++++++++++++++rsgfewt43ttttttt2wrwer+++");
+    public String processRequest(@RequestParam("term") String query) throws IOException {
         boolean test = true;
 /////Hoe geven we een argument mee?
         HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
