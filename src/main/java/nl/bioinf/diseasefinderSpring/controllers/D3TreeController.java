@@ -6,6 +6,7 @@ import nl.bioinf.diseasefinderSpring.HPOProcessor.HPOTerm;
 import org.json.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.File;
@@ -20,8 +21,8 @@ import java.util.HashMap;
 public class D3TreeController {
 
 
-    @RequestMapping(value = "termsToTree")
-    public void processRequest(@RequestParam String autoCompValues) throws IOException {
+    @RequestMapping(value = "termsToTree", method = RequestMethod.GET)
+    public void processRequest(@RequestParam("term") String autoCompValues) throws IOException {
 
         HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
         String path = Application.class.getClassLoader()
