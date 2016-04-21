@@ -6,7 +6,7 @@
 package nl.bioinf.diseasefinderSpring.controllers;
 
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
-import nl.bioinf.diseasefinderSpring.login.SearchHistory;
+import nl.bioinf.diseasefinderSpring.symptomsdatabase.GetSearchHistory;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -43,9 +43,16 @@ public class SymptomProsessingController {
     @ResponseBody
     public String processInput(final String symptoms) {
         /* Save the search history of the user */
-        SearchHistory sh = new SearchHistory();
-        //sh.searchHistory(symptoms, jdbcTemplate);
+
         SymptomProcessor sp = new SymptomProcessor(symptoms);
+
+        SearchHistory sh = new SearchHistory();
+        sh.searchHistory(symptoms, jdbcTemplate);
+
+        System.out.println("PRE----- get searchhistory");
+        GetSearchHistory dit = new GetSearchHistory();
+        dit.GetSearchHistory();
+
         return sp.getDiseases();
     }
 
