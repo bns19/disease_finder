@@ -31,6 +31,8 @@ public class GetSearchHistory {
         params.addValue("id", id);
         String sql = "SELECT datetime from history where id =:id";
 
+        System.out.println("print uitkomst");
+
         return this.jdbcTemplate.query(sql, new MapSqlParameterSource(), BeanPropertyRowMapper.newInstance(SearchHis.class));
 
 
