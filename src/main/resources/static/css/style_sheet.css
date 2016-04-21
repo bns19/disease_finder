@@ -27,6 +27,15 @@ footer {
     opacity: 0.9;
 }
 
+.header{
+    margin:auto;
+    border: 3px solid #808080;
+    background-color: lightblue;
+    height:10%;
+    opacity: 0.9;
+}
+
+
 table {
     border-collapse: collapse;
     width: 90%;
