@@ -38,12 +38,16 @@ public class WebController extends WebMvcConfigurerAdapter {
      * @param personForm personForm.
      * @return the form template.
      */
-    @RequestMapping(value = "/form", method = RequestMethod.GET)
+//    @RequestMapping(value = "/form", method = RequestMethod.GET)
+//    public String showForm(final PersonForm personForm) {
+//
+//        return "form";
+//    }
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showForm(final PersonForm personForm) {
 
-        return "form";
+        return "home";
     }
-
     /**
      * Make the jdbcTemplate usable in the class.
      * This is the database connector.
@@ -62,7 +66,8 @@ public class WebController extends WebMvcConfigurerAdapter {
     public String checkPersonInfo(@Valid final PersonForm personForm, final BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "form";
+            //return "form";
+            return "home";
         }
         if (!bindingResult.hasErrors()) {
 
@@ -75,10 +80,14 @@ public class WebController extends WebMvcConfigurerAdapter {
             RegisterUserMySQL registerUser = new RegisterUserMySQL();
             registerUser.registerUserMySQL(encrypted, personForm, jdbcTemplate);
 
-            return "/login";
+           // return "/login"
+            return "/home";
+
         }
 
-        return "/login";
+      //  return "/login";
+        return "/home";
+
     }
 
 }

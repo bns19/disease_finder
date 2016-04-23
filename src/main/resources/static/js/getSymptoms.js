@@ -9,87 +9,88 @@
  * note: some code is out commented but still neccesary in the futere of this project and for that reason not deleted.
  */
 
-//$(document).ready(initialize);
-//function initialize() {
-//    var symptoms;
-//    localStorage.setItem("ids", "");
-//    //by aroeters (lists made by mkslofstra)
-//    $("#ontology-tree").on('changed.jstree', function(e, data) {
-//        var i, j, selectedNodes = [], selectedIds = [];
-//
-//        //run through all selected nodes
-//        for (i = 0, j = data.selected.length; i < j; i++) {
-//            //get the selected node
-//            var selected = data.instance.get_node(data.selected[i]);
-//            if ($.inArray(selected.id, selectedNodes) === -1 && selected.text !== "All") {
-//                selectedNodes.push(selected.text);
-//                selectedIds.push(selected.id);
-//            }
-//            //get all parents
-//            parents = selected.parents;
-//            //The if makes sure that the parents are more than one, so if it
-//            //is one word, it will not be divided in characters
-//            if (parents.length !== 1) {
-//                //check for each parent, if the parent is in the array of
-//                //selected nodes
-//                $.each(parents, function(index, value) {
-//                    if ($.inArray(value, selectedNodes) === -1 && value !== "#") {
-//                        var thisNode = $("#ontology-tree").jstree("get_node", value);
-//                        if ($.inArray(thisNode.text, selectedNodes) === -1 && thisNode.text !== "All") {
-//                            selectedNodes.push(thisNode.text);
-//                            selectedIds.push(value);
-//                        }
-//                    }
-//                }
-//                );
-//            } else {
-//                //checks if the parent is #, this should not be added to the list.
-//                if (parents[0] !== "#") {
-//                    selectedNodes.push(parents[0]);
-//                };
-//            }
-//            localStorage.setItem("symptoms", selectedNodes);
-//            localStorage.setItem("selectedIds", selectedIds);
-//        }
-//        // by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
-//        $('#event_result').html('Selected symptoms:<br/>');
-//        for (i = 0; i < selectedIds.length; i++) {
-//            var this_node = $("#ontology-tree").jstree("get_node", selectedIds[i]);
-//            var icon = this_node.icon;
-//            $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
-//                    + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button>");
-//        }
-//        $(".dontClick").click(function() {
-//            $("#ontology-tree").jstree("deselect_node", $(this).data("close"));
-//        });
-//
-//
-//        //make sure that when a node opens, it is not selected (otherwise the children will not be loaded in the search)
-//        $("#ontology-tree").on('open_node.jstree', function(e, data) {
-//            var node = data.node;
-//            if ($("#ontology-tree").jstree("is_checked", node)) {
-//                var children = node.children;
-//                $("#ontology-tree").jstree("check_node", node);
-//                $.each(children, function(index, child) {
-//                    $("#ontology-tree").jstree("deselect_node", child);
-//                });
-//
-//            }
-//        });
-//    });
-/**
- * The code above is irrelevant at the moment because the symproms will be added hardcoded in this part of the project.
- *
- *
- */
+$(document).ready(initialize);
+function initialize() {
+    var symptoms;
+    localStorage.setItem("ids", "");
+    //by aroeters (lists made by mkslofstra)
+    $("#ontology-tree").on('changed.jstree', function (e, data) {
+        var i, j, selectedNodes = [], selectedIds = [];
+
+        //run through all selected nodes
+        for (i = 0, j = data.selected.length; i < j; i++) {
+            //get the selected node
+            var selected = data.instance.get_node(data.selected[i]);
+            if ($.inArray(selected.id, selectedNodes) === -1 && selected.text !== "All") {
+                selectedNodes.push(selected.text);
+                selectedIds.push(selected.id);
+            }
+            //get all parents
+            parents = selected.parents;
+            //The if makes sure that the parents are more than one, so if it
+            //is one word, it will not be divided in characters
+            if (parents.length !== 1) {
+                //check for each parent, if the parent is in the array of
+                //selected nodes
+                $.each(parents, function (index, value) {
+                        if ($.inArray(value, selectedNodes) === -1 && value !== "#") {
+                            var thisNode = $("#ontology-tree").jstree("get_node", value);
+                            if ($.inArray(thisNode.text, selectedNodes) === -1 && thisNode.text !== "All") {
+                                selectedNodes.push(thisNode.text);
+                                selectedIds.push(value);
+                            }
+                        }
+                    }
+                );
+            } else {
+                //checks if the parent is #, this should not be added to the list.
+                if (parents[0] !== "#") {
+                    selectedNodes.push(parents[0]);
+                }
+                ;
+            }
+            localStorage.setItem("symptoms", selectedNodes);
+            localStorage.setItem("selectedIds", selectedIds);
+        }
+        // by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
+        $('#event_result').html('Selected symptoms:<br/>');
+        for (i = 0; i < selectedIds.length; i++) {
+            var this_node = $("#ontology-tree").jstree("get_node", selectedIds[i]);
+            var icon = this_node.icon;
+            $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
+                + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button>");
+        }
+        $(".dontClick").click(function () {
+            $("#ontology-tree").jstree("deselect_node", $(this).data("close"));
+        });
+
+
+        //make sure that when a node opens, it is not selected (otherwise the children will not be loaded in the search)
+        $("#ontology-tree").on('open_node.jstree', function (e, data) {
+            var node = data.node;
+            if ($("#ontology-tree").jstree("is_checked", node)) {
+                var children = node.children;
+                $("#ontology-tree").jstree("check_node", node);
+                $.each(children, function (index, child) {
+                    $("#ontology-tree").jstree("deselect_node", child);
+                });
+
+            }
+        });
+    });
+    /**
+     * The code above is irrelevant at the moment because the symproms will be added hardcoded in this part of the project.
+     *
+     *
+     */
 
 
 
-$("#search-button").click(function () {
-    sendSymptoms();
-});
+    $("#search-button").click(function () {
+        sendSymptoms();
+    });
 
-
+}
 //by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
     localStorage.setItem("symptoms", symptoms);

@@ -6,20 +6,23 @@
 </head>
 
 <body background="https://hirewallpapers.com/wp-content/uploads/2016/02/light_blue_1920x1080_wallpaper.jpg">
-<div class = "header">header</div>
+<!--<div class="header">header</div>-->
+
+
+<menu th:replace="includes/menu :: menu"></menu>
 
 <div class="textcon">
-    <div class="menu">
-        <menu th:replace="includes/menu :: menu"></menu>
-    </div>
 
-    <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id ="history">
+
+    <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id="history">
         <div role="tabpanel">
 
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist" id ="tablist">
-                <li role="presentation" class="active"><a href="#treetab" aria-controls="treetab" role="tab" data-toggle="tab" class = "tab">trees</a></li>
-                <li role="presentation"><a type="hidden" href="#resultTab" aria-controls="resultTab" role="tab" data-toggle="tab" class = "tab">results</a></li>
+            <ul class="nav nav-tabs" role="tablist" id="tablist">
+                <li role="presentation" class="active"><a href="#treetab" aria-controls="treetab" role="tab"
+                                                          data-toggle="tab" class="tab">trees</a></li>
+                <li role="presentation"><a type="hidden" href="#resultTab" aria-controls="resultTab" role="tab"
+                                           data-toggle="tab" class="tab">results</a></li>
 
             </ul>
 
@@ -27,16 +30,25 @@
             <div class="tab-content" id="tabcontent">
                 <div role="tabpanel" class="tab-pane active" id="treetab">
                     <br/><br/>
-                    <div id="discriptionTrees">The trees will spawn here</div>
+                    <div id="discriptionTrees">
+
+                        The trees will spawn here
+
+
+
+                    </div>
                     <h2>Select symptoms</h2>
                     <div>
                         <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
                         <form>
                             <div th:with="username=${#httpServletRequest.remoteUser}"></div>
                             <input type="text" id="symptoms" name="symptoms"/>
-                            <button id="searchButton" name="searchButton" onclick="sendSymptoms(symptoms.value);" type="button">
-                                Search button</button>
+                            <button id="searchButton" name="searchButton" onclick="sendSymptoms(symptoms.value);"
+                                    type="button">
+                                Search button
+                            </button>
                         </form>
+                        <!--tree!!!!!!!!!!!!!!!!!!-->
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="resultTab">
@@ -47,7 +59,7 @@
             </div>
 
         </div>
-        </div>
+    </div>
     <div th:if="${#httpServletRequest.remoteUser}"> <!-- if customer is anonymous-->
         <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 
@@ -55,7 +67,93 @@
     </div>
 
 
+</div>
+<div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <!--<br>-->
+            <div class="bs-example bs-example-tabs">
+                <ul id="myTab" class="nav nav-tabs">
+                    <li class="active"><a href="#signin" data-toggle="tab">Sign In</a></li>
+                    <li class=""><a href="#signup" data-toggle="tab">Register</a></li>
+                </ul>
+            </div>
+            <div class="modal-body">
+                <div id="myTabContent" class="tab-content">
 
+                    <div class="tab-pane fade active in" id="signin">
+                        <table>
+                            <form th:action="@{/login}" method="post">
+                                <tr>
+                                    <td><label> User Name : <input type="text" name="username"/> </label></td>
+                                </tr>
+                                <tr>
+                                    <td><label> Password: <input type="password" name="password"/> </label></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="submit" value="Sign In"/></td>
+                                </tr>
+                            </form>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="signup">
+                        <form action="#" th:action="@{/form}" th:object="${personForm}" method="post">
+                            <table>
+
+                                <tr>
+                                    <td>First name:</td>
+                                    <td><input type="text" th:field="*{firstName}"/></td>
+                                    <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Email</td>
+                                </tr>
+                                <tr>
+                                    <td>Last name:</td>
+                                    <td><input type="text" th:field="*{lastName}"/></td>
+                                    <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName</td>
+                                </tr>
+                                <tr>
+                                    <td>Username:*</td>
+                                    <td><input type="text" th:field="*{username}"/></td>
+                                    <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username</td>
+                                </tr>
+                                <tr>
+                                    <td>Email:*</td>
+                                    <td><input type="email" th:field="*{email}"/></td>
+                                    <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email</td>
+                                </tr>
+                                <tr>
+                                    <td>Birthdate:</td>
+                                    <td><input type="text" th:field="*{bDate}"/></td>
+                                    <td th:if="${#fields.hasErrors('bDate')}" th:errors="*{bDate}">password</td>
+                                </tr>
+                                <tr>
+                                    <td>Password:*</td>
+                                    <td><input type="password" th:field="*{password}"/></td>
+                                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password</td>
+                                </tr>
+                                <tr>
+                                    <td>Confirm password:*</td>
+                                    <td><input type="password" th:field="*{password2}"/></td>
+                                    <td th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}">confirm password</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button type="submit">Submit</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <center>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </center>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 

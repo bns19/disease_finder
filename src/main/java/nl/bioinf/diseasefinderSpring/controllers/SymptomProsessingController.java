@@ -51,7 +51,7 @@ public class SymptomProsessingController {
 
         System.out.println("PRE----- get searchhistory");
         GetSearchHistory dit = new GetSearchHistory();
-        dit.GetSearchHistory();
+       // dit.GetSearchHistory();
 
         return sp.getDiseases();
     }

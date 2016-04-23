@@ -1,19 +1,42 @@
-<menu th:fragment="menu">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="includes/header :: head">
+    <title>Title</title>
+</head>
+<body>
+<menu>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"></a>
+            </div>
+            <button class="btn btn-primary btn-lg" href="#signup" data-toggle="modal" data-target=".bs-modal-sm">Sign In/Register</button>
+            <form th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" class="myButton"/></form>
+            <div>
+            </div>
+        </div>
+    </nav>
 
-    <form th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" class="myButton"/>
-        <a th:href="@{/login}" class="myButton">Login </a>
-        <a th:href="@{/form}" class="myButton">Register</a>
-        <a th:href="@{/frontpage}" class="myButton">Symptoms</a>
-    </form>
+    <!--<form th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" class="myButton"/>-->
+    <!--<a th:href="@{/login}" class="myButton">Login </a>-->
+    <!--<a th:href="@{/form}" class="myButton">Register</a>-->
+    <!--<a th:href="@{/frontpage}" class="myButton">Symptoms</a>-->
+    <!--</form>-->
 
 </menu>
 
-<logmenu th:fragment="logmenu">
+<!--<logmenu th:fragment="logmenu">-->
 
-    <form th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" class="myButton"/>
-        <a th:href="@{/login}" class="myButton">Login </a>
-        <a th:href="@{/form}" class="myButton">Register</a>
-        <a th:href="@{/frontpage}" class="myButton">Symptoms</a>
-    </form>
+<!--<form th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" class="myButton"/>-->
+<!--<a th:href="@{/login}" class="myButton">Login </a>-->
+<!--<a th:href="@{/form}" class="myButton">Register</a>-->
+<!--<a th:href="@{/frontpage}" class="myButton">Symptoms</a>-->
+<!--</form>-->
 
-</logmenu>
+<!--</logmenu>-->
+
+
+
+</body>
+</html>
