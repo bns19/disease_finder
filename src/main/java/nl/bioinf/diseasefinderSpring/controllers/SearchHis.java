@@ -5,6 +5,8 @@ package nl.bioinf.diseasefinderSpring.controllers;
  */
 public class SearchHis {
 
+    private String username;
+
     private String searchedsymptoms;
 
     private String datetime;
@@ -47,4 +49,23 @@ public class SearchHis {
     public void setdatetime(final String datetime) {
         this.datetime = datetime;
     }
+
+    /**
+     * Get first name.
+     *
+     * @return FirstName of the User.
+     */
+    public String getusername() {
+        return username;
+    }
+
+    /**
+     * Set first name.
+     *
+     * @param username firstname.
+     */
+    public void setusername(final String username) {
+        this.username = username;
+    }
+
 }

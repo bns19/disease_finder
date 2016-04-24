@@ -1,3 +1,18 @@
+<!--<validlogin th:fragment="functionality">-->
+    <!--<form th:action="@{/history}" method="post"><input type="submit" value="history" class="myButton"/></form>-->
+<!--</validlogin>-->
+
 <validlogin th:fragment="functionality">
-    <form th:action="@{/history}" method="post"><input type="submit" value="history" class="myButton"/></form>
+<ul class="nav nav-tabs" role="tablist" id ="tablist">
+    <li role="presentation" class="active"><a href="#searchTab" aria-controls="searchTab" role="tab" data-toggle="tab" class = "tab">Search</a></li>
+    <li role="presentation" ><a href="#resultTab" aria-controls="resultTab" role="tab" data-toggle="tab" class = "tab">Results</a></li>
+    <li role="presentation" ><a href="#resultTab" aria-controls="resultTab" role="tab" data-toggle="tab" class = "tab">History</a></li>
+</ul>
+</validlogin>
+
+<validlogin th:fragment="nofunctionality">
+    <ul class="nav nav-tabs" role="tablist" id ="tablist">
+        <li role="presentation" class="active"><a href="#searchTab" aria-controls="searchTab" role="tab" data-toggle="tab" class = "tab">Search</a></li>
+        <li role="presentation" ><a href="#resultTab" aria-controls="resultTab" role="tab" data-toggle="tab" class = "tab">Results</a></li>
+    </ul>
 </validlogin>

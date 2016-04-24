@@ -13,30 +13,15 @@
             </div>
             <button class="btn btn-primary btn-lg" href="#signup" data-toggle="modal" data-target=".bs-modal-sm">Sign In/Register</button>
             <form th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" class="myButton"/></form>
+            <div th:if="${#httpServletRequest.remoteUser}"> <!-- if customer is anonymous-->
+                <p th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</p>
+                </div>
             <div>
             </div>
         </div>
     </nav>
 
-    <!--<form th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" class="myButton"/>-->
-    <!--<a th:href="@{/login}" class="myButton">Login </a>-->
-    <!--<a th:href="@{/form}" class="myButton">Register</a>-->
-    <!--<a th:href="@{/frontpage}" class="myButton">Symptoms</a>-->
-    <!--</form>-->
-
 </menu>
-
-<!--<logmenu th:fragment="logmenu">-->
-
-<!--<form th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" class="myButton"/>-->
-<!--<a th:href="@{/login}" class="myButton">Login </a>-->
-<!--<a th:href="@{/form}" class="myButton">Register</a>-->
-<!--<a th:href="@{/frontpage}" class="myButton">Symptoms</a>-->
-<!--</form>-->
-
-<!--</logmenu>-->
-
-
 
 </body>
 </html>

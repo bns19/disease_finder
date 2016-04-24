@@ -17,14 +17,22 @@
     <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id="history">
         <div role="tabpanel">
 
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist" id="tablist">
-                <li role="presentation" class="active"><a href="#treetab" aria-controls="treetab" role="tab"
-                                                          data-toggle="tab" class="tab">trees</a></li>
-                <li role="presentation"><a type="hidden" href="#resultTab" aria-controls="resultTab" role="tab"
-                                           data-toggle="tab" class="tab">results</a></li>
 
-            </ul>
+            <div th:if="${#httpServletRequest.remoteUser}"> <!-- if customer is anonymous-->
+                <navmenu th:replace="includes/navmenu :: loggedin"></navmenu>
+            </div>
+
+
+
+
+            <!--&lt;!&ndash; Nav tabs &ndash;&gt;-->
+            <!--<ul class="nav nav-tabs" role="tablist" id="tablist">-->
+                <!--<li role="presentation" class="active"><a href="#treetab" aria-controls="treetab" role="tab"-->
+                                                          <!--data-toggle="tab" class="tab">trees</a></li>-->
+                <!--<li role="presentation"><a type="hidden" href="#resultTab" aria-controls="resultTab" role="tab"-->
+                                           <!--data-toggle="tab" class="tab">results</a></li>-->
+
+            <!--</ul>-->
 
             <!--Tab panes-->
             <div class="tab-content" id="tabcontent">
@@ -32,16 +40,11 @@
                     <br/><br/>
                     <div id="discriptionTrees">
 
-                        The trees will spawn here
-
-
 
                     </div>
                     <h2>Select symptoms</h2>
                     <div>
-                        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
                         <form>
-                            <div th:with="username=${#httpServletRequest.remoteUser}"></div>
                             <input type="text" id="symptoms" name="symptoms"/>
                             <button id="searchButton" name="searchButton" onclick="sendSymptoms(symptoms.value);"
                                     type="button">
@@ -59,11 +62,6 @@
             </div>
 
         </div>
-    </div>
-    <div th:if="${#httpServletRequest.remoteUser}"> <!-- if customer is anonymous-->
-        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-
-        <validlogin th:replace="includes/validlogin :: functionality"></validlogin>
     </div>
 
 

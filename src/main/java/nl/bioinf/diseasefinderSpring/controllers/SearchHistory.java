@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.Date;
@@ -17,6 +18,7 @@ import java.util.Date;
 /**
  * A Class that controls the search history.
  */
+@Service
 public class SearchHistory extends WebMvcConfigurerAdapter {
 
     /**
@@ -38,15 +40,11 @@ public class SearchHistory extends WebMvcConfigurerAdapter {
      */
     public String searchHistory(final String searchhistory, final NamedParameterJdbcTemplate jdbcTemplate) {
 
-        System.out.println("symptoms: " + searchhistory);
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
         Date datetime = new Date();
 
-        System.out.println(username);
-        // input the form data //
         String inputMysql = String.format("INSERT INTO history (username, searchedsymptoms, datetime) VALUES ('%s', '%s', '%s')",
                 username, searchhistory, datetime);
 
