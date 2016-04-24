@@ -17,22 +17,15 @@
     <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id="history">
         <div role="tabpanel">
 
-
-            <div th:if="${#httpServletRequest.remoteUser}"> <!-- if customer is anonymous-->
+            <!-- if customer is loggedin-->
+            <div th:if="${#httpServletRequest.remoteUser}">
                 <navmenu th:replace="includes/navmenu :: loggedin"></navmenu>
             </div>
 
-
-
-
-            <!--&lt;!&ndash; Nav tabs &ndash;&gt;-->
-            <!--<ul class="nav nav-tabs" role="tablist" id="tablist">-->
-                <!--<li role="presentation" class="active"><a href="#treetab" aria-controls="treetab" role="tab"-->
-                                                          <!--data-toggle="tab" class="tab">trees</a></li>-->
-                <!--<li role="presentation"><a type="hidden" href="#resultTab" aria-controls="resultTab" role="tab"-->
-                                           <!--data-toggle="tab" class="tab">results</a></li>-->
-
-            <!--</ul>-->
+            <!-- if customer is loggedin-->
+            <div th:if="${#httpServletRequest.remoteUser == null}">
+                <navmenu th:replace="includes/navmenu :: notloggedin"></navmenu>
+            </div>
 
             <!--Tab panes-->
             <div class="tab-content" id="tabcontent">
