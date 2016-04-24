@@ -39,6 +39,6 @@ public class MySQLCreateTables {
 
         /* Create history table */
         jdbcTemplate.update("CREATE TABLE IF NOT EXISTS History(id SERIAL, "
-                + "searchedsymptoms VARCHAR(255), username VARCHAR(255))", new MapSqlParameterSource());
+                + "username VARCHAR(255), searchhistory VARCHAR(255), datetime VARCHAR(255))", new MapSqlParameterSource());
     }
 }

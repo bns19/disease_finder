@@ -65,8 +65,7 @@ public class WebController extends WebMvcConfigurerAdapter {
             return "form";
         }
         if (!bindingResult.hasErrors()) {
-
-           // EncryptPassword pw = new EncryptPassword();
+            
             String encrypted = EncryptPassword.encryptPassword(personForm.getPassword());
 
             MySQLCreateTables mySQLCreateTables = new MySQLCreateTables();
