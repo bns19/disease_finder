@@ -15,17 +15,34 @@ footer {
     margin: auto;
     border: 1px solid #808080;
     height: 80%;
-    width:50%;
+    width:100%;
     background-color: white;
     padding-right: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 0px;
     padding-left: 30px;
-    margin-top: 300px;
+    margin-top: 0px;
     border-radius: 5px;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     opacity: 0.9;
 }
+
+.header{
+    margin: auto;
+    border: 1px solid #808080;
+    height: 20%;
+    width:100%;
+    background-color: lightblue;
+    padding-right: 30px;
+    padding-bottom: 0px;
+    padding-left: 30px;
+    margin-top: 0px;
+    border-radius: 5px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    opacity: 0.9;
+}
+
 
 table {
     border-collapse: collapse;
