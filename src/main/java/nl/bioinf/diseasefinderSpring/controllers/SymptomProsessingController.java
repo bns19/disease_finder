@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
 import java.io.IOException;
+import java.util.List;
 
 /**
  *This class now contains the controller responsible for finding diseases based on (dummy) symptoms given by the user.
@@ -30,6 +31,9 @@ public class SymptomProsessingController {
      */
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
+
+    @Autowired
+    private GetSearchHistory getSearchHistory;
 
 
     /**
@@ -48,10 +52,6 @@ public class SymptomProsessingController {
 
         SearchHistory sh = new SearchHistory();
         sh.searchHistory(symptoms, jdbcTemplate);
-
-        System.out.println("PRE----- get searchhistory");
-        GetSearchHistory dit = new GetSearchHistory();
-        dit.GetSearchHistory();
 
         return sp.getDiseases();
     }
