@@ -54,8 +54,8 @@ public class SymptomProsessingController {
         SearchHistory sh = new SearchHistory();
         sh.searchHistory(symptoms, jdbcTemplate);
 
-        GetSearchHistory dit = new GetSearchHistory();
-        List ListWithMysqlInformation = dit.GetSearchHistory("willem", jdbcTemplate);
+//        GetSearchHistory dit = new GetSearchHistory();
+//        List ListWithMysqlInformation = dit.GetSearchHistory("klaasje", jdbcTemplate);
 
         return sp.getDiseases();
     }
