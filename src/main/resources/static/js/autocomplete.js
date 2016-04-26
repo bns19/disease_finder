@@ -30,7 +30,6 @@ function initialize() {
             });
         },
         select: function(e, ui) {
-            console.log("hier????")
             $.ajax({
                 url: "termsToTree",
                 dataType: "text",
