@@ -22,7 +22,7 @@
                 <navmenu th:replace="includes/navmenu :: loggedin"></navmenu>
             </div>
 
-            <!-- if customer is loggedin-->
+            <!-- if customer is not loggedin-->
             <div th:if="${#httpServletRequest.remoteUser == null}">
                 <navmenu th:replace="includes/navmenu :: notloggedin"></navmenu>
             </div>
@@ -51,6 +51,11 @@
                     <br/><br/>
                     Click in the search-tab on the search button to get results here.
                 </div>
+
+                <div role="tabpanel" class="tab-pane" id="historytab">
+                    <navmenu th:replace="includes/searchhistory :: showsearchhis"></navmenu>
+                </div>
+
 
             </div>
 

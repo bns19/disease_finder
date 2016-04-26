@@ -1,4 +1,4 @@
-<navmenu th:fragment="loggedin">
+<navmenu th:fragment="loggedin" xmlns:th="http://www.w3.org/1999/xhtml">
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist" id="tablist">
 
@@ -10,6 +10,9 @@
 
     <li role="presentation"><a type="hidden" href="#historytab" aria-controls="historytab" role="tab"
                                data-toggle="tab" class="tab">history</a></li>
+
+    <!--<form action="#" th:action="@{/history}"><a type="hidden" href="#historytab" aria-controls="historytab" role="tab"-->
+                                                                         <!--data-toggle="tab" class="tab">history</a></form>-->
 </ul>
 </navmenu>
 

@@ -1,5 +1,7 @@
 package nl.bioinf.diseasefinderSpring.controllers;
 
+import org.springframework.context.annotation.Bean;
+
 /**
  * Created by hjdupon on 21-4-16.
  */

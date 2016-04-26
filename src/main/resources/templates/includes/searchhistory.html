@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<searchhis th:fragment="showsearchhis" xmlns:th="">
+    <h1> History </h1>
 
-</body>
-</html>
+    <div th:if="${#httpServletRequest.remoteUser != null}">
+
+        <tr th:each="mf : ${ListWithMysqlInformation}">
+
+            <td><label type="text" th:text="${ss.getsearchedsymptoms()}" /></td>
+
+        </tr>
+
+            <h1> info </h1>
+
+    </div>
+</searchhis>

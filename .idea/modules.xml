@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SpringDiseaseFinderDemoI.iml" filepath="$PROJECT_DIR$/SpringDiseaseFinderDemoI.iml" />
       <module fileurl="file://$PROJECT_DIR$/diseasefinderspringport.iml" filepath="$PROJECT_DIR$/diseasefinderspringport.iml" />
+      <module fileurl="file://$PROJECT_DIR$/diseasefinderspringportII.iml" filepath="$PROJECT_DIR$/diseasefinderspringportII.iml" />
     </modules>
   </component>
 </project>

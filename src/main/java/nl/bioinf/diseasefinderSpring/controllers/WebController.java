@@ -8,6 +8,7 @@ package nl.bioinf.diseasefinderSpring.controllers;
 import nl.bioinf.diseasefinderSpring.Database.MySQLCreateTables;
 import nl.bioinf.diseasefinderSpring.Database.RegisterUserMySQL;
 import nl.bioinf.diseasefinderSpring.login.EncryptPassword;
+import nl.bioinf.diseasefinderSpring.symptomsdatabase.GetSearchHistory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +79,8 @@ public class WebController extends WebMvcConfigurerAdapter {
 
             RegisterUserMySQL registerUser = new RegisterUserMySQL();
             registerUser.registerUserMySQL(encrypted, personForm, jdbcTemplate);
+
+            GetSearchHistory gsh = new GetSearchHistory();
 
            // return "/login"
             return "/home";
