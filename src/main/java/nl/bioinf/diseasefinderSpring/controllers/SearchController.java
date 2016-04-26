@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -37,32 +38,32 @@ public class SearchController extends WebMvcConfigurerAdapter {
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
 
-
     @RequestMapping(value = "/history", method = RequestMethod.GET)
-    public String executeHis(Locale locale, Model model) {
+    @ResponseBody
+    public Object executeHis(final PersonForm personForm, HttpSession session) {
 
         GetSearchHistory dit = new GetSearchHistory();
 
         SearchHis ss = new SearchHis();
 
-        ss.setsearchedsymptoms("blabla");
-
-        System.out.println("BALBALA");
-
-
         ListWithMysqlInformation = dit.GetSearchHistory("klaasje", jdbcTemplate);
 
-        model.addAttribute("ListWithMysqlInformation", ListWithMysqlInformation); // This is important
+//        model.addAttribute("ListWithMysqlInformation", ListWithMysqlInformation); // This is important
 
-        return ListWithMysqlInformation.toString();
+        PersonForm personform = new PersonForm();
+        personform.setUsername("HANS");
+
+        session.setAttribute("mySessionAttribute", "someValue");
+
+        System.out.println("HIER");
+
+        return ListWithMysqlInformation;
     }
 
-
-    @RequestMapping(value = "/history", method = RequestMethod.POST)
-    public String execute(@Valid final Model model, final BindingResult bindingResult) {
-
-        System.out.println("print");
-
-        return "/home";
-    }
+//    @ResponseBody
+//    @RequestMapping(value = "/history", method = RequestMethod.POST)
+//    public String execute(@Valid final Model model, final BindingResult bindingResult) {
+//
+//        return "/home";
+//    }
 }

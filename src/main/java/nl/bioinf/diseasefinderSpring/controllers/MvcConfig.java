@@ -6,9 +6,17 @@
 
 package nl.bioinf.diseasefinderSpring.controllers;
 
+import org.codehaus.groovy.control.messages.Message;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.util.List;
 
 /**
  * This class regulates some  view buisness.
@@ -33,5 +41,6 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/frontpage").setViewName("frontpage");
         registry.addViewController("/diseaseResults").setViewName("diseaseResults");
     }
+
 
 }
