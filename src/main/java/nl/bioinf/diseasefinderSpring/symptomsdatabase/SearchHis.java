@@ -1,6 +1,4 @@
-package nl.bioinf.diseasefinderSpring.controllers;
-
-import org.springframework.context.annotation.Bean;
+package nl.bioinf.diseasefinderSpring.symptomsdatabase;
 
 /**
  * Created by hjdupon on 21-4-16.
@@ -9,7 +7,7 @@ public class SearchHis {
 
     private String username;
 
-    private String searchedsymptoms;
+    private String searchedSymptoms;
 
     private String datetime;
 
@@ -21,17 +19,16 @@ public class SearchHis {
      *
      * @return FirstName of the User.
      */
-    public String getsearchedsymptoms() {
-        return searchedsymptoms;
+    public String getSearchedSymptoms() {
+        return searchedSymptoms;
     }
 
     /**
-     * Set first name.
-     *
-     * @param searchedsymptoms firstname.
+     * Sets the search history
+     * @param searchedSymptoms Search string
      */
-    public void setsearchedsymptoms(final String searchedsymptoms) {
-        this.searchedsymptoms = searchedsymptoms;
+    public void setSearchedSymptoms(final String searchedSymptoms) {
+        this.searchedSymptoms = searchedSymptoms;
     }
 
     /**

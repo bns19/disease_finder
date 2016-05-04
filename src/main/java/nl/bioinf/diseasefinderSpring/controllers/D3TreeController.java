@@ -1,8 +1,9 @@
 package nl.bioinf.diseasefinderSpring.controllers;
 
-import nl.bioinf.diseasefinderSpring.HPOProcessor.HPOFileReader;
-import nl.bioinf.diseasefinderSpring.HPOProcessor.HPOJsonObjectCreator;
-import nl.bioinf.diseasefinderSpring.HPOProcessor.HPOTerm;
+import nl.bioinf.diseasefinderSpring.Application;
+import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOFileReader;
+import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOJsonObjectCreator;
+import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOTerm;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 

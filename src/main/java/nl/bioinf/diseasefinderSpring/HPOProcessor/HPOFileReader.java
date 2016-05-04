@@ -4,10 +4,9 @@
  * Created by Mariska Slofstra & Arne Roeters
  * Adjusted by Bas Sikkema & Henri du Pon
  */
-package nl.bioinf.diseasefinderSpring.HPOProcessor;
+package nl.bioinf.diseasefinderSpring.hpoprocessor;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;

@@ -3,7 +3,7 @@
  * Theme 11/12
  * Created by henridupon on 3/1/2016.
  */
-package nl.bioinf.diseasefinderSpring.login;
+package nl.bioinf.diseasefinderSpring.security;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

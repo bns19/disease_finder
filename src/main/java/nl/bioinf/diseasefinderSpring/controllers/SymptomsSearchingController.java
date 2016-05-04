@@ -1,8 +1,8 @@
 package nl.bioinf.diseasefinderSpring.controllers;
 
-import nl.bioinf.diseasefinderSpring.HPOProcessor.HPOFileReader;
-import nl.bioinf.diseasefinderSpring.HPOProcessor.HPOJsonObjectCreator;
-import nl.bioinf.diseasefinderSpring.HPOProcessor.HPOTerm;
+import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOFileReader;
+import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOJsonObjectCreator;
+import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOTerm;
 import org.json.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
