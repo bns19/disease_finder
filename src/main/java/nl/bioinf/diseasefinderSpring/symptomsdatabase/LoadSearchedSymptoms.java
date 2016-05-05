@@ -6,21 +6,20 @@ import org.springframework.security.core.Authentication;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Created by hjdupon on 21-4-16.
+ * Created by henridupon on 5/4/2016.
  */
-//@Service
-public class GetSearchHistory {
+public class LoadSearchedSymptoms {
 
     Authentication authentication;
     NamedParameterJdbcTemplate jdbcTemplate;
 
-//    @Autowired
-    public GetSearchHistory(Authentication authentication, NamedParameterJdbcTemplate jdbcTemplate) {
+    //    @Autowired
+    public LoadSearchedSymptoms(Authentication authentication, NamedParameterJdbcTemplate jdbcTemplate) {
         this.authentication = requireNonNull(authentication);
         this.jdbcTemplate = requireNonNull(jdbcTemplate);
     }
 
-//    public List <SearchHis> GetSearchHistory (String username, final NamedParameterJdbcTemplate jdbcTemplate) {
+//    public List <SearchHis> SaveSearchedSymptoms (String username, final NamedParameterJdbcTemplate jdbcTemplate) {
 //
 //        RowMapper rowMapper = new SearchRowMapper();  // reusable object
 //        MapSqlParameterSource params = new MapSqlParameterSource();
@@ -43,4 +42,3 @@ public class GetSearchHistory {
 //    }
 
 }
-

@@ -23,7 +23,7 @@ public class SearchHistory {
     /**
      * Mandatory JPA constructor.
      */
-    protected SearchHistory() {
+    public SearchHistory() {
     }
 
     public SearchHistory(User user, String query, LocalDateTime createdAt) {
@@ -63,4 +63,6 @@ public class SearchHistory {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+
 }
