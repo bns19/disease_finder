@@ -5,12 +5,14 @@ function executeLoadHistory(){
     console.log("HOI")
     var controller = "/history";
 
-    $.get(controller, function (history){
-        console.log(history.searchedsymptoms)
-        console.log("print")
+    $.get(controller, null, function (history){
+        console.log("print1")
+        //console.log(history.searchHistoryRepos)
+        console.log("print2")
     })
 
 
 
 
 }
+

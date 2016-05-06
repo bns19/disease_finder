@@ -13,11 +13,11 @@ import java.time.LocalDateTime;
 /**
  * Created by hjdupon on 21-4-16.
  */
-//@Service
+
 public class SaveSearchedSymptoms {
 
     UserRepository userRepository;
-        SearchHistoryRepository searchHistoryRepository;
+    SearchHistoryRepository searchHistoryRepository;
 
         @Autowired
         public SaveSearchedSymptoms(UserRepository userRepository, SearchHistoryRepository searchHistoryRepository) {

@@ -10,6 +10,7 @@ import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.UserRepository;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SaveSearchedSymptoms;
+import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomsCalculationInformation;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -60,6 +61,11 @@ public class SymptomProcessingController {
 
         SaveSearchedSymptoms saveSymptoms = new SaveSearchedSymptoms(userRepository, searchHistoryRepository);
         saveSymptoms.saveSymptoms(symptoms);
+
+        SymptomsCalculationInformation symptomsCalculationInformation =
+                new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
+
+        symptomsCalculationInformation.calculateSymptomsSearch();
 
         return sp.getDiseases();
     }
