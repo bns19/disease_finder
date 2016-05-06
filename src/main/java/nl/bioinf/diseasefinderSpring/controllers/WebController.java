@@ -5,12 +5,10 @@
  */
 package nl.bioinf.diseasefinderSpring.controllers;
 
-import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.User;
 import nl.bioinf.diseasefinderSpring.domain.UserRepository;
 import nl.bioinf.diseasefinderSpring.security.EncryptPassword;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,14 +26,10 @@ import java.time.LocalDateTime;
 public class WebController extends WebMvcConfigurerAdapter {
 
     UserRepository userRepository;
-    SearchHistoryRepository searchHistoryRepository;
-    NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
-    public WebController(UserRepository userRepository, SearchHistoryRepository searchHistoryRepository) {
+    public WebController(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.searchHistoryRepository = searchHistoryRepository;
-        this.jdbcTemplate = jdbcTemplate;
     }
 
 
@@ -58,17 +52,18 @@ public class WebController extends WebMvcConfigurerAdapter {
             return "form";
         }
         if (!bindingResult.hasErrors()) {
-
             String encrypted = EncryptPassword.encryptPassword(user.getPassword());
 
             user.setPassword(encrypted);
+            user.setConfirmPassword(encrypted);
 
+            System.out.println(encrypted);
             user.setCreatedAt(LocalDateTime.now());
             userRepository.save(user);
 
-            return "/home";
+            return "/login";
         }
-        return "/home";
+        return "/form";
 
     }
 
