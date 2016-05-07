@@ -2,40 +2,18 @@
 $(document).ready(initialize);
 function initialize() {
     var url = "treeBuilder";
-    //$('#ontology-tree').jstree({
-    //    'core': {
-    //        'data': {
-    //            'url': url,
-    //            'data': function(node) {
-    //                return {'id': node.id, 'icon':node.icon};
-    //            }
-    //        }
-    //    },
-    //    'plugins': ["checkbox", "search"]
-    //});
 
     $('#ontology-tree').jstree({
         'core': {
             'data': {
-                //'url': url,
-                //'data': function(node) {
-                //    return {'id': node.id, 'icon':node.icon};
-                //}
-
-                "ajax" : {
-                    "type" : "POST",
-                    "url" : url,
-                    "succes" : function(node) {
-                        return {'id': node.id, 'icon':node.icon};
-                    }
+                'url': url,
+                'data': function(node) {
+                    return {'id': node.id, 'icon':node.icon};
                 }
             }
         },
         'plugins': ["checkbox", "search"]
-
     });
-
-
     var to = false;
     $('#search-symptom').keyup(function() {
         if (to) {
@@ -45,9 +23,8 @@ function initialize() {
             var v = $('#search-symptom').val();
             $('#ontology-tree').jstree(true).search(v);
         }, 250);
-        });
-        $('#search-symptom').focus(function() {
-            $('#search-symptom').attr('value', '');
+    });
+    $('#search-symptom').focus(function() {
+        $('#search-symptom').attr('value', '');
     });
 }
-

@@ -45,6 +45,7 @@ public class SymptomProcessor {
     private void processSymptoms(final String symptoms) {
         StringBuilder sb = new StringBuilder();
         /**Splits added dummy symptoms**/
+        System.out.println(symptoms);
         String[] symptomsList = symptoms.split(",");
 
         try {

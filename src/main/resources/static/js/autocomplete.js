@@ -28,8 +28,11 @@ function initialize() {
 
                 }
             });
+
         },
+
         select: function(e, ui) {
+            console.log(ui.item.value)
             $.ajax({
                 url: "termsToTree",
                 dataType: "text",

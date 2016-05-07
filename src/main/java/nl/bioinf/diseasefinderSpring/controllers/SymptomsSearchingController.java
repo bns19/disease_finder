@@ -23,36 +23,10 @@ public class SymptomsSearchingController {
     @ResponseBody
     public String processRequest(@RequestParam("term") String query) throws IOException {
         boolean test = true;
-/////Hoe geven we een argument mee?
-        HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
-
-        String path = HPOJsonObjectCreator.class.getClassLoader()
-                .getResource("config/hp.obo").toString();
-        HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
-        HashMap collection = hr.readFile().getHPOHashMap();
-        ArrayList<String> terms = new ArrayList<String>();
-        for (Object term : collection.values()) {
-            HPOTerm idGetter = (HPOTerm) term;
-            terms.add(idGetter.getName());
-        }
-//        response.setContentType("text/html");
-//        response.setHeader("Cache-control", "no-cache, no-store");
-//        response.setHeader("Pragma", "no-cache");
-//        response.setHeader("Expires", "-1");
-        JSONArray arrayObj = new JSONArray();
-        //String query = request.getParameter("term");
-        query = query.toLowerCase();
-        System.out.println(query);
-        for (String term : terms) {
-            String country = term.toLowerCase();
-            System.out.println(country);
-            if (country.startsWith(query.toLowerCase())) {
-                arrayObj.put(term);
-            }
-        }
-//        out.println(arrayObj.toString());
-//        out.close();
-        return arrayObj.toString();
+//        HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
+        HashMap collection =  HPOFileLoader.LoadHPOFile();
+        AutoCompleteSystem acs =  new AutoCompleteSystem(query, collection);
+        return acs.getAutoCompleteObject().toString();
     }
 
 

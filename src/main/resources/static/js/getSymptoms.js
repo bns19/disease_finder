@@ -1,13 +1,7 @@
 /**
  * Created by mkslofstra and aroeters, addditions and adjustments by bnsikkema
- * This code is still under construction because the tree and symptom systems are not yet implemented.
- * All the code that is commented out is part of that and will be implemented later and adjusted when necessary.
- *
  */
 
-/**
- * note: some code is out commented but still neccesary in the futere of this project and for that reason not deleted.
- */
 
 $(document).ready(initialize);
 function initialize() {
@@ -52,6 +46,8 @@ function initialize() {
             localStorage.setItem("symptoms", selectedNodes);
             localStorage.setItem("selectedIds", selectedIds);
         }
+
+        //Here will be the link between the old tree and the new tree.
         // by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
         $('#event_result').html('Selected symptoms:<br/>');
         for (i = 0; i < selectedIds.length; i++) {
@@ -78,13 +74,6 @@ function initialize() {
             }
         });
     });
-    /**
-     * The code above is irrelevant at the moment because the symproms will be added hardcoded in this part of the project.
-     *
-     *
-     */
-
-
 
     $("#search-button").click(function () {
         sendSymptoms();
@@ -93,7 +82,7 @@ function initialize() {
 }
 //by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
-    localStorage.setItem("symptoms", symptoms);
+    //localStorage.setItem("symptoms", symptoms);
     var symptomSet = symptoms;
     $('.nav-tabs a[href="#resultTab"]').tab('show');
 
@@ -102,7 +91,7 @@ function sendSymptoms(symptoms) {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     //use the mapped controller
-    $.post(controller, {"symptoms": symptomSet, _csrf: token}, function (diseases) {
+    $.post(controller, {"symptoms": localStorage.getItem("symptoms"), _csrf: token}, function (diseases) {
 
         $("#resultTab").text("");
         $("#resultTab").append("<br/><br/><ul>");
@@ -133,9 +122,10 @@ function loadDisease() {
         var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
         var title = disease.match(pattern)[1];
         //sommige ziekten worden niet gematched
-        console.log(title)
         var id = title.replace(/[ ,;.-]* /g, "");
         var idPat = new RegExp(id);
+
+        /////////////////////////////////////////////////////////////
         //// var matchId = localStorage.getItem("ids").match(idPat);
 
         // //make sure, the tab is only created one time
@@ -146,6 +136,8 @@ function loadDisease() {
         //         title = title.substring(0, 12) + "...";
         //     }
         //     //put the data in an extra tab
+        ///////////////////////////////////////////////////////
+
         $("#tablist").append("<li role=\"presentation\"><a href=\"#" + id + "\" aria-controls=\"" + id
             + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\" class=\"tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
         $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
@@ -162,11 +154,15 @@ function loadDisease() {
                 var tab = document.getElementById(close_id + "Tab");
                 tab.parentNode.removeChild(tab);
                 $('.nav-tabs a[href="#resultTab"]').tab('show');
-                //remove string from id list, so that it can be opened again
-                // var idString = localStorage.getItem("ids");
-                // var firstPart = idString.substring(0, matchId.index);
-                // var lastPart = idString.substring(matchId.index + id.length, idString.length);
-                // localStorage.setItem("ids", firstPart + lastPart);
+
+                //////////////////////////////////////////////////////////
+               // remove string from id list, so that it can be opened again
+               //  var idString = localStorage.getItem("ids");
+               //  var firstPart = idString.substring(0, matchId.index);
+               //  var lastPart = idString.substring(matchId.index + id.length, idString.length);
+               //  localStorage.setItem("ids", firstPart + lastPart);
+                //////////////////////////////////////////////////////////////
+
             }
         });
 
