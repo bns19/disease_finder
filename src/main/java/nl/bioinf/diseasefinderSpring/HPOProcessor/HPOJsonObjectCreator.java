@@ -6,7 +6,6 @@
  */
 package nl.bioinf.diseasefinderSpring.HPOProcessor;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 

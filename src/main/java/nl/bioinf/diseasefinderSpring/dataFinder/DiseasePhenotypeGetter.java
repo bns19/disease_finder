@@ -4,9 +4,9 @@
  * Created by Mariska Slofstra & Arne Roeters
  * Adjusted by Bas Sikkema & Henri du Pon
  */
-package nl.bioinf.diseasefinderSpring.dataFinder;
+package nl.bioinf.diseasefinderSpring.datafinder;
 
-import nl.bioinf.diseasefinderSpring.bodyFeatures.FeatureCollection;
+import nl.bioinf.diseasefinderSpring.bodyfeatures.FeatureCollection;
 import nl.bioinf.diseasefinderSpring.connection.OmimDataRetriever;
 import nl.bioinf.diseasefinderSpring.disease.Disease;
 import org.json.JSONException;

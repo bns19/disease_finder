@@ -7,7 +7,7 @@
 package nl.bioinf.diseasefinderSpring.disease;
 
 import nl.bioinf.diseasefinderSpring.connection.OmimDataRetriever;
-import nl.bioinf.diseasefinderSpring.dataFinder.DiseasePhenotypeGetter;
+import nl.bioinf.diseasefinderSpring.datafinder.DiseasePhenotypeGetter;
 import org.json.JSONException;
 
 import java.io.IOException;

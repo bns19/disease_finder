@@ -7,7 +7,10 @@ package nl.bioinf.diseasefinderSpring.controllers;
 
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
 import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
-import nl.bioinf.diseasefinderSpring.symptomsdatabase.GetSearchHistory;
+import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
+import nl.bioinf.diseasefinderSpring.domain.UserRepository;
+import nl.bioinf.diseasefinderSpring.symptomsdatabase.SaveSearchedSymptoms;
+import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomsCalculationInformation;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -17,24 +20,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
- *This class now contains the controller responsible for finding diseases based on (dummy) symptoms given by the user.
- * The functionality is succesfully ported.
+ * This class now contains the controller responsible for finding diseases based on (dummy) symptoms given by the user.
+ * The functionality is successfully ported.
  *
  */
 @Controller
-public class SymptomProsessingController {
+public class SymptomProcessingController {
+
+    UserRepository userRepository;
+    SearchHistoryRepository searchHistoryRepository;
+
+    @Autowired
+    public SymptomProcessingController(UserRepository userRepository, SearchHistoryRepository searchHistoryRepository) {
+        this.userRepository = userRepository;
+        this.searchHistoryRepository = searchHistoryRepository;
+    }
+
     /**
      * Make the jdbcTemplate approachable
      * There can only be one jdbcTemplate be made, in the WebSecurityConfig the Autowiring caused errors.
      */
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
-//
-//    @Autowired
-//    GetSearchHistory getSearchHistory;
 
 
     /**
@@ -47,15 +56,16 @@ public class SymptomProsessingController {
     @RequestMapping(value = "/sendSymptoms",  method = RequestMethod.POST)
     @ResponseBody
     public String processInput(final String symptoms) {
-        /* Save the search history of the user */
 
         SymptomProcessor sp = new SymptomProcessor(symptoms);
 
-        SearchHistory sh = new SearchHistory();
-        sh.searchHistory(symptoms, jdbcTemplate);
+        SaveSearchedSymptoms saveSymptoms = new SaveSearchedSymptoms(userRepository, searchHistoryRepository);
+        saveSymptoms.saveSymptoms(symptoms);
 
-//        GetSearchHistory dit = new GetSearchHistory();
-//        List ListWithMysqlInformation = dit.GetSearchHistory("klaasje", jdbcTemplate);
+        SymptomsCalculationInformation symptomsCalculationInformation =
+                new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
+
+        symptomsCalculationInformation.calculateSymptomsSearch();
 
         return sp.getDiseases();
     }
@@ -78,6 +88,7 @@ public class SymptomProsessingController {
         String information = diseases.getInfoOfDisease(omimNumber);
         return information;
     }
+
 
 }
 

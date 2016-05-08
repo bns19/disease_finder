@@ -4,7 +4,7 @@
  * Created by Mariska Slofstra & Arne Roeters
  * Adjusted by Bas Sikkema & Henri du Pon
  */
-package nl.bioinf.diseasefinderSpring.bodyFeatures;
+package nl.bioinf.diseasefinderSpring.bodyfeatures;
 
 /**
  * BodyFeature is the enum which specifies all the main features of a disease.

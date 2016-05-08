@@ -4,7 +4,7 @@
  * Created by Mariska Slofstra & Arne Roeters
  * Adjusted by Bas Sikkema & Henri du Pon
  */
-package nl.bioinf.diseasefinderSpring.bodyFeatures;
+package nl.bioinf.diseasefinderSpring.bodyfeatures;
 
 import java.util.Arrays;
 

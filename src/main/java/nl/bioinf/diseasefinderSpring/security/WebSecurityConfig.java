@@ -3,7 +3,7 @@
  * Theme 11/12
  * Created by hjdupon on 24-2-16.
  */
-package nl.bioinf.diseasefinderSpring.controllers;
+package nl.bioinf.diseasefinderSpring.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -29,6 +30,7 @@ import javax.sql.DataSource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+
     /**
      * Make the jdbcTemplate usable in the class.
      * This is the database connector.
@@ -38,12 +40,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     /**
+     * Provides a utility class for easy DataSource access, a PlatformTransactionManager for a single DataSource,
+     * and various simple DataSource implementations.
+     */
+    @Autowired
+    DataSource dataSource;
+
+    /**
      * @param http is similar to Spring Security's XML element in the namespace configuration.
      *             It allows configuring web based security for specific http requests.
      * @throws Exception
      */
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
+
         http
                 .authorizeRequests()
                 .antMatchers("/**").permitAll()
@@ -53,36 +63,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .permitAll()
                 .and()
-                .logout()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
                 .permitAll();
     }
 
 
-    /**
-     * Provides a utility class for easy DataSource access, a PlatformTransactionManager for a single DataSource,
-     * and various simple DataSource implementations.
-     */
-    @Autowired
-    DataSource dataSource;
 
-
-    /**
-     * @param auth auth.
-     * @throws Exception an exception.
-     * The @Autowired annotation provides fine-grained control over where and how autowiring should be accomplished.
-     * The annotation can be used to autowire bean on the setter method just like @Required annotation, constructor,
-     * a property or methods with arbitrary names and/or multiple arguments.
-     */
     @Autowired
     public void configureGlobal(final AuthenticationManagerBuilder auth) throws Exception {
-
         auth.
                 jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
                 .usersByUsernameQuery("select username, password, enabled from User where username = ?")
                 .authoritiesByUsernameQuery("select username, authority from User where username = ?");
-    }
+
+        }
 
 
     /**

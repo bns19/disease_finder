@@ -98,19 +98,9 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="signup">
-                        <form action="#" th:action="@{/form}" th:object="${personForm}" method="post">
+                        <form action="#" th:action="@{/form}" th:object="${user}" method="post">
                             <table>
 
-                                <tr>
-                                    <td>First name:</td>
-                                    <td><input type="text" th:field="*{firstName}"/></td>
-                                    <td th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Email</td>
-                                </tr>
-                                <tr>
-                                    <td>Last name:</td>
-                                    <td><input type="text" th:field="*{lastName}"/></td>
-                                    <td th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName</td>
-                                </tr>
                                 <tr>
                                     <td>Username:*</td>
                                     <td><input type="text" th:field="*{username}"/></td>
@@ -122,25 +112,21 @@
                                     <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email</td>
                                 </tr>
                                 <tr>
-                                    <td>Birthdate:</td>
-                                    <td><input type="text" th:field="*{bDate}"/></td>
-                                    <td th:if="${#fields.hasErrors('bDate')}" th:errors="*{bDate}">password</td>
-                                </tr>
-                                <tr>
                                     <td>Password:*</td>
                                     <td><input type="password" th:field="*{password}"/></td>
                                     <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password</td>
                                 </tr>
                                 <tr>
                                     <td>Confirm password:*</td>
-                                    <td><input type="password" th:field="*{password2}"/></td>
-                                    <td th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}">confirm password</td>
+                                    <td><input type="password" th:field="*{confirmPassword}"/></td>
+                                    <td th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">confirm password</td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <button type="submit">Submit</button>
                                     </td>
                                 </tr>
+
                             </table>
                         </form>
 
