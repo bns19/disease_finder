@@ -1,6 +1,6 @@
 package nl.bioinf.diseasefinderSpring.controllers;
 
-import nl.bioinf.diseasefinderSpring.HPOProcessor.HPOTerm;
+import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOTerm;
 import org.json.JSONArray;
 
 import java.util.ArrayList;
