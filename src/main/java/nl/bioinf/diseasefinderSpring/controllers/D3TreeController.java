@@ -1,6 +1,8 @@
 package nl.bioinf.diseasefinderSpring.controllers;
 
 
+import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOFileLoader;
+import nl.bioinf.diseasefinderSpring.treehandler.PrimaryTreeBuilder;
 import org.json.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
