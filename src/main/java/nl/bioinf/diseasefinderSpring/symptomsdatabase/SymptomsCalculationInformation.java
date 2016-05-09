@@ -34,14 +34,21 @@ public class SymptomsCalculationInformation {
     }
 
     public void calculatePercentageOfSymptomsSearchedByUser(){
-        // Count number of searches total
-        Long countUser = searchHistoryRepository.countByUser_id(user.getId());
-        // Count query that contains ? word
-        Long countQueryUser = searchHistoryRepository.countByQueryContainingAndUser_id("sss", user.getId());
+        // Count number of searches total\\
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long countUser = 0L;
+        System.out.println(auth.getName());
+        if (auth.getName() != "anonymousUser") {
+            countUser = searchHistoryRepository.countByUser_id(user.getId());
 
-        Long searchedSymptomsPercentageUser = 100/countUser*countQueryUser;
+            // Long countUser = searchHistoryRepository.countByUser_id(user.getId());
+            // Count query that contains ? word
+            Long countQueryUser = searchHistoryRepository.countByQueryContainingAndUser_id("sss", user.getId());
 
-        System.out.println("percentage User: "+ searchedSymptomsPercentageUser);
+            Long searchedSymptomsPercentageUser = 100 / countUser * countQueryUser;
+
+            System.out.println("percentage User: " + searchedSymptomsPercentageUser);
+        }
     }
 
     public void calculatePercentageOfSymptomsSearchedByTotal(){

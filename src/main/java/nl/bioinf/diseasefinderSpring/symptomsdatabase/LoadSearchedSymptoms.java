@@ -24,10 +24,15 @@ public class LoadSearchedSymptoms {
         List mySQLSearchHistory = null;
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
         String username = auth.getName();
+        List<SearchHistory> searchHistoryRepos = null;
         User user = userRepository.findByUsername(username);
-        List<SearchHistory> searchHistoryRepos = searchHistoryRepository.findByUser_id(user.getId());
-        System.out.println(searchHistoryRepos);
+        System.out.println(user);
+        try {
+           searchHistoryRepos = searchHistoryRepository.findByUser_id(user.getId());
+        } catch(NullPointerException n) {}
+        //List<SearchHistory> searchHistoryRepos = searchHistoryRepository.findByUser_id(user.getId());
 
         //TODO: gooit nu een null pointerexception als iemand niet is ingelogd, moet nog gefixed worden
 
