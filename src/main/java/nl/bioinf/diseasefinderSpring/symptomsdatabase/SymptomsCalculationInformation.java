@@ -41,7 +41,7 @@ public class SymptomsCalculationInformation {
 
         Long searchedSymptomsPercentageUser = 100/countUser*countQueryUser;
 
-        System.out.println("perc: "+ searchedSymptomsPercentageUser);
+        System.out.println("percentage User: "+ searchedSymptomsPercentageUser);
     }
 
     public void calculatePercentageOfSymptomsSearchedByTotal(){
@@ -52,7 +52,7 @@ public class SymptomsCalculationInformation {
 
         Long searchedSymptomsPercentageTotal = 100/countUsers*countQueryUsers;
 
-        System.out.println("perc2: "+ searchedSymptomsPercentageTotal);
+        System.out.println("percentage Total: "+ searchedSymptomsPercentageTotal);
     }
 
 
