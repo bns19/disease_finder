@@ -1,5 +1,7 @@
 package nl.bioinf.diseasefinderSpring.domain;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -15,6 +17,7 @@ public class SearchHistory {
     private User user;
 
     @NotNull
+    @Type(type="text")
     private String query;
 
     @NotNull

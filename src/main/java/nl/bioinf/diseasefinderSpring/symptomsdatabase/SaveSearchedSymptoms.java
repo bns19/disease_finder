@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import javax.xml.soap.Text;
 import java.time.LocalDateTime;
 
 /**
@@ -26,6 +27,7 @@ public class SaveSearchedSymptoms {
         }
 
     public void saveSymptoms(String symptoms) {
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
