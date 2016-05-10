@@ -25,7 +25,7 @@ public class LoadSearchedSymptoms {
     }
 
     public List<SearchHistory> loadSearchedSymptoms() {
-        List<SearchHistory> searchHistoryRepos;
+        List<SearchHistory> usersHistory;
 
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -33,13 +33,9 @@ public class LoadSearchedSymptoms {
         String username = auth.getName();
 
         User user = userRepository.findByUsername(username);
-
-        searchHistoryRepos = searchHistoryRepository.findByUser_id(user.getId());
-
-        //TODO: gooit nu een null pointerexception als iemand niet is ingelogd, moet nog gefixed worden
-        System.out.println("searchHistoryRepos" + searchHistoryRepos.toString());
-
-        return searchHistoryRepos;
+        System.out.println("eenuser:     "+ user.getId());
+        usersHistory = searchHistoryRepository.findByUser_id(user.getId());
+        return usersHistory;
 
     }
 
