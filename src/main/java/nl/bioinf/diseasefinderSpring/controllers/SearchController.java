@@ -44,7 +44,7 @@ public class SearchController extends WebMvcConfigurerAdapter {
 
         LoadSearchedSymptoms loadHistory = new LoadSearchedSymptoms();
         List<SearchHistory> searchHistory = loadHistory.loadSearchedSymptoms();
-
+        System.out.println(searchHistory);
         return searchHistory;
     }
 

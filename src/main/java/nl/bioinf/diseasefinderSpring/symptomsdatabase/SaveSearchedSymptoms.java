@@ -30,9 +30,7 @@ public class SaveSearchedSymptoms {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
-
         User user = userRepository.findByUsername(username);
-
         SearchHistory searchedsymptoms = new SearchHistory();
         searchedsymptoms.setUser(user);
         searchedsymptoms.setCreatedAt(LocalDateTime.now());

@@ -22,20 +22,34 @@ public class LoadSearchedSymptoms {
 
     public List<SearchHistory> loadSearchedSymptoms() {
         List mySQLSearchHistory = null;
+        List<SearchHistory> searchHistoryRepos = null;
+
+        Object userid;
+        User user;
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         String username = auth.getName();
-        List<SearchHistory> searchHistoryRepos = null;
-        User user = userRepository.findByUsername(username);
-        System.out.println(user);
+        if (username == null){
+           // searchHistoryRepos = searchHistoryRepository.findByUser_id("NULL"));
+        }
+
+        else{
+            user = userRepository.findByUsername(username);
+            searchHistoryRepos = searchHistoryRepository.findByUser_id(user.getId());
+        }
+
+        System.out.println(username+"!!!!");
+
         try {
-           searchHistoryRepos = searchHistoryRepository.findByUser_id(user.getId());
-        } catch(NullPointerException n) {}
+
+        } catch(NullPointerException n) {
+            System.out.println("hiergaatietsfout");
+        }
         //List<SearchHistory> searchHistoryRepos = searchHistoryRepository.findByUser_id(user.getId());
 
         //TODO: gooit nu een null pointerexception als iemand niet is ingelogd, moet nog gefixed worden
-
+        System.out.println(searchHistoryRepos);
         return searchHistoryRepos;
 
     }
