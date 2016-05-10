@@ -1,7 +1,40 @@
 
+
+
+function createTree(){
+
+var treeData = [
+    {
+        "name": "Top Level",
+        "parent": "null",
+        "children": [
+            {
+                "name": "Level 2: A",
+                "parent": "Top Level",
+                "children": [
+                    {
+                        "name": "Son of A",
+                        "parent": "Level 2: A"
+                    },
+                    {
+                        "name": "Daughter of A",
+                        "parent": "Level 2: A"
+                    }
+                ]
+            },
+            {
+                "name": "Level 2: B",
+                "parent": "Top Level"
+            }
+        ]
+    }
+];
+
+
+// ************** Generate the tree diagram	 *****************
 var margin = {top: 20, right: 120, bottom: 20, left: 120},
     width = 960 - margin.right - margin.left,
-    height = 800 - margin.top - margin.bottom;
+    height = 500 - margin.top - margin.bottom;
 
 var i = 0,
     duration = 750,
@@ -19,26 +52,13 @@ var svg = d3.select("body").append("svg")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.json("/mbostock/raw/4063550/flare.json", function(error, flare) {
-    if (error) throw error;
+root = treeData[0];
+root.x0 = height / 2;
+root.y0 = 0;
 
-    root = flare;
-    root.x0 = height / 2;
-    root.y0 = 0;
+update(root);
 
-    function collapse(d) {
-        if (d.children) {
-            d._children = d.children;
-            d._children.forEach(collapse);
-            d.children = null;
-        }
-    }
-
-    root.children.forEach(collapse);
-    update(root);
-});
-
-d3.select(self.frameElement).style("height", "800px");
+d3.select(self.frameElement).style("height", "500px");
 
 function update(source) {
 
@@ -64,7 +84,7 @@ function update(source) {
         .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
     nodeEnter.append("text")
-        .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
+        .attr("x", function(d) { return d.children || d._children ? -13 : 13; })
         .attr("dy", ".35em")
         .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
         .text(function(d) { return d.name; })
@@ -76,7 +96,7 @@ function update(source) {
         .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
 
     nodeUpdate.select("circle")
-        .attr("r", 4.5)
+        .attr("r", 10)
         .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
     nodeUpdate.select("text")
@@ -137,4 +157,5 @@ function click(d) {
         d._children = null;
     }
     update(d);
+}
 }

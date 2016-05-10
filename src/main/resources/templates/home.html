@@ -2,12 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="includes/header :: head">
-    <title>Title</title>
+    <title>DiseaseFinder</title>
 </head>
 
 <body background="https://hirewallpapers.com/wp-content/uploads/2016/02/light_blue_1920x1080_wallpaper.jpg">
-<!--<div class="header">header</div>-->
-
 
 <menu th:replace="includes/menu :: menu"></menu>
 
@@ -40,10 +38,10 @@
                         <form>
                             <input type="text" id="symptoms" name="symptoms"/>
                             <button id="searchButton" name="searchButton" onclick="sendSymptoms(symptoms.value);"
-                                    type="button">
-                                Search button
+                                    type="button"> Search
                             </button>
                         </form>
+
                         <div id="event_result">Select symptoms on the right side of the page.</div>
                         <button id="search-button" class="button btn btn-info">Search for diseases</button>
                         <div id="ontology-tree" class="demo" style="margin-top:2em;"></div>
@@ -78,56 +76,11 @@
                 </ul>
             </div>
             <div class="modal-body">
-                <div id="myTabContent" class="tab-content">
+                    <div id="myTabContent" class="tab-content">
+                        <login th:replace="includes/login :: login"></login>
 
-                    <div class="tab-pane fade active in" id="signin">
-                        <table>
-                            <form th:action="@{/login}" method="post">
-                                <tr>
-                                    <td><label> User Name : <input type="text" name="username"/> </label></td>
-                                </tr>
-                                <tr>
-                                    <td><label> Password: <input type="password" name="password"/> </label></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="submit" value="Sign In"/></td>
-                                </tr>
-                            </form>
-                        </table>
-                    </div>
                     <div class="tab-pane fade" id="signup">
-                        <form action="#" th:action="@{/form}" th:object="${user}" method="post">
-                            <table>
-
-                                <tr>
-                                    <td>Username:*</td>
-                                    <td><input type="text" th:field="*{username}"/></td>
-                                    <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username</td>
-                                </tr>
-                                <tr>
-                                    <td>Email:*</td>
-                                    <td><input type="email" th:field="*{email}"/></td>
-                                    <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email</td>
-                                </tr>
-                                <tr>
-                                    <td>Password:*</td>
-                                    <td><input type="password" th:field="*{password}"/></td>
-                                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password</td>
-                                </tr>
-                                <tr>
-                                    <td>Confirm password:*</td>
-                                    <td><input type="password" th:field="*{confirmPassword}"/></td>
-                                    <td th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">confirm password</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <button type="submit">Submit</button>
-                                    </td>
-                                </tr>
-
-                            </table>
-                        </form>
-
+                        <register th:replace="includes/register :: register"></register>
                     </div>
                 </div>
             </div>
@@ -141,11 +94,8 @@
 </div>
 </body>
 
-<subtree th:replace="includes/subtree :: tree">
-    <title>DITDIT</title>
-</subtree>
+<subtree th:replace="includes/subtree :: tree"></subtree>
 
-<footer th:replace="includes/footer :: foot">
-    <title>Title</title>
-</footer>
+<footer th:replace="includes/footer :: foot"></footer>
+
 </html>
