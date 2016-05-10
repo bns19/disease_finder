@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -55,7 +56,7 @@ public class SearchController extends WebMvcConfigurerAdapter {
 
         LoadSearchedSymptoms loadHistory = new LoadSearchedSymptoms(userRepository, searchHistoryRepository);
         List<SearchHistory> searchHistory = loadHistory.loadSearchedSymptoms();
-        System.out.println(searchHistory);
+
         return searchHistory;
     }
 
