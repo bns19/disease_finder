@@ -57,15 +57,13 @@
                 </div>
 
                 <div role="tabpanel" class="tab-pane" id="historytab">
-                    <navmenu th:replace="includes/searchhistory :: showsearchhis"></navmenu>
+                    <searchhistory th:replace="includes/searchhistory :: showsearchhis"></searchhistory>
                 </div>
-
 
             </div>
 
         </div>
     </div>
-
 
 </div>
 <div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
@@ -142,6 +140,10 @@
     </div>
 </div>
 </body>
+
+<subtree th:replace="includes/subtree :: tree">
+    <title>DITDIT</title>
+</subtree>
 
 <footer th:replace="includes/footer :: foot">
     <title>Title</title>

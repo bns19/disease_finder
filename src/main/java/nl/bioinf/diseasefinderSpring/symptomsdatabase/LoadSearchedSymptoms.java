@@ -4,6 +4,7 @@ import nl.bioinf.diseasefinderSpring.domain.SearchHistory;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.User;
 import nl.bioinf.diseasefinderSpring.domain.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -14,42 +15,30 @@ import java.util.List;
  */
 public class LoadSearchedSymptoms {
 
-    SearchHistoryRepository searchHistoryRepository;
     UserRepository userRepository;
+    SearchHistoryRepository searchHistoryRepository;
 
-    public LoadSearchedSymptoms() {
+    @Autowired
+    public LoadSearchedSymptoms(UserRepository userRepository, SearchHistoryRepository searchHistoryRepository) {
+        this.userRepository = userRepository;
+        this.searchHistoryRepository = searchHistoryRepository;
     }
 
     public List<SearchHistory> loadSearchedSymptoms() {
-        List mySQLSearchHistory = null;
-        List<SearchHistory> searchHistoryRepos = null;
+        List<SearchHistory> searchHistoryRepos;
 
-        Object userid;
-        User user;
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         String username = auth.getName();
-        if (username == null){
-           // searchHistoryRepos = searchHistoryRepository.findByUser_id("NULL"));
-        }
 
-        else{
-            user = userRepository.findByUsername(username);
-            searchHistoryRepos = searchHistoryRepository.findByUser_id(user.getId());
-        }
+        User user = userRepository.findByUsername(username);
 
-        System.out.println(username+"!!!!");
-
-        try {
-
-        } catch(NullPointerException n) {
-            System.out.println("hiergaatietsfout");
-        }
-        //List<SearchHistory> searchHistoryRepos = searchHistoryRepository.findByUser_id(user.getId());
+        searchHistoryRepos = searchHistoryRepository.findByUser_id(user.getId());
 
         //TODO: gooit nu een null pointerexception als iemand niet is ingelogd, moet nog gefixed worden
-        System.out.println(searchHistoryRepos);
+        System.out.println("searchHistoryRepos" + searchHistoryRepos.toString());
+
         return searchHistoryRepos;
 
     }

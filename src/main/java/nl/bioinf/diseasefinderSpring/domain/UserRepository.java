@@ -8,6 +8,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface UserRepository extends PagingAndSortingRepository<User, Long> {
 
 
-    public User findByUsername(String username);
+    User findByUsername(String username);
 
 }

@@ -5,7 +5,9 @@ package nl.bioinf.diseasefinderSpring.controllers;
  */
 
 import nl.bioinf.diseasefinderSpring.domain.SearchHistory;
+import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.User;
+import nl.bioinf.diseasefinderSpring.domain.UserRepository;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.LoadSearchedSymptoms;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,15 @@ import java.util.List;
 @Controller
 public class SearchController extends WebMvcConfigurerAdapter {
 
+
+    UserRepository userRepository;
+    SearchHistoryRepository searchHistoryRepository;
+
+    @Autowired
+    public SearchController(UserRepository userRepository, SearchHistoryRepository searchHistoryRepository) {
+        this.userRepository = userRepository;
+        this.searchHistoryRepository = searchHistoryRepository;
+    }
     /**
      * Make the jdbcTemplate usable in the class.
      * This is the database connector.
@@ -42,7 +53,7 @@ public class SearchController extends WebMvcConfigurerAdapter {
 
         session.setAttribute("mySessionAttribute", "someValue");
 
-        LoadSearchedSymptoms loadHistory = new LoadSearchedSymptoms();
+        LoadSearchedSymptoms loadHistory = new LoadSearchedSymptoms(userRepository, searchHistoryRepository);
         List<SearchHistory> searchHistory = loadHistory.loadSearchedSymptoms();
         System.out.println(searchHistory);
         return searchHistory;
