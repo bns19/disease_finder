@@ -1,5 +1,7 @@
 package nl.bioinf.diseasefinderSpring.controllers;
 
+import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOFileLoader;
+import nl.bioinf.diseasefinderSpring.treehandler.AutoCompleteSystem;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

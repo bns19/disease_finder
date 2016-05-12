@@ -4,7 +4,7 @@
  * Created by bnsikkema on 8-4-16.
  * Part of code created by mslofstra
  */
-package nl.bioinf.diseasefinderSpring.controllers;
+package nl.bioinf.diseasefinderSpring.symptomsdatabase;
 
 import nl.bioinf.diseasefinderSpring.disease.Disease;
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;

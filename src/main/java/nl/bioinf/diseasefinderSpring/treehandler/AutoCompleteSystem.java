@@ -1,4 +1,4 @@
-package nl.bioinf.diseasefinderSpring.controllers;
+package nl.bioinf.diseasefinderSpring.treehandler;
 
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOTerm;
 import org.json.JSONArray;

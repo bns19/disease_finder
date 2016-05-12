@@ -10,6 +10,7 @@ import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.UserRepository;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SaveSearchedSymptoms;
+import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomProcessor;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomsCalculationInformation;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,4 @@
-package nl.bioinf.diseasefinderSpring.controllers;
-
-import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOFileReader;
-import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOJsonObjectCreator;
+package nl.bioinf.diseasefinderSpring.hpoprocessor;
 
 import java.util.HashMap;
 
