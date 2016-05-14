@@ -1,18 +1,7 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head th:replace="includes/header :: head">
-</head>
-
-<body>
-<div class="textcon">
-
-    <div class="menu">
-
-    </div>
-
+<registerform th:fragment="register" xmlns:th="http://www.w3.org/1999/xhtml">
     <form action="#" th:action="@{/form}" th:object="${user}" method="post">
         <table>
+
             <tr>
                 <td>Username:*</td>
                 <td><input type="text" th:field="*{username}"/></td>
@@ -38,10 +27,7 @@
                     <button type="submit">Submit</button>
                 </td>
             </tr>
+
         </table>
     </form>
-
-</div>
-</body>
-<footer th:replace="includes/footer :: foot"></footer>
-</html>
+</registerform>
