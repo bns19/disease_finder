@@ -46,7 +46,6 @@ public class WebController extends WebMvcConfigurerAdapter {
      */
     @RequestMapping(value = "/form", method = RequestMethod.POST)
     public String checkPersonInfo(@Valid final User user, final BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors());
             return "form";
@@ -61,7 +60,7 @@ public class WebController extends WebMvcConfigurerAdapter {
             user.setCreatedAt(LocalDateTime.now());
             userRepository.save(user);
 
-            return "/login";
+            return "/home";
         }
         return "/form";
 
