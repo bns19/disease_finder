@@ -60,7 +60,7 @@ public class WebController extends WebMvcConfigurerAdapter {
             user.setCreatedAt(LocalDateTime.now());
             userRepository.save(user);
 
-            return "/home";
+            return "/login";
         }
         return "/form";
 

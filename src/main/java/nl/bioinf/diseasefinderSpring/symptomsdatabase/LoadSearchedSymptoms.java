@@ -35,8 +35,18 @@ public class LoadSearchedSymptoms {
         User user = userRepository.findByUsername(username);
         System.out.println("eenuser:     "+ user.getId());
         usersHistory = searchHistoryRepository.findByUser_id(user.getId());
+
+//        procesRetrievedHistory(usersHistory);
         return usersHistory;
 
     }
+
+//    private void procesRetrievedHistory(List usersHistory) {
+//        for (int i = 0; usersHistory.size() > i; i++) {
+//            Object o = usersHistory.get(i);
+//
+//        }
+//
+//    }
 
 }
