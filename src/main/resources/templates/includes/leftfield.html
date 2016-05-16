@@ -1,10 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<leftfield>
 
-</body>
-</html>
+    <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id="history">
+        <div role="tabpanel">
+
+            <!-- if customer is loggedin-->
+            <div th:if="${#httpServletRequest.remoteUser}">
+                <navmenu th:replace="includes/navmenu :: loggedin"></navmenu>
+            </div>
+
+            <!-- if customer is not loggedin-->
+            <div th:if="${#httpServletRequest.remoteUser == null}">
+                <navmenu th:replace="includes/navmenu :: notloggedin"></navmenu>
+            </div>
+
+            <!--Tab panes-->
+            <div class="tab-content" id="tabcontent">
+                <div role="tabpanel" class="tab-pane active" id="treetab">
+                    <br/><br/>
+                    <div id="discriptionTrees">
+
+
+                    </div>
+                    <h2>Select symptoms</h2>
+                    <div>
+                        <form>
+                            <input type="text" id="symptoms" name="symptoms"/>
+                            <button id="searchButton" name="searchButton" onclick="sendSymptoms(symptoms.value);"
+                                    type="button"> Search
+                            </button>
+                        </form>
+
+                        <div id="event_result">Select symptoms on the right side of the page.</div>
+                        <button id="search-button" class="button btn btn-info">Search for diseases</button>
+                        <div id="ontology-tree" class="demo" style="margin-top:2em;"></div>
+
+                        <!--tree!!!!!!!!!!!!!!!!!!-->
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="resultTab">
+                    <br/><br/>
+                    Click in the search-tab on the search button to get results here.
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="historytab">
+                    <searchhistory th:replace="includes/searchhistory :: showsearchhis"></searchhistory>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</leftfield>
