@@ -82,7 +82,7 @@ public class User {
         this.confirmPassword = confirmPassword;
         this.email = email;
         this.authority = authority;
-        this.enabled = false;
+        this.enabled = true;
         this.role = role;
         this.createdAt = createdAt;
     }
@@ -104,7 +104,6 @@ public class User {
     }
 
     public String getPassword() {
-        this.password = password;
         checkPassword(); //check
         return password;
     }
@@ -139,11 +138,12 @@ public class User {
     }
 
     public boolean getEnabled() {
-        return enabled;
+        return true;
     }
 
     public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+
+        this.enabled = true;
     }
 
     public LocalDateTime getCreatedAt() {

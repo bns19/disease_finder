@@ -55,6 +55,7 @@ public class WebController extends WebMvcConfigurerAdapter {
 
             user.setPassword(encrypted);
             user.setConfirmPassword(encrypted);
+            user.setEnabled(true);
 
             System.out.println(encrypted);
             user.setCreatedAt(LocalDateTime.now());
