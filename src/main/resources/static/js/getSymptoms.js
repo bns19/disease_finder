@@ -126,7 +126,7 @@ function loadDisease() {
         var idPat = new RegExp(id);
 
         /////////////////////////////////////////////////////////////
-        //// var matchId = localStorage.getItem("ids").match(idPat);
+        // var matchId = localStorage.getItem("ids").match(idPat);
 
         // //make sure, the tab is only created one time
         // if (matchId === null) {
@@ -156,14 +156,15 @@ function loadDisease() {
                 $('.nav-tabs a[href="#resultTab"]').tab('show');
 
                 //////////////////////////////////////////////////////////
-               // remove string from id list, so that it can be opened again
-               //  var idString = localStorage.getItem("ids");
-               //  var firstPart = idString.substring(0, matchId.index);
-               //  var lastPart = idString.substring(matchId.index + id.length, idString.length);
-               //  localStorage.setItem("ids", firstPart + lastPart);
+                // remove string from id list, so that it can be opened again
+                //  var idString = localStorage.getItem("ids");
+                //  var firstPart = idString.substring(0, matchId.index);
+                //  var lastPart = idString.substring(matchId.index + id.length, idString.length);
+                //  localStorage.setItem("ids", firstPart + lastPart);
                 //////////////////////////////////////////////////////////////
 
             }
+        //}
         });
 
 

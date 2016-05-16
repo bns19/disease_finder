@@ -26,11 +26,56 @@
                 </ul>
             </div>
             <div class="modal-body">
-                    <div id="myTabContent" class="tab-content">
-                        <login th:replace="includes/login :: login"></login>
+                <div id="myTabContent" class="tab-content">
 
+                    <div class="tab-pane fade active in" id="signin">
+                        <table>
+                            <form th:action="@{/login}" method="post">
+                                <tr>
+                                    <td><label> User Name : <input type="text" name="username"/> </label></td>
+                                </tr>
+                                <tr>
+                                    <td><label> Password: <input type="password" name="password"/> </label></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="submit" value="Sign In"/></td>
+                                </tr>
+                            </form>
+                        </table>
+                    </div>
                     <div class="tab-pane fade" id="signup">
-                        <register th:replace="includes/register :: register"></register>
+                        <form action="#" th:action="@{/form}" th:object="${user}" method="post">
+                            <table>
+
+                                <tr>
+                                    <td>Username:*</td>
+                                    <td><input type="text" th:field="*{username}"/></td>
+                                    <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username</td>
+                                </tr>
+                                <tr>
+                                    <td>Email:*</td>
+                                    <td><input type="email" th:field="*{email}"/></td>
+                                    <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email</td>
+                                </tr>
+                                <tr>
+                                    <td>Password:*</td>
+                                    <td><input type="password" th:field="*{password}"/></td>
+                                    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password</td>
+                                </tr>
+                                <tr>
+                                    <td>Confirm password:*</td>
+                                    <td><input type="password" th:field="*{confirmPassword}"/></td>
+                                    <td th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">confirm password</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button type="submit">Submit</button>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -41,6 +86,34 @@
             </div>
         </div>
     </div>
+<!--<div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"-->
+     <!--aria-hidden="true">-->
+    <!--<div class="modal-dialog modal-sm">-->
+        <!--<div class="modal-content">-->
+            <!--&lt;!&ndash;<br>&ndash;&gt;-->
+            <!--<div class="bs-example bs-example-tabs">-->
+                <!--<ul id="myTab" class="nav nav-tabs">-->
+                    <!--<li class="active"><a href="#signin" data-toggle="tab">Sign In</a></li>-->
+                    <!--<li class=""><a href="#signup" data-toggle="tab">Register</a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                    <!--<div id="myTabContent" class="tab-content">-->
+                        <!--&lt;!&ndash;<login th:replace="includes/login :: login"></login>&ndash;&gt;-->
+
+                    <!--<div class="tab-pane fade" id="signup">-->
+                        <!---->
+                        <!--&lt;!&ndash;<register th:replace="includes/register :: register"></register>&ndash;&gt;-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<center>-->
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                <!--</center>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 </div>
 </body>
 

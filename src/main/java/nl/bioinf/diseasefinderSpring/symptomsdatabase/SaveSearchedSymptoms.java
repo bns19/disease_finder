@@ -32,7 +32,7 @@ public class SaveSearchedSymptoms {
         User user = userRepository.findByUsername(username);
         SearchHistory searchedsymptoms = new SearchHistory();
         searchedsymptoms.setUser(user);
-        searchedsymptoms.setCreatedAt(LocalDateTime.now());
+        searchedsymptoms.setCreatedAt(LocalDateTime.now().toString());
         searchedsymptoms.setQuery(symptoms);
 
         searchHistoryRepository.save(searchedsymptoms);
