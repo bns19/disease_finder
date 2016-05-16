@@ -26,7 +26,7 @@ public class SaveSearchedSymptoms {
         }
 
     public void saveSymptoms(String symptoms) {
-
+        System.out.println(symptoms+ "hier zijn de symptomen");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = userRepository.findByUsername(username);

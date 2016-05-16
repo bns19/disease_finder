@@ -1,14 +1,16 @@
 <searchhis th:fragment="showsearchhis" xmlns:th="">
-    <h1> History </h1>
+    <h1> your search history </h1>
 
     <div th:if="${#httpServletRequest.remoteUser != null}">
 
         <td th:text="${application.executeHis}">42</td>
         <table>
-            <caption><b>your search history</b></caption>
+            <caption><b></b></caption>
             <tr>
-            <th>Query</th>
-            <th>date</th>
+
+                <td id="historyContent"></td>
+
+
             </tr>
         </table>
     </div>

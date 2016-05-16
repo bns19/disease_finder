@@ -56,12 +56,11 @@ public class SymptomProcessingController {
      */
     @RequestMapping(value = "/sendSymptoms",  method = RequestMethod.POST)
     @ResponseBody
-    public String processInput(final String symptoms) {
-
+    public String processInput(final String symptoms, final String shortSymptoms) {
         SymptomProcessor sp = new SymptomProcessor(symptoms);
 
         SaveSearchedSymptoms saveSymptoms = new SaveSearchedSymptoms(userRepository, searchHistoryRepository);
-        saveSymptoms.saveSymptoms(symptoms);
+        saveSymptoms.saveSymptoms(shortSymptoms);
 
         SymptomsCalculationInformation symptomsCalculationInformation =
                 new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
