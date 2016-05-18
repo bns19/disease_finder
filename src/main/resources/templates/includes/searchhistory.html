@@ -1,46 +1,47 @@
 <searchhis th:fragment="showsearchhis" xmlns:th="">
-    <h1> your search history </h1>
+<h1> your search history </h1>
 
-    <div th:if="${#httpServletRequest.remoteUser != null}">
+<div th:if="${#httpServletRequest.remoteUser != null}">
 
-        <td th:text="${application.executeHis}">42</td>
+    <td th:text="${application.executeHis}">42</td>
 
 
 
-        <!--<table>-->
+    <!--<div>-->
+        <!--<table class="table table-striped">-->
             <!--<tr>-->
                 <!--<th>search query</th>-->
                 <!--<th>date of search</th>-->
-            <!--</tr>-->
-            <!--<td th:text="${search.getQuery()}">A Smoke Test'</td>-->
-            <!--<tr>-->
-                <!--<td th:text="${search.getCreatedAt()}">A Smoke Test'</td>-->
 
+            <!--</tr>-->
+            <!--<tr th:each="searchObject :  ${history}">-->
+                <!--<td th:text="${search.getQuery()}"></td>-->
+                <!--<td th:text="${search.getCreatedAt()}"></td>-->
             <!--</tr>-->
         <!--</table>-->
+    <!--</div>-->
 
-
-        <th:block th:each="search : ${history}">
+    <th:block th:each="search : ${history}">
         <tr>
             <td th:text="${search.getQuery()}">A Smoke Test'</td>
         </tr>
-            <tr>
-                <td th:text="${search.getCreatedAt()}">A Smoke Test'</td>
-            </tr>
+        <tr>
+            <td th:text="${search.getCreatedAt()}">A Smoke Test'</td>
+        </tr>
     </th:block>
 
 
 
 
 
-        <table>
-            <caption><b></b></caption>
-            <tr>
+    <table>
+        <caption><b></b></caption>
+        <tr>
 
-                <td id="historyContent"></td>
+            <td id="historyContent"></td>
 
 
-            </tr>
-        </table>
-    </div>
+        </tr>
+    </table>
+</div>
 </searchhis>
