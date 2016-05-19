@@ -4,8 +4,12 @@
     <div th:if="${#httpServletRequest.remoteUser != null}">
 
         <td th:text="${application.executeHis}">42</td>
-
-            <h1> andere info </h1>
-
+        <table>
+            <caption><b>your search history</b></caption>
+            <tr>
+            <th>Query</th>
+            <th>date</th>
+            </tr>
+        </table>
     </div>
 </searchhis>

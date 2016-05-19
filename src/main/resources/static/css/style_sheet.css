@@ -133,3 +133,20 @@ height: 1000px;
     stroke: #ccc;
     stroke-width: 2px;
 }
+
+.subtreebox {
+    margin: auto;
+    border: 1px solid #808080;
+    height: 80%;
+    width:100%;
+    background-color: white;
+    padding-right: 30px;
+    padding-bottom: 0px;
+    padding-left: 30px;
+    margin-left: 10px;
+    margin-top: 0px;
+    border-radius: 5px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    opacity: 0.9;
+}

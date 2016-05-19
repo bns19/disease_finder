@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import javax.xml.soap.Text;
 import java.time.LocalDateTime;
 
 /**
@@ -33,7 +32,7 @@ public class SaveSearchedSymptoms {
         User user = userRepository.findByUsername(username);
         SearchHistory searchedsymptoms = new SearchHistory();
         searchedsymptoms.setUser(user);
-        searchedsymptoms.setCreatedAt(LocalDateTime.now());
+        searchedsymptoms.setCreatedAt(LocalDateTime.now().toString());
         searchedsymptoms.setQuery(symptoms);
 
         searchHistoryRepository.save(searchedsymptoms);
