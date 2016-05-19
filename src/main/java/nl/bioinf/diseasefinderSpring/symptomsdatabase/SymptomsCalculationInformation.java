@@ -1,5 +1,6 @@
 package nl.bioinf.diseasefinderSpring.symptomsdatabase;
 
+import nl.bioinf.diseasefinderSpring.controllers.StatisticalInformation;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.User;
 import nl.bioinf.diseasefinderSpring.domain.UserRepository;
@@ -16,51 +17,55 @@ public class SymptomsCalculationInformation {
     SearchHistoryRepository searchHistoryRepository;
     User user;
 
+    private StatisticalInformation statisticalInformation = new StatisticalInformation();
+
     @Autowired
     public SymptomsCalculationInformation(UserRepository userRepository, SearchHistoryRepository searchHistoryRepository) {
         this.userRepository = userRepository;
         this.searchHistoryRepository = searchHistoryRepository;
     }
 
-    public void calculateSymptomsSearch(){
+    public void calculateSymptomsSearch(String shortSymptoms){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
         user = userRepository.findByUsername(username);
-
-        calculatePercentageOfSymptomsSearchedByUser();
-        calculatePercentageOfSymptomsSearchedByTotal();
-
-    }
-
-    public void calculatePercentageOfSymptomsSearchedByUser(){
-        // Count number of searches total\\
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Long countUser = 0L;
-        System.out.println(auth.getName());
         if (auth.getName() != "anonymousUser") {
-            countUser = searchHistoryRepository.countByUser_id(user.getId());
-
-            // Long countUser = searchHistoryRepository.countByUser_id(user.getId());
-            // Count query that contains ? word
-            Long countQueryUser = searchHistoryRepository.countByQueryContainingAndUser_id("sss", user.getId());
-
-            Long searchedSymptomsPercentageUser = 100 / countUser * countQueryUser;
-
-            System.out.println("percentage User: " + searchedSymptomsPercentageUser);
+            calculatePercentageOfSymptomsSearchedByUser(shortSymptoms);
         }
+
+        //calculatePercentageOfSymptomsSearchedByTotal(shortSymptoms);
     }
 
-    public void calculatePercentageOfSymptomsSearchedByTotal(){
+    private void calculatePercentageOfSymptomsSearchedByUser(String shortSymptoms){
+        // Count number of searches total\\
+        Long totalUserSearches = 0L;
+       // Long countUserSearches = searchHistoryRepository.count();
+
+        totalUserSearches = searchHistoryRepository.countByUser_id(user.getId());
+        this.statisticalInformation.setTotalUserSearches(totalUserSearches);
+        System.out.println(totalUserSearches+" totaal aantal searches bij de user");
+            Long totalSearchesQueryUser = searchHistoryRepository.countByQueryContainingAndUser_id(shortSymptoms, user.getId());
+        this.statisticalInformation.setTotalQuerySearchesUser(totalSearchesQueryUser);
+        System.out.println(totalSearchesQueryUser+" totaal aantal searches van de user van deze specifieke query");
+            double searchedSymptomsPercentageUser = (double)100 / totalUserSearches * totalSearchesQueryUser;
+            this.statisticalInformation.setPercentageQuerySearchesUser(searchedSymptomsPercentageUser);
+            System.out.println("percentage dat deze querie door deze user is gezocht van alle searches van deze user : " + searchedSymptomsPercentageUser);
+
+    }
+
+    private void calculatePercentageOfSymptomsSearchedByTotal(String shortSymptoms){
         // Count number of searches total
-        Long countUsers = searchHistoryRepository.count();
-        // Count query that contains ? word
-        Long countQueryUsers = searchHistoryRepository.countByQueryContaining("sss");
-
-        Long searchedSymptomsPercentageTotal = 100/countUsers*countQueryUsers;
-
-        System.out.println("percentage Total: "+ searchedSymptomsPercentageTotal);
+        Long totalSearches = searchHistoryRepository.count();
+        this.statisticalInformation.setTotalSearches(totalSearches);
+        Long countQueryUsers = searchHistoryRepository.countByQueryContaining(shortSymptoms);
+        this.statisticalInformation.setTotalQuerySearches(countQueryUsers);
+        double searchedSymptomsPercentageTotal = (double) 100/totalSearches*countQueryUsers;
+        this.statisticalInformation.setPercentageQuerySearches(searchedSymptomsPercentageTotal);
     }
 
+    public StatisticalInformation getStatisticalInformation() {
+        return this.statisticalInformation;
+    }
 
 }
