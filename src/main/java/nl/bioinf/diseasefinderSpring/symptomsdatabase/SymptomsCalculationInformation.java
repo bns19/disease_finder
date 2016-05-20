@@ -44,13 +44,12 @@ public class SymptomsCalculationInformation {
 
         totalUserSearches = searchHistoryRepository.countByUser_id(user.getId());
         this.statisticalInformation.setTotalUserSearches(totalUserSearches);
-        System.out.println(totalUserSearches+" totaal aantal searches bij de user");
-            Long totalSearchesQueryUser = searchHistoryRepository.countByQueryContainingAndUser_id(shortSymptoms, user.getId());
+
+        Long totalSearchesQueryUser = searchHistoryRepository.countByQueryContainingAndUser_id(shortSymptoms, user.getId());
         this.statisticalInformation.setTotalQuerySearchesUser(totalSearchesQueryUser);
-        System.out.println(totalSearchesQueryUser+" totaal aantal searches van de user van deze specifieke query");
-            double searchedSymptomsPercentageUser = (double)100 / totalUserSearches * totalSearchesQueryUser;
-            this.statisticalInformation.setPercentageQuerySearchesUser(searchedSymptomsPercentageUser);
-            System.out.println("percentage dat deze querie door deze user is gezocht van alle searches van deze user : " + searchedSymptomsPercentageUser);
+
+        double searchedSymptomsPercentageUser = (double)100 / totalUserSearches * totalSearchesQueryUser;
+        this.statisticalInformation.setPercentageQuerySearchesUser(searchedSymptomsPercentageUser);
 
     }
 
@@ -58,8 +57,10 @@ public class SymptomsCalculationInformation {
         // Count number of searches total
         Long totalSearches = searchHistoryRepository.count();
         this.statisticalInformation.setTotalSearches(totalSearches);
+
         Long countQueryUsers = searchHistoryRepository.countByQueryContaining(shortSymptoms);
         this.statisticalInformation.setTotalQuerySearches(countQueryUsers);
+
         double searchedSymptomsPercentageTotal = (double) 100/totalSearches*countQueryUsers;
         this.statisticalInformation.setPercentageQuerySearches(searchedSymptomsPercentageTotal);
     }
