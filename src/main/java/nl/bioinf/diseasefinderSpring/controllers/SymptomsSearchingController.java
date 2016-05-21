@@ -1,14 +1,17 @@
 package nl.bioinf.diseasefinderSpring.controllers;
 
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOFileLoader;
+import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOJsonObjectCreator;
 import nl.bioinf.diseasefinderSpring.treehandler.AutoCompleteSystem;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by bnsikkema on 18-4-16.
@@ -25,6 +28,5 @@ public class SymptomsSearchingController {
         AutoCompleteSystem acs =  new AutoCompleteSystem(query, collection);
         return acs.getAutoCompleteObject().toString();
     }
-
 
 }
