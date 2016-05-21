@@ -8,30 +8,45 @@
 
     </ul>
 
-    <div>
+    <div id="statistics">
     <p>Global statistics</p>
-    <div>
+
+        <div>
         <table class="table table-striped">
             <tr>
                 <th>Number of total searches</th>
+                <!--if logged in, show statistics beneath-->
                 <th>number of searches by you</th>
                 <th>percentage of searches by you</th>
             </tr>
-
+            <tr>
+                <td th:text="${statistics.getTotalSearches()}"></td>
+                <td th:text="${statistics.getTotalUserSearches()}"></td>
+                <td th:text="${statistics.getPercentageSearchesUser()}"></td>
+            </tr>
 
         </table>
     </div>
 
     <p>query statistics</p>
-    <!--<p th:text="${statistics}"></p>-->
-    <p>This combination of symptoms has the following statistics</p>
+
+        <p>statistics of you're last searched query: </p>  <p th:text="${statistics.getQuery()}"></p>
     <div>
         <table class="table table-striped">
             <tr>
-                <th>search query</th>
-                <th>moment of search</th>
-                <th></th>
+                <th>number of times searched</th>
+                <th>percentage of total searches</th>
+                <!--if logged in, show statistics beneath-->
+                <th>number of times searched by you</th>
+                <th>percentage of your search</th>
             </tr>
+            <tr>
+                <td th:text="${statistics.getTotalQuerySearches()}"></td>
+                <td th:text="${statistics.getPercentageQuerySearches()}"></td>
+                <td th:text="${statistics.getTotalQuerySearchesUser()}"></td>
+                <td th:text="${statistics.getPercentageQuerySearchesUser()}"></td>
+            </tr>
+
 
         </table>
     </div>
