@@ -1,4 +1,4 @@
-<showstatistics>
+<showstatistics xmlns:th="http://www.w3.org/1999/xhtml">
     <ul class="nav nav-tabs" role="tablist" id="tablist">
 
         <li role="presentation" class="active"><a href="#statistics" aria-controls="statistics" role="tab"
@@ -7,4 +7,35 @@
 
 
     </ul>
+
+    <div>
+    <p>Global statistics</p>
+    <div>
+        <table class="table table-striped">
+            <tr>
+                <th>Number of total searches</th>
+                <th>number of searches by you</th>
+                <th>percentage of searches by you</th>
+            </tr>
+
+
+        </table>
+    </div>
+
+    <p>query statistics</p>
+    <!--<p th:text="${statistics}"></p>-->
+    <p>This combination of symptoms has the following statistics</p>
+    <div>
+        <table class="table table-striped">
+            <tr>
+                <th>search query</th>
+                <th>moment of search</th>
+                <th></th>
+            </tr>
+
+        </table>
+    </div>
+
+    </div>
+
 </showstatistics>

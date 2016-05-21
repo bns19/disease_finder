@@ -12,6 +12,7 @@ import nl.bioinf.diseasefinderSpring.domain.UserRepository;
 import nl.bioinf.diseasefinderSpring.security.EncryptPassword;
 //import nl.bioinf.diseasefinderSpring.symptomsdatabase.LoadSearchedSymptoms;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.LoadSearchedSymptoms;
+import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomsCalculationInformation;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -55,6 +56,7 @@ public class WebController extends WebMvcConfigurerAdapter {
         //session.setAttribute("mySessionAttribute", "someValue");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
+
         if (!username.equals("anonymousUser")) {
             LoadSearchedSymptoms loadHistory = new LoadSearchedSymptoms(userRepository, searchHistoryRepository);
             List<SearchHistory> searchHistory = loadHistory.loadSearchedSymptoms();
