@@ -6,16 +6,21 @@
 $(document).ready(initialize);
 function initialize() {
     var symptoms;
+
     localStorage.setItem("ids", "");
     //by aroeters (lists made by mkslofstra)
     $("#ontology-tree").on('changed.jstree', function (e, data) {
+        localStorage.setItem("shortSymptoms", "")
         var i, j, selectedNodes = [], selectedIds = [];
-
+        var shortSymptomsList = []
         //run through all selected nodes
         for (i = 0, j = data.selected.length; i < j; i++) {
             //get the selected node
+
             var selected = data.instance.get_node(data.selected[i]);
+
             if ($.inArray(selected.id, selectedNodes) === -1 && selected.text !== "All") {
+                shortSymptomsList.push(selected.text)
                 selectedNodes.push(selected.text);
                 selectedIds.push(selected.id);
             }
@@ -46,15 +51,19 @@ function initialize() {
             localStorage.setItem("symptoms", selectedNodes);
             localStorage.setItem("selectedIds", selectedIds);
         }
+        var shortSymptomString = shortSymptomsList.toString();
+        localStorage.setItem("shortSymptoms", shortSymptomString)
 
         //Here will be the link between the old tree and the new tree.
         // by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
         $('#event_result').html('Selected symptoms:<br/>');
         for (i = 0; i < selectedIds.length; i++) {
+
             var this_node = $("#ontology-tree").jstree("get_node", selectedIds[i]);
             var icon = this_node.icon;
             $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
                 + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button>");
+
         }
         $(".dontClick").click(function () {
             $("#ontology-tree").jstree("deselect_node", $(this).data("close"));
@@ -91,7 +100,7 @@ function sendSymptoms(symptoms) {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     //use the mapped controller
-    $.post(controller, {"symptoms": localStorage.getItem("symptoms"), _csrf: token}, function (diseases) {
+    $.post(controller, {"symptoms": localStorage.getItem("symptoms"), "shortSymptoms": localStorage.getItem("shortSymptoms"), _csrf: token}, function (diseases) {
 
         $("#resultTab").text("");
         $("#resultTab").append("<br/><br/><ul>");
