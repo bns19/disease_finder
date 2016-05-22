@@ -17,13 +17,7 @@ import java.util.HashMap;
 public class SecondaryTreeBuilder {
 
     public String buildsecondaryTree(String requestedNodeChildren, HashMap collection) throws IOException, JSONException {
-        String icon = "img/human.png";
         HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
-        HashMap<String, String> icons = new HashMap<String, String>();
-        icons.put("HP:0000005", "img/dna.png");
-        icons.put("HP:0000118", "img/human.png");
-        icons.put("HP:0040006", "img/skull.png");
-        icons.put("HP:0012823", "img/clock.png");
         String jsonChildren = "";
         if (requestedNodeChildren.equals("#")) {
             jsonChildren = "["
@@ -37,16 +31,13 @@ public class SecondaryTreeBuilder {
             JSONArray children = new JSONArray();
             for (HPOTerm child : parent.getChildren()) {
                 JSONObject childNode = new JSONObject(hj.createSubTree(child, parent.getId()));
-                if (icons.containsKey(child.getId())) {
-                    ;
-                } else {
-                    //childNode.put("icon", request.getParameter("icon"));
-                    childNode.put("icon", icon);
-                }
+
                 children.put(childNode);
             }
             jsonChildren = children.toString();
         }
+
+        System.out.println(jsonChildren);
         return jsonChildren;
     }
 
