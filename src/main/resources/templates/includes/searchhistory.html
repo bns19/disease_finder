@@ -3,11 +3,11 @@
 
 <div th:if="${#httpServletRequest.remoteUser != null}">
 
-    <td th:text="${application.executeHis}">42</td>
+    <td th:text="${application.executeHis}" >42</td>
 
 
 
-    <div>
+    <div id="userHistory">
         <table class="table table-striped">
             <tr>
                 <th>search query</th>

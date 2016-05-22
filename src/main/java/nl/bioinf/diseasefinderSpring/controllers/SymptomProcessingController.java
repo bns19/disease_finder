@@ -65,7 +65,7 @@ public class SymptomProcessingController {
 
         SymptomsCalculationInformation symptomsCalculationInformation =
                 new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
-        symptomsCalculationInformation.calculateSymptomsSearch(shortSymptoms);
+        symptomsCalculationInformation.calculateSymptomsSearch();
         model.addAttribute("statistics", symptomsCalculationInformation.getStatisticalInformation());
         return sp.getDiseases();
     }

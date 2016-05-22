@@ -8,14 +8,12 @@ function initialize() {
             'data': {
                 'url': url,
                 'data': function(node) {
-                    console.log(node.icon)
                     return {'id': node.id, 'icon':node.icon};
                 }
             }
         },
         'plugins': ["checkbox", "search"]
     });
-
     var to = false;
     $('#search-symptom').keyup(function() {
         if (to) {
@@ -23,7 +21,6 @@ function initialize() {
         }
         to = setTimeout(function() {
             var v = $('#search-symptom').val();
-
             $('#ontology-tree').jstree(true).search(v);
         }, 250);
     });

@@ -6,13 +6,14 @@ package nl.bioinf.diseasefinderSpring.controllers;
 public class StatisticalInformation {
 
     private Long totalSearches;
-    private Long totalQuerySearches;
-    private Long totalUserSearches;
-    private Long totalQuerySearchesUser;
+    private Long totalQuerySearches = 0L;
+    private Long totalUserSearches = 0L;
+    private Long totalQuerySearchesUser = 0L;
     private double percentageQuerySearches;
-    private double PercentageQuerySearchesUser;
-    private double PercentageQuerySearchesUserOverAll;
-
+    private double percentageSearchesUser = 0;
+    private double PercentageQuerySearchesUser = 0;
+    private double PercentageQuerySearchesUserOverAll = 0;
+    private String query;
 
     public Long getTotalSearches() {
         return totalSearches;
@@ -54,6 +55,14 @@ public class StatisticalInformation {
         this.percentageQuerySearches = percentageQuerySearches;
     }
 
+    public double getPercentageSearchesUser() {
+        return percentageSearchesUser;
+    }
+
+    public void setPercentageSearchesUser(double percentageSearchesUser) {
+        this.percentageSearchesUser = percentageSearchesUser;
+    }
+
     public double getPercentageQuerySearchesUser() {
         return PercentageQuerySearchesUser;
     }
@@ -68,5 +77,13 @@ public class StatisticalInformation {
 
     public void setPercentageQuerySearchesUserOverAll(double percentageQuerySearchesUserOverAll) {
         PercentageQuerySearchesUserOverAll = percentageQuerySearchesUserOverAll;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
     }
 }

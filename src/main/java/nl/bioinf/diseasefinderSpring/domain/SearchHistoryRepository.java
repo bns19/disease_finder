@@ -10,6 +10,7 @@ public interface SearchHistoryRepository extends PagingAndSortingRepository<Sear
 
     List<SearchHistory> findByUser_id(Long userId);
     Iterable<SearchHistory> findAll();
+    SearchHistory findById(Long id);
     long count();
     long countByUser_id(Long userId);
     long countByQueryContaining(String query);

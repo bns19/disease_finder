@@ -1,3 +1,4 @@
+console.log("there")
 
 function createTab() {
     $("#tablist").append('<li role="presentation" class="active"><a href="#searchTab" ' +

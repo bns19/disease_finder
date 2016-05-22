@@ -57,6 +57,11 @@ public class WebController extends WebMvcConfigurerAdapter {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
+        SymptomsCalculationInformation symptomsCalculationInformation =
+                new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
+        symptomsCalculationInformation.calculateSymptomsSearch();
+        model.addAttribute("statistics", symptomsCalculationInformation.getStatisticalInformation());
+
         if (!username.equals("anonymousUser")) {
             LoadSearchedSymptoms loadHistory = new LoadSearchedSymptoms(userRepository, searchHistoryRepository);
             List<SearchHistory> searchHistory = loadHistory.loadSearchedSymptoms();

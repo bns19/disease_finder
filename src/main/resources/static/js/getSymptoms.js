@@ -19,8 +19,6 @@ function initialize() {
 
             var selected = data.instance.get_node(data.selected[i]);
 
-            console.log("selected: " + selected)
-
             if ($.inArray(selected.id, selectedNodes) === -1 && selected.text !== "All") {
                 shortSymptomsList.push(selected.text)
                 selectedNodes.push(selected.text);
@@ -28,9 +26,6 @@ function initialize() {
             }
             //get all parents
             parents = selected.parents;
-
-            console.log("parents: " + parents)
-
             //The if makes sure that the parents are more than one, so if it
             //is one word, it will not be divided in characters
             if (parents.length !== 1) {
@@ -39,9 +34,6 @@ function initialize() {
                 $.each(parents, function (index, value) {
                         if ($.inArray(value, selectedNodes) === -1 && value !== "#") {
                             var thisNode = $("#ontology-tree").jstree("get_node", value);
-
-                            console.log("thisNode: " + thisNode)
-
                             if ($.inArray(thisNode.text, selectedNodes) === -1 && thisNode.text !== "All") {
                                 selectedNodes.push(thisNode.text);
                                 selectedIds.push(value);
