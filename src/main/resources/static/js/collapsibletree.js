@@ -1,17 +1,16 @@
 function createTree(data) {
 
-    this.newData = data.replace(/\"|\n/g, "").split(",").reverse();
-    var mainlist = {};
+    createSecondTree(data)
+    //var newData = data.replace(/\"|\n/g, "").split(",").reverse();
+    this.mainlist = [];
 
-    createSecondTree(this.newData);
-
-    printconsoleMain(mainlist);
-
-    function createSecondTree(newData) {
-        for (var i in newData) {
+    // newData zijn de id's van de tree elementen die in de functie gaan
+    function createSecondTree(data) {
+        for (var i in data) {
             var url = "secondTreeBuilder";
 
-            $.get(url, {id: newData[i]}, function (jsonout) {
+            // aanroepen van de connector elke
+            $.get(url, {id: data[i]}, function (jsonout) {
                 executeTree(jsonout);
             });
         }
@@ -23,10 +22,16 @@ function createTree(data) {
         for (var j in jsonout) {
             var objectchild = new childobject(jsonout[j].text, jsonout[j].parent);
 
+            // Hier wordt een childobject gemaakt en gooi ik dit in de children list.
             children.push(objectchild);
         }
 
         var mainobject = new mainl(children);
+        stringl = JSON.stringify(children);
+        console.log("object: " + mainobject)
+        console.log("stringl: " + stringl)
+
+        this.mainlist.concat(stringl);
 
     }
 
@@ -34,15 +39,12 @@ function createTree(data) {
     function childobject(name, parent) {
         this.name = name;
         this.parent = parent;
+
     }
 
     //make an object of the children (instead of list)
     function mainl(mainl) {
-
-        var mainid = 1;
-
-        mainlist[mainid] = JSON.stringify(mainl);
-
+        this.mainl = mainl;
         str = JSON.stringify(mainl);
         console.log(str)
     }
@@ -59,32 +61,32 @@ function createTree(data) {
 
 
 
-var treeData = [
-    {
-        "name": "Top Level",
-        "parent": "null",
-        "children": [
-            {
-                "name": "Level 2: A",
-                "parent": "Top Level",
-                "children": [
-                    {
-                        "name": "Son of A",
-                        "parent": "Level 2: A"
-                    },
-                    {
-                        "name": "Daughter of A",
-                        "parent": "Level 2: A"
-                    }
-                ]
-            },
-            {
-                "name": "Level 2: B",
-                "parent": "Top Level"
-            }
-        ]
-    }
-];
+    var treeData = [
+        {
+            "name": "Top Level",
+            "parent": "null",
+            "children": [
+                {
+                    "name": "Level 2: A",
+                    "parent": "Top Level",
+                    "children": [
+                        {
+                            "name": "Son of A",
+                            "parent": "Level 2: A"
+                        },
+                        {
+                            "name": "Daughter of A",
+                            "parent": "Level 2: A"
+                        }
+                    ]
+                },
+                {
+                    "name": "Level 2: B",
+                    "parent": "Top Level"
+                }
+            ]
+        }
+    ];
 
 
  //************** Generate the tree diagram	 *****************
@@ -240,3 +242,31 @@ var treeData = [
     }
 
 }
+
+//
+//function createTree(data) {
+//
+//    this.newData = data.replace(/\"|\n/g, "").split(",").reverse();
+//
+//    createSecondTree(this.newData);
+//
+//    function createSecondTree(newData) {
+//        var url = "secondTreeBuilder";
+//
+//        $.get(url,
+//            data: newData,
+//            function (jsonout) {
+//                executeTree(jsonout);
+//            });
+//
+//    }
+//
+//
+//    function executeTree(jsonout) {
+//    }
+//
+//
+//    function printconsoleMain(mainlist) {
+//        str = JSON.stringify(mainlist);
+//        console.log("Mainlist: " + str)
+//    }

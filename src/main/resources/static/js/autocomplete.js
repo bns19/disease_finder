@@ -37,14 +37,14 @@ function initialize() {
         },
 
         select: function(e, ui) {
+
+            // Selected item value = ui.item.value
             $.ajax({
                 url: "termsToTree",
                 dataType: "text",
                 data: {"autoCompleteResult": ui.item.value},
                 success: function(data) {
                     data = data.replace(/\[|\]/g, "");
-
-                    console.log("datareplace: " + data)
 
                     var newData = data.replace(/\"|\n/g, "").split(",").reverse();
 
@@ -55,8 +55,11 @@ function initialize() {
 
                         if (count === 1) {
 
-                            //Create the tree
-                            createTree(data);
+                            //create second tree
+                            createTree(newData);
+
+                            //Create the secondary tree field
+                            //createSecondTreeField();
 
                             // to highligt the symptom that is searched for
                             $("#ontology-tree").jstree(true).get_node(newData[0]).li_attr.class = "jstree-search"

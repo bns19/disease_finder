@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by bnsikkema on 18-4-16.
@@ -44,13 +46,25 @@ public class D3TreeController {
 
     @RequestMapping(value = "secondTreeBuilder", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String buildSecondTree(String id) throws IOException {
-        HashMap collection = HPOFileLoader.LoadHPOFile();
-        String requestedNodeChildren = id;
-        SecondaryTreeBuilder secTreeBuilder = new SecondaryTreeBuilder();
-        String jsonChildren = secTreeBuilder.buildsecondaryTree(requestedNodeChildren, collection);
-        System.out.println("JSONCHILD: " + jsonChildren);
-        return jsonChildren;
+    public List buildSecondTree(String id) throws IOException {
+
+        ArrayList<String> jsonChildrenList = new ArrayList<String>();
+
+
+            String jsonChildren = "";
+
+            HashMap collection = HPOFileLoader.LoadHPOFile();
+            String requestedNodeChildren = id;
+            SecondaryTreeBuilder secTreeBuilder = new SecondaryTreeBuilder();
+            jsonChildren = secTreeBuilder.buildsecondaryTree(requestedNodeChildren, collection);
+
+            System.out.println("JSONCHILD: " + jsonChildren);
+
+            jsonChildrenList.add(jsonChildren);
+
+
+
+        return jsonChildrenList;
     }
 }
 
