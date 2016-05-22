@@ -5,6 +5,7 @@ import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOFileLoader;
 import nl.bioinf.diseasefinderSpring.treehandler.PrimaryTreeBuilder;
 import nl.bioinf.diseasefinderSpring.treehandler.SecondaryTreeBuilder;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,7 +47,7 @@ public class D3TreeController {
 
     @RequestMapping(value = "secondTreeBuilder", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public List buildSecondTree(String id) throws IOException {
+    public List buildSecondTree(String id) throws IOException, JSONException {
 
         ArrayList<String> jsonChildrenList = new ArrayList<String>();
 
