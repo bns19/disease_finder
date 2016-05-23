@@ -1,11 +1,14 @@
 function createTree(data) {
 
+    document.getElementById("demo").innerHTML = "Hello World";
+
     createSecondTree(data)
     //var newData = data.replace(/\"|\n/g, "").split(",").reverse();
     this.mainlist = [];
 
     // newData zijn de id's van de tree elementen die in de functie gaan
     function createSecondTree(data) {
+        console.log(data)
         for (var i in data) {
             var url = "secondTreeBuilder";
 
