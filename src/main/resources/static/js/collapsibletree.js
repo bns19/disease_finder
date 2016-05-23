@@ -1,5 +1,7 @@
 function createTree(data) {
 
+    console.log("DATA: " + data)
+
     createSecondTree(data)
     //var newData = data.replace(/\"|\n/g, "").split(",").reverse();
     this.mainlist = [];
@@ -10,7 +12,7 @@ function createTree(data) {
             var url = "secondTreeBuilder";
 
             // aanroepen van de connector elke
-            $.get(url, {id: data[i]}, function (jsonout) {
+            $.get(url, {id: data}, function (jsonout) {
                 executeTree(jsonout);
             });
         }

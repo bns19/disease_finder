@@ -56,7 +56,7 @@ function initialize() {
                         if (count === 1) {
 
                             //create second tree
-                            createTree(newData);
+                            createTree(data);
 
                             //Create the secondary tree field
                             //createSecondTreeField();
