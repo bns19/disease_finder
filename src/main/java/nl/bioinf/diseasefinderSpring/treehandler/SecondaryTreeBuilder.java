@@ -16,7 +16,11 @@ import java.util.HashMap;
  */
 public class SecondaryTreeBuilder {
 
-    public String buildsecondaryTree(String requestedNodeChildren, HashMap collection) throws IOException, JSONException {
+    public String buildsecondaryTree(String requestedNodeChildren, final HashMap collection) throws IOException, JSONException {
+        String icon = "glyphicon glyphicon-user";
+
+        requestedNodeChildren = requestedNodeChildren.replaceAll("^\"|\"$", "");
+
         HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
         String jsonChildren = "";
         if (requestedNodeChildren.equals("#")) {

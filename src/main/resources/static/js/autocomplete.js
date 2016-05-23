@@ -44,10 +44,11 @@ function initialize() {
                 dataType: "text",
                 data: {"autoCompleteResult": ui.item.value},
                 success: function(data) {
+
                     data = data.replace(/\[|\]/g, "");
+                    createTree(data);
 
                     var newData = data.replace(/\"|\n/g, "").split(",").reverse();
-
                     var count = newData.length;
 
                     window.setInterval(function() {
