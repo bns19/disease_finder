@@ -1,0 +1,56 @@
+<showstatistics xmlns:th="http://www.w3.org/1999/xhtml">
+    <ul class="nav nav-tabs" role="tablist" id="tablist">
+
+        <li role="presentation" class="active"><a href="#statistics" aria-controls="statistics" role="tab"
+                                                  data-toggle="tab" class="tab">statistics</a>
+        </li>
+
+
+    </ul>
+
+    <div id="statistics">
+    <p>Global statistics</p>
+
+        <div>
+        <table class="table table-striped">
+            <tr>
+                <th>Number of total searches</th>
+                <!--if logged in, show statistics beneath-->
+                <th>number of searches by you</th>
+                <th>percentage of searches by you</th>
+            </tr>
+            <tr>
+                <td th:text="${statistics.getTotalSearches()}"></td>
+                <td th:text="${statistics.getTotalUserSearches()}"></td>
+                <td th:text="${statistics.getPercentageSearchesUser()}"></td>
+            </tr>
+
+        </table>
+    </div>
+
+    <p>query statistics</p>
+
+        <p>statistics of you're last searched query: </p>  <p th:text="${statistics.getQuery()}"></p>
+    <div>
+        <table class="table table-striped">
+            <tr>
+                <th>number of times searched</th>
+                <th>percentage of total searches</th>
+                <!--if logged in, show statistics beneath-->
+                <th>number of times searched by you</th>
+                <th>percentage of your search</th>
+            </tr>
+            <tr>
+                <td th:text="${statistics.getTotalQuerySearches()}"></td>
+                <td th:text="${statistics.getPercentageQuerySearches()}"></td>
+                <td th:text="${statistics.getTotalQuerySearchesUser()}"></td>
+                <td th:text="${statistics.getPercentageQuerySearchesUser()}"></td>
+            </tr>
+
+
+        </table>
+    </div>
+
+    </div>
+
+</showstatistics>

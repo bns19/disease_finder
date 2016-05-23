@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -56,18 +57,16 @@ public class SymptomProcessingController {
      */
     @RequestMapping(value = "/sendSymptoms",  method = RequestMethod.POST)
     @ResponseBody
-    public String processInput(final String symptoms) {
-
+    public String processInput(Model model, final String symptoms, final String shortSymptoms) {
         SymptomProcessor sp = new SymptomProcessor(symptoms);
 
         SaveSearchedSymptoms saveSymptoms = new SaveSearchedSymptoms(userRepository, searchHistoryRepository);
-        saveSymptoms.saveSymptoms(symptoms);
+        saveSymptoms.saveSymptoms(shortSymptoms);
 
         SymptomsCalculationInformation symptomsCalculationInformation =
                 new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
-
         symptomsCalculationInformation.calculateSymptomsSearch();
-
+        model.addAttribute("statistics", symptomsCalculationInformation.getStatisticalInformation());
         return sp.getDiseases();
     }
 

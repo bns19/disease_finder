@@ -1,11 +1,14 @@
 package nl.bioinf.diseasefinderSpring.symptomsdatabase;
 
+import nl.bioinf.diseasefinderSpring.controllers.StatisticalInformation;
+import nl.bioinf.diseasefinderSpring.domain.SearchHistory;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.User;
 import nl.bioinf.diseasefinderSpring.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import java.text.DecimalFormat;
 
 /**
  * Created by henridupon on 5/5/2016.
@@ -16,6 +19,8 @@ public class SymptomsCalculationInformation {
     SearchHistoryRepository searchHistoryRepository;
     User user;
 
+    private StatisticalInformation statisticalInformation = new StatisticalInformation();
+
     @Autowired
     public SymptomsCalculationInformation(UserRepository userRepository, SearchHistoryRepository searchHistoryRepository) {
         this.userRepository = userRepository;
@@ -23,44 +28,81 @@ public class SymptomsCalculationInformation {
     }
 
     public void calculateSymptomsSearch(){
+
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
+        Long totalSearches =  searchHistoryRepository.count();
+        SearchHistory historyObj = searchHistoryRepository.findById(totalSearches);
+        String lastSearchedQuery;
+        if (historyObj == null) {
+            lastSearchedQuery = "";
+        } else {
+            lastSearchedQuery = historyObj.getQuery();
+        }
         user = userRepository.findByUsername(username);
+        if (auth.getName() != "anonymousUser") {
+            calculatePercentageOfSymptomsSearchedByUser(lastSearchedQuery);
+        }
 
-        calculatePercentageOfSymptomsSearchedByUser();
-        calculatePercentageOfSymptomsSearchedByTotal();
 
+        calculatePercentageOfSymptomsSearchedByTotal(lastSearchedQuery);
     }
 
-    public void calculatePercentageOfSymptomsSearchedByUser(){
+    private void calculatePercentageOfSymptomsSearchedByUser(String lastSearchedQuery){
         // Count number of searches total\\
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Long countUser = 0L;
-        System.out.println(auth.getName());
-        if (auth.getName() != "anonymousUser") {
-            countUser = searchHistoryRepository.countByUser_id(user.getId());
+        Long totalUserSearches = 0L;
+       // Long countUserSearches = searchHistoryRepository.count();
 
-            // Long countUser = searchHistoryRepository.countByUser_id(user.getId());
-            // Count query that contains ? word
-            Long countQueryUser = searchHistoryRepository.countByQueryContainingAndUser_id("sss", user.getId());
+        totalUserSearches = searchHistoryRepository.countByUser_id(user.getId());
+        this.statisticalInformation.setTotalUserSearches(totalUserSearches);
+        if (!lastSearchedQuery.equals("")) {
 
-            Long searchedSymptomsPercentageUser = 100 / countUser * countQueryUser;
+            Long totalSearches = searchHistoryRepository.count();
 
-            System.out.println("percentage User: " + searchedSymptomsPercentageUser);
+            Long totalSearchesQueryUser = searchHistoryRepository.countByQueryContainingAndUser_id(lastSearchedQuery, user.getId());
+            this.statisticalInformation.setTotalQuerySearchesUser(totalSearchesQueryUser);
+
+            double searchedSymptomsPercentageUser = (double) 100 / totalUserSearches * totalSearchesQueryUser;
+            searchedSymptomsPercentageUser = roundNumbers(searchedSymptomsPercentageUser);
+            this.statisticalInformation.setPercentageQuerySearchesUser(searchedSymptomsPercentageUser);
+
+
+            if (totalUserSearches > 0) {
+                double percentageSearchesUser = (double) totalUserSearches / totalSearches * 100;
+                percentageSearchesUser = roundNumbers(percentageSearchesUser);
+                this.statisticalInformation.setPercentageSearchesUser(percentageSearchesUser);
+            }
+
         }
     }
 
-    public void calculatePercentageOfSymptomsSearchedByTotal(){
-        // Count number of searches total
-        Long countUsers = searchHistoryRepository.count();
-        // Count query that contains ? word
-        Long countQueryUsers = searchHistoryRepository.countByQueryContaining("sss");
+    private void calculatePercentageOfSymptomsSearchedByTotal(String lastSearchedQuery){
+        Long totalSearches = searchHistoryRepository.count();
+        this.statisticalInformation.setTotalSearches(totalSearches);
+        if (!lastSearchedQuery.equals("")) {
+            this.statisticalInformation.setQuery(lastSearchedQuery);
 
-        Long searchedSymptomsPercentageTotal = 100/countUsers*countQueryUsers;
+            Long countQueryUsers = searchHistoryRepository.countByQueryContaining(lastSearchedQuery);
+            this.statisticalInformation.setTotalQuerySearches(countQueryUsers);
 
-        System.out.println("percentage Total: "+ searchedSymptomsPercentageTotal);
+            double searchedSymptomsPercentageTotal = (double) countQueryUsers / totalSearches * 100;
+            searchedSymptomsPercentageTotal = roundNumbers(searchedSymptomsPercentageTotal);
+            this.statisticalInformation.setPercentageQuerySearches(searchedSymptomsPercentageTotal);
+        }
     }
 
+    private double roundNumbers(final double percentage) {
+        DecimalFormat df = new DecimalFormat("#.###");
+       String roundedPercentage = df.format(percentage);
+        roundedPercentage = roundedPercentage.replace(",",".");
+        return Double.parseDouble(roundedPercentage);
+
+    }
+
+
+    public StatisticalInformation getStatisticalInformation() {
+        return this.statisticalInformation;
+    }
 
 }

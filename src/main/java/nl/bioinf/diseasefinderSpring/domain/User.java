@@ -59,7 +59,7 @@ public class User {
     /**
      * The account needs to be enabled to work.
      */
-    private String enabled = "true";
+    private boolean enabled;
 
     /**
      * The account needs to be enabled to work.
@@ -72,6 +72,7 @@ public class User {
      * Mandatory JPA constructor.
      */
     protected User() {
+        super();
     }
 
 
@@ -81,7 +82,7 @@ public class User {
         this.confirmPassword = confirmPassword;
         this.email = email;
         this.authority = authority;
-        this.enabled = enabled;
+        this.enabled = true;
         this.role = role;
         this.createdAt = createdAt;
     }
@@ -103,7 +104,6 @@ public class User {
     }
 
     public String getPassword() {
-        this.password = password;
         checkPassword(); //check
         return password;
     }
@@ -137,12 +137,13 @@ public class User {
         this.authority = authority;
     }
 
-    public String getEnabled() {
-        return enabled;
+    public boolean getEnabled() {
+        return true;
     }
 
-    public void setEnabled(String enabled) {
-        this.enabled = enabled;
+    public void setEnabled(boolean enabled) {
+
+        this.enabled = true;
     }
 
     public LocalDateTime getCreatedAt() {

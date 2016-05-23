@@ -1,10 +1,5 @@
 <subtree th:fragment="tree" xmlns:th="http://www.w3.org/1999/xhtml">
-    <div class="treecontainer">
-        <div id="tree-simple"></div>
-
-        <script>
-            document.getElementById("tree-simple").onclick = createTree()
-        </script>
-
-    </div>
+        <div id="treeid">
+        </div>
+        <button onclick="createTree('treeid')">Click me</button>
 </subtree>

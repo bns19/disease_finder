@@ -2,6 +2,7 @@
 $(document).ready(initialize);
 
 function initialize() {
+
     var url = "/autocompleteSymptoms";
     $("#symptoms").on("click", function() {
         $(this).val("");
@@ -15,37 +16,55 @@ function initialize() {
         cacheLength: 1,
         scroll: true,
         highlight: false,
+        //Hier word de data uit de hpoprocessor opgehaald
         source: function(request, response) {
-            console.log(request)
             $.ajax({
                 url: "/autocompleteSymptoms",
                 type: "GET",
                 dataType: "json",
                 data: request,
                 success: function(data) {
+
                     var items = data;
+
                     response(items);
 
                 }
+
             });
+
 
         },
 
         select: function(e, ui) {
-            console.log(ui.item.value)
+
+            // Selected item value = ui.item.value
             $.ajax({
                 url: "termsToTree",
                 dataType: "text",
                 data: {"autoCompleteResult": ui.item.value},
                 success: function(data) {
                     data = data.replace(/\[|\]/g, "");
+
                     var newData = data.replace(/\"|\n/g, "").split(",").reverse();
+
                     var count = newData.length;
+
                     window.setInterval(function() {
                         $("#ontology-tree").jstree("open_node", newData[0]);
+
                         if (count === 1) {
+
+                            //create second tree
+                            createTree(newData);
+
+                            //Create the secondary tree field
+                            //createSecondTreeField();
+
                             // to highligt the symptom that is searched for
-                            $("#ontology-tree").jstree(true).get_node(newData[0]).li_attr.class = "jstree-search";
+                            $("#ontology-tree").jstree(true).get_node(newData[0]).li_attr.class = "jstree-search"
+
+
                             window.clearInterval();
                         }
                         newData.splice(0, 1);
