@@ -34,6 +34,7 @@ public class SymptomsCalculationInformation {
 
         Long totalSearches =  searchHistoryRepository.count();
         SearchHistory historyObj = searchHistoryRepository.findById(totalSearches);
+        System.out.println(historyObj.getQuery()+ " query");
         String lastSearchedQuery;
         if (historyObj == null) {
             lastSearchedQuery = "";
@@ -63,12 +64,15 @@ public class SymptomsCalculationInformation {
             Long totalSearchesQueryUser = searchHistoryRepository.countByQueryContainingAndUser_id(lastSearchedQuery, user.getId());
             this.statisticalInformation.setTotalQuerySearchesUser(totalSearchesQueryUser);
 
-            double searchedSymptomsPercentageUser = (double) 100 / totalUserSearches * totalSearchesQueryUser;
-            searchedSymptomsPercentageUser = roundNumbers(searchedSymptomsPercentageUser);
-            this.statisticalInformation.setPercentageQuerySearchesUser(searchedSymptomsPercentageUser);
 
 
             if (totalUserSearches > 0) {
+                double searchedSymptomsPercentageUser = (double) 100 / totalUserSearches * totalSearchesQueryUser;
+                System.out.println(searchedSymptomsPercentageUser + " user");
+
+                searchedSymptomsPercentageUser = roundNumbers(searchedSymptomsPercentageUser);
+                this.statisticalInformation.setPercentageQuerySearchesUser(searchedSymptomsPercentageUser);
+
                 double percentageSearchesUser = (double) totalUserSearches / totalSearches * 100;
                 percentageSearchesUser = roundNumbers(percentageSearchesUser);
                 this.statisticalInformation.setPercentageSearchesUser(percentageSearchesUser);
@@ -93,6 +97,7 @@ public class SymptomsCalculationInformation {
     }
 
     private double roundNumbers(final double percentage) {
+        System.out.println(percentage);
         DecimalFormat df = new DecimalFormat("#.###");
        String roundedPercentage = df.format(percentage);
         roundedPercentage = roundedPercentage.replace(",",".");
