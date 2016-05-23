@@ -16,16 +16,30 @@ import java.util.HashMap;
  */
 public class SecondaryTreeBuilder {
 
-    public String buildsecondaryTree(String requestedNodeChildren, HashMap collection) throws IOException, JSONException {
+    public String buildsecondaryTree(String requestedNodeChildren, final HashMap collection) throws IOException, JSONException {
+        String icon = "glyphicon glyphicon-user";
+
+        requestedNodeChildren = requestedNodeChildren.replaceAll("^\"|\"$", "");
+
         HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
         String jsonChildren = "";
+        if (requestedNodeChildren.equals("#")) {
+            jsonChildren = "["
+                    + "{\"children\":true,\"icon\":\"glyphicon glyphicon-user\""
+                    + ",\"id\":\"HP:0000001\", \"text\": \"All\", "
+                    + "\"state\": {\"opened\": true,"
+                    + " \"selected\": false}}"
+                    + "]";
+        } else {
+            HPOTerm parent = (HPOTerm) collection.get(requestedNodeChildren);
+            JSONArray children = new JSONArray();
+            for (HPOTerm child : parent.getChildren()) {
+                JSONObject childNode = new JSONObject(hj.createSubTree(child, parent.getId()));
 
-
-        HPOTerm parent = (HPOTerm) collection.get(requestedNodeChildren);
-        JSONArray children = new JSONArray();
-
-        jsonChildren = children.toString();
-
+                children.put(childNode);
+            }
+            jsonChildren = children.toString();
+        }
 
         System.out.println(jsonChildren);
         return jsonChildren;

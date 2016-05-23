@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by bnsikkema on 18-4-16.
@@ -49,21 +47,20 @@ public class D3TreeController {
     @ResponseBody
     public List buildSecondTree(String id) throws IOException, JSONException {
 
+        List<String> items = new LinkedList<String>(Arrays.asList(id.split("\\s*,\\s*")));
+        items.add(0, "#");
+
         ArrayList<String> jsonChildrenList = new ArrayList<String>();
+        String jsonChildren = "";
 
-
-            String jsonChildren = "";
+        for (String item : items) {;
 
             HashMap collection = HPOFileLoader.LoadHPOFile();
-            String requestedNodeChildren = id;
+            String requestedNodeChildren = item;
             SecondaryTreeBuilder secTreeBuilder = new SecondaryTreeBuilder();
             jsonChildren = secTreeBuilder.buildsecondaryTree(requestedNodeChildren, collection);
-
-            System.out.println("JSONCHILD: " + jsonChildren);
-
             jsonChildrenList.add(jsonChildren);
-
-
+        }
 
         return jsonChildrenList;
     }

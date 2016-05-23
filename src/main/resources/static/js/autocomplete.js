@@ -44,19 +44,17 @@ function initialize() {
                 dataType: "text",
                 data: {"autoCompleteResult": ui.item.value},
                 success: function(data) {
+
                     data = data.replace(/\[|\]/g, "");
+                    createTree(data);
 
                     var newData = data.replace(/\"|\n/g, "").split(",").reverse();
-
                     var count = newData.length;
 
                     window.setInterval(function() {
                         $("#ontology-tree").jstree("open_node", newData[0]);
 
                         if (count === 1) {
-
-                            //create second tree
-                            createTree(data);
 
                             //Create the secondary tree field
                             //createSecondTreeField();

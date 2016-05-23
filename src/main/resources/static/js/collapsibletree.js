@@ -1,21 +1,18 @@
 function createTree(data) {
 
-    console.log("DATA: " + data)
-
     createSecondTree(data)
     //var newData = data.replace(/\"|\n/g, "").split(",").reverse();
     this.mainlist = [];
 
     // newData zijn de id's van de tree elementen die in de functie gaan
     function createSecondTree(data) {
-        for (var i in data) {
             var url = "secondTreeBuilder";
 
             // aanroepen van de connector elke
             $.get(url, {id: data}, function (jsonout) {
                 executeTree(jsonout);
             });
-        }
+
     }
 
 
