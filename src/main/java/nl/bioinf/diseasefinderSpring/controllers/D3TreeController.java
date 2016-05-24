@@ -45,10 +45,10 @@ public class D3TreeController {
 
     @RequestMapping(value = "secondTreeBuilder", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public List buildSecondTree(String id) throws IOException, JSONException {
+    public String buildSecondTree(String id) throws IOException, JSONException {
 
         List<String> items = new LinkedList<String>(Arrays.asList(id.split("\\s*,\\s*")));
-        items.add(0, "#");
+//        items.add(0, "#");
 
         ArrayList<String> jsonChildrenList = new ArrayList<String>();
         String jsonChildren = "";
@@ -62,7 +62,9 @@ public class D3TreeController {
             jsonChildrenList.add(jsonChildren);
         }
 
-        return jsonChildrenList;
+
+
+        return jsonChildrenList.toString();
     }
 }
 

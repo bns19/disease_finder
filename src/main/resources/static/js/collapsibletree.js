@@ -1,94 +1,81 @@
 function createTree(data) {
 
+    var treeData = [];
+
     createSecondTree(data)
-    //var newData = data.replace(/\"|\n/g, "").split(",").reverse();
-    this.mainlist = [];
 
     // newData zijn de id's van de tree elementen die in de functie gaan
     function createSecondTree(data) {
-            var url = "secondTreeBuilder";
+        var url = "secondTreeBuilder";
 
-            // aanroepen van de connector elke
-            $.get(url, {id: data}, function (jsonout) {
-                executeTree(jsonout);
-            });
+        // aanroepen van de connector elke
+        $.get(url, {id: data}, function (jsonout) {
+            executeTree(jsonout);
+        });
 
     }
-
 
     function executeTree(jsonout) {
-        var children = [];
-        for (var j in jsonout) {
-            var objectchild = new childobject(jsonout[j].text, jsonout[j].parent);
+        for (x in jsonout) {
+            var firstloop = jsonout[x];
 
-            // Hier wordt een childobject gemaakt en gooi ik dit in de children list.
-            children.push(objectchild);
-        }
+            for (firstsearch in firstloop) {
+                count = 0;
+                //console.log(firstloop[firstsearch])
 
-        var mainobject = new mainl(children);
-        stringl = JSON.stringify(children);
-        console.log("object: " + mainobject)
-        console.log("stringl: " + stringl)
+                if (count == 0 ){
 
-        this.mainlist.concat(stringl);
+                    console.log("children: " + treeData["children"])
 
-    }
+                    var objj = firstloop[firstsearch];
 
-
-    function childobject(name, parent) {
-        this.name = name;
-        this.parent = parent;
-
-    }
-
-    //make an object of the children (instead of list)
-    function mainl(mainl) {
-        this.mainl = mainl;
-        str = JSON.stringify(mainl);
-        console.log(str)
-    }
-
-
-    function printconsoleMain(mainlist) {
-        str = JSON.stringify(mainlist);
-        console.log("Mainlist: " + str)
-    }
+                    for (iit in objj) {
+                        var treeObjects = objj[iit];
+                        treeData["children"].push(treeObjects);
+                    }
 
 
 
-    //var treeData = mainlist;
-
-
-
-    var treeData = [
-        {
-            "name": "Top Level",
-            "parent": "null",
-            "children": [
-                {
-                    "name": "Level 2: A",
-                    "parent": "Top Level",
-                    "children": [
-                        {
-                            "name": "Son of A",
-                            "parent": "Level 2: A"
-                        },
-                        {
-                            "name": "Daughter of A",
-                            "parent": "Level 2: A"
-                        }
-                    ]
-                },
-                {
-                    "name": "Level 2: B",
-                    "parent": "Top Level"
                 }
-            ]
+            }
         }
-    ];
+    }
+
+    console.log(treeData)
+    for (items in treeData){
+        console.log("Treedata: " + treeData[items])
+    }
 
 
- //************** Generate the tree diagram	 *****************
+    //var treeData = [
+    //    {
+    //        "name": "Top Level",
+    //        "parent": "null",
+    //        "children": [
+    //            {
+    //                "name": "Level 2: A",
+    //                "parent": "Top Level",
+    //                "children": [
+    //                    {
+    //                        "name": "Son of A",
+    //                        "parent": "Level 2: A"
+    //                    },
+    //                    {
+    //                        "name": "Daughter of A",
+    //                        "parent": "Level 2: A"
+    //                    }
+    //                ]
+    //            },
+    //            {
+    //                "name": "Level 2: B",
+    //                "parent": "Top Level"
+    //            }
+    //        ]
+    //    }
+    //];
+
+
+    //************** Generate the tree diagram	 *****************
     var margin = {top: 20, right: 120, bottom: 20, left: 120},
         width = 960 - margin.right - margin.left,
         height = 500 - margin.top - margin.bottom;
@@ -242,30 +229,10 @@ function createTree(data) {
 
 }
 
-//
-//function createTree(data) {
-//
-//    this.newData = data.replace(/\"|\n/g, "").split(",").reverse();
-//
-//    createSecondTree(this.newData);
-//
-//    function createSecondTree(newData) {
-//        var url = "secondTreeBuilder";
-//
-//        $.get(url,
-//            data: newData,
-//            function (jsonout) {
-//                executeTree(jsonout);
-//            });
-//
-//    }
-//
-//
-//    function executeTree(jsonout) {
-//    }
-//
-//
-//    function printconsoleMain(mainlist) {
-//        str = JSON.stringify(mainlist);
-//        console.log("Mainlist: " + str)
-//    }
+
+//for (secondsearch in secondloop) {
+//    var setforid2 = secondloop[secondsearch];
+//    var parentid = setforid2['parent'];
+    //console.log("ID: " + id)
+    //console.log("parentid: " + parentid)
+//}

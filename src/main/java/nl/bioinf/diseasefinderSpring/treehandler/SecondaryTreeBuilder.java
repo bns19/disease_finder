@@ -1,6 +1,7 @@
 package nl.bioinf.diseasefinderSpring.treehandler;
 
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOJsonObjectCreator;
+import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOJsonObjectCreatorSecondaryTree;
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOTerm;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,19 +18,15 @@ import java.util.HashMap;
 public class SecondaryTreeBuilder {
 
     public String buildsecondaryTree(String requestedNodeChildren, final HashMap collection) throws IOException, JSONException {
-        String icon = "glyphicon glyphicon-user";
-
         requestedNodeChildren = requestedNodeChildren.replaceAll("^\"|\"$", "");
 
-        HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
+        HPOJsonObjectCreatorSecondaryTree hj = new HPOJsonObjectCreatorSecondaryTree();
         String jsonChildren = "";
         if (requestedNodeChildren.equals("#")) {
             jsonChildren = "["
-                    + "{\"children\":true,\"icon\":\"glyphicon glyphicon-user\""
+                    + "{\"children\":true,\""
                     + ",\"id\":\"HP:0000001\", \"text\": \"All\", "
-                    + "\"state\": {\"opened\": true,"
-                    + " \"selected\": false}}"
-                    + "]";
+                    + "}]";
         } else {
             HPOTerm parent = (HPOTerm) collection.get(requestedNodeChildren);
             JSONArray children = new JSONArray();
