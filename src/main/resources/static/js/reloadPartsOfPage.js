@@ -3,20 +3,9 @@
  */
 
 
-$(document).ready(
-    function() {
-    setInterval(function() {
-        $("#statistics"), 3000})}
-
-
-
-)
-//console.log("passed")
-//$('#historytab').onclick(function() {
-//    location.reload();
-//})
-
-function reloadHistory() {
-    console.log("passed")
-    location.reload();
-}
+$(document).ready(function(){
+    $("#tablist").click(function(){
+        $("#statisticsTab").load(location.href+" #statisticsTab>*","");
+        $("#historytab").load(location.href+" #historytab>*","");
+    });
+});
