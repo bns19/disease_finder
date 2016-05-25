@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by bnsikkema on 18-4-16.
@@ -51,6 +53,7 @@ public class D3TreeController {
         items.add(0, "#");
 
         ArrayList<String> jsonChildrenList = new ArrayList<String>();
+        ArrayList<String> jsonChildrenListForAdding = new ArrayList<String>();
         String jsonChildren = "";
 
         for (String item : items) {;
@@ -59,7 +62,24 @@ public class D3TreeController {
             String requestedNodeChildren = item;
             SecondaryTreeBuilder secTreeBuilder = new SecondaryTreeBuilder();
             jsonChildren = secTreeBuilder.buildsecondaryTree(requestedNodeChildren, collection);
+            jsonChildrenListForAdding.add(jsonChildren);
             jsonChildrenList.add(jsonChildren);
+        }
+
+        for (String jsonchild : jsonChildrenList){
+
+            Pattern pattern = Pattern.compile("([0-9]{7})");
+            Matcher matcher = pattern.matcher(jsonchild);
+            if (matcher.find())
+            {
+                System.out.println(matcher.group(1));
+            }
+
+            System.out.println(jsonchild);
+
+
+
+
         }
 
         return jsonChildrenList;

@@ -46,17 +46,13 @@ public class HPOJsonObjectCreatorSecondaryTree {
             final String parent) {
         HashMap tree = new HashMap();
         HashMap<String, Boolean> state = new HashMap<String, Boolean>();
-        state.put("opened", false);
-        state.put("selected", false);
         tree.put("id", hpoTerm.getId());
         tree.put("text", hpoTerm.getName());
         tree.put("parent", parent);
-        tree.put("state", state);
         if (hpoTerm.hasChildren()) {
-            tree.put("children", true);
-        } else {
-            tree.put("children", false);
+            tree.put("children", "true");
         }
+
         return tree;
     }
 }

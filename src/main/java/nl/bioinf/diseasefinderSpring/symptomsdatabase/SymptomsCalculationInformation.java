@@ -34,7 +34,7 @@ public class SymptomsCalculationInformation {
 
         Long totalSearches =  searchHistoryRepository.count();
         SearchHistory historyObj = searchHistoryRepository.findById(totalSearches);
-        System.out.println(historyObj.getQuery()+ " query");
+//        System.out.println(historyObj.getQuery()+ " query");
         String lastSearchedQuery;
         if (historyObj == null) {
             lastSearchedQuery = "";

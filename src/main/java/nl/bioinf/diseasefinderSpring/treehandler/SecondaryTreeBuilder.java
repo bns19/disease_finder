@@ -1,6 +1,7 @@
 package nl.bioinf.diseasefinderSpring.treehandler;
 
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOJsonObjectCreator;
+import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOJsonObjectCreatorSecondaryTree;
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOTerm;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,14 +22,12 @@ public class SecondaryTreeBuilder {
 
         requestedNodeChildren = requestedNodeChildren.replaceAll("^\"|\"$", "");
 
-        HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
+        HPOJsonObjectCreatorSecondaryTree hj = new HPOJsonObjectCreatorSecondaryTree();
         String jsonChildren = "";
         if (requestedNodeChildren.equals("#")) {
             jsonChildren = "["
-                    + "{\"children\":true,\"icon\":\"glyphicon glyphicon-user\""
-                    + ",\"id\":\"HP:0000001\", \"text\": \"All\", "
-                    + "\"state\": {\"opened\": true,"
-                    + " \"selected\": false}}"
+                    + "{\"children\":true\""
+                    + ",\"id\":\"HP:0000001\", \"text\": \"All\"},"
                     + "]";
         } else {
             HPOTerm parent = (HPOTerm) collection.get(requestedNodeChildren);
@@ -41,7 +40,6 @@ public class SecondaryTreeBuilder {
             jsonChildren = children.toString();
         }
 
-        System.out.println(jsonChildren);
         return jsonChildren;
     }
 
