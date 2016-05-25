@@ -18,17 +18,15 @@ import java.util.HashMap;
 public class SecondaryTreeBuilder {
 
     public String buildsecondaryTree(String requestedNodeChildren, final HashMap collection) throws IOException, JSONException {
-        String icon = "glyphicon glyphicon-user";
-
         requestedNodeChildren = requestedNodeChildren.replaceAll("^\"|\"$", "");
 
         HPOJsonObjectCreatorSecondaryTree hj = new HPOJsonObjectCreatorSecondaryTree();
         String jsonChildren = "";
         if (requestedNodeChildren.equals("#")) {
             jsonChildren = "["
-                    + "{\"children\":true\""
-                    + ",\"id\":\"HP:0000001\", \"text\": \"All\"},"
-                    + "]";
+                    + "{\"children\":true,\""
+                    + ",\"id\":\"HP:0000001\", \"text\": \"All\", "
+                    + "}]";
         } else {
             HPOTerm parent = (HPOTerm) collection.get(requestedNodeChildren);
             JSONArray children = new JSONArray();
@@ -40,6 +38,7 @@ public class SecondaryTreeBuilder {
             jsonChildren = children.toString();
         }
 
+        System.out.println(jsonChildren);
         return jsonChildren;
     }
 
