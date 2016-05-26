@@ -62,8 +62,6 @@ public class D3TreeController {
             jsonChildrenList.add(jsonChildren);
         }
 
-
-
         return jsonChildrenList.toString();
     }
 }

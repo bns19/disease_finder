@@ -22,12 +22,14 @@ public class SecondaryTreeBuilder {
 
         HPOJsonObjectCreatorSecondaryTree hj = new HPOJsonObjectCreatorSecondaryTree();
         String jsonChildren = "";
+
         if (requestedNodeChildren.equals("#")) {
             jsonChildren = "["
                     + "{\"children\":true,\""
                     + ",\"id\":\"HP:0000001\", \"text\": \"All\", "
                     + "}]";
-        } else {
+        }
+        else {
             HPOTerm parent = (HPOTerm) collection.get(requestedNodeChildren);
             JSONArray children = new JSONArray();
             for (HPOTerm child : parent.getChildren()) {
