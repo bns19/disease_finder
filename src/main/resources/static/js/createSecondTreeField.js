@@ -4,12 +4,5 @@
 function createSecondTreeField() {
     //createTree();
 
-    //var x = createSecondTreeField(data);
-
-    document.getElementById("SecondaryTree").innterHTML = createTree();
-
-    //document.getElementById("demo").innerHTML = createTree();
-
-    document.getElementById("demo").innerHTML = window.createTree();
 
 }
