@@ -25,15 +25,15 @@ public class SaveSearchedSymptoms {
             this.searchHistoryRepository = searchHistoryRepository;
         }
 
-    public void saveSymptoms(String symptoms) {
+    public void saveSymptoms(String shortSymptoms,String symptoms) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = userRepository.findByUsername(username);
         SearchHistory searchedsymptoms = new SearchHistory();
         searchedsymptoms.setUser(user);
         searchedsymptoms.setCreatedAt(LocalDateTime.now().toString());
-        searchedsymptoms.setQuery(symptoms);
-        //searchsymptoms = a object
+        searchedsymptoms.setQuery(shortSymptoms);
+        searchedsymptoms.setLongQuery(symptoms);
         searchHistoryRepository.save(searchedsymptoms);
     }
 

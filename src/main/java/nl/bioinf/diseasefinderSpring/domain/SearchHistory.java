@@ -24,6 +24,10 @@ public class SearchHistory {
     @Type(type="text")
     private String query;
 
+    @NotNull
+    @Type(type="text")
+    private String longQuery;
+
 //    @NotNull
 //    private LocalDateTime createdAt;
 
@@ -35,9 +39,10 @@ public class SearchHistory {
     public SearchHistory() {
     }
 
-    public SearchHistory(User user, String query, String createdAt) {
+    public SearchHistory(User user, String query, String longQuery, String createdAt) {
         this.user = user;
         this.query = query;
+        this.longQuery = longQuery;
         this.createdAt = createdAt;
     }
 
@@ -55,6 +60,14 @@ public class SearchHistory {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getLongQuery() {
+        return longQuery;
+    }
+
+    public void setLongQuery(String longQuery) {
+        this.longQuery = longQuery;
     }
 
     public String getQuery() {

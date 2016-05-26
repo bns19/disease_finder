@@ -89,6 +89,15 @@ function initialize() {
     });
 
 }
+
+
+
+function sendSearchedQuery() {
+    console.log("here we are")
+    sendSymptoms(symptoms)
+}
+
+
 //by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
     //localStorage.setItem("symptoms", symptoms);

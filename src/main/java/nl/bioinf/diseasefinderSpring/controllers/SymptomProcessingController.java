@@ -61,7 +61,7 @@ public class SymptomProcessingController {
         SymptomProcessor sp = new SymptomProcessor(symptoms);
 
         SaveSearchedSymptoms saveSymptoms = new SaveSearchedSymptoms(userRepository, searchHistoryRepository);
-        saveSymptoms.saveSymptoms(shortSymptoms);
+        saveSymptoms.saveSymptoms(shortSymptoms, symptoms);
 
         SymptomsCalculationInformation symptomsCalculationInformation =
                 new SymptomsCalculationInformation(userRepository, searchHistoryRepository);

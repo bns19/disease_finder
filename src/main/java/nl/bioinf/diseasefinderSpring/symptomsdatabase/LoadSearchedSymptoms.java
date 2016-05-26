@@ -29,7 +29,6 @@ public class LoadSearchedSymptoms {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = userRepository.findByUsername(username);
-        System.out.println("eenuser:     "+ user.getId());
         usersHistory = searchHistoryRepository.findByUser_id(user.getId());
         return usersHistory;
 
