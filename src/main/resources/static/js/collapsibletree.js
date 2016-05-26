@@ -1,139 +1,123 @@
 function createTree(data) {
 
-    var mainlist = [];
+    console.log("DATA: " + data)
 
-    var treeData = [];
+    // Global variables
+    var mlist = new Array();
 
     createSecondTree(data)
 
-    // newData zijn de id's van de tree elementen die in de functie gaan
+    // data has the id's that are searched for from symptoms
     function createSecondTree(data) {
         var url = "secondTreeBuilder";
 
-        // aanroepen van de connector elke
+        // Call the connector and ask for the nodes information (id, parent, children, name)
         $.get(url, {id: data}, function (jsonout) {
             executeTree(jsonout);
         });
 
     }
 
-    function executeTree(jsonout) {
-        var mlist = new Array();
-
-        for (x in jsonout) {
-            var count = 0;
-
-
-            var loop = jsonout[x];
-
-            for (firstsearch in loop) {
-
-                if (count == 0) {
-                    var length = jsonout[x].length;
-                    var addcount = 0;
-
-                    for (var i = addcount; length > i; i++) {
-                        mlist.push(loop[firstsearch]);
-                        addcount += 1;
-                    }
-                    count += 1;
-                }
+    // Unique array maker (used to get the root(s))
+    function unique(arr) {
+        var u = {}, a = [];
+        for (var i = 0, l = arr.length; i < l; ++i) {
+            if (!u.hasOwnProperty(arr[i])) {
+                a.push(arr[i]);
+                u[arr[i]] = 1;
             }
-
         }
-
-
-        ctree(mlist);
-
-        function ctree(input) {
-
-            for (item in input) {
-                console.log("id: " + input[item]['id'])
-                console.log("parent: " + input[item]['parent'])
-                console.log("name: " + input[item]['name'])
-                console.log("children: " + input[item]['children'])
-            }
-
-            var arr = input;
-
-            var tree = [],
-                mappedArr = {},
-                arrElem,
-                mappedElem;
-
-            // First map the nodes of the array to an object -> create a hash table.
-            for (var i = 0, len = arr.length; i < len; i++) {
-                arrElem = arr[i];
-                mappedArr[arrElem.id] = arrElem;
-                mappedArr[arrElem.id]['children'] = [];
-            }
-
-            for (var id in mappedArr) {
-
-                if (mappedArr.hasOwnProperty(id)) {
-                    mappedElem = mappedArr[id];
-
-                    // If the element is not at the root level, add it to its parent array of children.
-                    if (mappedElem['parent']) {
-
-                        if (mappedElem.parent) {
-
-                            if (mappedArr[mappedElem['parent']] == null) {
-                                console.log(mappedArr[mappedElem['parent']])
-                            }
-                            else {
-                                mappedArr[mappedElem['parent']]['children'].push(mappedElem);
-                            }
-
-                        }
-                        else {
-                            console.log("melding")
-                        }
-                    }
-                    // If the element is at the root level, add it to first level elements array.
-                    else {
-                        console.log("else mappedelem: " + mappedElem)
-                        tree.push(mappedElem);
-                    }
-                }
-            }
-            treeData = tree;
-            console.log(tree);
-        }
-
+        return a;
     }
 
+    function executeTree(jsonout) {
+        for (x in jsonout) {
+            var count = 0;
+            var loop = jsonout[x];
 
-//console.log("treeDATA::: " + treeData)
+            //Update the mlist with all the objects
+            for (firstsearch in loop) {
+                mlist.push(loop[firstsearch]);
+            }
+            count += 1;
+        }
+        ctree(mlist);
+    }
 
-    //
-    //var treeData = [
-    //    {
-    //        "name": "Top Level",
-    //        "parent": "null",
-    //        "children": [
-    //            {
-    //                "name": "Level 2: A",
-    //                "parent": "Top Level",
-    //                "children": [
-    //                    {
-    //                        "name": "Son of A",
-    //                        "parent": "Level 2: A"
-    //                    },
-    //                    {
-    //                        "name": "Daughter of A",
-    //                        "parent": "Level 2: A"
-    //                    }
-    //                ]
-    //            },
-    //            {
-    //                "name": "Level 2: B",
-    //                "parent": "Top Level"
-    //            }
-    //        ]
-    //    }
-    //];
+    function ctree(input) {
+        var mainlist = new Array();
+        var uniqueidlist = new Array();
 
+        for (item in input) {
+            uniqueidlist.push(input[item]['id'])
+        }
+
+        var uniqueid = unique(uniqueidlist);
+
+        for (item in input) {
+            if (uniqueid.indexOf(input[item]['parent']) >= 0) {
+
+            }
+            else {
+                input[item]['parent'] = "000001"; //sets the parentid's to 000001 of the nodes that have no parent
+            }
+        }
+
+        //Create the root object
+        var rootobject = new Object();
+        rootobject['name'] = "root";
+        rootobject['id'] = "000001";
+        rootobject['parent'] = null;
+
+        //Push root object to the input list
+        input.push(rootobject)
+
+        var arr = input;
+        var tree = [],
+            mappedArr = {},
+            arrElem,
+            mappedElem;
+
+        // First map the nodes of the array to an object -> create a hash table.
+        for (var i = 0, len = arr.length; i < len; i++) {
+            arrElem = arr[i];
+            mappedArr[arrElem.id] = arrElem;
+            mappedArr[arrElem.id]['children'] = [];
+        }
+
+        for (var id in mappedArr) {
+
+            if (mappedArr.hasOwnProperty(id)) {
+                mappedElem = mappedArr[id];
+
+                // If the element is not at the root level, add it to its parent array of children.
+                if (mappedElem['parent']) {
+
+                    if (mappedElem.parent) {
+
+                        if (mappedArr[mappedElem['parent']] == null) {
+                        }
+                        else {
+                            mappedArr[mappedElem['parent']]['children'].push(mappedElem);
+                        }
+
+                    }
+                    else {
+                    }
+                }
+                // If the element is at the root level, add it to first level elements array.
+                else {
+                    tree.push(mappedElem);
+                }
+            }
+        }
+        executeCreateTree(tree);
+    }
+
+}
+
+
+function executeCreateTree(treeData) {
 
 //************** Generate the tree diagram	 *****************
     var margin = {top: 20, right: 120, bottom: 20, left: 120},
@@ -158,7 +142,6 @@ function createTree(data) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    console.log(treeData[0])
     root = treeData[0];
     root.x0 = height / 2;
     root.y0 = 0;
@@ -276,7 +259,7 @@ function createTree(data) {
         });
     }
 
-// Toggle children on click.
+    // Toggle children on click.
     function click(d) {
         if (d.children) {
             d._children = d.children;
