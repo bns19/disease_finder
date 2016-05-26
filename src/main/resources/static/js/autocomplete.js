@@ -26,14 +26,9 @@ function initialize() {
                 success: function(data) {
 
                     var items = data;
-
                     response(items);
-
                 }
-
             });
-
-
         },
 
         select: function(e, ui) {
