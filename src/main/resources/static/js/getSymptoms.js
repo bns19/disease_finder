@@ -92,9 +92,12 @@ function initialize() {
 
 
 
-function resendQuery(query) {
+function resendQuery(queryNumber) {
+    var queryId = "testId1"
     console.log("here we are")
 
+    var inhoud = queryId.innerHTML;
+    alert(inhoud);
    // sendSymptoms(symptoms)
     }
 

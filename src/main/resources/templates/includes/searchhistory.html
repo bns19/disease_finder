@@ -15,10 +15,11 @@
                 <th>search button</th>
 
             </tr>
-            <tr th:each="searchObject :  ${history}">
-                <td th:text="${searchObject.getQuery()}" ></td>
+            <tr th:each="searchObject, iterStat :  ${history}">
+
+                <td th:id = "testId+${iterStat.count}" th:text="${searchObject.getQuery()}" ></td>
                 <td th:text="${searchObject.getCreatedAt()}"></td>
-                <td><button id="historyButton" th:onclick="'javascript:resendQuery()'">find this query</button></td>
+                <td><button id="historyButton" th:onclick="'javascript:resendQuery(\'' + 1 + '\')'">find this query</button></td>
             </tr>
         </table>
     </div>
