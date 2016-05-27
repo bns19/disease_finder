@@ -18,7 +18,7 @@
             <tr th:each="searchObject :  ${history}">
                 <td th:text="${searchObject.getQuery()}" ></td>
                 <td th:text="${searchObject.getCreatedAt()}"></td>
-                <td><button>find this query</button></td>
+                <td><button id="historyButton" th:onclick="'javascript:resendQuery()'">find this query</button></td>
             </tr>
         </table>
     </div>

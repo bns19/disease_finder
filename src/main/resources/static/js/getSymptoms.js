@@ -92,10 +92,11 @@ function initialize() {
 
 
 
-function sendSearchedQuery() {
+function resendQuery(query) {
     console.log("here we are")
-    sendSymptoms(symptoms)
-}
+
+   // sendSymptoms(symptoms)
+    }
 
 
 //by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
