@@ -8,7 +8,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -16,6 +18,7 @@ import java.util.HashMap;
  * +
  */
 public class SecondaryTreeBuilder {
+    JSONArray children = new JSONArray();
 
     public String buildsecondaryTree(String requestedNodeChildren, final HashMap collection) throws IOException, JSONException {
         requestedNodeChildren = requestedNodeChildren.replaceAll("^\"|\"$", "");
@@ -23,26 +26,28 @@ public class SecondaryTreeBuilder {
         HPOJsonObjectCreatorSecondaryTree hj = new HPOJsonObjectCreatorSecondaryTree();
         String jsonChildren = "";
 
-        if (requestedNodeChildren.equals("#")) {
-            jsonChildren = "["
-                    + "{\"children\":true,\""
-                    + ",\"id\":\"HP:0000001\", \"text\": \"All\", "
-                    + "}]";
-        }
-        else {
-            HPOTerm parent = (HPOTerm) collection.get(requestedNodeChildren);
-            JSONArray children = new JSONArray();
-            for (HPOTerm child : parent.getChildren()) {
-                JSONObject childNode = new JSONObject(hj.createSubTree(child, parent.getId()));
+        HPOTerm parent = (HPOTerm) collection.get(requestedNodeChildren);
 
-                children.put(childNode);
-            }
-            jsonChildren = children.toString();
-        }
+        getAllChildrenNodes(parent, hj);
 
-        System.out.println(jsonChildren);
+        jsonChildren = children.toString();
+
         return jsonChildren;
     }
 
+
+    public void getAllChildrenNodes(HPOTerm parent, HPOJsonObjectCreatorSecondaryTree hj) {
+        if (parent.getChildren() != null) {
+            for (HPOTerm child : parent.getChildren()) {
+                JSONObject childNode = new JSONObject(hj.createSubTree(child, parent.getId()));
+                getAllChildrenNodes(child, hj);
+
+                children.put(childNode);
+                System.out.println(childNode);
+            }
+
+        }
+
+    }
 
 }
