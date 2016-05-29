@@ -92,13 +92,16 @@ function initialize() {
 
 
 
-function resendQuery(queryNumber) {
-    var queryId = "testId1"
-    console.log("here we are")
+function resendQuery(longQuery) {
 
-    var inhoud = queryId.innerHTML;
-    alert(inhoud);
-   // sendSymptoms(symptoms)
+    //console.log(query);
+    //var queryId = "#testId"+queryNumber;
+    //console.log(queryId);
+    //
+    //var inhoud = $(queryId).text();
+    console.log(longQuery);
+    localStorage.setItem("symptoms", longQuery)
+    sendSymptoms()
     }
 
 
