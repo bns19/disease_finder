@@ -1,32 +1,27 @@
-<!--<rightfield>-->
+<rightfield>
 
-    <!--<div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id="statisticsTab">-->
-        <!--<div role="tabpanel">-->
+    <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id="statisticsTab">
+        <div role="tabpanel">
 
+            <!--Tab panes-->
+            <div class="tab-content" id="tabcontent">
 
+                <!--<showstatistics th:replace="includes/showstatistics"></showstatistics>-->
+                <div role="tabpanel" class="tab-pane active" id="treetab">
 
-            <!--&lt;!&ndash;Tab panes&ndash;&gt;-->
-            <!--<div class="tab-content" id="tabcontent">-->
-                <!--&lt;!&ndash;<showstatistics th:replace="includes/showstatistics"></showstatistics>&ndash;&gt;-->
-                <!--<div role="tabpanel" class="tab-pane active" id="treetab">-->
-                    <!--<br/><br/>-->
-                    <!--<div id="statistics">-->
-
-
-                    <!--<h2>show statistics</h2>-->
-
-                        <!--<div id="SecondaryTree"></div>-->
-                        <!--<div id="demo"></div>-->
+                    <br/><br/>
 
 
-                        <!--<subtree th:replace="includes/subtree :: tree"></subtree>-->
+                    <h2>Secondary Tree</h2>
 
-                    <!--</div>-->
-                <!--</div>-->
+                    <subtree th:replace="includes/subtree :: tree"></subtree>
 
-            <!--</div>-->
 
-        <!--</div>-->
-    <!--</div>-->
+                </div>
 
-<!--</rightfield>-->
+            </div>
+
+        </div>
+    </div>
+
+</rightfield>

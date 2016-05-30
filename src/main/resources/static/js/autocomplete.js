@@ -51,6 +51,7 @@ function initialize() {
                         if (count === 1) {
 
 
+                            //$("#treeid").createTree(newData[0]);
                             createTree(newData[0]);
 
                             // to highligt the symptom that is searched for
