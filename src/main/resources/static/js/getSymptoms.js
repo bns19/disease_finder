@@ -55,18 +55,69 @@ function initialize() {
         localStorage.setItem("shortSymptoms", shortSymptomString)
 
         //Here will be the link between the old tree and the new tree.
+
         // by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
         $('#event_result').html('Selected symptoms:<br/>');
+
+        var shortSymptomCounter = -1;
         for (i = 0; i < selectedIds.length; i++) {
 
             var this_node = $("#ontology-tree").jstree("get_node", selectedIds[i]);
             var icon = this_node.icon;
-            $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
-                + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button>");
+            if ($.inArray(selectedNodes[i],shortSymptomsList) >-1) {
+                shortSymptomCounter++;
+                var negaButtonValue = i;
+                $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
+                    + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button><button class='negateButton' id='negateButton' value="+shortSymptomCounter+" >negate</button>");
 
+            }
+
+            else{
+                $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
+                    + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button>");
+            }
         }
         $(".dontClick").click(function () {
             $("#ontology-tree").jstree("deselect_node", $(this).data("close"));
+        });
+
+        $(".negateButton").click(function () {
+
+            var index = $(this).attr("value");
+
+            var shortSymptomList = localStorage.getItem("shortSymptoms").split(",");
+            var longSymptomList = localStorage.getItem("symptoms").split(",");
+            var symptomToNegate = shortSymptomList[index];
+
+            var longIndex = longSymptomList.indexOf(symptomToNegate);
+
+            if (symptomToNegate.substring(0,3) != "non") {
+                var negatedSymptom = "non"+symptomToNegate;
+                shortSymptomList[index]=negatedSymptom;
+                localStorage.removeItem("shortSymptoms");
+                localStorage.setItem("shortSymptoms", shortSymptomList.toString())
+
+
+                //longSymptomList[longIndex]=negatedSymptom;
+                //localStorage.removeItem("symptoms");
+                //localStorage.setItem("symptoms", longSymptomList.toString())
+            }
+
+            if (symptomToNegate.substring(0,3) == "non" && symptomToNegate.substring(3,5) != "non") {
+                var nonNegatedSymptom = symptomToNegate.substring(3,symptomToNegate.length);
+                shortSymptomList[index]=nonNegatedSymptom;
+                localStorage.removeItem("shortSymptoms");
+                localStorage.setItem("shortSymptoms", shortSymptomList.toString())
+
+                //longSymptomList[longIndex]=nonNegatedSymptom;
+                //localStorage.removeItem("symptoms");
+                //localStorage.setItem("symptoms", longSymptomList.toString())
+
+            }
+
+
+           console.log(localStorage.getItem("shortSymptoms"));
+            console.log(localStorage.getItem("symptoms"))
         });
 
 
@@ -92,10 +143,10 @@ function initialize() {
 
 
 
-function sendSearchedQuery() {
-    console.log("here we are")
-    sendSymptoms(symptoms)
-}
+function resendQuery(longQuery) {
+    localStorage.setItem("symptoms", longQuery)
+    sendSymptoms()
+    }
 
 
 //by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
@@ -115,7 +166,8 @@ function sendSymptoms(symptoms) {
         $("#resultTab").append("<br/><br/><ul>");
         $("#resultTab").append(diseases);
         $("#resultTab").append("</ul>");
-        $("#resultTab").append("<button id = \"save\" class=\"btn btn-default\">Save this result</button>");
+        $("#resultTab").append("<button id = \"save\" class=\"btn btn-default\">Save this result as .txt</button>");
+        $("#resultTab").append("<button id = \"savePdf\" class=\"btn btn-default\">Save this result as .pdf</button>");
         $("body").tooltip({selector: '[data-toggle=tooltip]'});
         $(".clickTitle").click(function () {
             localStorage.setItem("omimNumber", $(this).attr("id"));
@@ -123,6 +175,9 @@ function sendSymptoms(symptoms) {
         });
         $("#save").click(function () {
             saveResults();
+        });
+        $("#savePdf").click(function () {
+            saveResultsAsPdf();
         });
     });
 }
@@ -144,15 +199,16 @@ function loadDisease() {
         var idPat = new RegExp(id);
 
         /////////////////////////////////////////////////////////////
-        // var matchId = localStorage.getItem("ids").match(idPat);
+         var matchId = localStorage.getItem("ids").match(idPat);
 
-        // //make sure, the tab is only created one time
-        // if (matchId === null) {
-        //     localStorage.setItem("ids", localStorage.getItem("ids") + id);
-        //     title = title.charAt(0) + title.substring(1, title.length).toLowerCase();
-        //     if (title.length > 15) {
-        //         title = title.substring(0, 12) + "...";
-        //     }
+         //make sure, the tab is only created one time
+         if (matchId === null) {
+             localStorage.setItem("ids", localStorage.getItem("ids") + id);
+             title = title.charAt(0) + title.substring(1, title.length).toLowerCase();
+             if (title.length > 15) {
+                 title = title.substring(0, 12) + "...";
+             }
+         }
         //     //put the data in an extra tab
         ///////////////////////////////////////////////////////
 
@@ -161,7 +217,7 @@ function loadDisease() {
         $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
         $("#" + id).append("<br/><br/>");
         $("#" + id).append(disease);
-        $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease</button>");
+        $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease as .txt</button>");
         // }
         $(".closeDiseaseTab").click(function () {
             // matchId = localStorage.getItem("ids").match(idPat);
@@ -175,14 +231,14 @@ function loadDisease() {
 
                 //////////////////////////////////////////////////////////
                 // remove string from id list, so that it can be opened again
-                //  var idString = localStorage.getItem("ids");
-                //  var firstPart = idString.substring(0, matchId.index);
-                //  var lastPart = idString.substring(matchId.index + id.length, idString.length);
-                //  localStorage.setItem("ids", firstPart + lastPart);
+                  var idString = localStorage.getItem("ids");
+                  var firstPart = idString.substring(0, matchId.index);
+                  var lastPart = idString.substring(matchId.index + id.length, idString.length);
+                  localStorage.setItem("ids", firstPart + lastPart);
                 //////////////////////////////////////////////////////////////
 
             }
-        //}
+       // }
         });
 
 
@@ -234,6 +290,23 @@ function saveResults() {
     saveAs(resultFile, "results.csv");
 }
 ;
+
+
+//under construction
+function saveResultsAsPdf() {
+    console.log("hoipdf")
+    //var results = $("#resultTab").text();
+    //var doc = new jsPDF();
+    //var specialElementHandlers = {
+    //    '#editor': function (element, renderer) {
+    //        return true;
+    //    }}
+    //doc.fromHTML($('#resultTab').html(), 15, 15, {
+    //    'width': 170,
+    //    'elementHandlers': specialElementHandlers
+    //});
+};
+
 //by mkslofstra
 function saveDisease() {
     var disease = $("#" + localStorage.getItem("disease2save"));

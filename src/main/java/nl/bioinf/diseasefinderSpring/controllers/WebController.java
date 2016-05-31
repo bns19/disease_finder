@@ -66,8 +66,6 @@ public class WebController extends WebMvcConfigurerAdapter {
             LoadSearchedSymptoms loadHistory = new LoadSearchedSymptoms(userRepository, searchHistoryRepository);
             List<SearchHistory> searchHistory = loadHistory.loadSearchedSymptoms();
             model.addAttribute("history", searchHistory);
-
-
         }
         return "home";
     }

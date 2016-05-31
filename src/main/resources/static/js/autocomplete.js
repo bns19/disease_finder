@@ -41,7 +41,6 @@ function initialize() {
                 success: function(data) {
 
                     data = data.replace(/\[|\]/g, "");
-                    createTree(data);
 
                     var newData = data.replace(/\"|\n/g, "").split(",").reverse();
                     var count = newData.length;
@@ -51,8 +50,9 @@ function initialize() {
 
                         if (count === 1) {
 
-                            //Create the secondary tree field
-                            createSecondTreeField();
+
+                            //$("#treeid").createTree(newData[0]);
+                            createTree(newData[0]);
 
                             // to highligt the symptom that is searched for
                             $("#ontology-tree").jstree(true).get_node(newData[0]).li_attr.class = "jstree-search"

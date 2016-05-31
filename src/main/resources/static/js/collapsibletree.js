@@ -1,13 +1,11 @@
 function createTree(data) {
 
-    console.log("DATA: " + data)
-
     // Global variables
     var mlist = new Array();
 
     createSecondTree(data)
 
-    // data has the id's that are searched for from symptoms
+    // Data has the id's that are searched for from symptoms
     function createSecondTree(data) {
         var url = "secondTreeBuilder";
 
@@ -30,12 +28,13 @@ function createTree(data) {
         return a;
     }
 
+    // Get all the children of the input node
     function executeTree(jsonout) {
         for (x in jsonout) {
             var count = 0;
             var loop = jsonout[x];
 
-            //Update the mlist with all the objects
+            //Update the mlist with all the child node objects
             for (firstsearch in loop) {
                 mlist.push(loop[firstsearch]);
             }
@@ -44,6 +43,7 @@ function createTree(data) {
         ctree(mlist);
     }
 
+    //Create the tree structure
     function ctree(input) {
         var mainlist = new Array();
         var uniqueidlist = new Array();
@@ -119,6 +119,7 @@ function createTree(data) {
 
 function executeCreateTree(treeData) {
 
+
 //************** Generate the tree diagram	 *****************
     var margin = {top: 20, right: 120, bottom: 20, left: 120},
         width = 960 - margin.right - margin.left,
@@ -151,6 +152,8 @@ function executeCreateTree(treeData) {
     d3.select(self.frameElement).style("height", "500px");
 
     function update(source) {
+
+        console.log("SOURCE: ID " + source.id)
 
         // Compute the new tree layout.
         var nodes = tree.nodes(root).reverse(),

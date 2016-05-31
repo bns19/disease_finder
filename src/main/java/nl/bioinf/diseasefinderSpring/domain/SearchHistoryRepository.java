@@ -9,6 +9,7 @@ import java.util.List;
 public interface SearchHistoryRepository extends PagingAndSortingRepository<SearchHistory, Long> {
 
     List<SearchHistory> findByUser_id(Long userId);
+
     Iterable<SearchHistory> findAll();
     SearchHistory findById(Long id);
     long count();
