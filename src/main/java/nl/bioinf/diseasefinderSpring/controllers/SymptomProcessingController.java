@@ -5,7 +5,7 @@
  */
 package nl.bioinf.diseasefinderSpring.controllers;
 
-//import model.Findtrait;
+import model.Findtrait;
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
 import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
