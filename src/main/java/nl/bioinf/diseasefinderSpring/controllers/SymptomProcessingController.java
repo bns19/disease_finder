@@ -5,10 +5,12 @@
  */
 package nl.bioinf.diseasefinderSpring.controllers;
 
+import model.Findtrait;
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
 import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.UserRepository;
+import nl.bioinf.diseasefinderSpring.searchPackage.searchSystem;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SaveSearchedSymptoms;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomProcessor;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomsCalculationInformation;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * This class now contains the controller responsible for finding diseases based on (dummy) symptoms given by the user.
@@ -57,7 +60,28 @@ public class SymptomProcessingController {
      */
     @RequestMapping(value = "/sendSymptoms",  method = RequestMethod.POST)
     @ResponseBody
-    public String processInput(Model model, final String symptoms, final String shortSymptoms) {
+    public String processInput(Model model, final String symptoms, final String shortSymptoms) throws Exception{
+
+        /////////////////////////////////////////////////
+        System.out.println("zo zien de symproms eruit: " + symptoms);
+      //  searchSystem ss = new searchSystem(symptoms);
+       // System.out.println("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
+        //searchSystem ss = new searchSystem("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
+       // System.out.println(ss.getResults()+ "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+//        Findtrait diseases = ss.getResults();
+//        int count = 0;
+//
+//        for (List<String> i : diseases.getFinalres().keySet()) {
+//            count++;
+//
+//            System.out.println(count);
+//            System.out.println("Disorder    " + i.get(1));
+//            System.out.println("id    " + i.get(0));
+//            System.out.println("match    " + diseases.getFinalres().get(i) + "\n");
+//
+//            }
+        /////////////////////////////////////////////////
+
         SymptomProcessor sp = new SymptomProcessor(symptoms);
 
         SaveSearchedSymptoms saveSymptoms = new SaveSearchedSymptoms(userRepository, searchHistoryRepository);
