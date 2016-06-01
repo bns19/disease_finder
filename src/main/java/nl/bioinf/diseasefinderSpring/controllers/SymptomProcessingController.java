@@ -5,12 +5,12 @@
  */
 package nl.bioinf.diseasefinderSpring.controllers;
 
-import model.Findtrait;
+//import model.Findtrait;
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
 import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.UserRepository;
-import nl.bioinf.diseasefinderSpring.searchPackage.searchSystem;
+//import nl.bioinf.diseasefinderSpring.searchPackage.searchSystem;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SaveSearchedSymptoms;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomProcessor;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomsCalculationInformation;

@@ -51,7 +51,6 @@ public class HPOJsonObjectCreatorSecondaryTree {
         tree.put("id", hpoTerm.getId());
         tree.put("name", hpoTerm.getName());
         tree.put("parent", parent);
-//        tree.put("children", null);
         return tree;
     }
 }

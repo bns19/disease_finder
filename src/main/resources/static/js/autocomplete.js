@@ -3,10 +3,10 @@ $(document).ready(initialize);
 
 function initialize() {
 
-    var url = "/autocompleteSymptoms";
     $("#symptoms").on("click", function() {
         $(this).val("");
     });
+
     $("#symptoms").autocomplete({
 
         width: 150,
@@ -15,9 +15,12 @@ function initialize() {
         autoFocus: true,
         cacheLength: 1,
         scroll: true,
-        highlight: false,
+        highlight: true,
+
+
         //Hier word de data uit de hpoprocessor opgehaald
         source: function(request, response) {
+
             $.ajax({
                 url: "/autocompleteSymptoms",
                 type: "GET",
@@ -50,8 +53,7 @@ function initialize() {
 
                         if (count === 1) {
 
-
-                            //$("#treeid").createTree(newData[0]);
+                            //Create the secondary tree in the right field
                             createTree(newData[0]);
 
                             // to highligt the symptom that is searched for
