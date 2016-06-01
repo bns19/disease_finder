@@ -1,27 +1,17 @@
-<rightfield>
+<div id="rightfield" xmlns:th="http://www.w3.org/1999/xhtml">
 
-    <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id="statisticsTab">
-        <div role="tabpanel">
+    <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id="secondarytreetab">
 
-            <!--Tab panes-->
-            <div class="tab-content" id="tabcontent">
+        <div class="tab-content" id="tabcontent">
+            <div role="tabpanel" class="tab-pane active" id="treetab">
 
-                <!--<showstatistics th:replace="includes/showstatistics"></showstatistics>-->
-                <div role="tabpanel" class="tab-pane active" id="treetab">
-
-                    <br/><br/>
-
-
-                    <h2>Secondary Tree</h2>
-
-                    <subtree th:replace="includes/subtree :: tree"></subtree>
-
-
-                </div>
-
+                <h2>Secondary Tree</h2>
+                <div th:replace="includes/subtree :: tree"></div>
             </div>
 
         </div>
+
     </div>
 
-</rightfield>
+</div>
+

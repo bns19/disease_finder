@@ -6,7 +6,18 @@
 </head>
 
 <body background="https://hirewallpapers.com/wp-content/uploads/2016/02/light_blue_1920x1080_wallpaper.jpg">
-<menu th:replace="includes/menu :: menu"></menu>
+
+<div class="nav">
+    <ul>
+        <li><a href="#signup" data-toggle="modal" data-target=".bs-modal-sm">Register </a></li>
+        <li><a th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" /></a></li>
+        <li><a href="#about" data-toggle="modal" data-target=".bs-modal-sm">about </a></li>
+
+        <div th:if="${#httpServletRequest.remoteUser}"> <!-- if customer is anonymous-->
+            <p th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</p>
+        </div>
+    </ul>
+</div>
 
 <div class="textcon">
     <leftfield th:replace="includes/leftfield"></leftfield>

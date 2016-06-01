@@ -36,15 +36,13 @@ body{
     background: -ms-linear-gradient(top, rgba(160,216,239,1) 0%,rgba(221,241,249,1) 65%,rgba(206,206,206,1) 100%); /* IE10+ */
     background: linear-gradient(to bottom, rgba(160,216,239,1) 0%,rgba(221,241,249,1) 65%,rgba(206,206,206,1) 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a0d8ef', endColorstr='#cecece',GradientType=0 ); /* IE6-9 */
-    width:75%;
-    margin-left:12.5%;
+    width: 75%;
+    margin:0 auto;
     max-width: 100em;
-    margin-bottom:-2em;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    border-radius: 10px;
     border-style: ridge;
     border-color: #9acfea;
-    margin-top: 3em;
+    margin-top: 1em;
 }
 h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
    font-weight: normal;
@@ -312,7 +310,16 @@ div.tooltip-inner {
     border-right-color: grey !important;
 }
 .ui-autocomplete {
+    max-height: 200px;
     overflow-y: auto;
+    /* prevent horizontal scrollbar */
     overflow-x: hidden;
-    max-height: 15em;
+    /* add padding to account for vertical scrollbar */
+    padding-right: 20px;
+    background-color: white;
+    z-index:30;
+    border: 1px solid black;
+    padding: 20px;
+    width: 150px;
+
 }
