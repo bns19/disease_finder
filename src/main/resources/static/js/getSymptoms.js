@@ -162,9 +162,60 @@ function sendSymptoms(symptoms) {
     //use the mapped controller
     $.post(controller, {"symptoms": localStorage.getItem("symptoms"), "shortSymptoms": localStorage.getItem("shortSymptoms"), _csrf: token}, function (diseases) {
 
+
+            console.log(diseases)
+        var diseaseSummary = "";
+
         $("#resultTab").text("");
         $("#resultTab").append("<br/><br/><ul>");
-        $("#resultTab").append(diseases);
+       // $("#resultTab").append(diseases);
+
+
+
+        for (var disease in diseases) {
+            console.log(disease["1"])
+            //for (var d in diseases) {
+            //    console.log(d)
+            //}
+        }
+        diseaseSummary = "<li class =\"disease\">"
+        + "<table>"
+        +"<tr class=\"diseaseTitle\">"
+
+            + "<td class=\"title\" colspan=\"3\">"
+            + "<a class = \"clickTitle\" id=\""
+            +"mimnumber"
+            +"\"><b>"
+        + disease[0].value
+        + "</a></td></tr>"
+        + "<tr>\n"
+            + "<td class=\"label\">Omimnumber: </td><td class=\"value\">"
+            + "mimNumber"
+
+        + "</td></tr>"
+
+         + "<tr><td class=\"label\"><a data"
+            + "-toggle=\"tooltip\" title=\"The score is calculated through:"
+            + " The sum of 1 / occurence of each match through the "
+            + "search.\" id=\"score\"data-placement=\"right\">"
+            + "Score: </a></td><td class=\"value\">"
+        + "score"
+                + "<tr><td class=\"label\"><a data"
+                + "-toggle=\"tooltip\" title=\"The number of matched "
+                + "symptoms.\"data-placement=\"right\">Hits: "
+                + "</a></td><td class=\"value\">"
+            + "hits"
+            + "</td></tr>"
+            + "<tr><td class=\"label\">Matches: "
+            + "</td><td class=\"value\">"
+            + "matches"
+            + "</td></tr>"
+             +"</table>"
+            + "</li><br/>"
+
+            $("#resultTab").append(diseaseSummary);
+
+
         $("#resultTab").append("</ul>");
         $("#resultTab").append("<button id = \"save\" class=\"btn btn-default\">Save this result as .txt</button>");
         $("#resultTab").append("<button id = \"savePdf\" class=\"btn btn-default\">Save this result as .pdf</button>");

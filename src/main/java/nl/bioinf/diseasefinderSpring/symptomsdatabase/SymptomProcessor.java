@@ -12,9 +12,7 @@ import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
 import org.json.JSONException;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This class regulates the processing of disease terms and gets the corresponding diseases which it will return to the
@@ -28,6 +26,7 @@ public class SymptomProcessor {
      * @param symptoms the given symptoms as string
      */
     public SymptomProcessor(final String symptoms) {
+
         processSymptoms(symptoms);
     }
 
@@ -36,6 +35,7 @@ public class SymptomProcessor {
      * the retrieved diseases based on the given symptoms.
      */
     private String diseases;
+    private List<List> diseaseData = new ArrayList();
 
     /**
      * this method regulates the core processingpart.
@@ -46,6 +46,9 @@ public class SymptomProcessor {
         StringBuilder sb = new StringBuilder();
         /**Splits added dummy symptoms**/
         System.out.println(symptoms);
+
+
+
         String[] symptomsList = symptoms.split(",");
 
         try {
@@ -55,9 +58,13 @@ public class SymptomProcessor {
                     .getDiseaseCollection();
             Iterator it = hashMapOfDiseases.entrySet().iterator();
             while (it.hasNext()) {
+                List<String> featuresOfCurrentDisease = new ArrayList();
                 Map.Entry pair = (Map.Entry) it.next();
                 Disease disease = (Disease) pair.getValue();
                 sb.append(disease.printSummary());
+                featuresOfCurrentDisease.add(disease.getTitle());
+                featuresOfCurrentDisease.add((disease.getMimNumber()));
+                this.diseaseData.add(featuresOfCurrentDisease);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -75,4 +82,9 @@ public class SymptomProcessor {
     public String getDiseases() {
         return this.diseases;
     }
+
+    public List getDiseaseData() {
+        return this.diseaseData;
+    }
+
 }
