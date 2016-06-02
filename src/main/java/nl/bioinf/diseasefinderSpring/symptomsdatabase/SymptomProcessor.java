@@ -44,10 +44,6 @@ public class SymptomProcessor {
      */
     private void processSymptoms(final String symptoms) {
         StringBuilder sb = new StringBuilder();
-        /**Splits added dummy symptoms**/
-        System.out.println(symptoms);
-
-
 
         String[] symptomsList = symptoms.split(",");
 
@@ -58,12 +54,13 @@ public class SymptomProcessor {
                     .getDiseaseCollection();
             Iterator it = hashMapOfDiseases.entrySet().iterator();
             while (it.hasNext()) {
-                List<String> featuresOfCurrentDisease = new ArrayList();
+                List<Object> featuresOfCurrentDisease = new ArrayList();
                 Map.Entry pair = (Map.Entry) it.next();
                 Disease disease = (Disease) pair.getValue();
                 sb.append(disease.printSummary());
                 featuresOfCurrentDisease.add(disease.getTitle());
                 featuresOfCurrentDisease.add((disease.getMimNumber()));
+                featuresOfCurrentDisease.add(disease.getMatches());
                 this.diseaseData.add(featuresOfCurrentDisease);
             }
         } catch (JSONException e) {

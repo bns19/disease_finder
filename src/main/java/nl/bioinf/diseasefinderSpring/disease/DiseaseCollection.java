@@ -7,6 +7,7 @@
 package nl.bioinf.diseasefinderSpring.disease;
 
 import nl.bioinf.diseasefinderSpring.connection.OmimDataRetriever;
+import nl.bioinf.diseasefinderSpring.controllers.DiseaseInformation;
 import nl.bioinf.diseasefinderSpring.datafinder.DiseasePhenotypeGetter;
 import org.json.JSONException;
 
@@ -185,8 +186,20 @@ public class DiseaseCollection {
      * @return info the information about the disease.
      * @author mkslofstra
      */
+//    public final DiseaseInformation getInfoOfDisease(final String omimNumber) {
+//        //String info = this.diseaseCollection.get(omimNumber).toString();
+//        this.diseaseCollection.get(omimNumber).createDiseaseInformation();
+//        DiseaseInformation diseaseInformation = this.diseaseCollection.get(omimNumber).getDiseaseInformation();
+//
+//        System.out.println(diseaseInformation.getTitle());
+//        return diseaseInformation;
+//    }
     public final String getInfoOfDisease(final String omimNumber) {
-        String info = this.diseaseCollection.get(omimNumber).toString();
-        return info;
+        //String info = this.diseaseCollection.get(omimNumber).toString();
+      //  this.diseaseCollection.get(omimNumber).createDiseaseInformation();
+        String diseaseInformation = this.diseaseCollection.get(omimNumber).toString();
+
+       // System.out.println(diseaseInformation.getTitle());
+        return diseaseInformation;
     }
 }

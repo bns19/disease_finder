@@ -90,8 +90,6 @@ public class SymptomProcessingController {
         SymptomsCalculationInformation symptomsCalculationInformation =
                 new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
         symptomsCalculationInformation.calculateSymptomsSearch();
-        System.out.println(sp.getDiseaseData());
-       // return sp.getDiseases();
         return sp.getDiseaseData();
     }
 
@@ -104,6 +102,16 @@ public class SymptomProcessingController {
      * @throws JSONException JSONException.
      * @throws IOException JSONException.
      */
+//    @RequestMapping(value = "/diseaseInformation", method = RequestMethod.POST)
+//    @ResponseBody
+//    public DiseaseInformation loadDisease(final String omimNumber, final String symptoms) throws JSONException, IOException {
+//        String[] symptomSet = symptoms.split(",");
+//        DiseaseCollection diseases = new DiseaseCollection(symptomSet);
+//        ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
+//        DiseaseInformation information = diseases.getInfoOfDisease(omimNumber);
+//        return information;
+//    }
+
     @RequestMapping(value = "/diseaseInformation", method = RequestMethod.POST)
     @ResponseBody
     public String loadDisease(final String omimNumber, final String symptoms) throws JSONException, IOException {
@@ -113,7 +121,6 @@ public class SymptomProcessingController {
         String information = diseases.getInfoOfDisease(omimNumber);
         return information;
     }
-
 
 }
 

@@ -6,6 +6,8 @@
  */
 package nl.bioinf.diseasefinderSpring.disease;
 
+import nl.bioinf.diseasefinderSpring.controllers.DiseaseInformation;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +48,13 @@ public class Disease implements Comparable {
         this.title = titleOfDisease;
         this.features = featuresHashMap;
         this.hits++;
+
+        this.diseaseInformation.setOmimNumber(mimNumberValue);
+        this.diseaseInformation.setTitle(titleOfDisease);
+        this.diseaseInformation.setMatches(this.matches);
     }
+
+    private DiseaseInformation diseaseInformation = new DiseaseInformation();
 
     /**
      * matches is the list of matches found with the symptoms.
@@ -78,6 +86,9 @@ public class Disease implements Comparable {
      *
      * @return hits the number of hits a disease has.
      */
+
+    public final DiseaseInformation getDiseaseInformation() { return this.diseaseInformation; }
+
     public final Integer getHits() {
         return hits;
     }
@@ -98,6 +109,52 @@ public class Disease implements Comparable {
      */
     public final Double getScore() {
         return score;
+    }
+
+
+    public void createDiseaseInformation() {
+
+        StringBuilder sb = new StringBuilder();
+        Iterator it = features.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            String info = pair.getValue().toString();
+            //this replaces the ugly links and unreadable information
+            //on the omim api
+            info = info.replaceAll("\\{[A-Za-z0-9:_,. -]+\\}", "");
+            //name the key of the hashmap, this is the ontology of the
+            //symptom in camelcase
+            String wholeKey = (String) pair.getKey();
+            //make a stringbuilder
+            StringBuilder key = new StringBuilder();
+            //nicely format the symptom ontology
+            for (int i = 0; i < wholeKey.length(); i++) {
+                char letter = wholeKey.charAt(i);
+                //check for each character if the character is uppercase
+                //(then it is a new word)
+                if (Character.isUpperCase(letter)) {
+                    //append space if character is uppercase and make
+                    //the character lowercase
+                    key.append(" ").append(Character.toString(letter)
+                            .toLowerCase());
+                } else {
+                    //just append the character
+                    key.append(letter);
+                }
+            }
+            sb.append("<br/><br/><b>").append(key.toString())
+                    .append("</b><br/>").append(info);
+            it.remove(); // avoids a ConcurrentModificationException
+        }
+        String diseaseInfo = sb.toString();
+        for (String match : this.matches) {
+            match = match.replaceAll(" ", "");
+            diseaseInfo = diseaseInfo.replaceAll("(?i)" + match.toLowerCase(),
+                    "<span class=\"highlight\">" + match + "</span>");
+        }
+        this.diseaseInformation.setInformation(diseaseInfo);
+
+
     }
 
     /**

@@ -112,12 +112,7 @@ function initialize() {
                 //longSymptomList[longIndex]=nonNegatedSymptom;
                 //localStorage.removeItem("symptoms");
                 //localStorage.setItem("symptoms", longSymptomList.toString())
-
             }
-
-
-           console.log(localStorage.getItem("shortSymptoms"));
-            console.log(localStorage.getItem("symptoms"))
         });
 
 
@@ -161,9 +156,6 @@ function sendSymptoms(symptoms) {
     var header = $("meta[name='_csrf_header']").attr("content");
     //use the mapped controller
     $.post(controller, {"symptoms": localStorage.getItem("symptoms"), "shortSymptoms": localStorage.getItem("shortSymptoms"), _csrf: token}, function (diseases) {
-
-
-            console.log(diseases)
         var diseaseSummary = "";
 
         $("#resultTab").text("");
@@ -171,50 +163,56 @@ function sendSymptoms(symptoms) {
        // $("#resultTab").append(diseases);
 
 
+//        console.log(diseases)
 
         for (var disease in diseases) {
-            console.log(disease["1"])
-            //for (var d in diseases) {
-            //    console.log(d)
-            //}
-        }
-        diseaseSummary = "<li class =\"disease\">"
-        + "<table>"
-        +"<tr class=\"diseaseTitle\">"
 
-            + "<td class=\"title\" colspan=\"3\">"
-            + "<a class = \"clickTitle\" id=\""
-            +"mimnumber"
-            +"\"><b>"
-        + disease[0].value
-        + "</a></td></tr>"
-        + "<tr>\n"
-            + "<td class=\"label\">Omimnumber: </td><td class=\"value\">"
-            + "mimNumber"
+            var values = diseases[disease];
 
-        + "</td></tr>"
+            var matches = "";
+            for (var match in values[2]) {
+                console.log(values[2][match]+ "a match")
+                matches+= values[2][match];
+            }
 
-         + "<tr><td class=\"label\"><a data"
-            + "-toggle=\"tooltip\" title=\"The score is calculated through:"
-            + " The sum of 1 / occurence of each match through the "
-            + "search.\" id=\"score\"data-placement=\"right\">"
-            + "Score: </a></td><td class=\"value\">"
-        + "score"
+
+            diseaseSummary = "<li class =\"disease\">"
+                + "<table>"
+                + "<tr class=\"diseaseTitle\">"
+
+                + "<td class=\"title\" colspan=\"3\">"
+                + "<a class = \"clickTitle\" id=\""
+                + values[1]
+                + "\"><b>"
+                + values[0]
+                + "</a></td></tr>"
+                + "<tr>\n"
+                + "<td class=\"label\">Omimnumber: </td><td class=\"value\">"
+                + values[1]
+
+                + "</td></tr>"
+
+                + "<tr><td class=\"label\"><a data"
+                + "-toggle=\"tooltip\" title=\"The score is calculated through:"
+                + " The sum of 1 / occurence of each match through the "
+                + "search.\" id=\"score\"data-placement=\"right\">"
+                + "Score: </a></td><td class=\"value\">"
+                + "score"
                 + "<tr><td class=\"label\"><a data"
                 + "-toggle=\"tooltip\" title=\"The number of matched "
                 + "symptoms.\"data-placement=\"right\">Hits: "
                 + "</a></td><td class=\"value\">"
-            + "hits"
-            + "</td></tr>"
-            + "<tr><td class=\"label\">Matches: "
-            + "</td><td class=\"value\">"
-            + "matches"
-            + "</td></tr>"
-             +"</table>"
-            + "</li><br/>"
+                + "hits"
+                + "</td></tr>"
+                + "<tr><td class=\"label\">Matches: "
+                + "</td><td class=\"value\">"
+                + matches
+                + "</td></tr>"
+                + "</table>"
+                + "</li><br/>"
 
             $("#resultTab").append(diseaseSummary);
-
+        }
 
         $("#resultTab").append("</ul>");
         $("#resultTab").append("<button id = \"save\" class=\"btn btn-default\">Save this result as .txt</button>");
@@ -243,6 +241,8 @@ function loadDisease() {
         "symptoms": localStorage.getItem("symptoms"),
         _csrf: token
     }, function (disease) {
+
+        console.log(disease)
         var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
         var title = disease.match(pattern)[1];
         //sommige ziekten worden niet gematched
@@ -268,6 +268,29 @@ function loadDisease() {
         $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
         $("#" + id).append("<br/><br/>");
         $("#" + id).append(disease);
+
+        //$("#" + id).append("<h2>" + title + "</h2><div id =\"disease\">"
+        //+ "<p class=\"back2results\"><span class = \"glyphicon"
+        //+ " glyphicon-arrow-left\" aria-hidden=\"true\">"
+        //+ "  Back to results</p></span><br/>"
+        //+ "<b>Omim number : </b>"
+        //+ "<a href=\"http://omim.org/entry/" + mimNumber
+        //+ "\"target=\"blank\"data-toggle=\"tooltip\""
+        //+ " title=\"Click here to open the disease on"
+        //+ " the omim website\"id=\"omimSiteLink\">" + mimNumber + "</a>"
+        //+ "<br/><b>Matches: </b>" + this.matches + "<br/>"
+        //+ "<b><a data"
+        //+ "-toggle=\"tooltip\" title=\"The number of matched "
+        //+ "symptoms.\"data-placement=\"right\">Hits :</a></b> "
+        //+ hits + "<br/><b><a data"
+        //+ "-toggle=\"tooltip\" title=\"The score is calculated through:"
+        //+ " The sum of 1 / occurence of each match through the search"
+        //+ ".\"data-placement=\"right\">Score: </a></b>"
+        //+ score + "<br/><br/><button id=\"highlightButton\""
+        //+ " class=\"button btn btn-info\">"
+        //+ "Highlight matches</button>" + diseaseInfo + "</div>");
+
+
         $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease as .txt</button>");
         // }
         $(".closeDiseaseTab").click(function () {
