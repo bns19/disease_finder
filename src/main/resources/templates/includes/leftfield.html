@@ -1,9 +1,8 @@
-<leftfield>
+<leftfield xmlns:th="http://www.w3.org/1999/xhtml">
 
     <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id="history">
         <div role="tabpanel">
 
-            <!-- if customer is loggedin-->
             <div th:if="${#httpServletRequest.remoteUser}">
                 <navmenu th:replace="includes/navmenu :: loggedin"></navmenu>
             </div>
@@ -37,6 +36,7 @@
                 <div role="tabpanel" class="tab-pane" id="resultTab">
                     <br/><br/>
                     Click in the search-tab on the search button to get results here.
+                    <!--<symptomResults th:replace="includes/symptomResults"></symptomResults>-->
                 </div>
 
                 <div role="tabpanel" class="tab-pane" id="statisticsTab">

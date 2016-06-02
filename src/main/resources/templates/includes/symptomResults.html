@@ -1,0 +1,48 @@
+<symptomResults xmlns:th="http://www.w3.org/1999/xhtml">
+
+
+    <div id="diseases">
+        <div th:if="${diseaseSummary == null}">
+            Click in the search-tab on the search button to get results here.
+        </div>
+
+        <div th:if="${diseaseSummary != null}">
+            <tr th:each="disease :  ${diseaseSummary}">
+                <td th:text="${disease}"></td>
+                <td th:text="${disease}"></td>
+            </tr>
+            hallo
+        </div>
+    </div>
+
+</symptomResults>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--<meta charset="UTF-8">-->
+<!--<title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<div id = "diseaseTemplate">-->
+<!--<h2>disease</h2>-->
+<!--<div id ="disease">-->
+<!--<p class="back2results"><span class = "glyphicon glyphicon-arrow-left" aria-hidden=true>Back to results</span></p>-->
+<!--<br/>-->
+<!--<b>Omim number :</b>-->
+<!--<a href="http://omim.org/entry/"  target="blank" data-toggle="tooltip"-->
+<!--title= "Click here to open the disease on"  the omim website id= "omimSiteLink"> mimNumber</a>-->
+<!--<br/><b>Matches:</b>-->
+<!--<br/>-->
+<!--<b><a data-toggle="tooltip" title="The number of matched" symptoms.data-placement="right">Hits :</a></b>-->
+
+<!--<br/>-->
+
+<!--<b><a data-toggle="tooltip" title="The score is calculated through: The sum of 1 / occurence of each match through the searchdata-placement=" right>Score: </a></b>-->
+<!--<br/><br/>-->
+<!--<button id="highlightButton" class="button btn btn-info"> Highlight matches</button>diseaseInfo</div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

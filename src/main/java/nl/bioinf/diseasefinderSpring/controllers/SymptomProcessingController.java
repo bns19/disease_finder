@@ -5,12 +5,12 @@
  */
 package nl.bioinf.diseasefinderSpring.controllers;
 
-//import model.Findtrait;
+import model.Findtrait;
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
 import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.UserRepository;
-//import nl.bioinf.diseasefinderSpring.searchPackage.searchSystem;
+import nl.bioinf.diseasefinderSpring.searchPackage.SearchSystem;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SaveSearchedSymptoms;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomProcessor;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomsCalculationInformation;
@@ -60,14 +60,14 @@ public class SymptomProcessingController {
      */
     @RequestMapping(value = "/sendSymptoms",  method = RequestMethod.POST)
     @ResponseBody
-    public String processInput(Model model, final String symptoms, final String shortSymptoms) throws Exception{
+    public List processInput(Model model, final String symptoms, final String shortSymptoms) throws Exception{
 
         /////////////////////////////////////////////////
-        System.out.println("zo zien de symproms eruit: " + symptoms);
-      //  searchSystem ss = new searchSystem(symptoms);
-       // System.out.println("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
-        //searchSystem ss = new searchSystem("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
-       // System.out.println(ss.getResults()+ "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+//        System.out.println("zo zien de symproms eruit: " + symptoms);
+//        SearchSystem ss = new SearchSystem(symptoms);
+//        System.out.println("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
+//      //  SearchSystem ss = new SearchSystem("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
+//        System.out.println(ss.getResults()+ "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 //        Findtrait diseases = ss.getResults();
 //        int count = 0;
 //
@@ -90,8 +90,9 @@ public class SymptomProcessingController {
         SymptomsCalculationInformation symptomsCalculationInformation =
                 new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
         symptomsCalculationInformation.calculateSymptomsSearch();
-        model.addAttribute("statistics", symptomsCalculationInformation.getStatisticalInformation());
-        return sp.getDiseases();
+        System.out.println(sp.getDiseaseData());
+       // return sp.getDiseases();
+        return sp.getDiseaseData();
     }
 
     /**
