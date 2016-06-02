@@ -1,12 +1,13 @@
 /**
  * Created by hjdupon on 1-6-16.
  */
-function executeCreateTree(treeData) {
 
 //************** Generate the tree diagram	 *****************
+function executeCreateTree(treeData) {
+
     var margin = {top: 20, right: 120, bottom: 20, left: 120},
-        width = 960 - margin.right - margin.left,
-        height = 500 - margin.top - margin.bottom;
+        width = 1000 - margin.right - margin.left,
+        height = 750 - margin.top - margin.bottom;
 
     var i = 0,
         duration = 750,
@@ -35,6 +36,8 @@ function executeCreateTree(treeData) {
     d3.select(self.frameElement).style("height", "500px");
 
     function update(source) {
+
+        console.log(source)
 
         // Compute the new tree layout.
         var nodes = tree.nodes(root).reverse(),

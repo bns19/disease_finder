@@ -42,6 +42,7 @@ function initialize() {
                 dataType: "text",
                 data: {"autoCompleteResult": ui.item.value},
                 success: function(data) {
+                    var selectedname = ui.item.value;
 
                     data = data.replace(/\[|\]/g, "");
 
@@ -54,7 +55,7 @@ function initialize() {
                         if (count === 1) {
 
                             //Create the secondary tree in the right field
-                            createTree(newData[0]);
+                            createTree(newData[0], selectedname);
 
                             // to highligt the symptom that is searched for
                             $("#ontology-tree").jstree(true).get_node(newData[0]).li_attr.class = "jstree-search"
