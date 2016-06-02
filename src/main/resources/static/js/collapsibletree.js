@@ -1,4 +1,4 @@
-function createTree(data) {
+function createTree(data, selectedname) {
 
     //Global variables
     var mlist = new Array();
@@ -31,14 +31,12 @@ function createTree(data) {
     //Get all the children of the input node
     function executeTree(jsonout) {
         for (x in jsonout) {
-            var count = 0;
             var loop = jsonout[x];
 
             //Update the mlist with all the child node objects
             for (firstsearch in loop) {
                 mlist.push(loop[firstsearch]);
             }
-            count += 1;
         }
         ctree(mlist);
     }
@@ -62,14 +60,18 @@ function createTree(data) {
             }
         }
 
-        //Create the root object
-        var rootobject = new Object();
-        rootobject['name'] = "root";
-        rootobject['id'] = "000001";
-        rootobject['parent'] = null;
+        createRootObject();
 
-        //Push root object to the input list
-        input.push(rootobject)
+        function createRootObject() {
+            //Create the root object
+            var rootobject = new Object();
+            rootobject['name'] = selectedname;
+            rootobject['id'] = "000001";
+            rootobject['parent'] = null;
+
+            //Push root object to the input list
+            input.push(rootobject)
+        }
 
         var arr = input;
         var tree = [],
