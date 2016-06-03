@@ -143,7 +143,6 @@ function resendQuery(longQuery) {
     sendSymptoms()
     }
 
-
 //by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
     //localStorage.setItem("symptoms", symptoms);
@@ -162,18 +161,12 @@ function sendSymptoms(symptoms) {
         $("#resultTab").append("<br/><br/><ul>");
        // $("#resultTab").append(diseases);
 
-
-//        console.log(diseases)
-
         for (var disease in diseases) {
 
             var values = diseases[disease];
+           // var matches = getMatches(values[2]);
 
-            var matches = "";
-            for (var match in values[2]) {
-                console.log(values[2][match]+ "a match")
-                matches+= values[2][match];
-            }
+
 
 
             diseaseSummary = "<li class =\"disease\">"
@@ -206,7 +199,7 @@ function sendSymptoms(symptoms) {
                 + "</td></tr>"
                 + "<tr><td class=\"label\">Matches: "
                 + "</td><td class=\"value\">"
-                + matches
+                + values[2]
                 + "</td></tr>"
                 + "</table>"
                 + "</li><br/>"
@@ -231,6 +224,8 @@ function sendSymptoms(symptoms) {
     });
 }
 
+
+
 //by mkslofstra and bnsikkema
 function loadDisease() {
     var diseaseServlet = "/diseaseInformation";
@@ -241,17 +236,19 @@ function loadDisease() {
         "symptoms": localStorage.getItem("symptoms"),
         _csrf: token
     }, function (disease) {
+        console.log(disease["title"] + "de titel")
+        var title = disease["title"];
 
-        console.log(disease)
-        var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
-        var title = disease.match(pattern)[1];
-        //sommige ziekten worden niet gematched
+        //var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
+        //var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
+        //var title = disease.match(pattern)[1];
+        ////sommige ziekten worden niet gematched
         var id = title.replace(/[ ,;.-]* /g, "");
         var idPat = new RegExp(id);
 
         /////////////////////////////////////////////////////////////
          var matchId = localStorage.getItem("ids").match(idPat);
-
+        console.log(matchId)
          //make sure, the tab is only created one time
          if (matchId === null) {
              localStorage.setItem("ids", localStorage.getItem("ids") + id);
@@ -259,40 +256,48 @@ function loadDisease() {
              if (title.length > 15) {
                  title = title.substring(0, 12) + "...";
              }
-         }
-        //     //put the data in an extra tab
-        ///////////////////////////////////////////////////////
 
         $("#tablist").append("<li role=\"presentation\"><a href=\"#" + id + "\" aria-controls=\"" + id
             + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\" class=\"tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
         $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
         $("#" + id).append("<br/><br/>");
-        $("#" + id).append(disease);
+        //$("#" + id).append(disease);
 
-        //$("#" + id).append("<h2>" + title + "</h2><div id =\"disease\">"
-        //+ "<p class=\"back2results\"><span class = \"glyphicon"
-        //+ " glyphicon-arrow-left\" aria-hidden=\"true\">"
-        //+ "  Back to results</p></span><br/>"
-        //+ "<b>Omim number : </b>"
-        //+ "<a href=\"http://omim.org/entry/" + mimNumber
-        //+ "\"target=\"blank\"data-toggle=\"tooltip\""
-        //+ " title=\"Click here to open the disease on"
-        //+ " the omim website\"id=\"omimSiteLink\">" + mimNumber + "</a>"
-        //+ "<br/><b>Matches: </b>" + this.matches + "<br/>"
-        //+ "<b><a data"
-        //+ "-toggle=\"tooltip\" title=\"The number of matched "
-        //+ "symptoms.\"data-placement=\"right\">Hits :</a></b> "
-        //+ hits + "<br/><b><a data"
-        //+ "-toggle=\"tooltip\" title=\"The score is calculated through:"
-        //+ " The sum of 1 / occurence of each match through the search"
-        //+ ".\"data-placement=\"right\">Score: </a></b>"
-        //+ score + "<br/><br/><button id=\"highlightButton\""
-        //+ " class=\"button btn btn-info\">"
-        //+ "Highlight matches</button>" + diseaseInfo + "</div>");
+        $("#" + id).append("<h2>" + disease["title"] + "</h2><div id =\"disease\">"
+        + "<p class=\"back2results\"><span class = \"glyphicon"
+        + " glyphicon-arrow-left\" aria-hidden=\"true\">"
+        + "  Back to results</p></span><br/>"
+        + "<b>Omim number : </b>"
+        + "<a href=\"http://omim.org/entry/" +
+            disease["omimNumber"] +
+        + "\"target=\"blank\"data-toggle=\"tooltip\""
+        + " title=\"Click here to open the disease on the omim website\"id=\"omimSiteLink\">" +
+            disease["omimNumber"] +
+            "</a>"
+        + "<br/><b>Matches: </b>" +
+            disease["matches"] + "<br/>"
+        + "<b><a data"
+        + "-toggle=\"tooltip\" title=\"The number of matched "
+        + "symptoms.\"data-placement=\"right\">Hits :</a></b> "
+        + "hits" + "<br/><b><a data"
+        + "-toggle=\"tooltip\" title=\"The score is calculated through:"
+        + " The sum of 1 / occurence of each match through the search"
+        + ".\"data-placement=\"right\">Score: </a></b>"
+        + score + "<br/><br/><button id=\"highlightButton\""
+        + " class=\"button btn btn-info\">"
+        + "Highlight matches</button>" +
+            disease["information"] +
+            "</div>");
 
 
         $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease as .txt</button>");
-        // }
+         }
+
+
+
+
+
+
         $(".closeDiseaseTab").click(function () {
             // matchId = localStorage.getItem("ids").match(idPat);
             var close_id = $(this).data("close");
