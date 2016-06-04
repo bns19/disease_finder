@@ -54,15 +54,20 @@ public class WebController extends WebMvcConfigurerAdapter {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showForm(Model model, final User user) {
         //session.setAttribute("mySessionAttribute", "someValue");
+        System.out.println("testtttt");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
-
+        System.out.println("testtttt2");
         SymptomsCalculationInformation symptomsCalculationInformation =
                 new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
-        symptomsCalculationInformation.calculateSymptomsSearch();
-        model.addAttribute("statistics", symptomsCalculationInformation.getStatisticalInformation());
+        System.out.println("testtttt3");
+        try {
+            symptomsCalculationInformation.calculateSymptomsSearch();
 
+        model.addAttribute("statistics", symptomsCalculationInformation.getStatisticalInformation());
+        } catch (Exception e) {}
         if (!username.equals("anonymousUser")) {
+
             LoadSearchedSymptoms loadHistory = new LoadSearchedSymptoms(userRepository, searchHistoryRepository);
             List<SearchHistory> searchHistory = loadHistory.loadSearchedSymptoms();
             model.addAttribute("history", searchHistory);
@@ -90,9 +95,11 @@ public class WebController extends WebMvcConfigurerAdapter {
 
             System.out.println(encrypted);
             user.setCreatedAt(LocalDateTime.now());
-            userRepository.save(user);
 
-            return "/login";
+
+            userRepository.save(user);
+            System.out.println("bereikbaar?");
+            return "/home";
         }
         return "/form";
 

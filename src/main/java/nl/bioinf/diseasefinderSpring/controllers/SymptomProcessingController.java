@@ -83,13 +83,14 @@ public class SymptomProcessingController {
         /////////////////////////////////////////////////
 
         SymptomProcessor sp = new SymptomProcessor(symptoms);
+        try {
+            SaveSearchedSymptoms saveSymptoms = new SaveSearchedSymptoms(userRepository, searchHistoryRepository);
+            saveSymptoms.saveSymptoms(shortSymptoms, symptoms);
 
-        SaveSearchedSymptoms saveSymptoms = new SaveSearchedSymptoms(userRepository, searchHistoryRepository);
-        saveSymptoms.saveSymptoms(shortSymptoms, symptoms);
-
-        SymptomsCalculationInformation symptomsCalculationInformation =
-                new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
-        symptomsCalculationInformation.calculateSymptomsSearch();
+            SymptomsCalculationInformation symptomsCalculationInformation =
+                    new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
+            symptomsCalculationInformation.calculateSymptomsSearch();
+        } catch(Exception e) {}
         return sp.getDiseaseData();
     }
 

@@ -11,17 +11,26 @@
                 <th>number of searches by you</th>
                 <th>percentage of searches by you</th>
             </tr>
-            <tr>
+
+            <tr th:if="${statistics}">
+
                 <td th:text="${statistics.getTotalSearches()}"></td>
                 <td th:text="${statistics.getTotalUserSearches()}"></td>
                 <td th:text="${statistics.getPercentageSearchesUser()}"></td>
+            </tr>
+            <tr th:unless="${statistics}">
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
             </tr>
 
         </table>
     </div>
         <!--<p>statistics of you're last searched query: </p>  <p th:text="${statistics.getQuery()}"></p>-->
     <div>
+        <div th:if="${statistics}">
         <p>The last searched query is: </p><p th:text="${statistics.getQuery()}"></p>
+        </div>
         <table class="table table-striped">
             <caption><p>Statistics of the latest query</p> </caption>
 
@@ -33,11 +42,17 @@
                 <th>number of times searched by you</th>
                 <th>percentage of your search</th>
             </tr>
-            <tr>
+            <tr th:if="${statistics}">
                 <td th:text="${statistics.getTotalQuerySearches()}"></td>
                 <td th:text="${statistics.getPercentageQuerySearches()}"></td>
                 <td th:text="${statistics.getTotalQuerySearchesUser()}"></td>
                 <td th:text="${statistics.getPercentageQuerySearchesUser()}"></td>
+            </tr>
+            <tr th:unless="${statistics}">
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
             </tr>
 
 
