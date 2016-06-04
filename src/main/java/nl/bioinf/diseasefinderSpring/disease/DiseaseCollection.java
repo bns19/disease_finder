@@ -186,20 +186,20 @@ public class DiseaseCollection {
      * @return info the information about the disease.
      * @author mkslofstra
      */
-//    public final DiseaseInformation getInfoOfDisease(final String omimNumber) {
-//        //String info = this.diseaseCollection.get(omimNumber).toString();
-//        this.diseaseCollection.get(omimNumber).createDiseaseInformation();
-//        DiseaseInformation diseaseInformation = this.diseaseCollection.get(omimNumber).getDiseaseInformation();
-//
-//        System.out.println(diseaseInformation.getTitle());
-//        return diseaseInformation;
-//    }
-    public final String getInfoOfDisease(final String omimNumber) {
+    public final DiseaseInformation getInfoOfDisease(final String omimNumber) {
         //String info = this.diseaseCollection.get(omimNumber).toString();
-      //  this.diseaseCollection.get(omimNumber).createDiseaseInformation();
-        String diseaseInformation = this.diseaseCollection.get(omimNumber).toString();
+        this.diseaseCollection.get(omimNumber).createDiseaseInformation();
+        DiseaseInformation diseaseInformation = this.diseaseCollection.get(omimNumber).getDiseaseInformation();
 
-       // System.out.println(diseaseInformation.getTitle());
+        System.out.println(diseaseInformation.getTitle());
         return diseaseInformation;
     }
+//    public final String getInfoOfDisease(final String omimNumber) {
+//        //String info = this.diseaseCollection.get(omimNumber).toString();
+//      //  this.diseaseCollection.get(omimNumber).createDiseaseInformation();
+//        String diseaseInformation = this.diseaseCollection.get(omimNumber).toString();
+//
+//       // System.out.println(diseaseInformation.getTitle());
+//        return diseaseInformation;
+//    }
 }

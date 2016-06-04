@@ -102,25 +102,25 @@ public class SymptomProcessingController {
      * @throws JSONException JSONException.
      * @throws IOException JSONException.
      */
-//    @RequestMapping(value = "/diseaseInformation", method = RequestMethod.POST)
-//    @ResponseBody
-//    public DiseaseInformation loadDisease(final String omimNumber, final String symptoms) throws JSONException, IOException {
-//        String[] symptomSet = symptoms.split(",");
-//        DiseaseCollection diseases = new DiseaseCollection(symptomSet);
-//        ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
-//        DiseaseInformation information = diseases.getInfoOfDisease(omimNumber);
-//        return information;
-//    }
-
     @RequestMapping(value = "/diseaseInformation", method = RequestMethod.POST)
     @ResponseBody
-    public String loadDisease(final String omimNumber, final String symptoms) throws JSONException, IOException {
+    public DiseaseInformation loadDisease(final String omimNumber, final String symptoms) throws JSONException, IOException {
         String[] symptomSet = symptoms.split(",");
         DiseaseCollection diseases = new DiseaseCollection(symptomSet);
         ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
-        String information = diseases.getInfoOfDisease(omimNumber);
+        DiseaseInformation information = diseases.getInfoOfDisease(omimNumber);
         return information;
     }
+
+//    @RequestMapping(value = "/diseaseInformation", method = RequestMethod.POST)
+//    @ResponseBody
+//    public String loadDisease(final String omimNumber, final String symptoms) throws JSONException, IOException {
+//        String[] symptomSet = symptoms.split(",");
+//        DiseaseCollection diseases = new DiseaseCollection(symptomSet);
+//        ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
+//        String information = diseases.getInfoOfDisease(omimNumber);
+//        return information;
+//    }
 
 }
 
