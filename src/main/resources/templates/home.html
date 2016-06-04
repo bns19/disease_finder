@@ -9,9 +9,12 @@
 
 <div class="nav">
     <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="#about" data-toggle="modal" data-target=".bs-modal-sm-about">About </a></li>
+        <li><a href="#howto" data-toggle="modal" data-target=".bs-modal-sm-howTo">How to </a></li>
         <li><a href="#signup" data-toggle="modal" data-target=".bs-modal-sm">Register </a></li>
         <li><a th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" /></a></li>
-        <li><a href="#about" data-toggle="modal" data-target=".bs-modal-sm">about </a></li>
+
 
         <div th:if="${#httpServletRequest.remoteUser}"> <!-- if customer is anonymous-->
             <p th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</p>
@@ -25,6 +28,59 @@
     <leftfield th:replace="includes/leftfield"></leftfield>
     <rightfield th:replace="includes/rightfield"></rightfield>
 </div>
+
+<div class="modal fade bs-modal-sm-about" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="aboutContent" class="tab-content">
+                    <div class="tab-pane fade active in" id="about">
+                        <p>about</p>
+
+                        Bacon ipsum dolor amet spare ribs doner flank alcatra meatloaf labore.
+                        T-bone venison consequat cillum, doner pig non chicken tail filet mignon.
+                        Sausage commodo sunt, tri-tip ground round pancetta cupidatat minim ut officia do.
+                        Shank deserunt occaecat ut, veniam pastrami strip steak short ribs consectetur venison meatloaf pariatur sausage.
+                        Kevin pork belly short ribs boudin laboris rump dolore excepteur hamburger bacon laborum aute mollit.
+
+                        Tail cillum ham hock, consectetur ut swine ham picanha prosciutto pork chop fatback filet mignon nisi.
+                        Duis in beef fatback meatball, pancetta esse ut. Jowl brisket tail spare ribs capicola ground round.
+                        Meatloaf labore sirloin bacon eiusmod in quis corned beef kielbasa spare ribs.
+                        Pig ullamco corned beef labore ex cupim, enim venison brisket ut ball tip ribeye andouille in.
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="modal fade bs-modal-sm-howTo" id="howToModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="howToContent" class="tab-content">
+                    <div class="tab-pane fade active in" id="howTo">
+                        <p>how to</p>
+
+                        Bacon ipsum dolor amet spare ribs doner flank alcatra meatloaf labore.
+                        T-bone venison consequat cillum, doner pig non chicken tail filet mignon.
+                        Sausage commodo sunt, tri-tip ground round pancetta cupidatat minim ut officia do.
+                        Shank deserunt occaecat ut, veniam pastrami strip steak short ribs consectetur venison meatloaf pariatur sausage.
+                        Kevin pork belly short ribs boudin laboris rump dolore excepteur hamburger bacon laborum aute mollit.
+
+                        Tail cillum ham hock, consectetur ut swine ham picanha prosciutto pork chop fatback filet mignon nisi.
+                        Duis in beef fatback meatball, pancetta esse ut. Jowl brisket tail spare ribs capicola ground round.
+                        Meatloaf labore sirloin bacon eiusmod in quis corned beef kielbasa spare ribs.
+                        Pig ullamco corned beef labore ex cupim, enim venison brisket ut ball tip ribeye andouille in.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
      aria-hidden="true">
