@@ -7,9 +7,10 @@ function initialize() {
         $(this).val("");
     });
 
+
     $("#symptoms").autocomplete({
 
-        width: 150,
+    width: 150,
         max: 10,
         minLength: 1,
         autoFocus: true,
@@ -34,7 +35,16 @@ function initialize() {
             });
         },
 
+        // ui = object being searched
         select: function(e, ui) {
+
+            //if(ui){
+            //    // Set secondaryTree to null
+            //    $("#subtree").remove();
+            //}
+            //console.log(ui.toString())
+            //console.log(e.toString())
+
 
             // Selected item value = ui.item.value
             $.ajax({

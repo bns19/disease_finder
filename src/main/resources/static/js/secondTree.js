@@ -39,6 +39,9 @@ function executeCreateTree(treeData) {
 
         console.log(source)
 
+        // show selected element
+        document.getElementById("selectedTreeNode").innerHTML = source.name;
+
         // Compute the new tree layout.
         var nodes = tree.nodes(root).reverse(),
             links = tree.links(nodes);
