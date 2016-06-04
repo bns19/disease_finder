@@ -1,6 +1,8 @@
 //Created by aroeters
 $(document).ready(initialize);
+
 function initialize() {
+
     var url = "treeBuilder";
     $('#ontology-tree').jstree({
         'core': {
