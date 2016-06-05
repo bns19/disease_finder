@@ -10,6 +10,8 @@ function initialize() {
     localStorage.setItem("ids", "");
     //by aroeters (lists made by mkslofstra)
     $("#ontology-tree").on('changed.jstree', function (e, data) {
+        console.log("data: " + data)
+        console.log("e: " + e)
         localStorage.setItem("shortSymptoms", "")
         var i, j, selectedNodes = [], selectedIds = [];
         var shortSymptomsList = []

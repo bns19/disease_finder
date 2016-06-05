@@ -73,7 +73,7 @@ body {
 }
 
 .nav li {
-    font-family: 'Oswald', sans-serif;
+    font-family: "Times New Roman", Times, serif;
     font-size: 1.2em;
     line-height: 40px;
     height: 40px;
@@ -141,8 +141,8 @@ body{
     display:inline-block;
     cursor:pointer;
     color:#ffffff;
-    font-family:Arial;
-    font-size:15px;
+    font-family: "Times New Roman", Times, serif;
+    font-size:1wpx;
     padding:5px 38px;
     text-decoration:none;
     text-shadow:0px 1px 0px #263666;
@@ -164,7 +164,7 @@ body{
 }
 
 .treecontainer {
-height: 1000px;
+    height: 1000px;
     width: 1000px;
     background-color: chartreuse;
     overflow:auto;
@@ -181,7 +181,8 @@ height: 1000px;
 }
 
 .node text {
-    font: 12px sans-serif;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 10px;
 }
 
 .link {

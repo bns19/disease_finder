@@ -38,15 +38,6 @@ function initialize() {
         // ui = object being searched
         select: function(e, ui) {
 
-            //if(ui){
-            //    // Set secondaryTree to null
-            //    $("#subtree").remove();
-            //}
-            //console.log(ui.toString())
-            //console.log(e.toString())
-
-
-            // Selected item value = ui.item.value
             $.ajax({
                 url: "termsToTree",
                 dataType: "text",
