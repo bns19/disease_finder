@@ -6,11 +6,12 @@
 package nl.bioinf.diseasefinderSpring.controllers;
 
 //import model.Findtrait;
+import model.Findtrait;
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
 import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.UserRepository;
-//import nl.bioinf.diseasefinderSpring.searchPackage.SearchSystem;
+import nl.bioinf.diseasefinderSpring.searchPackage.SearchSystem;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SaveSearchedSymptoms;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomProcessor;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomsCalculationInformation;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -62,27 +64,6 @@ public class SymptomProcessingController {
     @ResponseBody
     public List processInput(Model model, final String symptoms, final String shortSymptoms) throws Exception{
 
-        /////////////////////////////////////////////////
-//        System.out.println("zo zien de symproms eruit: " + symptoms);
-//        SearchSystem ss = new SearchSystem(symptoms);
-//        System.out.println("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
-//      //  SearchSystem ss = new SearchSystem("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
-//        System.out.println(ss.getResults()+ "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-//        Findtrait diseases = ss.getResults();
-//        int count = 0;
-//
-//        for (List<String> i : diseases.getFinalres().keySet()) {
-//            count++;
-//
-//            System.out.println(count);
-//            System.out.println("Disorder    " + i.get(1));
-//            System.out.println("id    " + i.get(0));
-//            System.out.println("match    " + diseases.getFinalres().get(i) + "\n");
-//
-//            }
-        /////////////////////////////////////////////////
-
-        SymptomProcessor sp = new SymptomProcessor(symptoms);
         try {
             SaveSearchedSymptoms saveSymptoms = new SaveSearchedSymptoms(userRepository, searchHistoryRepository);
             saveSymptoms.saveSymptoms(shortSymptoms, symptoms);
@@ -91,7 +72,43 @@ public class SymptomProcessingController {
                     new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
             symptomsCalculationInformation.calculateSymptomsSearch();
         } catch(Exception e) {}
-        return sp.getDiseaseData();
+        /////////////////////////////////////////////////
+        List returnableDiseaseList;
+        String searchProcess = "j";
+        if (searchProcess.equals("j")) {
+            List<List> diseasesList = new ArrayList();
+           // SearchSystem ss = new SearchSystem(symptoms);
+            SearchSystem ss = new SearchSystem("autism");
+            //  SearchSystem ss = new SearchSystem("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
+            Findtrait diseases = ss.getResults();
+            int count = 0;
+            for (List<String> i : diseases.getFinalres().keySet()) {
+                System.out.println("eeeentest");
+                List<String> symptomList = new ArrayList();
+                count++;
+
+                System.out.println(count);
+                System.out.println("Disorder    " + i.get(1));
+                System.out.println("id    " + i.get(0));
+                System.out.println("match    " + diseases.getFinalres().get(i) + "\n");
+                symptomList.add(i.get(1));
+                symptomList.add(i.get(0));
+                symptomList.add(diseases.getFinalres().get(i));
+               // System.out.println(di.getTitle() + "                             diseasetitles");
+                diseasesList.add(symptomList);
+            }
+            returnableDiseaseList = diseasesList;
+        } else {
+            /////////////////////////////////////////////////
+
+            SymptomProcessor sp = new SymptomProcessor(symptoms);
+            returnableDiseaseList =  sp.getDiseaseData();
+            System.out.println(returnableDiseaseList.toString() + "de lijst");
+//            return sp.getDiseaseData();
+        }
+
+        //return sp.getDiseaseData();
+        return returnableDiseaseList;
     }
 
     /**

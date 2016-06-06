@@ -10,7 +10,8 @@ public class DiseaseInformation {
     private String omimNumber;
     private double score;
     private double hits;
-    private List<String> matches;
+//    private List<String> matches;
+    private String matches;
     private String information;
 
 
@@ -48,11 +49,11 @@ public class DiseaseInformation {
         this.hits = hits;
     }
 
-    public List getMatches() {
+    public String getMatches() {
         return matches;
     }
 
-    public void setMatches(List matches) {
+    public void setMatches(String matches) {
         this.matches = matches;
     }
 
