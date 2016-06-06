@@ -152,10 +152,23 @@ public class Disease implements Comparable {
             diseaseInfo = diseaseInfo.replaceAll("(?i)" + match.toLowerCase(),
                     "<span class=\"highlight\">" + match + "</span>");
         }
-        this.diseaseInformation.setMatches(this.matches);
+  //      this.diseaseInformation.setMatches(this.matches);
+        this.diseaseInformation.setMatches(convertMatchesToString());
+
         this.diseaseInformation.setInformation(diseaseInfo);
 
 
+    }
+
+    private String convertMatchesToString() {
+        StringBuilder sb1 = new StringBuilder();
+        for (String match : this.matches ) {
+            sb1.append(match);
+            if (this.matches.size() > 1 && this.matches.indexOf(match) != this.matches.size()) {
+                sb1.append(",");
+            }
+        }
+        return sb1.toString();
     }
 
     /**
