@@ -2,6 +2,7 @@
  * Created by mkslofstra and aroeters, addditions and adjustments by bnsikkema
  */
 
+var oldsymptomItems = JSON.parse(localStorage.getItem('symptomsArray')) || [];
 
 $(document).ready(initialize);
 function initialize() {
@@ -50,6 +51,10 @@ function initialize() {
             }
             localStorage.setItem("symptoms", selectedNodes);
             localStorage.setItem("selectedIds", selectedIds);
+
+            var symptom = {};
+            symptom[selectedNodes] = selectedNodes;
+            oldsymptomItems.push(symptom);
         }
         var shortSymptomString = shortSymptomsList.toString();
         localStorage.setItem("shortSymptoms", shortSymptomString)
@@ -69,9 +74,7 @@ function initialize() {
                 var negaButtonValue = i;
                 $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
                     + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button><button class='negateButton' id='negateButton' value="+shortSymptomCounter+" >negate</button>");
-
             }
-
             else{
                 $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
                     + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button>");
@@ -85,9 +88,13 @@ function initialize() {
 
             var index = $(this).attr("value");
 
+            console.log(index)
+
             var shortSymptomList = localStorage.getItem("shortSymptoms").split(",");
             var longSymptomList = localStorage.getItem("symptoms").split(",");
             var symptomToNegate = shortSymptomList[index];
+
+            console.log(symptomToNegate)
 
             var longIndex = longSymptomList.indexOf(symptomToNegate);
 
@@ -96,6 +103,8 @@ function initialize() {
                 shortSymptomList[index]=negatedSymptom;
                 localStorage.removeItem("shortSymptoms");
                 localStorage.setItem("shortSymptoms", shortSymptomList.toString())
+
+
 
 
                 //longSymptomList[longIndex]=negatedSymptom;
@@ -132,6 +141,8 @@ function initialize() {
 
     $("#search-button").click(function () {
         sendSymptoms();
+        oldsymptomItems = JSON.parse(localStorage.getItem('symptomsArray')) || [];
+        clearlocalstorage();
     });
 
 }
@@ -145,7 +156,7 @@ function resendQuery(longQuery) {
 
 //by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
-    //localStorage.setItem("symptoms", symptoms);
+
     var symptomSet = symptoms;
     $('.nav-tabs a[href="#resultTab"]').tab('show');
 
@@ -293,11 +304,6 @@ function loadDisease() {
         $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease as .txt</button>");
          }
 
-
-
-
-
-
         $(".closeDiseaseTab").click(function () {
             // matchId = localStorage.getItem("ids").match(idPat);
             var close_id = $(this).data("close");
@@ -416,5 +422,52 @@ function saveDisease() {
     var diseaseFile = new Blob([print], {type: "text/plain;charset=utf-8"});
     //save the file with its id as name in a txt file
     saveAs(diseaseFile, localStorage.getItem("disease2save") + ".txt");
+
+}
+
+function addsymptomsfromsecondtree() {
+    var objectcount = oldsymptomItems.length;
+    var shortSymptomCounter = objectcount + 1;
+    var selectedsymptom = document.getElementById("selectedTreeNode").innerHTML;
+    var symptom = {};
+
+    symptom[selectedsymptom] = selectedsymptom;
+    oldsymptomItems.push(symptom);
+
+    console.log(objectcount)
+    console.log(shortSymptomCounter)
+
+    $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedsymptom + "\"> "
+        + selectedsymptom + " <span class=\"closeSymptom\"> X </span></button><button class='negateButton' id='negateButton' value="+shortSymptomCounter+" >negate</button>");
+
+
+    $(".negateButton").click(function () {
+
+        var index = $(this).attr("value");
+
+        var symptomToNegate = oldsymptomItems[index];
+
+        var longIndex = oldsymptomItems.indexOf(symptomToNegate);
+
+        if (symptomToNegate.substring(0,3) != "non") {
+            var negatedSymptom = "non"+symptomToNegate;
+            oldsymptomItems[index]=negatedSymptom;
+            localStorage.removeItem("symptomsArray");
+            localStorage.setItem("symptomsArray", oldsymptomItems.toString())
+
+        }
+
+        if (symptomToNegate.substring(0,3) == "non" && symptomToNegate.substring(3,5) != "non") {
+            var nonNegatedSymptom = symptomToNegate.substring(3,symptomToNegate.length);
+            oldsymptomItems[index]=nonNegatedSymptom;
+            localStorage.removeItem("symptomsArray");
+            localStorage.setItem("symptomsArray", oldsymptomItems.toString())
+
+        }
+    });
+
+    localStorage.setItem('symptomsArray', JSON.stringify(oldsymptomItems));
+    console.log(localStorage.getItem('symptomsArray'))
+
 
 }
