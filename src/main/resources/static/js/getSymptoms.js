@@ -169,6 +169,10 @@ function resendQuery(longQuery) {
 function sendSymptoms(symptoms) {
     //localStorage.setItem("symptoms", symptoms);
     var symptomSet = symptoms;
+
+    var algorithm = document.getElementById('algorithmType').value;
+    var runtime = document.getElementById('runtime').value;
+
     $('.nav-tabs a[href="#resultTab"]').tab('show');
 
     //HTMLpage that the spring controller has mapped.
@@ -176,7 +180,7 @@ function sendSymptoms(symptoms) {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     //use the mapped controller
-    $.post(controller, {"symptoms": localStorage.getItem("symptoms"), "shortSymptoms": localStorage.getItem("shortSymptoms"), _csrf: token}, function (diseases) {
+    $.post(controller, {"symptoms": localStorage.getItem("symptoms"), "shortSymptoms": localStorage.getItem("shortSymptoms"), "algorithm": algorithm,"runtime": runtime, _csrf: token}, function (diseases) {
         var diseaseSummary = "";
 
         $("#resultTab").text("");
@@ -184,17 +188,11 @@ function sendSymptoms(symptoms) {
         // $("#resultTab").append(diseases);
 
         for (var disease in diseases) {
-
             var values = diseases[disease];
             // var matches = getMatches(values[2]);
-
-
-
-
             diseaseSummary = "<li class =\"disease\">"
                 + "<table>"
                 + "<tr class=\"diseaseTitle\">"
-
                 + "<td class=\"title\" colspan=\"3\">"
                 + "<a class = \"clickTitle\" id=\""
                 + values[1]
@@ -204,9 +202,7 @@ function sendSymptoms(symptoms) {
                 + "<tr>\n"
                 + "<td class=\"label\">Omimnumber: </td><td class=\"value\">"
                 + values[1]
-
                 + "</td></tr>"
-
                 + "<tr><td class=\"label\"><a data"
                 + "-toggle=\"tooltip\" title=\"The score is calculated through:"
                 + " The sum of 1 / occurence of each match through the "
@@ -430,7 +426,6 @@ function saveDisease() {
         print += disease_info.substring(last, pattern.lastIndex - 1);
         print += "\n";
         var last = pattern.lastIndex - 1;
-
     }
     //ignore the last button
     print += disease_info.substring(last, disease_info.length - 80 - localStorage.getItem("disease2save").length);

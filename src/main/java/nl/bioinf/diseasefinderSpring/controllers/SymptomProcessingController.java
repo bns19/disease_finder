@@ -61,7 +61,9 @@ public class SymptomProcessingController {
      */
     @RequestMapping(value = "/sendSymptoms",  method = RequestMethod.POST)
     @ResponseBody
-    public List processInput(Model model, final String symptoms, final String shortSymptoms) throws Exception{
+    public List processInput(final String symptoms, final String shortSymptoms, final String algorithm, final int runtime) throws Exception{
+        System.out.println(algorithm + " algorithm!!!!!!");
+        System.out.println(runtime + " runtime!!!!!!");
 
         try {
             SaveSearchedSymptoms saveSymptoms = new SaveSearchedSymptoms(userRepository, searchHistoryRepository);
@@ -73,29 +75,12 @@ public class SymptomProcessingController {
         } catch(Exception e) {}
         /////////////////////////////////////////////////
         List returnableDiseaseList;
-        String searchProcess = "jsd";
-        if (searchProcess.equals("j")) {
+        if (algorithm.equals("j")) {
             List<List> diseasesList = new ArrayList();
            // SearchSystem ss = new SearchSystem(symptoms);
-            SearchSystem ss = new SearchSystem("autism");
-            //  SearchSystem ss = new SearchSystem("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
-            Findtrait diseases = ss.getResults();
-            int count = 0;
-            for (List<String> i : diseases.getFinalres().keySet()) {
-                System.out.println("eeeentest");
-                List<String> symptomList = new ArrayList();
-                count++;
+            SearchSystem ss = new SearchSystem("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
 
-                System.out.println(count);
-                System.out.println("Disorder    " + i.get(1));
-                System.out.println("id    " + i.get(0));
-                System.out.println("match    " + diseases.getFinalres().get(i) + "\n");
-                symptomList.add(i.get(1));
-                symptomList.add(i.get(0));
-                symptomList.add(diseases.getFinalres().get(i));
-               // System.out.println(di.getTitle() + "                             diseasetitles");
-                diseasesList.add(symptomList);
-            }
+            Findtrait diseases = ss.getResults();
             returnableDiseaseList = diseasesList;
         } else {
             /////////////////////////////////////////////////

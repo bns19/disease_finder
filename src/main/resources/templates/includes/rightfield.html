@@ -1,6 +1,13 @@
 <rightfield>
 
+
+
+
     <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id="secondarytreetab">
+        <ul class="nav nav-tabs" role="tablist" id="tablistsec">
+            <li role="presentation"><a type="active" href="#secondaryTreeTab" aria-controls="secTreeTab" role="tab"
+                                       data-toggle="tab"  class="tab"><div id="secondarTreeTab">tree</div></a></li>
+        </ul>
 
         <div class="tab-content" id="tabcontent">
 
@@ -10,10 +17,6 @@
 
                 <h2> Selected: </h2>
                 <p id="selectedTreeNode" type="text" > </p>
-
-
-                <button onclick="addsymptomsfromsecondtree()" id="addtosymptoms" class="button btn btn-info">add to symptoms</button>
-
                 <div class="fields">
                 <div th:replace="includes/subtree :: tree"></div>
 
