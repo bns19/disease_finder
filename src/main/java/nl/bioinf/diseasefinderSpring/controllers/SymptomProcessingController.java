@@ -74,7 +74,7 @@ public class SymptomProcessingController {
         } catch(Exception e) {}
         /////////////////////////////////////////////////
         List returnableDiseaseList;
-        String searchProcess = "j";
+        String searchProcess = "jsd";
         if (searchProcess.equals("j")) {
             List<List> diseasesList = new ArrayList();
            // SearchSystem ss = new SearchSystem(symptoms);

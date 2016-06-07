@@ -2,7 +2,6 @@
  * Created by mkslofstra and aroeters, addditions and adjustments by bnsikkema
  */
 
-var oldsymptomItems = JSON.parse(localStorage.getItem('symptomsArray')) || [];
 
 $(document).ready(initialize);
 function initialize() {
@@ -51,10 +50,6 @@ function initialize() {
             }
             localStorage.setItem("symptoms", selectedNodes);
             localStorage.setItem("selectedIds", selectedIds);
-
-            var symptom = {};
-            symptom[selectedNodes] = selectedNodes;
-            oldsymptomItems.push(symptom);
         }
         var shortSymptomString = shortSymptomsList.toString();
         localStorage.setItem("shortSymptoms", shortSymptomString)
@@ -74,7 +69,9 @@ function initialize() {
                 var negaButtonValue = i;
                 $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
                     + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button><button class='negateButton' id='negateButton' value="+shortSymptomCounter+" >negate</button>");
+
             }
+
             else{
                 $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
                     + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button>");
@@ -88,13 +85,9 @@ function initialize() {
 
             var index = $(this).attr("value");
 
-            console.log(index)
-
             var shortSymptomList = localStorage.getItem("shortSymptoms").split(",");
             var longSymptomList = localStorage.getItem("symptoms").split(",");
             var symptomToNegate = shortSymptomList[index];
-
-            console.log(symptomToNegate)
 
             var longIndex = longSymptomList.indexOf(symptomToNegate);
 
@@ -103,8 +96,6 @@ function initialize() {
                 shortSymptomList[index]=negatedSymptom;
                 localStorage.removeItem("shortSymptoms");
                 localStorage.setItem("shortSymptoms", shortSymptomList.toString())
-
-
 
 
                 //longSymptomList[longIndex]=negatedSymptom;
@@ -141,8 +132,6 @@ function initialize() {
 
     $("#search-button").click(function () {
         sendSymptoms();
-        oldsymptomItems = JSON.parse(localStorage.getItem('symptomsArray')) || [];
-        clearlocalstorage();
     });
 
 }
@@ -152,11 +141,11 @@ function initialize() {
 function resendQuery(longQuery) {
     localStorage.setItem("symptoms", longQuery)
     sendSymptoms()
-    }
+}
 
 //by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
-
+    //localStorage.setItem("symptoms", symptoms);
     var symptomSet = symptoms;
     $('.nav-tabs a[href="#resultTab"]').tab('show');
 
@@ -170,12 +159,12 @@ function sendSymptoms(symptoms) {
 
         $("#resultTab").text("");
         $("#resultTab").append("<br/><br/><ul>");
-       // $("#resultTab").append(diseases);
+        // $("#resultTab").append(diseases);
 
         for (var disease in diseases) {
 
             var values = diseases[disease];
-           // var matches = getMatches(values[2]);
+            // var matches = getMatches(values[2]);
 
 
 
@@ -258,51 +247,56 @@ function loadDisease() {
         var idPat = new RegExp(id);
 
         /////////////////////////////////////////////////////////////
-         var matchId = localStorage.getItem("ids").match(idPat);
+        var matchId = localStorage.getItem("ids").match(idPat);
         console.log(matchId)
-         //make sure, the tab is only created one time
-         if (matchId === null) {
-             localStorage.setItem("ids", localStorage.getItem("ids") + id);
-             title = title.charAt(0) + title.substring(1, title.length).toLowerCase();
-             if (title.length > 15) {
-                 title = title.substring(0, 12) + "...";
-             }
+        //make sure, the tab is only created one time
+        if (matchId === null) {
+            localStorage.setItem("ids", localStorage.getItem("ids") + id);
+            title = title.charAt(0) + title.substring(1, title.length).toLowerCase();
+            if (title.length > 15) {
+                title = title.substring(0, 12) + "...";
+            }
 
-        $("#tablist").append("<li role=\"presentation\"><a href=\"#" + id + "\" aria-controls=\"" + id
-            + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\" class=\"tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
-        $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
-        $("#" + id).append("<br/><br/>");
-        //$("#" + id).append(disease);
+            $("#tablist").append("<li role=\"presentation\"><a href=\"#" + id + "\" aria-controls=\"" + id
+                + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\" class=\"tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
+            $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
+            $("#" + id).append("<br/><br/>");
+            //$("#" + id).append(disease);
 
-        $("#" + id).append("<h2>" + disease["title"] + "</h2><div id =\"disease\">"
-        + "<p class=\"back2results\"><span class = \"glyphicon"
-        + " glyphicon-arrow-left\" aria-hidden=\"true\">"
-        + "  Back to results</p></span><br/>"
-        + "<b>Omim number : </b>"
-        + "<a href=\"http://omim.org/entry/" +
-            disease["omimNumber"] +
-        + "\"target=\"blank\"data-toggle=\"tooltip\""
-        + " title=\"Click here to open the disease on the omim website\"id=\"omimSiteLink\">" +
-            disease["omimNumber"] +
-            "</a>"
-        + "<br/><b>Matches: </b>" +
-            disease["matches"] + "<br/>"
-        + "<b><a data"
-        + "-toggle=\"tooltip\" title=\"The number of matched "
-        + "symptoms.\"data-placement=\"right\">Hits :</a></b> "
-        + "hits" + "<br/><b><a data"
-        + "-toggle=\"tooltip\" title=\"The score is calculated through:"
-        + " The sum of 1 / occurence of each match through the search"
-        + ".\"data-placement=\"right\">Score: </a></b>"
-        + score + "<br/><br/><button id=\"highlightButton\""
-        + " class=\"button btn btn-info\">"
-        + "Highlight matches</button>" +
-            disease["information"] +
-            "</div>");
+            $("#" + id).append("<h2>" + disease["title"] + "</h2><div id =\"disease\">"
+                + "<p class=\"back2results\"><span class = \"glyphicon"
+                + " glyphicon-arrow-left\" aria-hidden=\"true\">"
+                + "  Back to results</p></span><br/>"
+                + "<b>Omim number : </b>"
+                + "<a href=\"http://omim.org/entry/" +
+                disease["omimNumber"] +
+                + "\"target=\"blank\"data-toggle=\"tooltip\""
+                + " title=\"Click here to open the disease on the omim website\"id=\"omimSiteLink\">" +
+                disease["omimNumber"] +
+                "</a>"
+                + "<br/><b>Matches: </b>" +
+                disease["matches"] + "<br/>"
+                + "<b><a data"
+                + "-toggle=\"tooltip\" title=\"The number of matched "
+                + "symptoms.\"data-placement=\"right\">Hits :</a></b> "
+                + "hits" + "<br/><b><a data"
+                + "-toggle=\"tooltip\" title=\"The score is calculated through:"
+                + " The sum of 1 / occurence of each match through the search"
+                + ".\"data-placement=\"right\">Score: </a></b>"
+                + score + "<br/><br/><button id=\"highlightButton\""
+                + " class=\"button btn btn-info\">"
+                + "Highlight matches</button>" +
+                disease["information"] +
+                "</div>");
 
 
-        $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease as .txt</button>");
-         }
+            $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease as .txt</button>");
+        }
+
+
+
+
+
 
         $(".closeDiseaseTab").click(function () {
             // matchId = localStorage.getItem("ids").match(idPat);
@@ -316,14 +310,14 @@ function loadDisease() {
 
                 //////////////////////////////////////////////////////////
                 // remove string from id list, so that it can be opened again
-                  var idString = localStorage.getItem("ids");
-                  var firstPart = idString.substring(0, matchId.index);
-                  var lastPart = idString.substring(matchId.index + id.length, idString.length);
-                  localStorage.setItem("ids", firstPart + lastPart);
+                var idString = localStorage.getItem("ids");
+                var firstPart = idString.substring(0, matchId.index);
+                var lastPart = idString.substring(matchId.index + id.length, idString.length);
+                localStorage.setItem("ids", firstPart + lastPart);
                 //////////////////////////////////////////////////////////////
 
             }
-       // }
+            // }
         });
 
 
@@ -422,52 +416,5 @@ function saveDisease() {
     var diseaseFile = new Blob([print], {type: "text/plain;charset=utf-8"});
     //save the file with its id as name in a txt file
     saveAs(diseaseFile, localStorage.getItem("disease2save") + ".txt");
-
-}
-
-function addsymptomsfromsecondtree() {
-    var objectcount = oldsymptomItems.length;
-    var shortSymptomCounter = objectcount + 1;
-    var selectedsymptom = document.getElementById("selectedTreeNode").innerHTML;
-    var symptom = {};
-
-    symptom[selectedsymptom] = selectedsymptom;
-    oldsymptomItems.push(symptom);
-
-    console.log(objectcount)
-    console.log(shortSymptomCounter)
-
-    $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedsymptom + "\"> "
-        + selectedsymptom + " <span class=\"closeSymptom\"> X </span></button><button class='negateButton' id='negateButton' value="+shortSymptomCounter+" >negate</button>");
-
-
-    $(".negateButton").click(function () {
-
-        var index = $(this).attr("value");
-
-        var symptomToNegate = oldsymptomItems[index];
-
-        var longIndex = oldsymptomItems.indexOf(symptomToNegate);
-
-        if (symptomToNegate.substring(0,3) != "non") {
-            var negatedSymptom = "non"+symptomToNegate;
-            oldsymptomItems[index]=negatedSymptom;
-            localStorage.removeItem("symptomsArray");
-            localStorage.setItem("symptomsArray", oldsymptomItems.toString())
-
-        }
-
-        if (symptomToNegate.substring(0,3) == "non" && symptomToNegate.substring(3,5) != "non") {
-            var nonNegatedSymptom = symptomToNegate.substring(3,symptomToNegate.length);
-            oldsymptomItems[index]=nonNegatedSymptom;
-            localStorage.removeItem("symptomsArray");
-            localStorage.setItem("symptomsArray", oldsymptomItems.toString())
-
-        }
-    });
-
-    localStorage.setItem('symptomsArray', JSON.stringify(oldsymptomItems));
-    console.log(localStorage.getItem('symptomsArray'))
-
 
 }
