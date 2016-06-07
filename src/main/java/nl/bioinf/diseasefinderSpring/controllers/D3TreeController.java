@@ -2,6 +2,7 @@ package nl.bioinf.diseasefinderSpring.controllers;
 
 
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOFileLoader;
+import nl.bioinf.diseasefinderSpring.treehandler.ParentInformation;
 import nl.bioinf.diseasefinderSpring.treehandler.PrimaryTreeBuilder;
 import nl.bioinf.diseasefinderSpring.treehandler.SecondaryTreeBuilder;
 import org.json.JSONArray;
@@ -47,13 +48,14 @@ public class D3TreeController {
     @ResponseBody
     public String buildSecondTree(String id) throws IOException, JSONException {
 
+        System.out.println("id goede: " + id);
+
         List<String> items = new LinkedList<String>(Arrays.asList(id.split("\\s*,\\s*")));
-//        items.add(0, "#");
 
         ArrayList<String> jsonChildrenList = new ArrayList<String>();
         String jsonChildren = "";
 
-        for (String item : items) {;
+        for (String item : items) {
 
             HashMap collection = HPOFileLoader.LoadHPOFile();
             String requestedNodeChildren = item;
@@ -64,6 +66,39 @@ public class D3TreeController {
 
         return jsonChildrenList.toString();
     }
+
+    @RequestMapping(value = "parentTreeBuilder", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public String getParentInformation(String id) throws IOException, JSONException {
+
+        System.out.println("here");
+        System.out.println(id);
+        System.out.println("here1");
+
+        List<String> ParentIditems = Arrays.asList(id.split("\\s*,\\s*"));
+
+        for(String ids : ParentIditems){
+            System.out.println(ids);
+        }
+
+        List<String> items = new LinkedList<String>(Arrays.asList(id.split("\\s*,\\s*")));
+        ArrayList<String> jsonChildrenList = new ArrayList<String>();
+        String jsonChildren = "";
+
+        for (String item : items) {
+
+            HashMap collection = HPOFileLoader.LoadHPOFile();
+            ParentInformation parentInf = new ParentInformation();
+
+            jsonChildren = parentInf.getParentInformation(item, collection);
+            jsonChildrenList.add(jsonChildren);
+        }
+
+        System.out.println(jsonChildrenList.toString());
+
+        return jsonChildrenList.toString();
+    }
+
 }
 
 

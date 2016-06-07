@@ -8,11 +8,15 @@ function initialize() {
     var symptoms;
 
     localStorage.setItem("ids", "");
+
     //by aroeters (lists made by mkslofstra)
     $("#ontology-tree").on('changed.jstree', function (e, data) {
+
+
         localStorage.setItem("shortSymptoms", "")
         var i, j, selectedNodes = [], selectedIds = [];
         var shortSymptomsList = []
+        var parentObjectList = new Array;
         //run through all selected nodes
         for (i = 0, j = data.selected.length; i < j; i++) {
             //get the selected node
@@ -23,9 +27,17 @@ function initialize() {
                 shortSymptomsList.push(selected.text)
                 selectedNodes.push(selected.text);
                 selectedIds.push(selected.id);
+
+                var parentObj = new Object;
+                parentObj.id = selected.id;
+                parentObj.name = selected.text;
+                parentObjectList.push(parentObj)
+
             }
             //get all parents
             parents = selected.parents;
+
+
             //The if makes sure that the parents are more than one, so if it
             //is one word, it will not be divided in characters
             if (parents.length !== 1) {
@@ -46,13 +58,24 @@ function initialize() {
                 if (parents[0] !== "#") {
                     selectedNodes.push(parents[0]);
                 }
-                ;
+
             }
             localStorage.setItem("symptoms", selectedNodes);
             localStorage.setItem("selectedIds", selectedIds);
+
+
         }
         var shortSymptomString = shortSymptomsList.toString();
         localStorage.setItem("shortSymptoms", shortSymptomString)
+
+
+        //Call the createTree when the objects in the left tree are selected
+        for (item in data){
+            if (data[item].id) {
+                createTree(data[item], parents);
+            }
+        }
+
 
         //Here will be the link between the old tree and the new tree.
 
@@ -133,7 +156,6 @@ function initialize() {
     $("#search-button").click(function () {
         sendSymptoms();
     });
-
 }
 
 

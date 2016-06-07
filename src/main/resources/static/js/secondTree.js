@@ -35,7 +35,13 @@ function executeCreateTree(treeData) {
 
     d3.select(self.frameElement).style("height", "500px");
 
+    console.log("root: " + root)
+
     function update(source) {
+
+        //for (items in source){
+        //    console.log("source: " + source[items])
+        //}
 
         // show selected element
         document.getElementById("selectedTreeNode").innerHTML = source.name;
@@ -147,8 +153,15 @@ function executeCreateTree(treeData) {
         });
     }
 
+
     // Toggle children on click.
     function click(d) {
+        //console.log("clickd: " + d)
+        //for (items in d){
+        //    console.log("ditems: " + d[items])
+        //}
+
+
         if (d.children) {
             d._children = d.children;
             d.children = null;
@@ -158,4 +171,5 @@ function executeCreateTree(treeData) {
         }
         update(d);
     }
+    //click(root)
 }
