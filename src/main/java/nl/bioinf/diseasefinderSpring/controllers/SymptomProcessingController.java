@@ -5,7 +5,6 @@
  */
 package nl.bioinf.diseasefinderSpring.controllers;
 
-//import model.Findtrait;
 import model.Findtrait;
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
 import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
@@ -74,7 +73,7 @@ public class SymptomProcessingController {
         } catch(Exception e) {}
         /////////////////////////////////////////////////
         List returnableDiseaseList;
-        String searchProcess = "j";
+        String searchProcess = "jsd";
         if (searchProcess.equals("j")) {
             List<List> diseasesList = new ArrayList();
            // SearchSystem ss = new SearchSystem(symptoms);

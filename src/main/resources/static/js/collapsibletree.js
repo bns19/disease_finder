@@ -1,7 +1,5 @@
 function createTree(data, selectedname) {
 
-
-
     //Global variables
     var mlist = new Array();
 

@@ -2,7 +2,7 @@
  * Created by mkslofstra and aroeters, addditions and adjustments by bnsikkema
  */
 
-var oldsymptomItems = JSON.parse(localStorage.getItem('symptomsArray')) || [];
+//var oldsymptomItems = JSON.parse(localStorage.getItem('symptomsArray')) || [];
 
 $(document).ready(initialize);
 function initialize() {

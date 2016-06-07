@@ -69,6 +69,7 @@ function initialize() {
 
                             // to highligt the symptom that is searched for
                             $("#ontology-tree").jstree(true).get_node(newData[0]).li_attr.class = "jstree-search"
+                            console.log($("#ontology-tree").jstree(true).get_node(newData[0]).li_attr.class)
 
 
                             window.clearInterval();
