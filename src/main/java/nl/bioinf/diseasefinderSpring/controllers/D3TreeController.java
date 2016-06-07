@@ -48,12 +48,11 @@ public class D3TreeController {
     public String buildSecondTree(String id) throws IOException, JSONException {
 
         List<String> items = new LinkedList<String>(Arrays.asList(id.split("\\s*,\\s*")));
-//        items.add(0, "#");
 
         ArrayList<String> jsonChildrenList = new ArrayList<String>();
         String jsonChildren = "";
 
-        for (String item : items) {;
+        for (String item : items) {
 
             HashMap collection = HPOFileLoader.LoadHPOFile();
             String requestedNodeChildren = item;

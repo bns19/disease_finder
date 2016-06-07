@@ -35,8 +35,10 @@ function initialize() {
             });
         },
 
-        // ui = object being searched
+        // ui = symptom in string (name) where is being searched
         select: function(e, ui) {
+
+            console.log(ui.item.value)
 
             $.ajax({
                 url: "termsToTree",
@@ -45,10 +47,16 @@ function initialize() {
                 success: function(data) {
                     var selectedname = ui.item.value;
 
+                    console.log("data pre: " + data)
+
                     data = data.replace(/\[|\]/g, "");
+
+                    console.log("data: " + data)
 
                     var newData = data.replace(/\"|\n/g, "").split(",").reverse();
                     var count = newData.length;
+
+                    console.log("newData: " + newData)
 
                     window.setInterval(function() {
                         $("#ontology-tree").jstree("open_node", newData[0]);

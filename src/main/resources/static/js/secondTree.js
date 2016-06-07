@@ -40,8 +40,8 @@ function executeCreateTree(treeData) {
         console.log(source)
 
         // show selected element
-        document.getElementById("selectedTreeNode1").innerHTML = source.name;
-        //document.getElementById("selectedTreeNode2").innerHTML = source.name;
+        document.getElementById("selectedTreeNode").innerHTML = source.name;
+        document.getElementById("selectedsymptomvalue").attribute = source;
 
         // Compute the new tree layout.
         var nodes = tree.nodes(root).reverse(),
