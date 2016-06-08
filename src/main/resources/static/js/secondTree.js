@@ -5,9 +5,9 @@
 //************** Generate the tree diagram	 *****************
 function executeCreateTree(treeData) {
 
-    var margin = {top: 20, right: 120, bottom: 20, left: 120},
+    var margin = {top: 20, right: 120, bottom: 20, left: 200},
         width = 1000 - margin.right - margin.left,
-        height = 750 - margin.top - margin.bottom;
+        height = 1000 - margin.top - margin.bottom;
 
     var i = 0,
         duration = 750,
@@ -35,9 +35,13 @@ function executeCreateTree(treeData) {
 
     d3.select(self.frameElement).style("height", "500px");
 
+    console.log("root: " + root)
+
     function update(source) {
 
-        console.log(source)
+        //for (items in source){
+        //    console.log("source: " + source[items])
+        //}
 
         // show selected element
         document.getElementById("selectedTreeNode").innerHTML = source.name;
@@ -150,8 +154,15 @@ function executeCreateTree(treeData) {
         });
     }
 
+
     // Toggle children on click.
     function click(d) {
+        //console.log("clickd: " + d)
+        //for (items in d){
+        //    console.log("ditems: " + d[items])
+        //}
+
+
         if (d.children) {
             d._children = d.children;
             d.children = null;
@@ -161,4 +172,5 @@ function executeCreateTree(treeData) {
         }
         update(d);
     }
+    //click(root)
 }

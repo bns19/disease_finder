@@ -1,6 +1,5 @@
 <header th:fragment="head">
-        <title>PHEDIMAP</title>
-        <div id="logo" class="jumbotron"><h1>Phedimap2.0</h1><h2><small>Phenotype disease match application</small></h2></div>
+
 
         <script th:src="@{js_libs/jquery.min.js}" type="text/javascript" ></script>
         <script th:src="@{js_libs/jquery-ui.min.js}" type = "text/javascript"></script>
@@ -27,7 +26,8 @@
         <script th:src="@{js/createSecondTreeField.js}" type="text/javascript"></script>
         <script th:src="@{js/reloadPartsOfPage.js}" type="text/javascript"></script>
         <script th:src="@{js/secondTree.js}" type="text/javascript"></script>
-        <script th:src="@{js/savesecondtreesymptoms.js}" type="text/javascript"></script>
+        <script th:src="@{js/addsymptomsfromsecondtree.js}" type="text/javascript"></script>
+        <script th:src="@{js/clearlocalstorage.js}" type="text/javascript"></script>
 
         <link th:href="@{http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css}" rel="stylesheet" />
         <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
@@ -37,4 +37,7 @@
         <link th:href="@{/css/disease_matcher_layout.css}" rel="stylesheet" type="text/css"/>
         <meta name="_csrf" th:content="${_csrf.token}"/>
         <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+        <title>PHEDIMAP</title>
+        <div id="logo" class="jumbotron"><h1>Phedimap2.0</h1><h2><small>Phenotype disease match application</small></h2></div>
 </header>

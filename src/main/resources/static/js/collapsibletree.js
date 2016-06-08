@@ -1,14 +1,23 @@
-function createTree(data, selectedname) {
+function createTree(selectedname, selected) {
 
+    getParentData(selected);
 
+    //console.log("SELECTED: " + selected)
+    for (item in selected){
+        console.log(selected[item])
+    }
 
-    //Global variables
+        //Global variables
+    var oldsymptomItems = JSON.parse(localStorage.getItem('symptomsArray')) || [];
+
     var mlist = new Array();
+    var parentlist = new Array();
 
-    createSecondTree(data)
+    createSecondTree(selectedname)
 
     //Data has the id's that are searched for from symptoms
     function createSecondTree(data) {
+
         var url = "secondTreeBuilder";
 
         // Call the connector and ask for the nodes information (id, parent, children, name)
@@ -62,9 +71,11 @@ function createTree(data, selectedname) {
             }
         }
 
-        createRootObject();
 
-        function createRootObject() {
+
+        addRootObject();
+
+        function addRootObject() {
             //Create the root object
             var rootobject = new Object();
             rootobject['name'] = selectedname;
@@ -73,6 +84,38 @@ function createTree(data, selectedname) {
 
             //Push root object to the input list
             input.push(rootobject)
+        }
+
+        //function addRootObject() {
+        //    //Create the root object
+        //    var rootobject = new Object();
+        //
+        //    for (symptomobject in oldsymptomItems){
+        //        var selectedids = oldsymptomItems[symptomobject]
+        //
+        //
+        //        for (objects in selectedids){
+        //
+        //            rootobject['name'] = selectedids[objects].name;
+        //            rootobject['id'] = selectedids[objects].id;
+        //            if (selectedids[objects].parent )
+        //                rootobject['parent'] = selectedids[objects].parent;
+        //            else{
+        //                rootobject['parent'] = null;
+        //
+        //            }
+        //
+        //            //Push root object to the input list
+        //            input.push(rootobject)
+        //        }
+        //
+        //
+        //    }
+        //}
+
+        console.log("input: " + input)
+        for (inp in input){
+            console.log(input[inp])
         }
 
         var arr = input;
@@ -105,6 +148,34 @@ function createTree(data, selectedname) {
             }
         }
         executeCreateTree(tree);
+    }
+
+    //Connect to the connector
+    function getParentData(selected){
+
+        var url = "parentTreeBuilder";
+
+        var selected = selected.toString();
+
+        console.log("SELECTED: " + selected)
+
+        // Call the connector and ask for the nodes information (id, parent, children, name)
+        $.get(url, data: selected, function (jsonout) {
+            executegetparentdata(jsonout);
+        });
+
+    }
+    //Get all the parent information
+    function executegetparentdata(jsonout) {
+        for (x in jsonout) {
+            var loop = jsonout[x];
+
+            //Update the mlist with all the child node objects
+            for (firstsearch in loop) {
+                parentlist.push(loop[firstsearch]);
+            }
+        }
+        ctree(mlist);
     }
 }
 

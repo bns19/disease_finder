@@ -8,13 +8,15 @@ function initialize() {
     var symptoms;
 
     localStorage.setItem("ids", "");
+
     //by aroeters (lists made by mkslofstra)
     $("#ontology-tree").on('changed.jstree', function (e, data) {
-        console.log("data: " + data)
-        console.log("e: " + e)
+
+
         localStorage.setItem("shortSymptoms", "")
         var i, j, selectedNodes = [], selectedIds = [];
         var shortSymptomsList = []
+        var parentObjectList = new Array;
         //run through all selected nodes
         for (i = 0, j = data.selected.length; i < j; i++) {
             //get the selected node
@@ -25,9 +27,17 @@ function initialize() {
                 shortSymptomsList.push(selected.text)
                 selectedNodes.push(selected.text);
                 selectedIds.push(selected.id);
+
+                var parentObj = new Object;
+                parentObj.id = selected.id;
+                parentObj.name = selected.text;
+                parentObjectList.push(parentObj)
+
             }
             //get all parents
             parents = selected.parents;
+
+
             //The if makes sure that the parents are more than one, so if it
             //is one word, it will not be divided in characters
             if (parents.length !== 1) {
@@ -48,13 +58,24 @@ function initialize() {
                 if (parents[0] !== "#") {
                     selectedNodes.push(parents[0]);
                 }
-                ;
+
             }
             localStorage.setItem("symptoms", selectedNodes);
             localStorage.setItem("selectedIds", selectedIds);
+
+
         }
         var shortSymptomString = shortSymptomsList.toString();
         localStorage.setItem("shortSymptoms", shortSymptomString)
+
+
+        //Call the createTree when the objects in the left tree are selected
+        for (item in data){
+            if (data[item].id) {
+                createTree(data[item], parents);
+            }
+        }
+
 
         //Here will be the link between the old tree and the new tree.
 
@@ -135,7 +156,6 @@ function initialize() {
     $("#search-button").click(function () {
         sendSymptoms();
     });
-
 }
 
 
@@ -143,12 +163,16 @@ function initialize() {
 function resendQuery(longQuery) {
     localStorage.setItem("symptoms", longQuery)
     sendSymptoms()
-    }
+}
 
 //by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
     //localStorage.setItem("symptoms", symptoms);
     var symptomSet = symptoms;
+
+    var algorithm = document.getElementById('algorithmType').value;
+    var runtime = document.getElementById('runtime').value;
+
     $('.nav-tabs a[href="#resultTab"]').tab('show');
 
     //HTMLpage that the spring controller has mapped.
@@ -156,25 +180,19 @@ function sendSymptoms(symptoms) {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     //use the mapped controller
-    $.post(controller, {"symptoms": localStorage.getItem("symptoms"), "shortSymptoms": localStorage.getItem("shortSymptoms"), _csrf: token}, function (diseases) {
+    $.post(controller, {"symptoms": localStorage.getItem("symptoms"), "shortSymptoms": localStorage.getItem("shortSymptoms"), "algorithm": algorithm,"runtime": runtime, _csrf: token}, function (diseases) {
         var diseaseSummary = "";
 
         $("#resultTab").text("");
         $("#resultTab").append("<br/><br/><ul>");
-       // $("#resultTab").append(diseases);
+        // $("#resultTab").append(diseases);
 
         for (var disease in diseases) {
-
             var values = diseases[disease];
-           // var matches = getMatches(values[2]);
-
-
-
-
+            // var matches = getMatches(values[2]);
             diseaseSummary = "<li class =\"disease\">"
                 + "<table>"
                 + "<tr class=\"diseaseTitle\">"
-
                 + "<td class=\"title\" colspan=\"3\">"
                 + "<a class = \"clickTitle\" id=\""
                 + values[1]
@@ -184,9 +202,7 @@ function sendSymptoms(symptoms) {
                 + "<tr>\n"
                 + "<td class=\"label\">Omimnumber: </td><td class=\"value\">"
                 + values[1]
-
                 + "</td></tr>"
-
                 + "<tr><td class=\"label\"><a data"
                 + "-toggle=\"tooltip\" title=\"The score is calculated through:"
                 + " The sum of 1 / occurence of each match through the "
@@ -249,51 +265,51 @@ function loadDisease() {
         var idPat = new RegExp(id);
 
         /////////////////////////////////////////////////////////////
-         var matchId = localStorage.getItem("ids").match(idPat);
+        var matchId = localStorage.getItem("ids").match(idPat);
         console.log(matchId)
-         //make sure, the tab is only created one time
-         if (matchId === null) {
-             localStorage.setItem("ids", localStorage.getItem("ids") + id);
-             title = title.charAt(0) + title.substring(1, title.length).toLowerCase();
-             if (title.length > 15) {
-                 title = title.substring(0, 12) + "...";
-             }
+        //make sure, the tab is only created one time
+        if (matchId === null) {
+            localStorage.setItem("ids", localStorage.getItem("ids") + id);
+            title = title.charAt(0) + title.substring(1, title.length).toLowerCase();
+            if (title.length > 15) {
+                title = title.substring(0, 12) + "...";
+            }
 
-        $("#tablist").append("<li role=\"presentation\"><a href=\"#" + id + "\" aria-controls=\"" + id
-            + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\" class=\"tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
-        $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
-        $("#" + id).append("<br/><br/>");
-        //$("#" + id).append(disease);
+            $("#tablist").append("<li role=\"presentation\"><a href=\"#" + id + "\" aria-controls=\"" + id
+                + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\" class=\"tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
+            $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
+            $("#" + id).append("<br/><br/>");
+            //$("#" + id).append(disease);
 
-        $("#" + id).append("<h2>" + disease["title"] + "</h2><div id =\"disease\">"
-        + "<p class=\"back2results\"><span class = \"glyphicon"
-        + " glyphicon-arrow-left\" aria-hidden=\"true\">"
-        + "  Back to results</p></span><br/>"
-        + "<b>Omim number : </b>"
-        + "<a href=\"http://omim.org/entry/" +
-            disease["omimNumber"] +
-        + "\"target=\"blank\"data-toggle=\"tooltip\""
-        + " title=\"Click here to open the disease on the omim website\"id=\"omimSiteLink\">" +
-            disease["omimNumber"] +
-            "</a>"
-        + "<br/><b>Matches: </b>" +
-            disease["matches"] + "<br/>"
-        + "<b><a data"
-        + "-toggle=\"tooltip\" title=\"The number of matched "
-        + "symptoms.\"data-placement=\"right\">Hits :</a></b> "
-        + "hits" + "<br/><b><a data"
-        + "-toggle=\"tooltip\" title=\"The score is calculated through:"
-        + " The sum of 1 / occurence of each match through the search"
-        + ".\"data-placement=\"right\">Score: </a></b>"
-        + score + "<br/><br/><button id=\"highlightButton\""
-        + " class=\"button btn btn-info\">"
-        + "Highlight matches</button>" +
-            disease["information"] +
-            "</div>");
+            $("#" + id).append("<h2>" + disease["title"] + "</h2><div id =\"disease\">"
+                + "<p class=\"back2results\"><span class = \"glyphicon"
+                + " glyphicon-arrow-left\" aria-hidden=\"true\">"
+                + "  Back to results</p></span><br/>"
+                + "<b>Omim number : </b>"
+                + "<a href=\"http://omim.org/entry/" +
+                disease["omimNumber"] +
+                + "\"target=\"blank\"data-toggle=\"tooltip\""
+                + " title=\"Click here to open the disease on the omim website\"id=\"omimSiteLink\">" +
+                disease["omimNumber"] +
+                "</a>"
+                + "<br/><b>Matches: </b>" +
+                disease["matches"] + "<br/>"
+                + "<b><a data"
+                + "-toggle=\"tooltip\" title=\"The number of matched "
+                + "symptoms.\"data-placement=\"right\">Hits :</a></b> "
+                + "hits" + "<br/><b><a data"
+                + "-toggle=\"tooltip\" title=\"The score is calculated through:"
+                + " The sum of 1 / occurence of each match through the search"
+                + ".\"data-placement=\"right\">Score: </a></b>"
+                + score + "<br/><br/><button id=\"highlightButton\""
+                + " class=\"button btn btn-info\">"
+                + "Highlight matches</button>" +
+                disease["information"] +
+                "</div>");
 
 
-        $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease as .txt</button>");
-         }
+            $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease as .txt</button>");
+        }
 
 
 
@@ -312,14 +328,14 @@ function loadDisease() {
 
                 //////////////////////////////////////////////////////////
                 // remove string from id list, so that it can be opened again
-                  var idString = localStorage.getItem("ids");
-                  var firstPart = idString.substring(0, matchId.index);
-                  var lastPart = idString.substring(matchId.index + id.length, idString.length);
-                  localStorage.setItem("ids", firstPart + lastPart);
+                var idString = localStorage.getItem("ids");
+                var firstPart = idString.substring(0, matchId.index);
+                var lastPart = idString.substring(matchId.index + id.length, idString.length);
+                localStorage.setItem("ids", firstPart + lastPart);
                 //////////////////////////////////////////////////////////////
 
             }
-       // }
+            // }
         });
 
 
@@ -410,7 +426,6 @@ function saveDisease() {
         print += disease_info.substring(last, pattern.lastIndex - 1);
         print += "\n";
         var last = pattern.lastIndex - 1;
-
     }
     //ignore the last button
     print += disease_info.substring(last, disease_info.length - 80 - localStorage.getItem("disease2save").length);

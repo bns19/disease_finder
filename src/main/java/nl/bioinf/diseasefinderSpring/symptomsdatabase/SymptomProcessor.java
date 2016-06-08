@@ -57,7 +57,6 @@ public class SymptomProcessor {
                 List<Object> featuresOfCurrentDisease = new ArrayList();
                 Map.Entry pair = (Map.Entry) it.next();
                 Disease disease = (Disease) pair.getValue();
-              //  sb.append(disease.printSummary());
                 featuresOfCurrentDisease.add(disease.getTitle());
                 featuresOfCurrentDisease.add((disease.getMimNumber()));
                 featuresOfCurrentDisease.add(disease.getMatches());

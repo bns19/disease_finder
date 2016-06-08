@@ -35,11 +35,10 @@ function initialize() {
             });
         },
 
-        // ui = symptom in string (name) where is being searched
+        // ui = object being searched
         select: function(e, ui) {
 
-            console.log(ui.item.value)
-
+            // Selected item value = ui.item.value
             $.ajax({
                 url: "termsToTree",
                 dataType: "text",
@@ -47,16 +46,10 @@ function initialize() {
                 success: function(data) {
                     var selectedname = ui.item.value;
 
-                    console.log("data pre: " + data)
-
                     data = data.replace(/\[|\]/g, "");
-
-                    console.log("data: " + data)
 
                     var newData = data.replace(/\"|\n/g, "").split(",").reverse();
                     var count = newData.length;
-
-                    console.log("newData: " + newData)
 
                     window.setInterval(function() {
                         $("#ontology-tree").jstree("open_node", newData[0]);
@@ -64,7 +57,9 @@ function initialize() {
                         if (count === 1) {
 
                             //Create the secondary tree in the right field
-                            createTree(newData[0], selectedname);
+                            //createTree(newData[0], selectedname);
+                            //
+                            //console.log(newData[0])
 
                             // to highligt the symptom that is searched for
                             $("#ontology-tree").jstree(true).get_node(newData[0]).li_attr.class = "jstree-search"

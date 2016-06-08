@@ -16,21 +16,37 @@
             <div class="tab-content" id="tabcontent">
                 <div role="tabpanel" class="tab-pane active" id="treetab">
 
+                    <div id="discriptionTrees">
+
+
                     <h2>Select symptoms</h2>
-                        <button id="search-button" class="button btn btn-info">Search for diseases</button>
-
-
                         <form>
                             <input type="text" id="symptoms" name="symptoms"/>
                         </form>
 
 
-                        <div id="event_result">Select symptoms on the right side of the page. </div>
+                        <div id="event_result">Select symptoms on the right side of the page.</div>
+                        <p>select algorithm</p>
+                        <button id="search-button" class="button btn btn-info">Search for diseases</button>
 
+                        <select size="1" id="algorithmType" name="algorithm" class="button btn btn-info">
+                            <option value="AM">A.M-algorithm</option>
+                            <option value="j">J-algorithm</option>
+                        </select>
+
+                        <select size="1" id="runtime" name="algorithm" class="button btn btn-info">
+                            <option value="">No limit</option>
+                            <option value="30000">30 seconds</option>
+                            <option value="60000">1 minute</option>
+                            <option value="90000">1.5 minutes</option>
+                            <option value="120000">2 minutes</option>
+
+                        </select>
                         <div id="ontology-tree" class="fields" style="margin-top:2em;"></div>
 
-                        <!--tree!!!!!!!!!!!!!!!!!!-->
 
+                        <!--tree!!!!!!!!!!!!!!!!!!-->
+                    </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="resultTab">
                     <br/><br/>
