@@ -19,7 +19,7 @@ function createTree(selectedNodes, selectedIds, parents, parentObjectList) {
     console.log(parents)
     console.log(parentObjectList)
 
-    createSecondTree(lastparentnode)
+    //createSecondTree(lastparentnode)
 
     console.log("parentObjectList: " + parentObjectList)
 
