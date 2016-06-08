@@ -156,6 +156,7 @@ function initialize() {
 
     $("#search-button").click(function () {
         sendSymptoms();
+        console.log(localStorage.getItem("symptoms")+ "   symptomsdsssss")
     });
 
 
@@ -207,18 +208,20 @@ function sendSymptoms(symptoms) {
                 + "<td class=\"label\">Omimnumber: </td><td class=\"value\">"
                 + values[0]
                 + "</td></tr>"
-                + "<tr><td class=\"label\"><a data"
-                + "-toggle=\"tooltip\" title=\"The score is calculated through:"
-                + " The sum of 1 / occurence of each match through the "
-                + "search.\" id=\"score\"data-placement=\"right\">"
-                + "Score: </a></td><td class=\"value\">"
-                + "score"
-                + "<tr><td class=\"label\"><a data"
-                + "-toggle=\"tooltip\" title=\"The number of matched "
-                + "symptoms.\"data-placement=\"right\">Hits: "
-                + "</a></td><td class=\"value\">"
-                + "hits"
-                + "</td></tr>"
+
+                //+ "<tr><td class=\"label\"><a data"
+                //+ "-toggle=\"tooltip\" title=\"The score is calculated through:"
+                //+ " The sum of 1 / occurence of each match through the "
+                //+ "search.\" id=\"score\"data-placement=\"right\">"
+                //+ "Score: </a></td><td class=\"value\">"
+                //+ "score"
+                //+ "<tr><td class=\"label\"><a data"
+                //+ "-toggle=\"tooltip\" title=\"The number of matched "
+                //+ "symptoms.\"data-placement=\"right\">Hits: "
+                //+ "</a></td><td class=\"value\">"
+                //+ "hits"
+                //+ "</td></tr>"
+
                 + "<tr><td class=\"label\">Matches: "
                 + "</td><td class=\"value\">"
                 + values[2]
