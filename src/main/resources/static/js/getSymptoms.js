@@ -8,24 +8,42 @@ function initialize() {
     var symptoms;
 
     localStorage.setItem("ids", "");
+
     //by aroeters (lists made by mkslofstra)
     $("#ontology-tree").on('changed.jstree', function (e, data) {
+
         localStorage.setItem("shortSymptoms", "")
         var i, j, selectedNodes = [], selectedIds = [];
-        var shortSymptomsList = []
+        var shortSymptomsList = [];
+        var shortSymptomsIdList = [];
+        var parentObjectList = new Array;
         //run through all selected nodes
+
         for (i = 0, j = data.selected.length; i < j; i++) {
             //get the selected node
 
             var selected = data.instance.get_node(data.selected[i]);
 
             if ($.inArray(selected.id, selectedNodes) === -1 && selected.text !== "All") {
-                shortSymptomsList.push(selected.text)
+                shortSymptomsList.push(selected.text);
+                shortSymptomsIdList.push(selected.id);
                 selectedNodes.push(selected.text);
                 selectedIds.push(selected.id);
+
+                var parentObj = new Object();
+                parentObj.id = selected.id;
+                parentObj.name = selected.text;
+                //parentObj.parent = selected.parent;
+                parentObjectList.push(parentObj);
+
             }
+
+            localStorage.setItem("selectedNodes", selectedNodes);
+            localStorage.setItem("selectedIds", selectedIds);
+
             //get all parents
             parents = selected.parents;
+
             //The if makes sure that the parents are more than one, so if it
             //is one word, it will not be divided in characters
             if (parents.length !== 1) {
@@ -46,13 +64,13 @@ function initialize() {
                 if (parents[0] !== "#") {
                     selectedNodes.push(parents[0]);
                 }
-                ;
             }
-            localStorage.setItem("symptoms", selectedNodes);
-            localStorage.setItem("selectedIds", selectedIds);
+
         }
         var shortSymptomString = shortSymptomsList.toString();
-        localStorage.setItem("shortSymptoms", shortSymptomString)
+        localStorage.setItem("shortSymptoms", shortSymptomString);
+
+        createTree(shortSymptomsIdList[shortSymptomsIdList.length-1], selectedIds, parents, parentObjectList);
 
         //Here will be the link between the old tree and the new tree.
 
@@ -139,6 +157,7 @@ function initialize() {
     $("#search-button").click(function () {
         sendSymptoms();
     });
+
 
 }
 
@@ -239,7 +258,6 @@ function loadDisease() {
         "symptoms": localStorage.getItem("symptoms"),
         _csrf: token
     }, function (disease) {
-        console.log(disease["title"] + "de titel")
         var title = disease["title"];
 
         //var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
@@ -251,7 +269,6 @@ function loadDisease() {
 
         /////////////////////////////////////////////////////////////
         var matchId = localStorage.getItem("ids").match(idPat);
-        console.log(matchId)
         //make sure, the tab is only created one time
         if (matchId === null) {
             localStorage.setItem("ids", localStorage.getItem("ids") + id);
@@ -376,7 +393,6 @@ function saveResults() {
 
 //under construction
 function saveResultsAsPdf() {
-    console.log("hoipdf")
     //var results = $("#resultTab").text();
     //var doc = new jsPDF();
     //var specialElementHandlers = {

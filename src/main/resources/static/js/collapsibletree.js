@@ -1,19 +1,44 @@
-function createTree(data, selectedname) {
+function createTree(selectedNodes, selectedIds, parents, parentObjectList) {
+    // parentObjectList = all the selected nodes
+    // parents = all the parents of the selected node
+    // selectedIds = all the selected id's
+    // selectedNodes = all the names of the selected nodes
 
     //Global variables
+    var selectedNodeId = selectedIds[0];
     var mlist = new Array();
+    var parentlist = new Array();
+    var lastparentnode = parents[0];
+    var url = "secondTreeBuilder";
 
-    createSecondTree(data)
+    //clear the subtree that is currently shown on the html page
+    $("#subtree").empty();
+
+    console.log(selectedNodes)
+    console.log(selectedIds)
+    console.log(parents)
+    console.log(parentObjectList)
+
+    createSecondTree(lastparentnode)
+
+    console.log("parentObjectList: " + parentObjectList)
 
     //Data has the id's that are searched for from symptoms
     function createSecondTree(data) {
-        var url = "secondTreeBuilder";
 
         // Call the connector and ask for the nodes information (id, parent, children, name)
         $.get(url, {id: data}, function (jsonout) {
-            executeTree(jsonout);
-        });
+            for (x in jsonout) {
+                var loop = jsonout[x];
 
+                //Update the mlist with all the child node objects
+                for (firstsearch in loop) {
+                    if ($.inArray(loop[firstsearch], mlist) == -1)
+                        mlist.push(loop[firstsearch]);
+                }
+            }
+            ctree(mlist);
+        });
     }
 
     //Unique array maker (used to get the root(s))
@@ -28,44 +53,31 @@ function createTree(data, selectedname) {
         return a;
     }
 
-    //Get all the children of the input node
-    function executeTree(jsonout) {
-        for (x in jsonout) {
-            var loop = jsonout[x];
-
-            //Update the mlist with all the child node objects
-            for (firstsearch in loop) {
-                mlist.push(loop[firstsearch]);
-            }
-        }
-        ctree(mlist);
-    }
-
     //Create the tree structure
     function ctree(input) {
-        var uniqueidlist = new Array();
 
+        console.log(input)
+
+        var uniqueidlist = new Array();
         for (item in input) {
             uniqueidlist.push(input[item]['id'])
         }
-
         var uniqueid = unique(uniqueidlist);
-
         for (item in input) {
-            if (uniqueid.indexOf(input[item]['parent']) >= 0) {
 
+            if (uniqueid.indexOf(input[item]['parent']) >= 0) {
             }
             else {
                 input[item]['parent'] = "000001"; //sets the parentid's to 000001 of the nodes that have no parent
             }
         }
 
-        createRootObject();
+        addRootObject();
 
-        function createRootObject() {
-            //Create the root object
+        //Create the root object
+        function addRootObject() {
             var rootobject = new Object();
-            rootobject['name'] = selectedname;
+            rootobject['name'] = selectedNodes[0];
             rootobject['id'] = "000001";
             rootobject['parent'] = null;
 
@@ -102,7 +114,7 @@ function createTree(data, selectedname) {
                 }
             }
         }
-        executeCreateTree(tree);
+        //executeCreateTree(tree);
     }
 }
 

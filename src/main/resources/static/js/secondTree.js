@@ -35,6 +35,8 @@ function executeCreateTree(treeData) {
 
     d3.select(self.frameElement).style("height", "500px");
 
+    console.log("root: " + root)
+
     function update(source) {
 
         // show selected element
@@ -152,10 +154,24 @@ function executeCreateTree(treeData) {
         if (d.children) {
             d._children = d.children;
             d.children = null;
+            d._children.forEach(collapse);
         } else {
             d.children = d._children;
             d._children = null;
+            d._children.forEach(collapse);
         }
         update(d);
     }
+
+    //// select the nodes from the first children of the selected node
+    //clickroot(root)
+    //function clickroot(root){
+    //
+    //    if (root.children) {
+    //        var childnodes = root.children;
+    //        for (item in childnodes){
+    //            click(childnodes[item])
+    //    }
+    //    }
+    //}
 }
