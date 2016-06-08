@@ -58,7 +58,6 @@ function initialize() {
 
                             //Create the secondary tree in the right field
                             //createTree(newData[0], selectedname);
-                            //
                             //console.log(newData[0])
 
                             // to highligt the symptom that is searched for

@@ -39,13 +39,8 @@ function executeCreateTree(treeData) {
 
     function update(source) {
 
-        //for (items in source){
-        //    console.log("source: " + source[items])
-        //}
-
         // show selected element
         document.getElementById("selectedTreeNode").innerHTML = source.name;
-        document.getElementById("selectedsymptomvalue").attribute = source;
 
         // Compute the new tree layout.
         var nodes = tree.nodes(root).reverse(),
@@ -154,23 +149,29 @@ function executeCreateTree(treeData) {
         });
     }
 
-
     // Toggle children on click.
     function click(d) {
-        //console.log("clickd: " + d)
-        //for (items in d){
-        //    console.log("ditems: " + d[items])
-        //}
-
-
         if (d.children) {
             d._children = d.children;
             d.children = null;
+            d._children.forEach(collapse);
         } else {
             d.children = d._children;
             d._children = null;
+            d._children.forEach(collapse);
         }
         update(d);
     }
-    //click(root)
+
+    //// select the nodes from the first children of the selected node
+    //clickroot(root)
+    //function clickroot(root){
+    //
+    //    if (root.children) {
+    //        var childnodes = root.children;
+    //        for (item in childnodes){
+    //            click(childnodes[item])
+    //    }
+    //    }
+    //}
 }
