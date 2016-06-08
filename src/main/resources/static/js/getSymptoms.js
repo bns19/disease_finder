@@ -12,31 +12,37 @@ function initialize() {
     //by aroeters (lists made by mkslofstra)
     $("#ontology-tree").on('changed.jstree', function (e, data) {
 
-
         localStorage.setItem("shortSymptoms", "")
         var i, j, selectedNodes = [], selectedIds = [];
-        var shortSymptomsList = []
+        var shortSymptomsList = [];
+        var shortSymptomsIdList = [];
         var parentObjectList = new Array;
         //run through all selected nodes
+
         for (i = 0, j = data.selected.length; i < j; i++) {
             //get the selected node
 
             var selected = data.instance.get_node(data.selected[i]);
 
             if ($.inArray(selected.id, selectedNodes) === -1 && selected.text !== "All") {
-                shortSymptomsList.push(selected.text)
+                shortSymptomsList.push(selected.text);
+                shortSymptomsIdList.push(selected.id);
                 selectedNodes.push(selected.text);
                 selectedIds.push(selected.id);
 
-                var parentObj = new Object;
+                var parentObj = new Object();
                 parentObj.id = selected.id;
                 parentObj.name = selected.text;
-                parentObjectList.push(parentObj)
+                //parentObj.parent = selected.parent;
+                parentObjectList.push(parentObj);
 
             }
+
+            localStorage.setItem("selectedNodes", selectedNodes);
+            localStorage.setItem("selectedIds", selectedIds);
+
             //get all parents
             parents = selected.parents;
-
 
             //The if makes sure that the parents are more than one, so if it
             //is one word, it will not be divided in characters
@@ -58,30 +64,19 @@ function initialize() {
                 if (parents[0] !== "#") {
                     selectedNodes.push(parents[0]);
                 }
-
             }
-            localStorage.setItem("symptoms", selectedNodes);
-            localStorage.setItem("selectedIds", selectedIds);
-
 
         }
         var shortSymptomString = shortSymptomsList.toString();
-        localStorage.setItem("shortSymptoms", shortSymptomString)
+        localStorage.setItem("shortSymptoms", shortSymptomString);
 
-
-        //Call the createTree when the objects in the left tree are selected
-        for (item in data){
-            if (data[item].id) {
-                createTree(parents);
-                //createTree(data[item], parents);
-            }
-        }
-
+        createTree(shortSymptomsIdList[shortSymptomsIdList.length-1], selectedIds, parents, parentObjectList);
 
         //Here will be the link between the old tree and the new tree.
 
-        // by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
+         //by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
         $('#event_result').html('Selected symptoms:<br/>');
+        //$('#labels').html('Selected symptoms:<br/>');
 
         var shortSymptomCounter = -1;
         for (i = 0; i < selectedIds.length; i++) {
@@ -93,12 +88,16 @@ function initialize() {
                 var negaButtonValue = i;
                 $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
                     + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button><button class='negateButton' id='negateButton' value="+shortSymptomCounter+" >negate</button>");
+                //$("#labels").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
+                //    + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button><button class='negateButton' id='negateButton' value="+shortSymptomCounter+" >negate</button>");
 
             }
 
             else{
                 $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
                     + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button>");
+                //$("#labels").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
+                //    + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button>");
             }
         }
         $(".dontClick").click(function () {
@@ -114,28 +113,29 @@ function initialize() {
             var symptomToNegate = shortSymptomList[index];
 
             var longIndex = longSymptomList.indexOf(symptomToNegate);
-
-            if (symptomToNegate.substring(0,3) != "non") {
-                var negatedSymptom = "non"+symptomToNegate;
+            console.log(localStorage.getItem("shortSymptoms")+ "                  eerste short symptoms")
+            if (symptomToNegate.substring(0,4) != "non ") {
+                var negatedSymptom = "non "+symptomToNegate;
                 shortSymptomList[index]=negatedSymptom;
                 localStorage.removeItem("shortSymptoms");
                 localStorage.setItem("shortSymptoms", shortSymptomList.toString())
 
 
-                //longSymptomList[longIndex]=negatedSymptom;
-                //localStorage.removeItem("symptoms");
-                //localStorage.setItem("symptoms", longSymptomList.toString())
+                longSymptomList[longIndex]=negatedSymptom;
+                localStorage.removeItem("symptoms");
+                localStorage.setItem("symptoms", longSymptomList.toString())
+                console.log(localStorage.getItem("shortSymptoms") + "=")
             }
 
-            if (symptomToNegate.substring(0,3) == "non" && symptomToNegate.substring(3,5) != "non") {
-                var nonNegatedSymptom = symptomToNegate.substring(3,symptomToNegate.length);
+            if (symptomToNegate.substring(0,4) == "non " && symptomToNegate.substring(4,6) != "non") {
+                var nonNegatedSymptom = symptomToNegate.substring(4,symptomToNegate.length);
                 shortSymptomList[index]=nonNegatedSymptom;
                 localStorage.removeItem("shortSymptoms");
                 localStorage.setItem("shortSymptoms", shortSymptomList.toString())
-
-                //longSymptomList[longIndex]=nonNegatedSymptom;
-                //localStorage.removeItem("symptoms");
-                //localStorage.setItem("symptoms", longSymptomList.toString())
+                console.log(localStorage.getItem("shortSymptoms") + "+")
+                longSymptomList[longIndex]=nonNegatedSymptom;
+                localStorage.removeItem("symptoms");
+                localStorage.setItem("symptoms", longSymptomList.toString())
             }
         });
 
@@ -157,6 +157,8 @@ function initialize() {
     $("#search-button").click(function () {
         sendSymptoms();
     });
+
+
 }
 
 
@@ -169,6 +171,7 @@ function resendQuery(longQuery) {
 //by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
     //localStorage.setItem("symptoms", symptoms);
+    console.log("daar")
     var symptomSet = symptoms;
 
     var algorithm = document.getElementById('algorithmType').value;
@@ -196,13 +199,13 @@ function sendSymptoms(symptoms) {
                 + "<tr class=\"diseaseTitle\">"
                 + "<td class=\"title\" colspan=\"3\">"
                 + "<a class = \"clickTitle\" id=\""
-                + values[1]
-                + "\"><b>"
                 + values[0]
+                + "\"><b>"
+                + values[1]
                 + "</a></td></tr>"
                 + "<tr>\n"
                 + "<td class=\"label\">Omimnumber: </td><td class=\"value\">"
-                + values[1]
+                + values[0]
                 + "</td></tr>"
                 + "<tr><td class=\"label\"><a data"
                 + "-toggle=\"tooltip\" title=\"The score is calculated through:"
@@ -255,7 +258,6 @@ function loadDisease() {
         "symptoms": localStorage.getItem("symptoms"),
         _csrf: token
     }, function (disease) {
-        console.log(disease["title"] + "de titel")
         var title = disease["title"];
 
         //var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
@@ -267,7 +269,6 @@ function loadDisease() {
 
         /////////////////////////////////////////////////////////////
         var matchId = localStorage.getItem("ids").match(idPat);
-        console.log(matchId)
         //make sure, the tab is only created one time
         if (matchId === null) {
             localStorage.setItem("ids", localStorage.getItem("ids") + id);
@@ -392,7 +393,6 @@ function saveResults() {
 
 //under construction
 function saveResultsAsPdf() {
-    console.log("hoipdf")
     //var results = $("#resultTab").text();
     //var doc = new jsPDF();
     //var specialElementHandlers = {

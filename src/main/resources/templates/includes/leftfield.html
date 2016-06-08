@@ -25,8 +25,8 @@
                         </form>
 
 
-                        <div id="event_result">Select symptoms on the right side of the page.</div>
-                        <p>select algorithm</p>
+                        <!--<div id="event_result">Select symptoms on the right side of the page.</div>-->
+                        <!--<p>select algorithm</p>-->
                         <button id="search-button" class="button btn btn-info">Search for diseases</button>
 
                         <select size="1" id="algorithmType" name="algorithm" class="button btn btn-info">
@@ -35,7 +35,7 @@
                         </select>
 
                         <select size="1" id="runtime" name="algorithm" class="button btn btn-info">
-                            <option value="">No limit</option>
+                            <option value="0">No limit</option>
                             <option value="30000">30 seconds</option>
                             <option value="60000">1 minute</option>
                             <option value="90000">1.5 minutes</option>
@@ -56,6 +56,11 @@
 
                 <div role="tabpanel" class="tab-pane" id="statisticsTab">
                     <showstatistics th:replace="includes/showstatistics"></showstatistics>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="labelTab">
+                    <div id="event_result">
+                         </div>
                 </div>
 
                 <div role="tabpanel" class="tab-pane" id="historytab">

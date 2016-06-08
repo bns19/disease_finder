@@ -61,16 +61,20 @@ public class SearchSystem{
 
  //   public static void main(String[] args) throws Exception {
         // TODO code application logic here
-     public SearchSystem(String symptoms) throws Exception {
+     public SearchSystem(String symptoms, int runtime) throws Exception {
 //        Findtrait bb = new Findtrait("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
         Findtrait bb = new Findtrait();
-         bb.setCutoffTime(30000);
-         bb.setDiseases("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
+         if (runtime > 0) {
+             bb.setCutoffTime(runtime);
+         }
+         System.out.println("eentestofhijhierkomt");
+         bb.setDiseases(symptoms);
+         System.out.println("test2222");
        // System.out.println(bb.getFinalres().size());
        // this.results = new Findtrait("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
         //this.results = new Findtrait(symptoms);
         this.results = bb;
-        //int count = 0;
+        int count = 0;
       //  System.out.println(bb.getFinalres());
 //        for (List<String> i : bb.getFinalres().keySet()) {
 //            count++;
@@ -79,8 +83,8 @@ public class SearchSystem{
 //            System.out.println("Disorder    " + i.get(1));
 //            System.out.println("id    " + i.get(0));
 //            System.out.println("match    " + bb.getFinalres().get(i) + "\n");
-
-        //}
+//
+//        }
     }
 
     public Findtrait getResults() {
