@@ -34,8 +34,7 @@ public class HPOgetParentInformation {
      * @param parent  the id of the parent
      * @return a HashMap with all the information for jsTree.js
      */
-    public final HashMap getParentInfo(final HPOTerm hpoTerm,
-                                       final String parent) {
+    public final HashMap getParentInfo(final HPOTerm hpoTerm, final String parent) {
         HashMap tree = new HashMap();
         tree.put("id", hpoTerm.getId());
         tree.put("name", hpoTerm.getName());

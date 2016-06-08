@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -20,30 +21,21 @@ public class ParentInformation {
         requestedNodeChildren = requestedNodeChildren.replaceAll("^\"|\"$", "");
 
         HPOgetParentInformation hpi = new HPOgetParentInformation();
-        String jsonChildren = "";
 
         HPOTerm parent = (HPOTerm) collection.get(requestedNodeChildren);
 
-        getAllChildrenNodes(parent, hpi);
+        JSONObject childNode = new JSONObject();
 
-        jsonChildren = children.toString();
+        childNode.put("id", parent.getId());
+        childNode.put("name", parent.getName());
 
-        return jsonChildren;
+        children.put(childNode);
+
+        String jschilds = children.toString();
+
+        return jschilds;
     }
 
-
-    public void getAllChildrenNodes(HPOTerm parent, HPOgetParentInformation hpi) {
-        if (parent.getChildren() != null) {
-            for (HPOTerm child : parent.getChildren()) {
-                JSONObject childNode = new JSONObject(hpi.getParentInfo(child, parent.getId()));
-                getAllChildrenNodes(child, hpi);
-
-                children.put(childNode);
-                System.out.println(childNode);
-            }
-
-        }
-
-    }
 
 }
+
