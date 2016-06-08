@@ -62,9 +62,6 @@ public class SymptomProcessingController {
     @RequestMapping(value = "/sendSymptoms",  method = RequestMethod.POST)
     @ResponseBody
     public List processInput(final String symptoms, final String shortSymptoms, final String algorithm, final int runtime) throws Exception{
-        System.out.println(algorithm + " algorithm!!!!!!");
-        System.out.println(runtime + " runtime!!!!!!");
-
         try {
             SaveSearchedSymptoms saveSymptoms = new SaveSearchedSymptoms(userRepository, searchHistoryRepository);
             saveSymptoms.saveSymptoms(shortSymptoms, symptoms);
@@ -77,17 +74,44 @@ public class SymptomProcessingController {
         List returnableDiseaseList;
         if (algorithm.equals("j")) {
             List<List> diseasesList = new ArrayList();
-           // SearchSystem ss = new SearchSystem(symptoms);
-            SearchSystem ss = new SearchSystem("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
+//            List<String> diseasesList = new ArrayList();
+
+
+            SearchSystem ss = new SearchSystem(symptoms, runtime);
 
             Findtrait diseases = ss.getResults();
+            System.out.println(diseases + "resultaten");
+            int count = 0;
+            List<String> bridgeList = new ArrayList();
+            for (List<String> i : diseases.getFinalres().keySet()) {
+                count++;
+//
+//                bridgeList = i;
+//                try {
+//                    bridgeList.add(diseases.getFinalres().get(i));
+//                } catch(Exception e) {}
+//                    diseasesList.add(bridgeList);
+                diseasesList.add(i);
+                System.out.println(count);
+                System.out.println("Disorder    " + i.get(1));
+                System.out.println("id    " + i.get(0));
+                System.out.println("match    " + diseases.getFinalres().get(i) + "\n");
+                bridgeList.clear();
+//                diseasesList.add(i.get(1));
+//                diseasesList.add(i.get(0));
+//                diseasesList.add(diseases.getFinalres().get(i));
+
+
+            }
+            //diseaseList.add()
             returnableDiseaseList = diseasesList;
+
         } else {
             /////////////////////////////////////////////////
 
             SymptomProcessor sp = new SymptomProcessor(symptoms);
             returnableDiseaseList =  sp.getDiseaseData();
-            System.out.println(returnableDiseaseList.toString() + "de lijst");
+          //  System.out.println(returnableDiseaseList.toString() + "de lijst");
 //            return sp.getDiseaseData();
         }
 

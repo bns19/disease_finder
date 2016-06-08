@@ -56,8 +56,9 @@ function initialize() {
 
         //Here will be the link between the old tree and the new tree.
 
-        // by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
+         //by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
         $('#event_result').html('Selected symptoms:<br/>');
+        //$('#labels').html('Selected symptoms:<br/>');
 
         var shortSymptomCounter = -1;
         for (i = 0; i < selectedIds.length; i++) {
@@ -69,12 +70,16 @@ function initialize() {
                 var negaButtonValue = i;
                 $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
                     + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button><button class='negateButton' id='negateButton' value="+shortSymptomCounter+" >negate</button>");
+                //$("#labels").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
+                //    + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button><button class='negateButton' id='negateButton' value="+shortSymptomCounter+" >negate</button>");
 
             }
 
             else{
                 $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
                     + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button>");
+                //$("#labels").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
+                //    + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button>");
             }
         }
         $(".dontClick").click(function () {
@@ -90,28 +95,29 @@ function initialize() {
             var symptomToNegate = shortSymptomList[index];
 
             var longIndex = longSymptomList.indexOf(symptomToNegate);
-
-            if (symptomToNegate.substring(0,3) != "non") {
-                var negatedSymptom = "non"+symptomToNegate;
+            console.log(localStorage.getItem("shortSymptoms")+ "                  eerste short symptoms")
+            if (symptomToNegate.substring(0,4) != "non ") {
+                var negatedSymptom = "non "+symptomToNegate;
                 shortSymptomList[index]=negatedSymptom;
                 localStorage.removeItem("shortSymptoms");
                 localStorage.setItem("shortSymptoms", shortSymptomList.toString())
 
 
-                //longSymptomList[longIndex]=negatedSymptom;
-                //localStorage.removeItem("symptoms");
-                //localStorage.setItem("symptoms", longSymptomList.toString())
+                longSymptomList[longIndex]=negatedSymptom;
+                localStorage.removeItem("symptoms");
+                localStorage.setItem("symptoms", longSymptomList.toString())
+                console.log(localStorage.getItem("shortSymptoms") + "=")
             }
 
-            if (symptomToNegate.substring(0,3) == "non" && symptomToNegate.substring(3,5) != "non") {
-                var nonNegatedSymptom = symptomToNegate.substring(3,symptomToNegate.length);
+            if (symptomToNegate.substring(0,4) == "non " && symptomToNegate.substring(4,6) != "non") {
+                var nonNegatedSymptom = symptomToNegate.substring(4,symptomToNegate.length);
                 shortSymptomList[index]=nonNegatedSymptom;
                 localStorage.removeItem("shortSymptoms");
                 localStorage.setItem("shortSymptoms", shortSymptomList.toString())
-
-                //longSymptomList[longIndex]=nonNegatedSymptom;
-                //localStorage.removeItem("symptoms");
-                //localStorage.setItem("symptoms", longSymptomList.toString())
+                console.log(localStorage.getItem("shortSymptoms") + "+")
+                longSymptomList[longIndex]=nonNegatedSymptom;
+                localStorage.removeItem("symptoms");
+                localStorage.setItem("symptoms", longSymptomList.toString())
             }
         });
 
@@ -146,6 +152,7 @@ function resendQuery(longQuery) {
 //by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
     //localStorage.setItem("symptoms", symptoms);
+    console.log("daar")
     var symptomSet = symptoms;
 
     var algorithm = document.getElementById('algorithmType').value;
@@ -173,13 +180,13 @@ function sendSymptoms(symptoms) {
                 + "<tr class=\"diseaseTitle\">"
                 + "<td class=\"title\" colspan=\"3\">"
                 + "<a class = \"clickTitle\" id=\""
-                + values[1]
-                + "\"><b>"
                 + values[0]
+                + "\"><b>"
+                + values[1]
                 + "</a></td></tr>"
                 + "<tr>\n"
                 + "<td class=\"label\">Omimnumber: </td><td class=\"value\">"
-                + values[1]
+                + values[0]
                 + "</td></tr>"
                 + "<tr><td class=\"label\"><a data"
                 + "-toggle=\"tooltip\" title=\"The score is calculated through:"
