@@ -72,7 +72,8 @@ function initialize() {
         //Call the createTree when the objects in the left tree are selected
         for (item in data){
             if (data[item].id) {
-                createTree(data[item], parents);
+                createTree(parents);
+                //createTree(data[item], parents);
             }
         }
 

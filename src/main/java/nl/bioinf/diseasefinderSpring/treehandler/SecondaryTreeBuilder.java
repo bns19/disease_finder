@@ -43,7 +43,6 @@ public class SecondaryTreeBuilder {
                 getAllChildrenNodes(child, hj);
 
                 children.put(childNode);
-                System.out.println(childNode);
             }
 
         }

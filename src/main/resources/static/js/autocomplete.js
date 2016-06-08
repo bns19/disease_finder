@@ -57,8 +57,8 @@ function initialize() {
                         if (count === 1) {
 
                             //Create the secondary tree in the right field
-                            //createTree(newData[0], selectedname);
-                            //
+                            //createTree(newData[0]);
+
                             //console.log(newData[0])
 
                             // to highligt the symptom that is searched for
