@@ -35,7 +35,6 @@ public class HPOJsonObjectCreatorSecondaryTree {
                 .getResource("config/hp.obo").toString();
         HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
         this.hpoCollection = hr.readFile().getHPOHashMap();
-
     }
 
     /**
@@ -48,13 +47,9 @@ public class HPOJsonObjectCreatorSecondaryTree {
     public final HashMap createSubTree(final HPOTerm hpoTerm,
             final String parent) {
         HashMap tree = new HashMap();
-        HashMap<String, Boolean> state = new HashMap<String, Boolean>();
-        state.put("opened", false);
-        state.put("selected", false);
         tree.put("id", hpoTerm.getId());
         tree.put("name", hpoTerm.getName());
         tree.put("parent", parent);
-        tree.put("state", state);
         return tree;
     }
 }

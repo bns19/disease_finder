@@ -1,27 +1,16 @@
-function createTree(selectedNodes, selectedIds, parents, parentObjectList) {
-    // parentObjectList = all the selected nodes
-    // parents = all the parents of the selected node
-    // selectedIds = all the selected id's
-    // selectedNodes = all the names of the selected nodes
+function createTree(nodeId, nodeName){
 
     //Global variables
-    var selectedNodeId = selectedIds[0];
     var mlist = new Array();
-    var parentlist = new Array();
-    var lastparentnode = parents[0];
     var url = "secondTreeBuilder";
 
     //clear the subtree that is currently shown on the html page
     $("#subtree").empty();
 
-    console.log(selectedNodes)
-    console.log(selectedIds)
-    console.log(parents)
-    console.log(parentObjectList)
+    createSecondTree(nodeId)
 
-    //createSecondTree(lastparentnode)
-
-    console.log("parentObjectList: " + parentObjectList)
+    console.log("nodeId: " + nodeId)
+    console.log("nodeName: " + nodeName)
 
     //Data has the id's that are searched for from symptoms
     function createSecondTree(data) {
@@ -77,7 +66,7 @@ function createTree(selectedNodes, selectedIds, parents, parentObjectList) {
         //Create the root object
         function addRootObject() {
             var rootobject = new Object();
-            rootobject['name'] = selectedNodes[0];
+            rootobject['name'] = nodeName;
             rootobject['id'] = "000001";
             rootobject['parent'] = null;
 
@@ -114,7 +103,7 @@ function createTree(selectedNodes, selectedIds, parents, parentObjectList) {
                 }
             }
         }
-        //executeCreateTree(tree);
+        executeCreateTree(tree);
     }
 }
 

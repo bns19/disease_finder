@@ -11,6 +11,9 @@ function initialize() {
 
     //by aroeters (lists made by mkslofstra)
     $("#ontology-tree").on('changed.jstree', function (e, data) {
+        var ddd = $('#ontology-tree').jstree().get_selected("id")[0].id
+        console.log(ddd)
+
 
         localStorage.setItem("shortSymptoms", "")
         var i, j, selectedNodes = [], selectedIds = [];
@@ -70,7 +73,32 @@ function initialize() {
         var shortSymptomString = shortSymptomsList.toString();
         localStorage.setItem("shortSymptoms", shortSymptomString);
 
-        createTree(shortSymptomsIdList[shortSymptomsIdList.length-1], selectedIds, parents, parentObjectList);
+
+        localStorage.setItem("counter", data.length);
+        if (localStorage.getItem("counter") != null && localStorage.getItem("counter").length != data.length){
+            var nodeId = new Array();
+            var nodeName = new Array;
+
+            nodeId.push($('#ontology-tree').jstree().get_selected("id")[0].id);
+            nodeName.push($('#ontology-tree').jstree().get_selected("text")[0].text);
+
+            console.log(nodeId.length)
+            console.log(nodeName)
+            console.log(nodeId)
+
+            if (nodeId.length == 1){
+                $("#subtree").empty();
+                createTree(nodeId[0], nodeName[0])
+            }
+            else{
+                $("#subtree").empty();
+                createTree(nodeId[-1], nodeName[-1])
+
+            }
+        }
+        localStorage.setItem("savedIds", $('#ontology-tree').jstree().get_selected("id")[0].id);
+        localStorage.setItem("counter", data.length);
+
 
         //Here will be the link between the old tree and the new tree.
 
@@ -436,3 +464,28 @@ function saveDisease() {
     saveAs(diseaseFile, localStorage.getItem("disease2save") + ".txt");
 
 }
+
+//// check if the you have selected a new symptom (else the tree will be created several times
+//localStorage.setItem("counter", $("#ontology-tree").jstree("get_selected").length);
+//if ($("#ontology-tree").jstree("get_selected").length != null && localStorage.getItem("counter").length != $("#ontology-tree").jstree("get_selected").length){
+//
+//    if ($("#ontology-tree").jstree("get_selected").length = 1){
+//        var nodeId = $("#ontology-tree").jstree("get_selected");
+//        var nodeName = $('#ontology-tree').jstree().get_selected("text")[0].text;
+//        createTree(nodeId[0], nodeName[0]);
+//    }
+//    else{
+//
+//        var nodeId = $("#ontology-tree").jstree("get_selected");
+//        var nodeName = $('#ontology-tree').jstree().get_selected("text")[0].text;
+//        createTree(nodeId[-1], nodeName[-1]);
+//    }
+//
+//}
+//else{
+//    var nodeId = $("#ontology-tree").jstree("get_selected");
+//    var nodeName = $('#ontology-tree').jstree().get_selected("text")[0].text;
+//    createTree(nodeId, nodeName);
+//}
+//// set the counter
+//localStorage.setItem("counter", $("#ontology-tree").jstree("get_selected").length);
