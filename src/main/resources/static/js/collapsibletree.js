@@ -7,8 +7,9 @@ function createTree(nodeName){
     var listofallids = new Array();
 
     getListOfParents(nodeName)
+    getNodeInformation(listofallids)
 
-    console.log(listofallids)
+    //console.log(listofallids)
 
     //ctree(nodeName)
 
@@ -74,6 +75,16 @@ function createTree(nodeName){
             }
         }
     }
+
+    function getNodeInformation(listofallids) {
+        console.log(listofallids.toString())
+
+        var url = "/parentTreeBuilder";
+        $.get(url, {"ids" : "SS"}), function (outdata) {
+            console.log(outdata)
+        };
+    }
+
 }
 
 

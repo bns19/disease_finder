@@ -61,11 +61,13 @@ public class D3TreeController {
 
     @RequestMapping(value = "parentTreeBuilder", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String getParentInformation(String id) throws IOException, JSONException {
+    public String getParentInformation(String ids) throws IOException, JSONException {
 
-        List<String> ParentIditems = Arrays.asList(id.split("\\s*,\\s*"));
+        System.out.println("ID: " + ids);
 
-        List<String> items = new LinkedList<String>(Arrays.asList(id.split("\\s*,\\s*")));
+        List<String> ParentIditems = Arrays.asList(ids.split("\\s*,\\s*"));
+
+        List<String> items = new LinkedList<String>(Arrays.asList(ids.split("\\s*,\\s*")));
         ArrayList<String> jsonChildrenList = new ArrayList<String>();
         String jsonChildren = "";
 

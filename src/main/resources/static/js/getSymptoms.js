@@ -12,6 +12,8 @@ function initialize() {
     //by aroeters (lists made by mkslofstra)
     $("#ontology-tree").on('changed.jstree', function (e, data) {
 
+
+
         localStorage.setItem("shortSymptoms", "")
         var i, j, selectedNodes = [], selectedIds = [];
         var shortSymptomsList = [];
@@ -66,23 +68,6 @@ function initialize() {
         }
         var shortSymptomString = shortSymptomsList.toString();
         localStorage.setItem("shortSymptoms", shortSymptomString);
-
-
-        localStorage.setItem("counter", data.length);
-        if (localStorage.getItem("counter") != null && localStorage.getItem("counter").length != data.length){
-
-            var nodeName = $('#ontology-tree').jstree().get_selected("text");
-
-                $("#subtree").empty();
-
-            for (ii in nodeName){
-                console.log(nodeName[ii])
-            }
-
-                createTree(nodeName)
-
-        }
-        localStorage.setItem("counter", data.length);
 
 
         //Here will be the link between the old tree and the new tree.
@@ -170,7 +155,6 @@ function initialize() {
     $("#search-button").click(function () {
         sendSymptoms();
     });
-
 
 }
 
