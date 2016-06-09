@@ -7,7 +7,7 @@ function createTree(nodeId, nodeName){
     //clear the subtree that is currently shown on the html page
     $("#subtree").empty();
 
-    createSecondTree(nodeId)
+    //createSecondTree(nodeId)
 
     console.log("nodeId: " + nodeId)
     console.log("nodeName: " + nodeName)

@@ -72,7 +72,7 @@ function initialize() {
         }
         var shortSymptomString = shortSymptomsList.toString();
         localStorage.setItem("shortSymptoms", shortSymptomString);
-
+        localStorage.setItem("symptoms", selectedNodes)
 
         localStorage.setItem("counter", data.length);
         if (localStorage.getItem("counter") != null && localStorage.getItem("counter").length != data.length){
@@ -204,6 +204,7 @@ function sendSymptoms(symptoms) {
 
     var algorithm = document.getElementById('algorithmType').value;
     var runtime = document.getElementById('runtime').value;
+    var queryType = document.getElementById('query').value;
 
     $('.nav-tabs a[href="#resultTab"]').tab('show');
 
@@ -212,7 +213,7 @@ function sendSymptoms(symptoms) {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     //use the mapped controller
-    $.post(controller, {"symptoms": localStorage.getItem("symptoms"), "shortSymptoms": localStorage.getItem("shortSymptoms"), "algorithm": algorithm,"runtime": runtime, _csrf: token}, function (diseases) {
+    $.post(controller, {"symptoms": localStorage.getItem("symptoms"), "shortSymptoms": localStorage.getItem("shortSymptoms"), "algorithm": algorithm,"runtime": runtime, "queryType": queryType, _csrf: token}, function (diseases) {
         var diseaseSummary = "";
 
         $("#resultTab").text("");

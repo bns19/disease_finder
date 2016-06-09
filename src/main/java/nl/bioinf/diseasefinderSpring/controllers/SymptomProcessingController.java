@@ -61,7 +61,7 @@ public class SymptomProcessingController {
      */
     @RequestMapping(value = "/sendSymptoms",  method = RequestMethod.POST)
     @ResponseBody
-    public List processInput(final String symptoms, final String shortSymptoms, final String algorithm, final int runtime) throws Exception{
+    public List processInput(final String symptoms, final String shortSymptoms, final String algorithm, final int runtime, final String queryType) throws Exception{
         try {
             SaveSearchedSymptoms saveSymptoms = new SaveSearchedSymptoms(userRepository, searchHistoryRepository);
             saveSymptoms.saveSymptoms(shortSymptoms, symptoms);
@@ -71,13 +71,19 @@ public class SymptomProcessingController {
             symptomsCalculationInformation.calculateSymptomsSearch();
         } catch(Exception e) {}
         /////////////////////////////////////////////////
+        String symptomsToSearch;
+        if (queryType.equals("long")) {
+            symptomsToSearch = symptoms;
+        } else {
+            symptomsToSearch = shortSymptoms;
+        }
         List returnableDiseaseList;
         if (algorithm.equals("j")) {
             List<List> diseasesList = new ArrayList();
 //            List<String> diseasesList = new ArrayList();
 
 
-            SearchSystem ss = new SearchSystem(symptoms, runtime);
+            SearchSystem ss = new SearchSystem(symptomsToSearch, runtime);
 
             Findtrait diseases = ss.getResults();
             System.out.println(diseases + "resultaten");
@@ -108,8 +114,8 @@ public class SymptomProcessingController {
 
         } else {
             /////////////////////////////////////////////////
-
-            SymptomProcessor sp = new SymptomProcessor(symptoms);
+            System.out.println(symptomsToSearch+ "de geselecteerde symptoms");
+            SymptomProcessor sp = new SymptomProcessor(symptomsToSearch);
             returnableDiseaseList =  sp.getDiseaseData();
           //  System.out.println(returnableDiseaseList.toString() + "de lijst");
 //            return sp.getDiseaseData();
