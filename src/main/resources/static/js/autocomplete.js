@@ -3,14 +3,14 @@ $(document).ready(initialize);
 
 function initialize() {
 
-    $("#symptoms").on("click", function () {
+    $("#symptoms").on("click", function() {
         $(this).val("");
     });
 
 
     $("#symptoms").autocomplete({
 
-        width: 150,
+    width: 150,
         max: 10,
         minLength: 1,
         autoFocus: true,
@@ -20,14 +20,14 @@ function initialize() {
 
 
         //Hier word de data uit de hpoprocessor opgehaald
-        source: function (request, response) {
+        source: function(request, response) {
 
             $.ajax({
                 url: "/autocompleteSymptoms",
                 type: "GET",
                 dataType: "json",
                 data: request,
-                success: function (data) {
+                success: function(data) {
 
                     var items = data;
                     response(items);
@@ -36,14 +36,14 @@ function initialize() {
         },
 
         // ui = object being searched
-        select: function (e, ui) {
+        select: function(e, ui) {
 
             // Selected item value = ui.item.value
             $.ajax({
                 url: "termsToTree",
                 dataType: "text",
                 data: {"autoCompleteResult": ui.item.value},
-                success: function (data) {
+                success: function(data) {
                     var selectedname = ui.item.value;
 
                     data = data.replace(/\[|\]/g, "");
@@ -51,18 +51,21 @@ function initialize() {
                     var newData = data.replace(/\"|\n/g, "").split(",").reverse();
                     var count = newData.length;
 
-                    window.setInterval(function () {
+                    window.setInterval(function() {
                         $("#ontology-tree").jstree("open_node", newData[0]);
 
-                        // to highligt the symptom that is searched for
-                        $("#ontology-tree").jstree(true).get_node(newData[0]).li_attr.class = "jstree-search"
+                        if (count === 1) {
 
-                        window.clearInterval();
+                            // to highligt the symptom that is searched for
+                            $("#ontology-tree").jstree(true).get_node(newData[0]).li_attr.class = "jstree-search"
 
+
+                            window.clearInterval();
+                        }
                         newData.splice(0, 1);
                         count--;
                     }, 500);
-                    $("#search-symptom").on("click", function () {
+                    $("#search-symptom").on("click", function() {
                         $("*").removeClass("jstree-search");
                     });
 

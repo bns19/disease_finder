@@ -1,28 +1,16 @@
 function createTree(nodeName){
-
-    //Global variables
-    var mlist = new Array();
-
     //clear the subtree that is currently shown on the html page
     //$("#subtree").empty();
 
-    for (selectedObjects in nodeName) {
-        var object = nodeName[selectedObjects]
+    //Global variables
+    var mlist = new Array();
+    var listofallids = new Array();
 
-        for (item in object){
-            console.log(object[item])
-        }
-        console.log(object.text)
-        console.log(object.id)
+    getListOfParents(nodeName)
 
-        if (typeof(object.parent) !== 'undefined')
-            console.log(object.parent)
+    console.log(listofallids)
 
-        else{
-            console.log("voor de error")
-        }
-    }
-    ctree(nodeName)
+    //ctree(nodeName)
 
     //Create the tree structure
     function ctree(input) {
@@ -74,6 +62,17 @@ function createTree(nodeName){
             }
         }
         executeCreateTree(tree);
+    }
+
+    function getListOfParents(nodeName){
+        for (selectedObjects in nodeName) {
+            var object = nodeName[selectedObjects]
+            listofallids.push(object.id)
+
+            for (parentobjects in object.parents){
+                listofallids.push(object.parents[parentobjects])
+            }
+        }
     }
 }
 
