@@ -11,9 +11,6 @@ function initialize() {
 
     //by aroeters (lists made by mkslofstra)
     $("#ontology-tree").on('changed.jstree', function (e, data) {
-        var ddd = $('#ontology-tree').jstree().get_selected("id")[0].id
-        console.log(ddd)
-
 
         localStorage.setItem("shortSymptoms", "")
         var i, j, selectedNodes = [], selectedIds = [];
@@ -40,9 +37,6 @@ function initialize() {
                 parentObjectList.push(parentObj);
 
             }
-
-            localStorage.setItem("selectedNodes", selectedNodes);
-            localStorage.setItem("selectedIds", selectedIds);
 
             //get all parents
             parents = selected.parents;
@@ -76,27 +70,18 @@ function initialize() {
 
         localStorage.setItem("counter", data.length);
         if (localStorage.getItem("counter") != null && localStorage.getItem("counter").length != data.length){
-            var nodeId = new Array();
-            var nodeName = new Array;
 
-            nodeId.push($('#ontology-tree').jstree().get_selected("id")[0].id);
-            nodeName.push($('#ontology-tree').jstree().get_selected("text")[0].text);
+            var nodeName = $('#ontology-tree').jstree().get_selected("text");
 
-            console.log(nodeId.length)
-            console.log(nodeName)
-            console.log(nodeId)
-
-            if (nodeId.length == 1){
                 $("#subtree").empty();
-                createTree(nodeId[0], nodeName[0])
-            }
-            else{
-                $("#subtree").empty();
-                createTree(nodeId[-1], nodeName[-1])
 
+            for (ii in nodeName){
+                console.log(nodeName[ii])
             }
+
+                createTree(nodeName)
+
         }
-        localStorage.setItem("savedIds", $('#ontology-tree').jstree().get_selected("id")[0].id);
         localStorage.setItem("counter", data.length);
 
 
