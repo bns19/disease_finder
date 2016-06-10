@@ -70,21 +70,9 @@ public class SearchSystem{
          System.out.println("eentestofhijhierkomt");
          bb.setDiseases(symptoms);
          System.out.println("test2222");
-       // System.out.println(bb.getFinalres().size());
-       // this.results = new Findtrait("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
-        //this.results = new Findtrait(symptoms);
         this.results = bb;
         int count = 0;
-      //  System.out.println(bb.getFinalres());
-//        for (List<String> i : bb.getFinalres().keySet()) {
-//            count++;
-//
-//            System.out.println(count);
-//            System.out.println("Disorder    " + i.get(1));
-//            System.out.println("id    " + i.get(0));
-//            System.out.println("match    " + bb.getFinalres().get(i) + "\n");
-//
-//        }
+
     }
 
     public Findtrait getResults() {
