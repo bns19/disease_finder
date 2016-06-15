@@ -1,6 +1,6 @@
 function createTree(nodeId, parents, lengthparents) {
     //clear the subtree that is currently shown on the html page
-    //$("#subtree").empty();
+    $("#subtree").empty();
 
     //Global variables
     var mlist = new Array();
@@ -11,23 +11,36 @@ function createTree(nodeId, parents, lengthparents) {
 
 
     //Create the tree structure
-    function ctree(nodes) {
+    function createTree(arr) {
+        var tree = [],
+            mappedArr = {},
+            arrElem,
+            mappedElem;
 
-        var map = {}, node, roots = [];
-        for (var i = 0; i < nodes.length; i += 1) {
-            node = nodes[i];
-            node.children = [];
-            map[node.id] = i; // use map to look-up the parents
-            if (node.parent !== "HP:0000001") {
+        // First map the nodes of the array to an object -> create a hash table.
+        for(var i = 0, len = arr.length; i < len; i++) {
+            arrElem = arr[i];
+            mappedArr[arrElem.id] = arrElem;
+            mappedArr[arrElem.id]['children'] = [];
+        }
 
-                console.log(nodes[map[node.parent]].children)
 
-                nodes[map[node.parent]].children.push(node);
-            } else {
-                roots.push(node);
+        for (var id in mappedArr) {
+            if (mappedArr.hasOwnProperty(id)) {
+                mappedElem = mappedArr[id];
+                // If the element is not at the root level, add it to its parent array of children.
+                if (mappedElem.parentid) {
+                    mappedArr[mappedElem['parentid']]['children'].push(mappedElem);
+                }
+                // If the element is at the root level, add it to first level elements array.
+                else {
+                    tree.push(mappedElem);
+                }
             }
         }
-        console.log(roots);
+
+        console.log(tree)
+
         executeCreateTree(tree);
     }
 
@@ -53,23 +66,28 @@ function createTree(nodeId, parents, lengthparents) {
 
                 if (count != lengthparents) {
 
-                    newObject.parent = parentIds[count + 1];
-                    newObject.id = objectsInOutdata[parents].id;
-                    newObject.name = objectsInOutdata[parents].name;
-                    newObject.children = null;
+                    if (parentIds[count + 1] != "#") {
+                        newObject.parentid = parentIds[count + 1];
 
-                    console.log(newObject)
+                    }
+                    else{
+                        newObject.parentid = null;
+                    }
                 }
+                newObject.id = objectsInOutdata[parents].id;
+                newObject.name = objectsInOutdata[parents].name;
+                newObject.children = null;
+                console.log(newObject)
 
                 listOfNodes.push(newObject)
+
+
                 count += 1;
             }
         }
 
-        ctree(listOfNodes)
+        createTree(listOfNodes)
     }
 }
-
-
 
 

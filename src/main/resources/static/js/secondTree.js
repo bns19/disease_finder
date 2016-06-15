@@ -5,9 +5,9 @@
 //************** Generate the tree diagram	 *****************
 function executeCreateTree(treeData) {
 
-    var margin = {top: 20, right: 120, bottom: 20, left: 200},
-        width = 1000 - margin.right - margin.left,
-        height = 1000 - margin.top - margin.bottom;
+    var margin = {top: 20, right: 120, bottom: 20, left: 150},
+        width = 2000 - margin.right - margin.left,
+        height = 500 - margin.top - margin.bottom;
 
     var i = 0,
         duration = 750,
@@ -164,14 +164,14 @@ function executeCreateTree(treeData) {
     }
 
     // select the nodes from the first children of the selected node
-    clickroot(root)
-    function clickroot(root){
-
-        if (root.children) {
-            var childnodes = root.children;
-            for (item in childnodes){
-                click(childnodes[item])
-        }
-        }
-    }
+    //clickroot(root)
+    //function clickroot(root){
+    //
+    //    if (root.children) {
+    //        var childnodes = root.children;
+    //        for (item in childnodes){
+    //            click(childnodes[item])
+    //    }
+    //    }
+    //}
 }
