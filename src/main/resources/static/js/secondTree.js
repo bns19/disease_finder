@@ -5,7 +5,11 @@
 //************** Generate the tree diagram	 *****************
 function executeCreateTree(treeData) {
 
-    var margin = {top: 20, right: 120, bottom: 20, left: 150},
+    for (is in treeData){
+        console.log(treeData[is])
+    }
+
+    var margin = {top: 20, right: 50, bottom: 20, left: 50},
         width = 2000 - margin.right - margin.left,
         height = 500 - margin.top - margin.bottom;
 
@@ -21,11 +25,15 @@ function executeCreateTree(treeData) {
             return [d.y, d.x];
         });
 
+    //if(!document.getElementById('secondTree'+ treeData[0])) {}
+
     var svg = d3.select("#subtree").append("svg")
         .attr("width", width + margin.right + margin.left)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
 
     root = treeData[0];
     root.x0 = height / 2;
@@ -39,16 +47,13 @@ function executeCreateTree(treeData) {
 
     function update(source) {
 
-        // show selected element
-        document.getElementById("selectedTreeNode").innerHTML = source.name;
-
         // Compute the new tree layout.
         var nodes = tree.nodes(root).reverse(),
             links = tree.links(nodes);
 
         // Normalize for fixed-depth.
         nodes.forEach(function (d) {
-            d.y = d.depth * 180;
+            d.y = d.depth * 150;
         });
 
         // Update the nodes…
@@ -72,17 +77,12 @@ function executeCreateTree(treeData) {
             });
 
         nodeEnter.append("text")
-            .attr("x", function (d) {
-                return d.children || d._children ? -13 : 13;
-            })
+            .attr("y", function(d) {
+                return d.children || d._children ? -18 : 18; })
             .attr("dy", ".35em")
-            .attr("text-anchor", function (d) {
-                return d.children || d._children ? "end" : "start";
-            })
-            .text(function (d) {
-                return d.name;
-            })
-            .style("fill-opacity", 1e-6);
+            .attr("text-anchor", "middle")
+            .text(function(d) { return d.name; })
+            .style("fill-opacity", 1);
 
         // Transition nodes to their new position.
         var nodeUpdate = node.transition()

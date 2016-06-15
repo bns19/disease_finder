@@ -72,7 +72,8 @@ function initialize() {
         localStorage.setItem("symptoms", selectedNodes)
 
         var nodeId = $("#ontology-tree").jstree("get_selected");
-        console.log(nodeId)
+        parents.unshift(nodeId.toString());
+
         var lengthparents = parents.length;
         createTree(nodeId, parents, lengthparents);
 
