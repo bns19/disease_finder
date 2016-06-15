@@ -40,7 +40,6 @@ public class PrimaryTreeBuilder {
                     childNode.put("icon", icons.get(child.getId()));
 
                 } else {
-                    //childNode.put("icon", request.getParameter("icon"));
                     childNode.put("icon", icon);
                 }
                 children.put(childNode);

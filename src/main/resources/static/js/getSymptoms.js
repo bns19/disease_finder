@@ -43,6 +43,7 @@ function initialize() {
             //get all parents
             parents = selected.parents;
 
+
             //The if makes sure that the parents are more than one, so if it
             //is one word, it will not be divided in characters
             if (parents.length !== 1) {
@@ -69,6 +70,10 @@ function initialize() {
         var shortSymptomString = shortSymptomsList.toString();
         localStorage.setItem("shortSymptoms", shortSymptomString);
         localStorage.setItem("symptoms", selectedNodes)
+
+        var nodeId = $("#ontology-tree").jstree("get_selected");
+        var lengthparents = parents.length;
+        createTree(nodeId, parents, lengthparents);
 
         //Here will be the link between the old tree and the new tree.
 
@@ -155,6 +160,8 @@ function initialize() {
     $("#search-button").click(function () {
         sendSymptoms();
     });
+
+
 
 }
 

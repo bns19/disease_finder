@@ -1,90 +1,73 @@
-function createTree(nodeName){
+function createTree(nodeId, parents, lengthparents) {
     //clear the subtree that is currently shown on the html page
     //$("#subtree").empty();
 
     //Global variables
     var mlist = new Array();
-    var listofallids = new Array();
+    var parentIds = parents;
 
-    getListOfParents(nodeName)
-    getNodeInformation(listofallids)
 
-    //console.log(listofallids)
+    getNodeInformation(parents)
 
-    //ctree(nodeName)
 
     //Create the tree structure
-    function ctree(input) {
-        addObjects();
+    function ctree(nodes) {
 
-        //Create the root object
-        function addObjects() {
+        var map = {}, node, roots = [];
+        for (var i = 0; i < nodes.length; i += 1) {
+            node = nodes[i];
+            node.children = [];
+            map[node.id] = i; // use map to look-up the parents
+            if (node.parent !== "HP:0000001") {
 
-            for (selectedObjects in nodeName) {
-                var object = nodeName[selectedObjects]
+                console.log(nodes[map[node.parent]].children)
 
-                var rootobject = new Object();
-                rootobject['name'] = object.text;
-                rootobject['id'] = object.id;
-                rootobject['parent'] = object.parent;
-
-                //Push root object to the input list
-                mlist.push(rootobject)
+                nodes[map[node.parent]].children.push(node);
+            } else {
+                roots.push(node);
             }
         }
-
-        var arr = mlist;
-        var tree = [],
-            mappedArr = {},
-            arrElem,
-            mappedElem;
-
-        // First map the nodes of the array to an object -> create a hash table.
-        for (var i = 0, len = arr.length; i < len; i++) {
-            arrElem = arr[i];
-            mappedArr[arrElem.id] = arrElem;
-            mappedArr[arrElem.id]['children'] = [];
-        }
-
-        for (var id in mappedArr) {
-
-            if (mappedArr.hasOwnProperty(id)) {
-                mappedElem = mappedArr[id];
-
-                // If the element is not at the root level, add it to its parent array of children.
-                if (mappedElem.parent) {
-                    mappedArr[mappedElem['parent']]['children'].push(mappedElem);
-                }
-
-                // If the element is at the root level, add it to first level elements array.
-                else {
-                    tree.push(mappedElem);
-                }
-            }
-        }
+        console.log(roots);
         executeCreateTree(tree);
     }
 
-    function getListOfParents(nodeName){
-        for (selectedObjects in nodeName) {
-            var object = nodeName[selectedObjects]
-            listofallids.push(object.id)
 
-            for (parentobjects in object.parents){
-                listofallids.push(object.parents[parentobjects])
+    function getNodeInformation(parents) {
+        var url = "/parentTreeBuilder";
+        $.get(url, {"ids": parents.toString()}, function(outdata) {
+            processInformation(parents, outdata)
+        });
+    }
+
+
+    function processInformation(parents, outdata){
+        var count = 0;
+        var listOfNodes = new Array();
+
+        for( greatList in outdata){
+            var objectsInOutdata = outdata[greatList];
+
+            for (parents in objectsInOutdata) {
+
+                var newObject = new Object;
+
+                if (count != lengthparents) {
+
+                    newObject.parent = parentIds[count + 1];
+                    newObject.id = objectsInOutdata[parents].id;
+                    newObject.name = objectsInOutdata[parents].name;
+                    newObject.children = null;
+
+                    console.log(newObject)
+                }
+
+                listOfNodes.push(newObject)
+                count += 1;
             }
         }
+
+        ctree(listOfNodes)
     }
-
-    function getNodeInformation(listofallids) {
-        console.log(listofallids.toString())
-
-        var url = "/parentTreeBuilder";
-        $.get(url, {"ids" : "SS"}), function (outdata) {
-            console.log(outdata)
-        };
-    }
-
 }
 
 

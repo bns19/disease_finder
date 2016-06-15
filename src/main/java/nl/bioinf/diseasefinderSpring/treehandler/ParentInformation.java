@@ -20,14 +20,11 @@ public class ParentInformation {
     public String getParentInformation(String requestedNodeChildren, final HashMap collection) throws IOException, JSONException {
         requestedNodeChildren = requestedNodeChildren.replaceAll("^\"|\"$", "");
 
-        HPOgetParentInformation hpi = new HPOgetParentInformation();
-
-        HPOTerm parent = (HPOTerm) collection.get(requestedNodeChildren);
+        HPOTerm node = (HPOTerm) collection.get(requestedNodeChildren);
 
         JSONObject childNode = new JSONObject();
-
-        childNode.put("id", parent.getId());
-        childNode.put("name", parent.getName());
+        childNode.put("id", node.getId());
+        childNode.put("name", node.getName());
 
         children.put(childNode);
 
