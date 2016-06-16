@@ -43,7 +43,6 @@ function initialize() {
             //get all parents
             parents = selected.parents;
 
-
             //The if makes sure that the parents are more than one, so if it
             //is one word, it will not be divided in characters
             if (parents.length !== 1) {
@@ -71,15 +70,9 @@ function initialize() {
         localStorage.setItem("shortSymptoms", shortSymptomString);
         localStorage.setItem("symptoms", selectedNodes)
 
-        var nodeId = $("#ontology-tree").jstree("get_selected");
-        parents.unshift(nodeId.toString());
-
-        var lengthparents = parents.length;
-        createTree(nodeId, parents, lengthparents);
-
         //Here will be the link between the old tree and the new tree.
 
-         //by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
+        //by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
         $('#event_result').html('Selected symptoms:<br/>');
         //$('#labels').html('Selected symptoms:<br/>');
 
@@ -163,8 +156,6 @@ function initialize() {
         sendSymptoms();
     });
 
-
-
 }
 
 
@@ -177,7 +168,6 @@ function resendQuery(longQuery) {
 //by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
     //localStorage.setItem("symptoms", symptoms);
-    console.log("daar")
     var symptomSet = symptoms;
 
     var algorithm = document.getElementById('algorithmType').value;
@@ -192,6 +182,7 @@ function sendSymptoms(symptoms) {
     var header = $("meta[name='_csrf_header']").attr("content");
     //use the mapped controller
     $.post(controller, {"symptoms": localStorage.getItem("symptoms"), "shortSymptoms": localStorage.getItem("shortSymptoms"), "algorithm": algorithm,"runtime": runtime, "queryType": queryType, _csrf: token}, function (diseases) {
+        console.log("backend gepasseerd")
         var diseaseSummary = "";
 
 
@@ -201,6 +192,7 @@ function sendSymptoms(symptoms) {
 
         for (var disease in diseases) {
             var values = diseases[disease];
+            //localStorage.setItem("matches", value[2]);
             // var matches = getMatches(values[2]);
             diseaseSummary = "<li class =\"disease\">"
                 + "<table>"
@@ -215,22 +207,22 @@ function sendSymptoms(symptoms) {
                 + "<td class=\"label\">Omimnumber: </td><td class=\"value\">"
                 + values[0]
                 + "</td></tr>"
-                if (values[3]) {
+            if (values[3]) {
 
-                    diseaseSummary += "<tr><td class=\"label\"><a data"
-                        + "-toggle=\"tooltip\" title=\"The score is calculated through:"
-                        + " The sum of 1 / occurence of each match through the "
-                        + "search.\" id=\"score\"data-placement=\"right\">"
-                        + "Score: </a></td><td class=\"value\">"
-                        + "score"
-                        + "<tr><td class=\"label\"><a data"
-                        + "-toggle=\"tooltip\" title=\"The number of matched "
-                        + "symptoms.\"data-placement=\"right\">Hits: "
-                        + "</a></td><td class=\"value\">"
-                        + "hits"
-                        + "</td></tr>"
-                }
-                diseaseSummary+= "<tr><td class=\"label\">Matches: "
+                diseaseSummary += "<tr><td class=\"label\"><a data"
+                    + "-toggle=\"tooltip\" title=\"The score is calculated through:"
+                    + " The sum of 1 / occurence of each match through the "
+                    + "search.\" id=\"score\"data-placement=\"right\">"
+                    + "Score: </a></td><td class=\"value\">"
+                    + values[4]
+                    + "<tr><td class=\"label\"><a data"
+                    + "-toggle=\"tooltip\" title=\"The number of matched "
+                    + "symptoms.\"data-placement=\"right\">Hits: "
+                    + "</a></td><td class=\"value\">"
+                    + values[3]
+                    + "</td></tr>"
+            }
+            diseaseSummary+= "<tr><td class=\"label\">Matches: "
                 + "</td><td class=\"value\">"
                 + values[2]
                 + "</td></tr>"
@@ -277,35 +269,38 @@ function loadDisease() {
         ////sommige ziekten worden niet gematched
         var id = title.replace(/[ ,;.-]* /g, "");
         var idPat = new RegExp(id);
-
+        console.log(id)
+        console.log(idPat)
         /////////////////////////////////////////////////////////////
         var matchId = localStorage.getItem("ids").match(idPat);
         //make sure, the tab is only created one time
         if (matchId === null) {
             localStorage.setItem("ids", localStorage.getItem("ids") + id);
             title = title.charAt(0) + title.substring(1, title.length).toLowerCase();
-            if (title.length > 15) {
-                title = title.substring(0, 12) + "...";
+            if (title.length > 10) {
+                title = title.substring(0, 7) + "...";
             }
 
             $("#tablist").append("<li role=\"presentation\"><a href=\"#" + id + "\" aria-controls=\"" + id
                 + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\" class=\"tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
             $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
             $("#" + id).append("<br/><br/>");
-            //$("#" + id).append(disease);
 
-            $("#" + id).append("<h2>" + disease["title"] + "</h2><div id =\"disease\">"
-                + "<p class=\"back2results\"><span class = \"glyphicon"
-                + " glyphicon-arrow-left\" aria-hidden=\"true\">"
-                + "  Back to results</p></span><br/>"
+
+
+            diseaseInformationSummary = "<h2>" + disease["title"] + "</h2><div id =\"disease\">"
                 + "<b>Omim number : </b>"
-                + "<a href=\"http://omim.org/entry/" +
-                disease["omimNumber"] +
+                + "<a href=" +
+                "http://omim.org/entry/" +
+                disease["omimNumber"]
+                +" "
                 + "\"target=\"blank\"data-toggle=\"tooltip\""
                 + " title=\"Click here to open the disease on the omim website\"id=\"omimSiteLink\">" +
                 disease["omimNumber"] +
                 "</a>"
-                + "<br/><b>Matches: </b>" +
+
+
+            diseaseInformationSummary += "<br/><b>Matches: </b>" +
                 disease["matches"] + "<br/>"
                 + "<b><a data"
                 + "-toggle=\"tooltip\" title=\"The number of matched "
@@ -316,10 +311,12 @@ function loadDisease() {
                 + ".\"data-placement=\"right\">Score: </a></b>"
                 + score + "<br/><br/><button id=\"highlightButton\""
                 + " class=\"button btn btn-info\">"
-                + "Highlight matches</button>" +
-                disease["information"] +
-                "</div>");
+                + "Highlight matches</button>"
 
+
+            diseaseInformationSummary += disease["information"] +
+                "</div>"
+            $("#" + id).append(diseaseInformationSummary);
 
             $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease as .txt</button>");
         }
@@ -330,7 +327,7 @@ function loadDisease() {
 
 
         $(".closeDiseaseTab").click(function () {
-            // matchId = localStorage.getItem("ids").match(idPat);
+            matchId = localStorage.getItem("ids").match(idPat);
             var close_id = $(this).data("close");
             var elem = document.getElementById(close_id);
             if (elem !== null) {
@@ -363,11 +360,6 @@ function loadDisease() {
         $("#highlightButton").click(function () {
             $(".highlight").toggleClass("highlighted");
         });
-        //load results again
-        $(".back2results").click(function () {
-            $('.nav-tabs a[href="#resultTab"]').tab('show');
-        });
-
     });
 }
 ;

@@ -62,16 +62,16 @@ public class SearchSystem{
  //   public static void main(String[] args) throws Exception {
         // TODO code application logic here
      public SearchSystem(String symptoms, int runtime) throws Exception {
-//        Findtrait bb = new Findtrait("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
+//        Findtrait bb = new Findtrait();
         Findtrait bb = new Findtrait();
          if (runtime > 0) {
              bb.setCutoffTime(runtime);
          }
          System.out.println("eentestofhijhierkomt");
-         bb.setDiseases(symptoms);
+         bb.setDiseases("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
          System.out.println("test2222");
+         System.out.println(bb.getFinalres()+ "results");
         this.results = bb;
-        int count = 0;
 
     }
 

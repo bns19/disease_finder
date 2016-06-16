@@ -70,7 +70,6 @@ public class SymptomProcessingController {
                     new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
             symptomsCalculationInformation.calculateSymptomsSearch();
         } catch(Exception e) {}
-        /////////////////////////////////////////////////
         String symptomsToSearch;
         if (queryType.equals("long")) {
             symptomsToSearch = symptoms;
@@ -81,23 +80,18 @@ public class SymptomProcessingController {
         if (algorithm.equals("j")) {
             List<List> diseasesList = new ArrayList();
 //            List<String> diseasesList = new ArrayList();
-
-
             SearchSystem ss = new SearchSystem(symptomsToSearch, runtime);
-
             Findtrait diseases = ss.getResults();
-            System.out.println(diseases + "resultaten");
-            int count = 0;
+            System.out.println(diseases.getFinalres().keySet()+ "jeunards keyset");
+
             for (List<String> i : diseases.getFinalres().keySet()) {
                 List<String> bridgeList = new ArrayList();
-                count++;
                 for (String contents : i) {
                     bridgeList.add(contents);
                 }
+
                 bridgeList.add(diseases.getFinalres().get(i));
-                System.out.println(bridgeList+ "test1111");
                 diseasesList.add(bridgeList);
-                System.out.println(count);
                 System.out.println("Disorder    " + i.get(1));
                 System.out.println("id    " + i.get(0));
                 System.out.println("match    " + diseases.getFinalres().get(i) + "\n");
@@ -106,8 +100,6 @@ public class SymptomProcessingController {
             System.out.println(returnableDiseaseList);
 
         } else {
-            /////////////////////////////////////////////////
-            System.out.println(symptomsToSearch+ "de geselecteerde symptoms");
             SymptomProcessor sp = new SymptomProcessor(symptomsToSearch);
             returnableDiseaseList =  sp.getDiseaseData();
         }
