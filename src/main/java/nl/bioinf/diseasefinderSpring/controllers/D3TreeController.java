@@ -48,32 +48,26 @@ public class D3TreeController {
     @ResponseBody
     public String buildSecondTree(String id) throws IOException, JSONException {
 
-        List<String> items = new LinkedList<String>(Arrays.asList(id.split("\\s*,\\s*")));
-
         ArrayList<String> jsonChildrenList = new ArrayList<String>();
         String jsonChildren = "";
 
-        for (String item : items) {
-
-            HashMap collection = HPOFileLoader.LoadHPOFile();
-            String requestedNodeChildren = item;
-            SecondaryTreeBuilder secTreeBuilder = new SecondaryTreeBuilder();
-            jsonChildren = secTreeBuilder.buildsecondaryTree(requestedNodeChildren, collection);
-            jsonChildrenList.add(jsonChildren);
-        }
-
-        System.out.println("JJ: " + jsonChildrenList.toString());
+        HashMap collection = HPOFileLoader.LoadHPOFile();
+        SecondaryTreeBuilder secTreeBuilder = new SecondaryTreeBuilder();
+        jsonChildren = secTreeBuilder.buildsecondaryTree(id, collection);
+        jsonChildrenList.add(jsonChildren);
 
         return jsonChildrenList.toString();
     }
 
     @RequestMapping(value = "parentTreeBuilder", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String getParentInformation(String id) throws IOException, JSONException {
+    public String getParentInformation(String ids) throws IOException, JSONException {
 
-        List<String> ParentIditems = Arrays.asList(id.split("\\s*,\\s*"));
+        System.out.println("ID: " + ids);
 
-        List<String> items = new LinkedList<String>(Arrays.asList(id.split("\\s*,\\s*")));
+        List<String> ParentIditems = Arrays.asList(ids.split("\\s*,\\s*"));
+
+        List<String> items = new LinkedList<String>(Arrays.asList(ids.split("\\s*,\\s*")));
         ArrayList<String> jsonChildrenList = new ArrayList<String>();
         String jsonChildren = "";
 
@@ -91,8 +85,6 @@ public class D3TreeController {
             jsonChildrenList.add(jsonChildren);
             }
         }
-
-        System.out.println("JSONCHILDRENLIST: " + jsonChildrenList.toString());
 
         return jsonChildrenList.toString();
     }

@@ -21,15 +21,11 @@ public class SecondaryTreeBuilder {
     JSONArray children = new JSONArray();
 
     public String buildsecondaryTree(String requestedNodeChildren, final HashMap collection) throws IOException, JSONException {
-        requestedNodeChildren = requestedNodeChildren.replaceAll("^\"|\"$", "");
-
         HPOJsonObjectCreatorSecondaryTree hj = new HPOJsonObjectCreatorSecondaryTree();
         String jsonChildren = "";
 
         HPOTerm parent = (HPOTerm) collection.get(requestedNodeChildren);
-
         getAllChildrenNodes(parent, hj);
-
         jsonChildren = children.toString();
 
         return jsonChildren;

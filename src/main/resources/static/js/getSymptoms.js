@@ -12,6 +12,8 @@ function initialize() {
     //by aroeters (lists made by mkslofstra)
     $("#ontology-tree").on('changed.jstree', function (e, data) {
 
+
+
         localStorage.setItem("shortSymptoms", "")
         var i, j, selectedNodes = [], selectedIds = [];
         var shortSymptomsList = [];
@@ -37,9 +39,6 @@ function initialize() {
                 parentObjectList.push(parentObj);
 
             }
-
-            localStorage.setItem("selectedNodes", selectedNodes);
-            localStorage.setItem("selectedIds", selectedIds);
 
             //get all parents
             parents = selected.parents;
@@ -69,8 +68,7 @@ function initialize() {
         }
         var shortSymptomString = shortSymptomsList.toString();
         localStorage.setItem("shortSymptoms", shortSymptomString);
-
-        createTree(shortSymptomsIdList[shortSymptomsIdList.length-1], selectedIds, parents, parentObjectList);
+        localStorage.setItem("symptoms", selectedNodes)
 
         //Here will be the link between the old tree and the new tree.
 
@@ -156,9 +154,7 @@ function initialize() {
 
     $("#search-button").click(function () {
         sendSymptoms();
-        console.log(localStorage.getItem("symptoms")+ "   symptomsdsssss")
     });
-
 
 }
 
@@ -177,6 +173,7 @@ function sendSymptoms(symptoms) {
 
     var algorithm = document.getElementById('algorithmType').value;
     var runtime = document.getElementById('runtime').value;
+    var queryType = document.getElementById('query').value;
 
     $('.nav-tabs a[href="#resultTab"]').tab('show');
 
@@ -185,8 +182,9 @@ function sendSymptoms(symptoms) {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     //use the mapped controller
-    $.post(controller, {"symptoms": localStorage.getItem("symptoms"), "shortSymptoms": localStorage.getItem("shortSymptoms"), "algorithm": algorithm,"runtime": runtime, _csrf: token}, function (diseases) {
+    $.post(controller, {"symptoms": localStorage.getItem("symptoms"), "shortSymptoms": localStorage.getItem("shortSymptoms"), "algorithm": algorithm,"runtime": runtime, "queryType": queryType, _csrf: token}, function (diseases) {
         var diseaseSummary = "";
+
 
         $("#resultTab").text("");
         $("#resultTab").append("<br/><br/><ul>");
@@ -208,21 +206,22 @@ function sendSymptoms(symptoms) {
                 + "<td class=\"label\">Omimnumber: </td><td class=\"value\">"
                 + values[0]
                 + "</td></tr>"
+                if (values[3]) {
 
-                //+ "<tr><td class=\"label\"><a data"
-                //+ "-toggle=\"tooltip\" title=\"The score is calculated through:"
-                //+ " The sum of 1 / occurence of each match through the "
-                //+ "search.\" id=\"score\"data-placement=\"right\">"
-                //+ "Score: </a></td><td class=\"value\">"
-                //+ "score"
-                //+ "<tr><td class=\"label\"><a data"
-                //+ "-toggle=\"tooltip\" title=\"The number of matched "
-                //+ "symptoms.\"data-placement=\"right\">Hits: "
-                //+ "</a></td><td class=\"value\">"
-                //+ "hits"
-                //+ "</td></tr>"
-
-                + "<tr><td class=\"label\">Matches: "
+                    diseaseSummary += "<tr><td class=\"label\"><a data"
+                        + "-toggle=\"tooltip\" title=\"The score is calculated through:"
+                        + " The sum of 1 / occurence of each match through the "
+                        + "search.\" id=\"score\"data-placement=\"right\">"
+                        + "Score: </a></td><td class=\"value\">"
+                        + "score"
+                        + "<tr><td class=\"label\"><a data"
+                        + "-toggle=\"tooltip\" title=\"The number of matched "
+                        + "symptoms.\"data-placement=\"right\">Hits: "
+                        + "</a></td><td class=\"value\">"
+                        + "hits"
+                        + "</td></tr>"
+                }
+                diseaseSummary+= "<tr><td class=\"label\">Matches: "
                 + "</td><td class=\"value\">"
                 + values[2]
                 + "</td></tr>"
@@ -439,3 +438,28 @@ function saveDisease() {
     saveAs(diseaseFile, localStorage.getItem("disease2save") + ".txt");
 
 }
+
+//// check if the you have selected a new symptom (else the tree will be created several times
+//localStorage.setItem("counter", $("#ontology-tree").jstree("get_selected").length);
+//if ($("#ontology-tree").jstree("get_selected").length != null && localStorage.getItem("counter").length != $("#ontology-tree").jstree("get_selected").length){
+//
+//    if ($("#ontology-tree").jstree("get_selected").length = 1){
+//        var nodeId = $("#ontology-tree").jstree("get_selected");
+//        var nodeName = $('#ontology-tree').jstree().get_selected("text")[0].text;
+//        createTree(nodeId[0], nodeName[0]);
+//    }
+//    else{
+//
+//        var nodeId = $("#ontology-tree").jstree("get_selected");
+//        var nodeName = $('#ontology-tree').jstree().get_selected("text")[0].text;
+//        createTree(nodeId[-1], nodeName[-1]);
+//    }
+//
+//}
+//else{
+//    var nodeId = $("#ontology-tree").jstree("get_selected");
+//    var nodeName = $('#ontology-tree').jstree().get_selected("text")[0].text;
+//    createTree(nodeId, nodeName);
+//}
+//// set the counter
+//localStorage.setItem("counter", $("#ontology-tree").jstree("get_selected").length);

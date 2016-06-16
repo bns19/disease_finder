@@ -56,10 +56,6 @@ function initialize() {
 
                         if (count === 1) {
 
-                            //Create the secondary tree in the right field
-                            //createTree(newData[0], selectedname);
-                            //console.log(newData[0])
-
                             // to highligt the symptom that is searched for
                             $("#ontology-tree").jstree(true).get_node(newData[0]).li_attr.class = "jstree-search"
 

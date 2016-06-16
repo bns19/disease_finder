@@ -34,13 +34,18 @@
                             <option value="j">J-algorithm</option>
                         </select>
 
-                        <select size="1" id="runtime" name="algorithm" class="button btn btn-info">
+                        <select size="1" id="runtime" name="runtime" class="button btn btn-info">
                             <option value="0">No limit</option>
                             <option value="30000">30 seconds</option>
                             <option value="60000">1 minute</option>
                             <option value="90000">1.5 minutes</option>
                             <option value="120000">2 minutes</option>
 
+                        </select>
+
+                        <select size="1" id="query" name="query" class="button btn btn-info">
+                            <option value="long">all parent symptoms</option>
+                            <option value="short">only last symptom</option>
                         </select>
                         <div id="ontology-tree" class="fields" style="margin-top:2em;"></div>
 

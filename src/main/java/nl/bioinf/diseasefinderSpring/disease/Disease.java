@@ -52,6 +52,7 @@ public class Disease implements Comparable {
         this.diseaseInformation.setOmimNumber(mimNumberValue);
         this.diseaseInformation.setTitle(titleOfDisease);
 
+
     }
 
     private DiseaseInformation diseaseInformation = new DiseaseInformation();
