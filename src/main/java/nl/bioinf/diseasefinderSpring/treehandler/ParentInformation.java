@@ -17,25 +17,41 @@ import java.util.HashMap;
 public class ParentInformation {
     JSONArray children = new JSONArray();
 
+    /**
+     * @param requestedNodeChildren
+     * @param collection
+     * @return
+     * @throws IOException
+     * @throws JSONException
+     */
     public String getParentInformation(String requestedNodeChildren, final HashMap collection) throws IOException, JSONException {
         requestedNodeChildren = requestedNodeChildren.replaceAll("^\"|\"$", "");
 
-        HPOgetParentInformation hpi = new HPOgetParentInformation();
-
-        HPOTerm parent = (HPOTerm) collection.get(requestedNodeChildren);
+        HPOTerm node = (HPOTerm) collection.get(requestedNodeChildren);
 
         JSONObject childNode = new JSONObject();
+        childNode.put("id", node.getId());
+        childNode.put("name", node.getName());
 
-        childNode.put("id", parent.getId());
-        childNode.put("name", parent.getName());
+        Integer count = 0;
+        for(Object item : node.getIsA()){
+            if (count == 0){
+                String nodeGetIsA = item.toString();
+                nodeGetIsA.replaceAll("\\[", "").replaceAll("\\]","");
+                childNode.put("parentid", nodeGetIsA);
 
+                // call method recursively to get all the parent nodes and their id and name
+                getParentInformation(nodeGetIsA, collection);
+
+                count += 1;
+            }
+        }
+
+        // Add the new node to the jschilds list
         children.put(childNode);
-
         String jschilds = children.toString();
 
         return jschilds;
     }
-
-
 }
 

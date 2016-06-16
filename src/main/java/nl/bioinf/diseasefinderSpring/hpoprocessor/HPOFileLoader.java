@@ -8,6 +8,10 @@ import java.util.HashMap;
 public class HPOFileLoader {
     private HPOFileLoader() {};
 
+    /**
+     * @return
+     * @throws java.io.IOException
+     */
     public static HashMap LoadHPOFile() throws java.io.IOException {
         //HPOJsonObjectCreator hj = new HPOJsonObjectCreator();
 
