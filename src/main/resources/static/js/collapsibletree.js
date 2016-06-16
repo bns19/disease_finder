@@ -1,11 +1,7 @@
 function createTree(nodeId, parents, lengthparents) {
+
     // Clear the subtree that is currently shown on the html page
     $("#subtree").empty();
-
-    //Global variables
-    var mlist = new Array();
-    var parentIds = parents;
-
 
     // Get the information of all the parent nodes
     getNodeInformation(parents)
@@ -18,7 +14,7 @@ function createTree(nodeId, parents, lengthparents) {
             mappedElem;
 
         // First map the nodes of the array to an object -> create a hash table.
-        for(var i = 0, len = arr.length; i < len; i++) {
+        for (var i = 0, len = arr.length; i < len; i++) {
             arrElem = arr[i];
             mappedArr[arrElem.id] = arrElem;
             mappedArr[arrElem.id]['children'] = [];
@@ -37,7 +33,8 @@ function createTree(nodeId, parents, lengthparents) {
                 }
             }
         }
-        console.log("tree: " + tree)
+
+        // Execute the d3.js tree with the created list of nodes
         executeCreateTree(tree);
     }
 
@@ -45,36 +42,36 @@ function createTree(nodeId, parents, lengthparents) {
     // Connect with the connector and get the HPO file information per parent (id and name)
     function getNodeInformation(parents) {
         var url = "/parentTreeBuilder";
-        $.get(url, {"ids": parents.toString()}, function(outdata) {
+        $.get(url, {"ids": parents.toString()}, function (outdata) {
             processInformation(parents, outdata)
         });
     }
 
 
     // Get the parent from every child node
-    function processInformation(parents, outdata){
+    function processInformation(parents, outdata) {
         var listOfNodes = new Array();
 
-        for( greatList in outdata){
+        for (greatList in outdata) {
             var objectsInOutdata = outdata[greatList];
 
             for (parents in objectsInOutdata) {
 
                 var newObject = new Object;
 
-                if (objectsInOutdata[parents].name == "All"){
+                // Set the parent to null when you got the root node
+                if (objectsInOutdata[parents].name == "All") {
                     newObject.id = objectsInOutdata[parents].id;
                     newObject.name = objectsInOutdata[parents].name;
                     newObject.children = null;
                     newObject.parentid = null;
-                    listOfNodes.push(newObject)
 
+                    listOfNodes.push(newObject)
                 }
 
                 else {
                     if (objectsInOutdata[parents].parentid != "#") {
                         newObject.parentid = objectsInOutdata[parents].parentid;
-
                     }
                     else {
                         newObject.parentid = null;
@@ -84,17 +81,15 @@ function createTree(nodeId, parents, lengthparents) {
                     newObject.name = objectsInOutdata[parents].name;
                     newObject.children = null;
 
-                    console.log(newObject)
-
                     listOfNodes.push(newObject)
-
                 }
             }
         }
 
-        // show selected element
+        // Show selected element
         document.getElementById("selectedTreeNode").innerHTML = listOfNodes[0].name;
 
+        // Create the tree with the list of nodes
         createTree(listOfNodes)
     }
 }

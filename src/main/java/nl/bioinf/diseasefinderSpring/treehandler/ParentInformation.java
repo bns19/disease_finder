@@ -17,6 +17,13 @@ import java.util.HashMap;
 public class ParentInformation {
     JSONArray children = new JSONArray();
 
+    /**
+     * @param requestedNodeChildren
+     * @param collection
+     * @return
+     * @throws IOException
+     * @throws JSONException
+     */
     public String getParentInformation(String requestedNodeChildren, final HashMap collection) throws IOException, JSONException {
         requestedNodeChildren = requestedNodeChildren.replaceAll("^\"|\"$", "");
 
@@ -30,29 +37,21 @@ public class ParentInformation {
         for(Object item : node.getIsA()){
             if (count == 0){
                 String nodeGetIsA = item.toString();
-                System.out.println("nodeGetIsA: " + nodeGetIsA);
-
                 nodeGetIsA.replaceAll("\\[", "").replaceAll("\\]","");
-                System.out.println("nodeGetIsA: " + nodeGetIsA);
-
                 childNode.put("parentid", nodeGetIsA);
 
+                // call method recursively to get all the parent nodes and their id and name
                 getParentInformation(nodeGetIsA, collection);
 
                 count += 1;
             }
         }
 
-
-
-
+        // Add the new node to the jschilds list
         children.put(childNode);
-
         String jschilds = children.toString();
 
         return jschilds;
     }
-
-
 }
 

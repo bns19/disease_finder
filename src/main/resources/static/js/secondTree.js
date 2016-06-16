@@ -162,16 +162,4 @@ function executeCreateTree(treeData) {
         }
         update(d);
     }
-
-    // select the nodes from the first children of the selected node
-    //clickroot(root)
-    //function clickroot(root){
-    //
-    //    if (root.children) {
-    //        var childnodes = root.children;
-    //        for (item in childnodes){
-    //            click(childnodes[item])
-    //    }
-    //    }
-    //}
 }
