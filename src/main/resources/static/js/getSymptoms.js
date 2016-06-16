@@ -72,6 +72,16 @@ function initialize() {
 
         //Here will be the link between the old tree and the new tree.
 
+        var nodeId = $("#ontology-tree").jstree("get_selected");
+        parents.unshift(nodeId.toString());
+
+        var lengthparents = parents.length;
+        createTree(nodeId, parents, lengthparents);
+
+        // Show selected element
+        //document.getElementById("selectedTreeNode").innerHTML = selected.name;
+
+
         //by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
         $('#event_result').html('Selected symptoms:<br/>');
         //$('#labels').html('Selected symptoms:<br/>');

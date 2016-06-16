@@ -86,8 +86,7 @@ function createTree(nodeId, parents, lengthparents) {
             }
         }
 
-        // Show selected element
-        document.getElementById("selectedTreeNode").innerHTML = listOfNodes[0].name;
+
 
         // Create the tree with the list of nodes
         createTree(listOfNodes)
