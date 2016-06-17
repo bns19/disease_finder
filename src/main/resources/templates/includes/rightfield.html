@@ -1,18 +1,15 @@
 <rightfield>
 
-
-
-
     <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id="secondarytreetab">
         <ul class="nav nav-tabs" role="tablist" id="tablistsec">
             <li role="presentation"><a type="active" href="#secondaryTreeTab" aria-controls="secTreeTab" role="tab"
-                                       data-toggle="tab"  class="tab"><div id="secondarTreeTab">tree</div></a></li>
+                                       data-toggle="tab"  class="tab"><div id="secondarTreeTab">Selected</div></a></li>
         </ul>
 
         <div class="tab-content" id="tabcontent">
 
             <div role="tabpanel" class="tab-pane active" id="treetab">
-                <h2> Selected: </h2>
+                <h2> Selected </h2>
                 <p id="selectedTreeNode" type="text" > </p>
                 <div class="fields">
                 <div th:replace="includes/subtree :: tree"></div>
