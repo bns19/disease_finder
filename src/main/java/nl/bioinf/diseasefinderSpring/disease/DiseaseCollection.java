@@ -186,13 +186,22 @@ public class DiseaseCollection {
      * @return info the information about the disease.
      * @author mkslofstra
      */
-    public final DiseaseInformation getInfoOfDisease(final String omimNumber) {
+    public final DiseaseInformation getInfoOfDisease(final String omimNumber) throws IOException{
         //String info = this.diseaseCollection.get(omimNumber).toString();
-        this.diseaseCollection.get(omimNumber).createDiseaseInformation();
-        DiseaseInformation diseaseInformation = this.diseaseCollection.get(omimNumber).getDiseaseInformation();
+        Disease theDisease = this.getDiseaseContent(omimNumber);
+        List<String> testMatch = new ArrayList();
+        testMatch.add("phenotypic abnormality");
+        theDisease.setMatches(testMatch);
+        theDisease.createDiseaseInformation();
+        DiseaseInformation diseaseInformation2 = theDisease.getDiseaseInformation();
+        diseaseInformation2.getMatches();
 
-        System.out.println(diseaseInformation.getTitle());
-        return diseaseInformation;
+//        this.diseaseCollection.get(omimNumber).createDiseaseInformation();
+//        DiseaseInformation diseaseInformation = this.diseaseCollection.get(omimNumber).getDiseaseInformation();
+
+//        System.out.println(diseaseInformation.getTitle());
+//        return diseaseInformation;
+        return diseaseInformation2;
     }
 //    public final String getInfoOfDisease(final String omimNumber) {
 //        //String info = this.diseaseCollection.get(omimNumber).toString();
