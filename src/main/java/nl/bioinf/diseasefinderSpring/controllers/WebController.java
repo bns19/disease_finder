@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import javax.swing.*;
 import javax.validation.Valid;
+import java.awt.*;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -83,7 +85,10 @@ public class WebController extends WebMvcConfigurerAdapter {
     public String checkPersonInfo(@Valid final User user, final BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors());
+
             return "home";
+
+
         }
         if (!bindingResult.hasErrors()) {
             String encrypted = EncryptPassword.encryptPassword(user.getPassword());
