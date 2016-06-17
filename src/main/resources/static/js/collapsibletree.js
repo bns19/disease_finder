@@ -1,10 +1,13 @@
-function createTree(nodeId, parents, lengthparents) {
+function createTree(selected, parents) {
+
+    var parentList = parents;
+    //parentList.unshift(selected)
 
     // Clear the subtree that is currently shown on the html page
     $("#subtree").empty();
 
     // Get the information of all the parent nodes
-    getNodeInformation(parents)
+    getNodeInformation(selected)
 
     // Create the tree structure
     function createTree(arr) {

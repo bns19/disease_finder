@@ -19,6 +19,7 @@ function initialize() {
         var shortSymptomsList = [];
         var shortSymptomsIdList = [];
         var parentObjectList = new Array;
+
         //run through all selected nodes
 
         for (i = 0, j = data.selected.length; i < j; i++) {
@@ -71,6 +72,16 @@ function initialize() {
         localStorage.setItem("symptoms", selectedNodes)
 
         //Here will be the link between the old tree and the new tree.
+        console.log("selected: " + selected.id.toString())
+        console.log("parents : " + parents.toString())
+
+
+        var nodeId = $("#ontology-tree").jstree("get_selected");
+        //var selectedId = selected.id;
+        createTree(nodeId, parents);
+
+         //document.getElementById("selectedTreeNode").innerHTML = selected.name;
+
 
         //by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
         $('#event_result').html('Selected symptoms:<br/>');
@@ -440,27 +451,3 @@ function saveDisease() {
 
 }
 
-//// check if the you have selected a new symptom (else the tree will be created several times
-//localStorage.setItem("counter", $("#ontology-tree").jstree("get_selected").length);
-//if ($("#ontology-tree").jstree("get_selected").length != null && localStorage.getItem("counter").length != $("#ontology-tree").jstree("get_selected").length){
-//
-//    if ($("#ontology-tree").jstree("get_selected").length = 1){
-//        var nodeId = $("#ontology-tree").jstree("get_selected");
-//        var nodeName = $('#ontology-tree').jstree().get_selected("text")[0].text;
-//        createTree(nodeId[0], nodeName[0]);
-//    }
-//    else{
-//
-//        var nodeId = $("#ontology-tree").jstree("get_selected");
-//        var nodeName = $('#ontology-tree').jstree().get_selected("text")[0].text;
-//        createTree(nodeId[-1], nodeName[-1]);
-//    }
-//
-//}
-//else{
-//    var nodeId = $("#ontology-tree").jstree("get_selected");
-//    var nodeName = $('#ontology-tree').jstree().get_selected("text")[0].text;
-//    createTree(nodeId, nodeName);
-//}
-//// set the counter
-//localStorage.setItem("counter", $("#ontology-tree").jstree("get_selected").length);
