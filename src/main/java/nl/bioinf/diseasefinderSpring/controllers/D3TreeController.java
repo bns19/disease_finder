@@ -63,10 +63,6 @@ public class D3TreeController {
     @ResponseBody
     public String getParentInformation(String ids) throws IOException, JSONException {
 
-        System.out.println("ID: " + ids);
-
-        List<String> ParentIditems = Arrays.asList(ids.split("\\s*,\\s*"));
-
         List<String> items = new LinkedList<String>(Arrays.asList(ids.split("\\s*,\\s*")));
         ArrayList<String> jsonChildrenList = new ArrayList<String>();
         String jsonChildren = "";
@@ -78,6 +74,8 @@ public class D3TreeController {
             }
             else{
 
+                System.out.println(item);
+
             HashMap collection = HPOFileLoader.LoadHPOFile();
             ParentInformation parentInf = new ParentInformation();
 
@@ -85,6 +83,8 @@ public class D3TreeController {
             jsonChildrenList.add(jsonChildren);
             }
         }
+
+        System.out.println(jsonChildrenList.toString());
 
         return jsonChildrenList.toString();
     }

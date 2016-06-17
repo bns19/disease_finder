@@ -1,39 +1,13 @@
-function createTree(nodeName){
-    //clear the subtree that is currently shown on the html page
-    //$("#subtree").empty();
+function createTree(nodeId, parents, lengthparents) {
 
-    //Global variables
-    var mlist = new Array();
-    var listofallids = new Array();
+    // Clear the subtree that is currently shown on the html page
+    $("#subtree").empty();
 
-    getListOfParents(nodeName)
-    getNodeInformation(listofallids)
+    // Get the information of all the parent nodes
+    getNodeInformation(parents)
 
-    //console.log(listofallids)
-
-    //ctree(nodeName)
-
-    //Create the tree structure
-    function ctree(input) {
-        addObjects();
-
-        //Create the root object
-        function addObjects() {
-
-            for (selectedObjects in nodeName) {
-                var object = nodeName[selectedObjects]
-
-                var rootobject = new Object();
-                rootobject['name'] = object.text;
-                rootobject['id'] = object.id;
-                rootobject['parent'] = object.parent;
-
-                //Push root object to the input list
-                mlist.push(rootobject)
-            }
-        }
-
-        var arr = mlist;
+    // Create the tree structure
+    function createTree(arr) {
         var tree = [],
             mappedArr = {},
             arrElem,
@@ -47,46 +21,76 @@ function createTree(nodeName){
         }
 
         for (var id in mappedArr) {
-
             if (mappedArr.hasOwnProperty(id)) {
                 mappedElem = mappedArr[id];
-
                 // If the element is not at the root level, add it to its parent array of children.
-                if (mappedElem.parent) {
-                    mappedArr[mappedElem['parent']]['children'].push(mappedElem);
+                if (mappedElem.parentid) {
+                    mappedArr[mappedElem['parentid']]['children'].push(mappedElem);
                 }
-
                 // If the element is at the root level, add it to first level elements array.
                 else {
                     tree.push(mappedElem);
                 }
             }
         }
+
+        // Execute the d3.js tree with the created list of nodes
         executeCreateTree(tree);
     }
 
-    function getListOfParents(nodeName){
-        for (selectedObjects in nodeName) {
-            var object = nodeName[selectedObjects]
-            listofallids.push(object.id)
 
-            for (parentobjects in object.parents){
-                listofallids.push(object.parents[parentobjects])
+    // Connect with the connector and get the HPO file information per parent (id and name)
+    function getNodeInformation(parents) {
+        var url = "/parentTreeBuilder";
+        $.get(url, {"ids": parents.toString()}, function (outdata) {
+            processInformation(parents, outdata)
+        });
+    }
+
+
+    // Get the parent from every child node
+    function processInformation(parents, outdata) {
+        var listOfNodes = new Array();
+
+        for (greatList in outdata) {
+            var objectsInOutdata = outdata[greatList];
+
+            for (parents in objectsInOutdata) {
+
+                var newObject = new Object;
+
+                // Set the parent to null when you got the root node
+                if (objectsInOutdata[parents].name == "All") {
+                    newObject.id = objectsInOutdata[parents].id;
+                    newObject.name = objectsInOutdata[parents].name;
+                    newObject.children = null;
+                    newObject.parentid = null;
+
+                    listOfNodes.push(newObject)
+                }
+
+                else {
+                    if (objectsInOutdata[parents].parentid != "#") {
+                        newObject.parentid = objectsInOutdata[parents].parentid;
+                    }
+                    else {
+                        newObject.parentid = null;
+                    }
+
+                    newObject.id = objectsInOutdata[parents].id;
+                    newObject.name = objectsInOutdata[parents].name;
+                    newObject.children = null;
+
+                    listOfNodes.push(newObject)
+                }
             }
         }
+
+
+
+        // Create the tree with the list of nodes
+        createTree(listOfNodes)
     }
-
-    function getNodeInformation(listofallids) {
-        console.log(listofallids.toString())
-
-        var url = "/parentTreeBuilder";
-        $.get(url, {"ids" : "SS"}), function (outdata) {
-            console.log(outdata)
-        };
-    }
-
 }
-
-
 
 

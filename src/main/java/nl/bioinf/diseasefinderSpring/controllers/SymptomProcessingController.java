@@ -61,7 +61,7 @@ public class SymptomProcessingController {
      */
     @RequestMapping(value = "/sendSymptoms",  method = RequestMethod.POST)
     @ResponseBody
-    public List processInput(final String symptoms, final String shortSymptoms, final String algorithm, final int runtime) throws Exception{
+    public List processInput(final String symptoms, final String shortSymptoms, final String algorithm, final int runtime, final String queryType) throws Exception{
         try {
             SaveSearchedSymptoms saveSymptoms = new SaveSearchedSymptoms(userRepository, searchHistoryRepository);
             saveSymptoms.saveSymptoms(shortSymptoms, symptoms);
@@ -70,52 +70,39 @@ public class SymptomProcessingController {
                     new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
             symptomsCalculationInformation.calculateSymptomsSearch();
         } catch(Exception e) {}
-        /////////////////////////////////////////////////
+        String symptomsToSearch;
+        if (queryType.equals("long")) {
+            symptomsToSearch = symptoms;
+        } else {
+            symptomsToSearch = shortSymptoms;
+        }
         List returnableDiseaseList;
         if (algorithm.equals("j")) {
             List<List> diseasesList = new ArrayList();
 //            List<String> diseasesList = new ArrayList();
-
-
-            SearchSystem ss = new SearchSystem(symptoms, runtime);
-
+            SearchSystem ss = new SearchSystem(symptomsToSearch, runtime);
             Findtrait diseases = ss.getResults();
-            System.out.println(diseases + "resultaten");
-            int count = 0;
-            List<String> bridgeList = new ArrayList();
+            System.out.println(diseases.getFinalres().keySet()+ "jeunards keyset");
+
             for (List<String> i : diseases.getFinalres().keySet()) {
-                count++;
-//
-//                bridgeList = i;
-//                try {
-//                    bridgeList.add(diseases.getFinalres().get(i));
-//                } catch(Exception e) {}
-//                    diseasesList.add(bridgeList);
-                diseasesList.add(i);
-                System.out.println(count);
+                List<String> bridgeList = new ArrayList();
+                for (String contents : i) {
+                    bridgeList.add(contents);
+                }
+
+                bridgeList.add(diseases.getFinalres().get(i));
+                diseasesList.add(bridgeList);
                 System.out.println("Disorder    " + i.get(1));
                 System.out.println("id    " + i.get(0));
                 System.out.println("match    " + diseases.getFinalres().get(i) + "\n");
-                bridgeList.clear();
-//                diseasesList.add(i.get(1));
-//                diseasesList.add(i.get(0));
-//                diseasesList.add(diseases.getFinalres().get(i));
-
-
             }
-            //diseaseList.add()
             returnableDiseaseList = diseasesList;
+            System.out.println(returnableDiseaseList);
 
         } else {
-            /////////////////////////////////////////////////
-
-            SymptomProcessor sp = new SymptomProcessor(symptoms);
+            SymptomProcessor sp = new SymptomProcessor(symptomsToSearch);
             returnableDiseaseList =  sp.getDiseaseData();
-          //  System.out.println(returnableDiseaseList.toString() + "de lijst");
-//            return sp.getDiseaseData();
         }
-
-        //return sp.getDiseaseData();
         return returnableDiseaseList;
     }
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:replace="includes/header :: head">
-    <title>DiseaseFinder</title>
+    <title>PheDiMap</title>
 </head>
 
 <body background="https://hirewallpapers.com/wp-content/uploads/2016/02/light_blue_1920x1080_wallpaper.jpg">
@@ -24,8 +24,12 @@
 
 
 <div class="textcon">
-    <leftfield th:replace="includes/leftfield"></leftfield>
-    <rightfield th:replace="includes/rightfield"></rightfield>
+
+        <leftfield th:replace="includes/leftfield"></leftfield>
+
+
+        <rightfield th:replace="includes/rightfield"></rightfield>
+
 </div>
 
 <div class="modal fade bs-modal-sm-about" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
@@ -35,18 +39,27 @@
             <div class="modal-body">
                 <div id="aboutContent" class="tab-content">
                     <div class="tab-pane fade active in" id="about">
-                        <p>about</p>
-
-                        Bacon ipsum dolor amet spare ribs doner flank alcatra meatloaf labore.
-                        T-bone venison consequat cillum, doner pig non chicken tail filet mignon.
-                        Sausage commodo sunt, tri-tip ground round pancetta cupidatat minim ut officia do.
-                        Shank deserunt occaecat ut, veniam pastrami strip steak short ribs consectetur venison meatloaf pariatur sausage.
-                        Kevin pork belly short ribs boudin laboris rump dolore excepteur hamburger bacon laborum aute mollit.
-
-                        Tail cillum ham hock, consectetur ut swine ham picanha prosciutto pork chop fatback filet mignon nisi.
-                        Duis in beef fatback meatball, pancetta esse ut. Jowl brisket tail spare ribs capicola ground round.
-                        Meatloaf labore sirloin bacon eiusmod in quis corned beef kielbasa spare ribs.
-                        Pig ullamco corned beef labore ex cupim, enim venison brisket ut ball tip ribeye andouille in.
+                        <p><b>about the Phedimap 2.0 too</b></p>
+                        <p>Phedimap 2.0 is  an expantion of the original Phedimap tool.</p>
+                        <p>The original phedimap tool is an application which searches for diseases in the
+                        public omim database with symptoms provided by the user from the HPO database.
+                        The original application was created in 2015 by Mariska Slofstra and Arne Roeters.</p>
+                        <p>This expantion consists of the base of the original application but has usefull additional options.
+                        One of the biggests additional options is the option to registrate and login with your own account.
+                        This gives you the option to visit your search history which you can directly find again without
+                        Having to select all the symptoms again. Another big addition is that of a new search algorithm.
+                        The user has now the option to search with two different algorithms. The new algorithm searches
+                        with the use of synonims which provide a much broader span of possible results.</p>
+                        Other added features are (among other things):
+                       <ul>
+                        <li>The possibility to negate symptoms</li>
+                        <li>Additional symptom tree</li>
+                        <li>A pdf download system</li>
+                        <li>A statistics menu</li>
+                        <li>Lots of back-end stuff you will probably never notice as user but which improves the application (which you can take my word for).</li>
+                        </ul>
+                        <p>The Phedimap 2.0 project started in November 2015 by Bas Sikkema and Henri Du Pon and was finished
+                        in June 2016.</p>
                     </div>
                     </div>
                 </div>
@@ -61,18 +74,33 @@
             <div class="modal-body">
                 <div id="howToContent" class="tab-content">
                     <div class="tab-pane fade active in" id="howTo">
-                        <p>how to</p>
+                        <p><b>How to use this application</b></p>
+                        The Phedimap 2.0 application is a very compact one and is easy to use.
+                        The main principle is easy: type a desired symptom in the searchbar, if this symptom exists the autocomplete
+                        menu will show it to you so you can select it. The main symptom tree will than unfold to your symptom.
+                        select the symptom in the tree and repeat the procedure for other desired symptoms (if any).
+                        It is also possible to search for the symptoms directly in the tree by floding this last one open manualy.
+                        When you are done selecting symptoms you have the option to negate certain symptoms by clicking on
+                        the negate button in the symptom tab.
+                        It is possible to select tree parameters before searching:
+                        <ol type="I">
+                            <li>Algorithm. This parameter determines the algorithm which will be used for the particular search
+                                (for more information about the algorithms; check the report*).</li>
+                            <li>Duration. This parameter states the maximal duration of the search. This parameter is only relevant when using
+                                the J-algorithn with lots of symptoms.</li>
+                            <li>Symptoms. This parameter determines whether or not the search will be carried out with only the personal selected
+                                symptoms or with the whole branch of symptoms which proceeds this one symptom.</li>
+                        </ol>
+                        When the above stated choices are filled in you can press the search button.
+                        The results (if any) will appear in the results tab. From there on you can click on the omim number to
+                        go to the omim page of the specific disease or you can click on the title to reveal more information about the
+                        disease in a new tab.
 
-                        Bacon ipsum dolor amet spare ribs doner flank alcatra meatloaf labore.
-                        T-bone venison consequat cillum, doner pig non chicken tail filet mignon.
-                        Sausage commodo sunt, tri-tip ground round pancetta cupidatat minim ut officia do.
-                        Shank deserunt occaecat ut, veniam pastrami strip steak short ribs consectetur venison meatloaf pariatur sausage.
-                        Kevin pork belly short ribs boudin laboris rump dolore excepteur hamburger bacon laborum aute mollit.
+                        For more information about other options of the application; please check the report*.
 
-                        Tail cillum ham hock, consectetur ut swine ham picanha prosciutto pork chop fatback filet mignon nisi.
-                        Duis in beef fatback meatball, pancetta esse ut. Jowl brisket tail spare ribs capicola ground round.
-                        Meatloaf labore sirloin bacon eiusmod in quis corned beef kielbasa spare ribs.
-                        Pig ullamco corned beef labore ex cupim, enim venison brisket ut ball tip ribeye andouille in.
+                        *this report is a document which describes the whole application plus information about the phenimap
+                        application in total.
+
                     </div>
                 </div>
             </div>
@@ -183,38 +211,11 @@
 
     </div>
 
-<!--<div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"-->
-     <!--aria-hidden="true">-->
-    <!--<div class="modal-dialog modal-sm">-->
-        <!--<div class="modal-content">-->
-            <!--&lt;!&ndash;<br>&ndash;&gt;-->
-            <!--<div class="bs-example bs-example-tabs">-->
-                <!--<ul id="myTab" class="nav nav-tabs">-->
-                    <!--<li class="active"><a href="#signin" data-toggle="tab">Sign In</a></li>-->
-                    <!--<li class=""><a href="#signup" data-toggle="tab">Register</a></li>-->
-                <!--</ul>-->
-            <!--</div>-->
-            <!--<div class="modal-body">-->
-                    <!--<div id="myTabContent" class="tab-content">-->
-                        <!--&lt;!&ndash;<login th:replace="includes/login :: login"></login>&ndash;&gt;-->
-
-                    <!--<div class="tab-pane fade" id="signup">-->
-                        <!---->
-                        <!--&lt;!&ndash;<register th:replace="includes/register :: register"></register>&ndash;&gt;-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="modal-footer">-->
-                <!--<center>-->
-                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                <!--</center>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-
-
+    <div id = "footercontainer">
+        <footer th:replace="includes/thefooter"></footer>
+    </div>
 </body>
-<!--<footer th:replace="includes/thefooter"></footer>-->
-<!--<footer th:replace="includes/thefooter :: foot"></footer>-->
+
+
 
 </html>

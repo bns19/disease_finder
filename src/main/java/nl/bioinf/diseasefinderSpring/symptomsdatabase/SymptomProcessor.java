@@ -60,6 +60,9 @@ public class SymptomProcessor {
                 featuresOfCurrentDisease.add((disease.getMimNumber()));
                 featuresOfCurrentDisease.add(disease.getTitle());
                 featuresOfCurrentDisease.add(disease.getMatches());
+                featuresOfCurrentDisease.add(disease.getHits());
+                featuresOfCurrentDisease.add(disease.getScore());
+
                 this.diseaseData.add(featuresOfCurrentDisease);
             }
         } catch (JSONException e) {

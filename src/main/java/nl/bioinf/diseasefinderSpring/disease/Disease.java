@@ -48,9 +48,9 @@ public class Disease implements Comparable {
         this.title = titleOfDisease;
         this.features = featuresHashMap;
         this.hits++;
-
         this.diseaseInformation.setOmimNumber(mimNumberValue);
         this.diseaseInformation.setTitle(titleOfDisease);
+
 
     }
 
