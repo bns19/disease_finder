@@ -191,19 +191,13 @@ public class DiseaseCollection {
         DiseaseInformation dinf = new DiseaseInformation();
        if (algorithm.equals("j")) {
            Disease theDisease = this.getDiseaseContent(omimNumber);
-           List<String> testMatch = new ArrayList();
-           theDisease.setMatches(testMatch);
            theDisease.createDiseaseInformation();
            DiseaseInformation diseaseInformation2 = theDisease.getDiseaseInformation();
-           diseaseInformation2.getMatches();
            dinf = diseaseInformation2;
-//           return diseaseInformation2;
        } else {
-        this.diseaseCollection.get(omimNumber).createDiseaseInformation();
-        DiseaseInformation diseaseInformation = this.diseaseCollection.get(omimNumber).getDiseaseInformation();
-        dinf = diseaseInformation;
-        System.out.println(diseaseInformation.getTitle());
-//        return diseaseInformation;
+            this.diseaseCollection.get(omimNumber).createDiseaseInformation();
+            DiseaseInformation diseaseInformation = this.diseaseCollection.get(omimNumber).getDiseaseInformation();
+            dinf = diseaseInformation;
     }
         return dinf;
 //    public final String getInfoOfDisease(final String omimNumber) {

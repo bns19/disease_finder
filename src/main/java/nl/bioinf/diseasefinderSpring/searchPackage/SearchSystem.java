@@ -62,7 +62,6 @@ public class SearchSystem{
  //   public static void main(String[] args) throws Exception {
         // TODO code application logic here
      public SearchSystem(String symptoms, int runtime) throws Exception {
-//        Findtrait bb = new Findtrait();
         Findtrait bb = new Findtrait();
          if (runtime > 0) {
              bb.setCutoffTime(runtime);
