@@ -12,7 +12,7 @@ body {
 body{
     position: relative;
 }
-#logo h1{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
+#logo h1{font-family:  Impact, Charcoal, sans-serif;
          font-weight: normal;
          font-size: 3em;
          letter-spacing: .2em;
@@ -25,6 +25,7 @@ body{
          width: 100%;
          border-top-left-radius: 20px;
          border-top-right-radius: 20px;
+
 }
 /*the head of the page with the logo*/
 #logo{
@@ -36,26 +37,24 @@ body{
     background: -ms-linear-gradient(top, rgba(160,216,239,1) 0%,rgba(221,241,249,1) 65%,rgba(206,206,206,1) 100%); /* IE10+ */
     background: linear-gradient(to bottom, rgba(160,216,239,1) 0%,rgba(221,241,249,1) 65%,rgba(206,206,206,1) 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a0d8ef', endColorstr='#cecece',GradientType=0 ); /* IE6-9 */
-    width: 75%;
+    width: 80%;
     margin:0 auto;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     border: 1px solid #808080;
-    margin-top: 1em;
+    opacity: 0.9;
 }
-h2{font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
+h2{font-family:  Impact, Charcoal, sans-serif;
    font-weight: normal;
    font-size: 1.75em;
    letter-spacing: .2em;
-   line-height: 1.1em;
+   line-height: 0.5em;
    margin:0px;
    text-align: center;
-   text-transform: uppercase;
    padding:1em;
 }
 h2 small{
     text-align: center;
-    text-transform: uppercase;
     -webkit-mask-image: -webkit-linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.5) 50%, rgba(0,0,0,1));
     -webkit-mask-image: linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.5) 50%, rgba(0,0,0,1));
 }
@@ -257,8 +256,7 @@ highlight{
 }
 h4 {
     text-align: center;
-    font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
-    text-transform: uppercase;
+    font-family:  Impact, Charcoal, sans-serif;
 }
 .centerAlignment {
     text-align: center;

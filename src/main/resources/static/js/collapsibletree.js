@@ -1,8 +1,5 @@
 function createTree(selected, parents) {
 
-    var parentList = parents;
-    //parentList.unshift(selected)
-
     // Clear the subtree that is currently shown on the html page
     $("#subtree").empty();
 

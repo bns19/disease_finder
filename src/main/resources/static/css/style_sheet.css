@@ -17,7 +17,7 @@
     margin: auto;
     /*height: auto;*/
     height:500px;
-    width:75%;
+    width:80%;
     background-color: white;
     padding-right: 30px;
     padding-bottom: 0px;
@@ -32,6 +32,7 @@
 }
 
 .header{
+    padding-top: 5px;
     margin: auto;
     border: 1px solid #808080;
     height: 20%;
@@ -68,14 +69,14 @@ body {
     background-color: lightblue;
     text-align: center;
     padding: 0;
-    width: 75%;
+    width: 80%;
     margin:0 auto;
     border: 1px solid #808080;
 }
 
 .nav li {
-    font-family: "Times New Roman", Times, serif;
-    font-size: 1.2em;
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 17px;
     line-height: 40px;
     height: 40px;
     border-bottom: 1px solid #888;
@@ -106,7 +107,7 @@ body {
         border-bottom: none;
         height: 50px;
         line-height: 50px;
-        font-size: 1.4em;
+        font-size: 17px;
     }
 
     .nav li {
@@ -143,8 +144,8 @@ body{
     display:inline-block;
     cursor:pointer;
     color:#ffffff;
-    font-family: "Times New Roman", Times, serif;
-    font-size:1wpx;
+    font-family: Impact, Charcoal, sans-serif;
+    font-size:17px;
     padding:5px 38px;
     text-decoration:none;
     text-shadow:0px 1px 0px #263666;
@@ -183,8 +184,11 @@ body{
 }
 
 .node text {
-    font-family: "Times New Roman", Times, serif;
+    font-family: Impact, Charcoal, sans-serif;
     font-size: 10px;
+    -ms-transform: rotate(35deg); /* IE 9 */
+    -webkit-transform: rotate(35deg); /* Chrome, Safari, Opera */
+    transform: rotate(35deg);
 }
 
 .link {

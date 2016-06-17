@@ -9,9 +9,9 @@ function executeCreateTree(treeData) {
         console.log(treeData[is])
     }
 
-    var margin = {top: 20, right: 50, bottom: 20, left: 50},
+    var margin = {top: 90, right: 90, bottom: 150, left: 50},
         width = 2000 - margin.right - margin.left,
-        height = 500 - margin.top - margin.bottom;
+        height = 700 - margin.top - margin.bottom;
 
     var i = 0,
         duration = 750,
@@ -36,7 +36,7 @@ function executeCreateTree(treeData) {
 
 
     root = treeData[0];
-    root.x0 = height / 2;
+    root.x0 = height / 1.5;
     root.y0 = 0;
 
     update(root);
@@ -53,7 +53,7 @@ function executeCreateTree(treeData) {
 
         // Normalize for fixed-depth.
         nodes.forEach(function (d) {
-            d.y = d.depth * 150;
+            d.y = d.depth * 200;
         });
 
         // Update the nodes…
@@ -73,16 +73,23 @@ function executeCreateTree(treeData) {
         nodeEnter.append("circle")
             .attr("r", 1e-6)
             .style("fill", function (d) {
-                return d._children ? "lightsteelblue" : "#fff";
+                return d._children ? "white" : "#FFFFFF";
             });
 
         nodeEnter.append("text")
-            .attr("y", function(d) {
-                return d.children || d._children ? -18 : 18; })
+            .attr("x", function(d) { return d.children || d._children ? -13 : 13; })
             .attr("dy", ".35em")
-            .attr("text-anchor", "middle")
+            .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
             .text(function(d) { return d.name; })
-            .style("fill-opacity", 1);
+            .style("fill-opacity", 1e-6);
+
+        //nodeEnter.append("text")
+        //    .attr("y", function(d) {
+        //        return d.children || d._children ? -18 : 18; })
+        //    .attr("dy", ".35em")
+        //    .attr("text-anchor", "middle")
+        //    .text(function(d) { return d.name; })
+        //    .style("fill-opacity", 1);
 
         // Transition nodes to their new position.
         var nodeUpdate = node.transition()
@@ -94,7 +101,7 @@ function executeCreateTree(treeData) {
         nodeUpdate.select("circle")
             .attr("r", 10)
             .style("fill", function (d) {
-                return d._children ? "lightsteelblue" : "#fff";
+                return d._children ?  "white" : "#FFFFFF";
             });
 
         nodeUpdate.select("text")
