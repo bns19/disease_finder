@@ -148,7 +148,7 @@ public class Disease implements Comparable {
             it.remove(); // avoids a ConcurrentModificationException
         }
         String diseaseInfo = sb.toString();
-        if (this.matches.size() > 0) {
+        if (this.matches != null && !this.matches.isEmpty()) {
             for (String match : this.matches) {
                 match = match.replaceAll(" ", "");
                 diseaseInfo = diseaseInfo.replaceAll("(?i)" + match.toLowerCase(),

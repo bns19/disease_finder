@@ -70,7 +70,7 @@ public class SearchSystem{
          bb.setDiseases(symptoms);
          System.out.println("test2222");
          System.out.println(bb.getFinalres()+ "results");
-        this.results = bb;
+         this.results = bb;
 
     }
 

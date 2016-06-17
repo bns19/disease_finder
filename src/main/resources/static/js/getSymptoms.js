@@ -414,7 +414,36 @@ function saveResults() {
 
 //under construction
 function saveResultsAsPdf() {
+    var results = $("#resultTab").text();
+    console.log(results)
+    //for nice formating of the results
+    var pattern = /\d[H|M|S]/g;
+    var last = 0;
+    var myArray;
+    var print = "";
+    while ((myArray = pattern.exec(results)) !== null) {
+        print += results.substring(last, pattern.lastIndex - 1);
+        print += ";";
+        var last = pattern.lastIndex - 1;
+
+    }
+    //add last matches, without the save button
+    print += results.substring(last, results.length - 16);
+    //remove the semicolons in the title, this can cause problems in the csv format
+    var result = print.replace(/;/g, "");
+    //make a csv format table (labels are not needed)
+    result = result.replace(/\nOmimnumber: /g, ";");
+    result = result.replace(/Score: /g, ";");
+    result = result.replace(/Hits: /g, ";");
+    result = result.replace(/Matches: /g, ";");
+    console.log(result+ "      results")
+
+
+
+
+    //console.log("pdf")
     //var results = $("#resultTab").text();
+    //console.log(results)
     //var doc = new jsPDF();
     //var specialElementHandlers = {
     //    '#editor': function (element, renderer) {
