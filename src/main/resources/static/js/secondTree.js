@@ -53,7 +53,7 @@ function executeCreateTree(treeData) {
 
         // Normalize for fixed-depth.
         nodes.forEach(function (d) {
-            d.y = d.depth * 200;
+            d.y = d.depth * 150;
         });
 
         // Update the nodes…
@@ -82,14 +82,6 @@ function executeCreateTree(treeData) {
             .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
             .text(function(d) { return d.name; })
             .style("fill-opacity", 1e-6);
-
-        //nodeEnter.append("text")
-        //    .attr("y", function(d) {
-        //        return d.children || d._children ? -18 : 18; })
-        //    .attr("dy", ".35em")
-        //    .attr("text-anchor", "middle")
-        //    .text(function(d) { return d.name; })
-        //    .style("fill-opacity", 1);
 
         // Transition nodes to their new position.
         var nodeUpdate = node.transition()
