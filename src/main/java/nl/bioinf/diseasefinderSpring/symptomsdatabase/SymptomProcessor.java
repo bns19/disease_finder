@@ -25,11 +25,13 @@ public class SymptomProcessor {
      *
      * @param symptoms the given symptoms as string
      */
-    public SymptomProcessor(final String symptoms) {
+    public SymptomProcessor() {
 
+//        processSymptoms(symptoms);
+    }
+    public void startProcessing(final String symptoms) {
         processSymptoms(symptoms);
     }
-
 
     /**
      * the retrieved diseases based on the given symptoms.
@@ -84,6 +86,10 @@ public class SymptomProcessor {
 
     public List getDiseaseData() {
         return this.diseaseData;
+    }
+
+    public void setDiseaseData(List diseaseDataII) {
+        this.diseaseData.add(diseaseDataII);
     }
 
 }
