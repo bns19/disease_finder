@@ -36,8 +36,10 @@ import java.util.List;
  */
 @Controller
 public class WebController extends WebMvcConfigurerAdapter {
+
     @Autowired
     SearchHistoryRepository searchHistoryRepository;
+
     @Autowired
     UserRepository userRepository;
     
@@ -54,13 +56,10 @@ public class WebController extends WebMvcConfigurerAdapter {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showForm(Model model, final User user) {
         //session.setAttribute("mySessionAttribute", "someValue");
-        System.out.println("testtttt");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
-        System.out.println("testtttt2");
         SymptomsCalculationInformation symptomsCalculationInformation =
                 new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
-        System.out.println("testtttt3");
         try {
             symptomsCalculationInformation.calculateSymptomsSearch();
 
@@ -84,7 +83,7 @@ public class WebController extends WebMvcConfigurerAdapter {
     public String checkPersonInfo(@Valid final User user, final BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors());
-            return "form";
+            return "home";
         }
         if (!bindingResult.hasErrors()) {
             String encrypted = EncryptPassword.encryptPassword(user.getPassword());
@@ -92,16 +91,12 @@ public class WebController extends WebMvcConfigurerAdapter {
             user.setPassword(encrypted);
             user.setConfirmPassword(encrypted);
             user.setEnabled(true);
-
-            System.out.println(encrypted);
             user.setCreatedAt(LocalDateTime.now());
 
-
             userRepository.save(user);
-            System.out.println("bereikbaar?");
-            return "/home";
+            return "home";
         }
-        return "/form";
+        return "home";
 
     }
 

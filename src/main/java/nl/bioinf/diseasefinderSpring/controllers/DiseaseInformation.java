@@ -10,12 +10,8 @@ public class DiseaseInformation {
     private String omimNumber;
     private double score;
     private double hits;
-//    private List<String> matches;
     private String matches;
     private String information;
-
-
-
 
     public String getTitle() {
         return title;
