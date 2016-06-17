@@ -118,12 +118,14 @@ public class SymptomProcessingController {
      */
     @RequestMapping(value = "/diseaseInformation", method = RequestMethod.POST)
     @ResponseBody
-    public DiseaseInformation loadDisease(final String omimNumber, final String symptoms) throws JSONException, IOException {
-        String[] symptomSet = symptoms.split(",");
-        DiseaseCollection diseases = new DiseaseCollection(symptomSet);
-        ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
-        System.out.println(omimNumber+ "het omimnummer");
-        DiseaseInformation information = diseases.getInfoOfDisease(omimNumber);
+    public DiseaseInformation loadDisease(final String omimNumber, final String symptoms, final String algorithm) throws JSONException, IOException {
+//        if (algorithm.equals("j")) {
+            String[] symptomSet = symptoms.split(",");
+            DiseaseCollection diseases = new DiseaseCollection(symptomSet);
+            ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
+//        }
+        DiseaseInformation information = diseases.getInfoOfDisease(omimNumber, algorithm);
+//        information.setScore();
         return information;
     }
 

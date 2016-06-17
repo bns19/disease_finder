@@ -171,6 +171,8 @@ function sendSymptoms(symptoms) {
     var symptomSet = symptoms;
 
     var algorithm = document.getElementById('algorithmType').value;
+
+    localStorage.setItem("algorithm", algorithm);
     var runtime = document.getElementById('runtime').value;
     var queryType = document.getElementById('query').value;
 
@@ -256,9 +258,14 @@ function loadDisease() {
     var diseaseServlet = "/diseaseInformation";
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
+    var theMatches = $(this).attr("value");
+    console.log(theMatches + "matches")
+    //console.log(this.value + "matches")
+    //var matchesFromFrontpage =
     $.post(diseaseServlet, {
         "omimNumber": localStorage.getItem("omimNumber"),
         "symptoms": localStorage.getItem("symptoms"),
+        "algorithm":localStorage.getItem("algorithm"),
         _csrf: token
     }, function (disease) {
         var title = disease["title"];
@@ -287,33 +294,33 @@ function loadDisease() {
             $("#" + id).append("<br/><br/>");
 
 
-
             diseaseInformationSummary = "<h2>" + disease["title"] + "</h2><div id =\"disease\">"
                 + "<b>Omim number : </b>"
                 + "<a href=" +
                 "http://omim.org/entry/" +
                 disease["omimNumber"]
-                +" "
+                + " "
                 + "\"target=\"blank\"data-toggle=\"tooltip\""
                 + " title=\"Click here to open the disease on the omim website\"id=\"omimSiteLink\">" +
                 disease["omimNumber"] +
                 "</a>"
 
+            if (disease["score"]) {
 
-            diseaseInformationSummary += "<br/><b>Matches: </b>" +
-                disease["matches"] + "<br/>"
-                + "<b><a data"
-                + "-toggle=\"tooltip\" title=\"The number of matched "
-                + "symptoms.\"data-placement=\"right\">Hits :</a></b> "
-                + "hits" + "<br/><b><a data"
-                + "-toggle=\"tooltip\" title=\"The score is calculated through:"
-                + " The sum of 1 / occurence of each match through the search"
-                + ".\"data-placement=\"right\">Score: </a></b>"
-                + score + "<br/><br/><button id=\"highlightButton\""
-                + " class=\"button btn btn-info\">"
-                + "Highlight matches</button>"
+                diseaseInformationSummary += "<br/><b>Matches: </b>" +
+                    disease["matches"] + "<br/>"
+                    + "<b><a data"
+                    + "-toggle=\"tooltip\" title=\"The number of matched "
+                    + "symptoms.\"data-placement=\"right\">Hits :</a></b> "
+                    + "hits" + "<br/><b><a data"
+                    + "-toggle=\"tooltip\" title=\"The score is calculated through:"
+                    + " The sum of 1 / occurence of each match through the search"
+                    + ".\"data-placement=\"right\">Score: </a></b>"
+                    + score + "<br/><br/><button id=\"highlightButton\""
+                    + " class=\"button btn btn-info\">"
+                    + "Highlight matches</button>"
 
-
+        }
             diseaseInformationSummary += disease["information"] +
                 "</div>"
             $("#" + id).append(diseaseInformationSummary);

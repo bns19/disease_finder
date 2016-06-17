@@ -52,6 +52,7 @@ public class Disease implements Comparable {
         this.diseaseInformation.setTitle(titleOfDisease);
 
 
+
     }
 
     private DiseaseInformation diseaseInformation = new DiseaseInformation();
@@ -147,14 +148,15 @@ public class Disease implements Comparable {
             it.remove(); // avoids a ConcurrentModificationException
         }
         String diseaseInfo = sb.toString();
-        for (String match : this.matches) {
-            match = match.replaceAll(" ", "");
-            diseaseInfo = diseaseInfo.replaceAll("(?i)" + match.toLowerCase(),
-                    "<span class=\"highlight\">" + match + "</span>");
+        if (this.matches.size() > 0) {
+            for (String match : this.matches) {
+                match = match.replaceAll(" ", "");
+                diseaseInfo = diseaseInfo.replaceAll("(?i)" + match.toLowerCase(),
+                        "<span class=\"highlight\">" + match + "</span>");
+            }
+            //      this.diseaseInformation.setMatches(this.matches);
+            this.diseaseInformation.setMatches(convertMatchesToString());
         }
-  //      this.diseaseInformation.setMatches(this.matches);
-        this.diseaseInformation.setMatches(convertMatchesToString());
-
         this.diseaseInformation.setInformation(diseaseInfo);
 
 

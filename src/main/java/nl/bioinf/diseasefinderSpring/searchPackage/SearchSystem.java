@@ -68,7 +68,7 @@ public class SearchSystem{
              bb.setCutoffTime(runtime);
          }
          System.out.println("eentestofhijhierkomt");
-         bb.setDiseases("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
+         bb.setDiseases(symptoms);
          System.out.println("test2222");
          System.out.println(bb.getFinalres()+ "results");
         this.results = bb;
