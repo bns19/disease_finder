@@ -79,7 +79,6 @@ public class SymptomProcessingController {
         List returnableDiseaseList;
         if (algorithm.equals("j")) {
             List<List> diseasesList = new ArrayList();
-//            List<String> diseasesList = new ArrayList();
             SearchSystem ss = new SearchSystem(symptomsToSearch, runtime);
             Findtrait diseases = ss.getResults();
             System.out.println(diseases.getFinalres().keySet()+ "jeunards keyset");
@@ -99,7 +98,6 @@ public class SymptomProcessingController {
             System.out.println(returnableDiseaseList);
 
         } else {
-//            SymptomProcessor sp = new SymptomProcessor(symptomsToSearch);
             SymptomProcessor sp = new SymptomProcessor();
             sp.startProcessing(symptomsToSearch);
             returnableDiseaseList =  sp.getDiseaseData();
@@ -118,25 +116,12 @@ public class SymptomProcessingController {
      */
     @RequestMapping(value = "/diseaseInformation", method = RequestMethod.POST)
     @ResponseBody
-    public DiseaseInformation loadDisease(final String omimNumber, final String symptoms) throws JSONException, IOException {
-        String[] symptomSet = symptoms.split(",");
-        DiseaseCollection diseases = new DiseaseCollection(symptomSet);
-        ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
-        System.out.println(omimNumber+ "het omimnummer");
-        DiseaseInformation information = diseases.getInfoOfDisease(omimNumber);
-        return information;
+    public DiseaseInformation loadDisease(final String omimNumber, final String symptoms, final String algorithm) throws JSONException, IOException {
+            String[] symptomSet = symptoms.split(",");
+            DiseaseCollection diseases = new DiseaseCollection(symptomSet);
+            DiseaseInformation information = diseases.getInfoOfDisease(omimNumber, algorithm);
+            return information;
     }
-
-//    @RequestMapping(value = "/diseaseInformation", method = RequestMethod.POST)
-//    @ResponseBody
-//    public String loadDisease(final String omimNumber, final String symptoms) throws JSONException, IOException {
-//        String[] symptomSet = symptoms.split(",");
-//        DiseaseCollection diseases = new DiseaseCollection(symptomSet);
-//        ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
-//        String information = diseases.getInfoOfDisease(omimNumber);
-//        return information;
-//    }
-
 }
 
 

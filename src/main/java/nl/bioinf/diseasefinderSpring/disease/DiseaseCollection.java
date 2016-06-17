@@ -186,23 +186,20 @@ public class DiseaseCollection {
      * @return info the information about the disease.
      * @author mkslofstra
      */
-    public final DiseaseInformation getInfoOfDisease(final String omimNumber) throws IOException{
+    public final DiseaseInformation getInfoOfDisease(final String omimNumber, final String algorithm) throws IOException{
         //String info = this.diseaseCollection.get(omimNumber).toString();
-        Disease theDisease = this.getDiseaseContent(omimNumber);
-        List<String> testMatch = new ArrayList();
-        testMatch.add("phenotypic abnormality");
-        theDisease.setMatches(testMatch);
-        theDisease.createDiseaseInformation();
-        DiseaseInformation diseaseInformation2 = theDisease.getDiseaseInformation();
-        diseaseInformation2.getMatches();
-
-//        this.diseaseCollection.get(omimNumber).createDiseaseInformation();
-//        DiseaseInformation diseaseInformation = this.diseaseCollection.get(omimNumber).getDiseaseInformation();
-
-//        System.out.println(diseaseInformation.getTitle());
-//        return diseaseInformation;
-        return diseaseInformation2;
+        DiseaseInformation dinf = new DiseaseInformation();
+       if (algorithm.equals("j")) {
+           Disease theDisease = this.getDiseaseContent(omimNumber);
+           theDisease.createDiseaseInformation();
+           DiseaseInformation diseaseInformation2 = theDisease.getDiseaseInformation();
+           dinf = diseaseInformation2;
+       } else {
+            this.diseaseCollection.get(omimNumber).createDiseaseInformation();
+            DiseaseInformation diseaseInformation = this.diseaseCollection.get(omimNumber).getDiseaseInformation();
+            dinf = diseaseInformation;
     }
+        return dinf;
 //    public final String getInfoOfDisease(final String omimNumber) {
 //        //String info = this.diseaseCollection.get(omimNumber).toString();
 //      //  this.diseaseCollection.get(omimNumber).createDiseaseInformation();
@@ -210,5 +207,5 @@ public class DiseaseCollection {
 //
 //       // System.out.println(diseaseInformation.getTitle());
 //        return diseaseInformation;
-//    }
+    }
 }
