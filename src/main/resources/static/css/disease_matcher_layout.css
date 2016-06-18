@@ -12,7 +12,7 @@ body {
 body{
     position: relative;
 }
-#logo h1{font-family:  Impact, Charcoal, sans-serif;
+#logo h1{font-family:  Avantgarde, sans-serif;
          font-weight: normal;
          font-size: 3em;
          letter-spacing: .2em;
@@ -44,7 +44,7 @@ body{
     border: 1px solid #808080;
     opacity: 0.9;
 }
-h2{font-family:  Impact, Charcoal, sans-serif;
+h2{font-family:  Avantgarde, sans-serif;
    font-weight: normal;
    font-size: 1.75em;
    letter-spacing: .2em;
@@ -125,11 +125,14 @@ h2 small{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a0d8ef', endColorstr='#cecece',GradientType=0 ); /* IE6-9 */
     /*position:absolute;*/
     height: 5em;
-    width: 75%;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    border: 1px solid #808080;
+    width: 80%;
+    margin: auto;
+    text-align: center;
     overflow:auto;
+    border: 1px solid #808080;
+    opacity: 0.9;
 }
 /*the copyright text in the footer*/
 #copyright{
@@ -256,7 +259,7 @@ highlight{
 }
 h4 {
     text-align: center;
-    font-family:  Impact, Charcoal, sans-serif;
+    font-family:  Avantgarde, sans-serif;
 }
 .centerAlignment {
     text-align: center;
