@@ -16,7 +16,7 @@
         <li><a href="#about" data-toggle="modal" data-target=".bs-modal-sm-about">About </a></li>
         <li><a href="#howto" data-toggle="modal" data-target=".bs-modal-sm-howTo">How to </a></li>
         <li><a href="#singnin" data-toggle="modal" data-target=".bs-modal-sm-signIn">Sign in </a></li>
-        <li><a href="#signup" data-toggle="modal" data-target=".bs-modal-sm">Register </a></li>
+        <li><a href="#signup" data-toggle="modal" data-target=".bs-modal-sm-signup">Register </a></li>
         <li><a th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" /></a></li>
     </ul>
 </div>
@@ -26,8 +26,6 @@
 <div class="textcon">
 
         <leftfield th:replace="includes/leftfield"></leftfield>
-
-
         <rightfield th:replace="includes/rightfield"></rightfield>
 
 </div>
@@ -159,7 +157,7 @@
 
 
 
-    <div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    <div class="modal fade bs-modal-sm-signup" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
