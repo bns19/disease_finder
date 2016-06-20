@@ -86,8 +86,6 @@ function createTree(selected, parents) {
             }
         }
 
-
-
         // Create the tree with the list of nodes
         createTree(listOfNodes)
     }

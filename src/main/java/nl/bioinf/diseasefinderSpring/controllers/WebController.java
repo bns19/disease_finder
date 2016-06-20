@@ -87,8 +87,6 @@ public class WebController extends WebMvcConfigurerAdapter {
             System.out.println(bindingResult.getAllErrors());
 
             return "home";
-
-
         }
         if (!bindingResult.hasErrors()) {
             String encrypted = EncryptPassword.encryptPassword(user.getPassword());

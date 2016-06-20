@@ -50,7 +50,7 @@ public class SymptomsCalculationInformation {
     }
 
     private void calculatePercentageOfSymptomsSearchedByUser(String lastSearchedQuery){
-        // Count number of searches total\\
+        // Count number of searches total
         Long totalUserSearches = 0L;
        // Long countUserSearches = searchHistoryRepository.count();
 
@@ -100,7 +100,6 @@ public class SymptomsCalculationInformation {
         return Double.parseDouble(roundedPercentage);
 
     }
-
 
     public StatisticalInformation getStatisticalInformation() {
         return this.statisticalInformation;
