@@ -1,4 +1,4 @@
-package nl.bioinf.diseasefinderSpring.controllers;
+package nl.bioinf.diseasefinderSpring.beans;
 
 import java.util.List;
 

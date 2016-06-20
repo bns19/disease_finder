@@ -1,6 +1,6 @@
 package nl.bioinf.diseasefinderSpring.symptomsdatabase;
 
-import nl.bioinf.diseasefinderSpring.controllers.StatisticalInformation;
+import nl.bioinf.diseasefinderSpring.beans.StatisticalInformation;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistory;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.User;
