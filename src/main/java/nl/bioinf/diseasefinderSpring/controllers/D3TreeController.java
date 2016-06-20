@@ -1,12 +1,15 @@
 package nl.bioinf.diseasefinderSpring.controllers;
 
 
+import nl.bioinf.diseasefinderSpring.domain.User;
+import nl.bioinf.diseasefinderSpring.domain.UserRepository;
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOFileLoader;
 import nl.bioinf.diseasefinderSpring.treehandler.ParentInformation;
 import nl.bioinf.diseasefinderSpring.treehandler.PrimaryTreeBuilder;
 import nl.bioinf.diseasefinderSpring.treehandler.SecondaryTreeBuilder;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +24,6 @@ import java.util.*;
 
 @Controller
 public class D3TreeController {
-
 
     @RequestMapping(value = "termsToTree", method = RequestMethod.GET)
     @ResponseBody

@@ -1,5 +1,7 @@
 function createTree(selected, parents) {
 
+    console.log("print")
+
     // Clear the subtree that is currently shown on the html page
     $("#subtree").empty();
 

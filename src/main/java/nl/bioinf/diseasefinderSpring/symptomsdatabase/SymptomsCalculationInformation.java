@@ -8,6 +8,11 @@ import nl.bioinf.diseasefinderSpring.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.io.IOException;
 import java.text.DecimalFormat;
 
 /**
@@ -106,3 +111,19 @@ public class SymptomsCalculationInformation {
     }
 
 }
+
+
+//    @RequestMapping(value = "getRegisteredUsers", method = RequestMethod.GET, produces = "application/json")
+//    @ResponseBody
+//    public String RegisteredUser(String username) throws IOException {
+//        user = userRepository.findByUsername(username);
+//
+//        System.out.println(user.getUsername());
+//
+//        System.out.println(username);
+//
+//        String BoolUser = "";
+//
+//        return BoolUser;
+//
+//    }
