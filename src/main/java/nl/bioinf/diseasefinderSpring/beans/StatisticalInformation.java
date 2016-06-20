@@ -1,4 +1,4 @@
-package nl.bioinf.diseasefinderSpring.controllers;
+package nl.bioinf.diseasefinderSpring.beans;
 
 /**
  * Created by bnsikkema on 19-5-16.
