@@ -66,8 +66,11 @@ public class SearchSystem{
          if (runtime > 0) {
              bb.setCutoffTime(runtime);
          }
+         System.out.println(symptoms + "hier wordt me egezocht");
          System.out.println("eentestofhijhierkomt");
-         bb.setDiseases(symptoms);
+//         bb.setDiseases(symptoms);
+           bb.setDiseases("Pain insensitivity,Impaired pain sensation,Abnormality of pain sensation,Sensory impairment,Peripheral neuropathy,Abnormal peripheral nervous system morphology,Abnormality of nervous system morphology,Abnormality of the nervous system,Phenotypic abnormality,Impaired pain sensation");
+
          System.out.println("test2222");
          System.out.println(bb.getFinalres()+ "results");
          this.results = bb;
