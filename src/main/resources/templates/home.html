@@ -120,12 +120,12 @@
                     </div>
 
                         <table>
-                            <form th:action="@{/login}" method="post">
+                            <form name= "loginform" th:action="@{/login}" method="post" onsubmit="return validateLoginForm()" required="required">
                                 <tr>
-                                    <td><label> User Name : <input type="text" name="username"/> </label></td>
+                                    <td><label> User Name : <input type="text" name="username" required="required"/> </label></td>
                                 </tr>
                                 <tr>
-                                    <td><label> Password: <input type="password" name="password"/> </label></td>
+                                    <td><label> Password: <input type="password" name="password" required="required"/> </label></td>
                                 </tr>
                                 <tr>
                                     <td><input type="submit" value="Sign In"/></td>
@@ -145,40 +145,42 @@
 
 
 
-    <div class="modal fade bs-modal-sm-signup" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    <div class="modal fade bs-modal-sm-signup" id="myModalSignup" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
                 <div class="modal-body">
                     <div id="myTabContent" class="tab-content">
 
+                        <h1> Register </h1>
+
                         <div th:if="${param.error}" class="alert alert-error">
                             Invalid username and password. </div>
-                 <form action="#" th:action="@{/form}" th:object="${user}" method="post">
+                 <form onsubmit="return validateRegisterForm()" name="registerform" action="#" th:action="@{/form}" th:object="${user}" method="post" >
                         <table>
                             <tr>
                                 <td>Username:*</td>
-                                <td><input type="text" th:field="*{username}"/></td>
+                                <td><input name="username" id="username" type="text" th:field="*{username}" required="required"/></td>
                                 <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username</td>
                             </tr>
                             <tr>
                                 <td>Email:*</td>
-                                <td><input type="email" th:field="*{email}"/></td>
+                                <td><input name="email" type="email" th:field="*{email}" required="required"/></td>
                                 <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email</td>
                             </tr>
                             <tr>
                                 <td>Password:*</td>
-                                <td><input type="password" th:field="*{password}"/></td>
+                                <td><input name="password" type="password" th:field="*{password}" required="required"/></td>
                                 <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password</td>
                             </tr>
                             <tr>
                                 <td>Confirm password:*</td>
-                                <td><input type="password" th:field="*{confirmPassword}"/></td>
+                                <td><input name="confirmPassword" type="password" th:field="*{confirmPassword}" required="required"/></td>
                                 <td th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">confirm password</td>
                             </tr>
                             <tr>
                                 <td>
-                                    <button type="submit">Submit</button>
+                                    <button type="submit" name="registerform">Submit</button>
                                 </td>
                             </tr>
                         </table>
@@ -201,7 +203,6 @@
             <p>PheDiMap 2.0 version created By Bas Sikkema and Henri Du Pon (2016). Original application by Mariska Slofstra and Arne Roeters (2015)</p>
         </div>
 </body>
-
 
 
 </html>
