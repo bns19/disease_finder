@@ -15,44 +15,9 @@ package nl.bioinf.diseasefinderSpring.searchPackage;
 
 import model.Findtrait;
 
-import java.util.List;
-
 /**
  *
- * @author jgboekhoudt
- */
-//public class SearchSystem {
-////
-////    /**
-////     * @param args the command line arguments
-////     */
-//    public static void main(String[] args) throws Exception {
-//        // TODO code application logic here
-//        Findtrait bb = new Findtrait("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
-//        bb.setDiseases("large ears,fat,autism,bad breath,no head control,small toes,black nail,albinism,cancer,blood cells");
-//        System.out.println(bb.getFinalres().size());
-//        int count = 0;
-//        System.out.println(bb.getFinalres());
-//        for (List<String> i : bb.getFinalres().keySet()) {
-//            count++;
-//
-//            System.out.println(count);
-//            System.out.println("Disorder    " + i.get(1));
-//            System.out.println("id    " + i.get(0));
-//            System.out.println("match    " + bb.getFinalres().get(i) + "\n");
-//
-//        }
-//    }
-//
-//}
-// /
-//import model.Findtrait;
-//
-//import java.util.List;
-
-/**
- *
- * @author jgboekhoudt
+ * @author jgboekhoudt and Bnsikkema
  */
 //public class NewMain {
 public class SearchSystem{
@@ -68,6 +33,8 @@ public class SearchSystem{
          }
          System.out.println("eentestofhijhierkomt");
          bb.setDiseases(symptoms);
+//       bb.setDiseases("Pain insensitivity,Impaired pain sensation,Abnormality of pain sensation,Sensory impairment,Peripheral neuropathy,Abnormal peripheral nervous system morphology,Abnormality of nervous system morphology,Abnormality of the nervous system,Phenotypic abnormality,Impaired pain sensation");
+
          System.out.println("test2222");
          System.out.println(bb.getFinalres()+ "results");
          this.results = bb;
@@ -77,5 +44,5 @@ public class SearchSystem{
     public Findtrait getResults() {
         return this.results;
     }
-//
+
 }

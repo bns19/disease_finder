@@ -81,8 +81,10 @@ public class SymptomProcessingController {
             SearchSystem ss = new SearchSystem(symptomsToSearch, runtime);
             Findtrait diseases = ss.getResults();
             System.out.println(diseases.getFinalres().keySet()+ "jeunards keyset");
+            int count=0;
             for (List<String> i : diseases.getFinalres().keySet()) {
                 List<String> bridgeList = new ArrayList();
+                count++;
                 for (String contents : i) {
                     bridgeList.add(contents);
                 }
@@ -92,9 +94,10 @@ public class SymptomProcessingController {
                 System.out.println("Disorder    " + i.get(1));
                 System.out.println("id    " + i.get(0));
                 System.out.println("match    " + diseases.getFinalres().get(i) + "\n");
+                System.out.println(count);
             }
             returnableDiseaseList = diseasesList;
-            System.out.println(returnableDiseaseList);
+//            System.out.println(returnableDiseaseList);
 
         } else {
             SymptomProcessor sp = new SymptomProcessor();
