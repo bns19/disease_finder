@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- *
  * @author aroeters
  */
 public class HPOJsonObjectCreatorSecondaryTree {
@@ -31,8 +30,7 @@ public class HPOJsonObjectCreatorSecondaryTree {
      */
     public HPOJsonObjectCreatorSecondaryTree() throws IOException {
 
-        String path = HPOJsonObjectCreatorSecondaryTree.class.getClassLoader()
-                .getResource("config/hp.obo").toString();
+        String path = HPOJsonObjectCreatorSecondaryTree.class.getClassLoader().getResource("config/hp.obo").toString();
         HPOFileReader hr = new HPOFileReader(path.split(":")[1]);
         this.hpoCollection = hr.readFile().getHPOHashMap();
     }
@@ -41,15 +39,16 @@ public class HPOJsonObjectCreatorSecondaryTree {
      * Creates the child branch of the requested parent.
      *
      * @param hpoTerm the HPoTerm object of the parent
-     * @param parent the id of the parent
+     * @param parent  the id of the parent
      * @return a HashMap with all the information for jsTree.js
      */
-    public final HashMap createSubTree(final HPOTerm hpoTerm,
-            final String parent) {
+    public final HashMap createSubTree(final HPOTerm hpoTerm, final String parent) {
+
         HashMap tree = new HashMap();
         tree.put("id", hpoTerm.getId());
         tree.put("name", hpoTerm.getName());
         tree.put("parent", parent);
+
         return tree;
     }
 }

@@ -6,8 +6,8 @@
 package nl.bioinf.diseasefinderSpring.controllers;
 
 import model.Findtrait;
+import nl.bioinf.diseasefinderSpring.beans.DiseaseInformation;
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
-import nl.bioinf.diseasefinderSpring.disease.ScoreCalculator;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.UserRepository;
 import nl.bioinf.diseasefinderSpring.searchPackage.SearchSystem;
@@ -18,7 +18,6 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -82,8 +81,10 @@ public class SymptomProcessingController {
             SearchSystem ss = new SearchSystem(symptomsToSearch, runtime);
             Findtrait diseases = ss.getResults();
             System.out.println(diseases.getFinalres().keySet()+ "jeunards keyset");
+            int count=0;
             for (List<String> i : diseases.getFinalres().keySet()) {
                 List<String> bridgeList = new ArrayList();
+                count++;
                 for (String contents : i) {
                     bridgeList.add(contents);
                 }
@@ -93,9 +94,10 @@ public class SymptomProcessingController {
                 System.out.println("Disorder    " + i.get(1));
                 System.out.println("id    " + i.get(0));
                 System.out.println("match    " + diseases.getFinalres().get(i) + "\n");
+                System.out.println(count);
             }
             returnableDiseaseList = diseasesList;
-            System.out.println(returnableDiseaseList);
+//            System.out.println(returnableDiseaseList);
 
         } else {
             SymptomProcessor sp = new SymptomProcessor();

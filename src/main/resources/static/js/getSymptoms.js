@@ -2,7 +2,6 @@
  * Created by mkslofstra and aroeters, addditions and adjustments by bnsikkema
  */
 
-
 $(document).ready(initialize);
 function initialize() {
     var symptoms;
@@ -178,6 +177,7 @@ function resendQuery(longQuery) {
 
 //by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
+    console.log(localStorage.getItem("symptoms") + "alle symptomen");
     //localStorage.setItem("symptoms", symptoms);
     var symptomSet = symptoms;
 

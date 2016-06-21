@@ -1,6 +1,6 @@
 package nl.bioinf.diseasefinderSpring.symptomsdatabase;
 
-import nl.bioinf.diseasefinderSpring.controllers.StatisticalInformation;
+import nl.bioinf.diseasefinderSpring.beans.StatisticalInformation;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistory;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.User;
@@ -8,6 +8,11 @@ import nl.bioinf.diseasefinderSpring.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.io.IOException;
 import java.text.DecimalFormat;
 
 /**
@@ -50,7 +55,7 @@ public class SymptomsCalculationInformation {
     }
 
     private void calculatePercentageOfSymptomsSearchedByUser(String lastSearchedQuery){
-        // Count number of searches total\\
+        // Count number of searches total
         Long totalUserSearches = 0L;
        // Long countUserSearches = searchHistoryRepository.count();
 
@@ -101,9 +106,24 @@ public class SymptomsCalculationInformation {
 
     }
 
-
     public StatisticalInformation getStatisticalInformation() {
         return this.statisticalInformation;
     }
 
 }
+
+
+//    @RequestMapping(value = "getRegisteredUsers", method = RequestMethod.GET, produces = "application/json")
+//    @ResponseBody
+//    public String RegisteredUser(String username) throws IOException {
+//        user = userRepository.findByUsername(username);
+//
+//        System.out.println(user.getUsername());
+//
+//        System.out.println(username);
+//
+//        String BoolUser = "";
+//
+//        return BoolUser;
+//
+//    }

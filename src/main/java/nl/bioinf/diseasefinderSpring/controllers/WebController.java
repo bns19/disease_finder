@@ -23,11 +23,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.swing.*;
 import javax.validation.Valid;
 import java.awt.*;
+import java.io.IOException;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -44,7 +46,7 @@ public class WebController extends WebMvcConfigurerAdapter {
 
     @Autowired
     UserRepository userRepository;
-    
+
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -65,8 +67,9 @@ public class WebController extends WebMvcConfigurerAdapter {
         try {
             symptomsCalculationInformation.calculateSymptomsSearch();
 
-        model.addAttribute("statistics", symptomsCalculationInformation.getStatisticalInformation());
-        } catch (Exception e) {}
+            model.addAttribute("statistics", symptomsCalculationInformation.getStatisticalInformation());
+        } catch (Exception e) {
+        }
         if (!username.equals("anonymousUser")) {
 
             LoadSearchedSymptoms loadHistory = new LoadSearchedSymptoms(userRepository, searchHistoryRepository);
@@ -77,7 +80,7 @@ public class WebController extends WebMvcConfigurerAdapter {
     }
 
     /**
-     * @param user data from the registration form.
+     * @param user          data from the registration form.
      * @param bindingResult bindingResult.
      * @return the result page.
      */
@@ -105,4 +108,19 @@ public class WebController extends WebMvcConfigurerAdapter {
 
     }
 
+    @RequestMapping(value = "getRegisteredUsers", method = RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    public String RegisteredUser(String username) throws IOException {
+        System.out.println(username);
+
+        System.out.println(userRepository.findByUsername(username));
+
+        if (userRepository.findByUsername(username) == null) {
+            System.out.println("hier");
+            return "False";
+        } else {
+            return "True";
+        }
+
+    }
 }

@@ -9,9 +9,11 @@ body {
     padding:0;
     height:100%;
 }
+
 body{
     position: relative;
 }
+
 #logo h1{font-family:  Avantgarde, sans-serif;
          font-weight: normal;
          font-size: 3em;
@@ -25,8 +27,8 @@ body{
          width: 100%;
          border-top-left-radius: 20px;
          border-top-right-radius: 20px;
-
 }
+
 /*the head of the page with the logo*/
 #logo{
     background: rgb(160,216,239); /* Old browsers */
@@ -44,20 +46,26 @@ body{
     border: 1px solid #808080;
     opacity: 0.9;
 }
-h2{font-family:  Avantgarde, sans-serif;
-   font-weight: normal;
-   font-size: 1.75em;
-   letter-spacing: .2em;
-   line-height: 0.5em;
-   margin:0px;
-   text-align: center;
-   padding:1em;
+
+/*Heading of the left and right field in every tab*/
+h2{
+    font-family:  Avantgarde, sans-serif;
+    font-weight: normal;
+    font-size: 24px;
+    letter-spacing: .2em;
+    line-height: 0.5em;
+    margin:0px;
+    text-align: center;
+    padding: 15px 15px 15px 15px;
+    line-height: 30px;
 }
+
 h2 small{
     text-align: center;
     -webkit-mask-image: -webkit-linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.5) 50%, rgba(0,0,0,1));
     -webkit-mask-image: linear-gradient(top, rgba(0,0,0,1), rgba(0,0,0,.5) 50%, rgba(0,0,0,1));
 }
+
 /*the searchbar itself*/
 #search-symptom{
     border-radius: 5px;
@@ -66,12 +74,13 @@ h2 small{
     padding-left: 1em;
     padding-right: 2.5em;
     width: 20em;
-
 }
+
 /*the div in which is the searchbar*/
 #search-bar{
     float: right;    
 }
+
 /*the div with the tree and search bar*/
 #search{
     border-right-style: ridge;
@@ -86,6 +95,7 @@ h2 small{
     margin-top:-0.1em;
     overflow: auto;
 }
+
 /*the div with the results*/
 #result{
     height: 100%;
@@ -95,25 +105,29 @@ h2 small{
     margin-bottom:5em;
     list-style-type: none;
     overflow: auto;
-
 }
+
 /*the color of the label in the results*/
 .label{
     color: grey !important;
 }
+
 /*the pipe sign in the footer*/
 .pipe{
     color:#9acfea;
 }
+
 /*the title of the results*/
 .clickUp:hover{
     font-weight: bold !important;
     cursor: pointer !important;
     color: #666666 !important;
 }
+
 .clickUp {
     color:grey !important;
 }
+
 #footer{
     background: rgb(160,216,239); /* Old browsers */
     background: -moz-linear-gradient(top, rgba(160,216,239,1) 0%, rgba(221,241,249,1) 65%, rgba(206,206,206,1) 100%); /* FF3.6+ */
@@ -134,15 +148,18 @@ h2 small{
     border: 1px solid #808080;
     opacity: 0.9;
 }
+
 /*the copyright text in the footer*/
 #copyright{
     float:right;
     color:grey !important;
 }
+
 #search-button{
     float:right;
     margin-top: 5em;
 }
+
 /*the content on the background*/ 
 #wrapper{
     border-bottom-left-radius: 25px;
@@ -163,13 +180,16 @@ h2 small{
     background: linear-gradient(to bottom, rgba(226,226,226,1) 0%,rgba(219,219,219,1) 33%,rgba(219,219,219,1) 34%,rgba(219,219,219,1) 34%,rgba(254,254,254,1) 62%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
 }
+
 /*align the result data*/
 td.label{
     width: 45em;
 }
+
 td.value{
     width: 45em;
 }
+
 /*http://stackoverflow.com/questions/18838964/add-bootstrap-glyphicon-to-input-box*/
 /* enable absolute positioning */
 .inner-addon { 
@@ -194,6 +214,7 @@ td.value{
 .right-addon input { 
     padding-right: 10px;
 }
+
 /*https://css-tricks.com/almanac/properties/s/scrollbar/*/
 body::-webkit-scrollbar {
     width: 1em;
@@ -207,73 +228,95 @@ body::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
 }important
+
 #disease{
     margin-left: 5em;
     margin-right: 5em;
 }
+
 .back2results{
     color: #666666;
 }
+
 .back2results :hover{
     color: black;
     text-decoration: underline;
     cursor: pointer;
 }
+
 .clickTitle :hover{
     cursor:pointer;
 }
+
 #remove{   float:right;
            margin-left: 10em;
            margin-right: 1em;
            margin-top: 2em;
 }
+
 #extraPage{
     height: 50em;
 }
+
 #extraPage h2{
     text-align: center;
 }
+
 .examplePic{
     height:5em;
     padding-left: 5em;
 }
+
 .examplePic :hover{
     cursor: pointer;
 }
+
 .bigger{
     height:50em;
 }
+
 .examplePic1{
     height: 20em;
 }
+
 .text{ width: 30em;
-       margin-top:1em;}
+    margin-top:1em;
+}
+
 .highlighted{
     background-color: yellow;
 }
+
 highlight{
     float:right;
 }
+
 #warning{
     color: grey;
 }
+
 h4 {
     text-align: center;
     font-family:  Avantgarde, sans-serif;
 }
+
 .centerAlignment {
     text-align: center;
 }
+
 #extraPage {
     overflow: auto;
     margin-bottom: 5em;
 }
+
 .caution {
     color: red;
 }
+
 div.tooltip-inner {
     max-width: 50em;
 }
+
 .closeSymptom{
     background-color: indianred;
     color: white;
@@ -282,6 +325,7 @@ div.tooltip-inner {
     border-color: indianred;
     border-style: solid;
 }
+
 .tab-pane {
     padding: 2em;
     background-color:rgba(255,255,255,0.7);
@@ -297,6 +341,7 @@ div.tooltip-inner {
     border-bottom-style: solid;
     margin-bottom: 2em;
 }
+
 .tab{
     height: 3em;
     border-top-style: solid !important;
@@ -306,6 +351,7 @@ div.tooltip-inner {
     border-left-color: grey !important;
     border-right-color: grey !important;
 }
+
 .ui-autocomplete {
     max-height: 200px;
     overflow-y: auto;
@@ -321,18 +367,3 @@ div.tooltip-inner {
 
 }
 
-/*#registerModal {*/
-    /*height: 150px;*/
-    /*width: 150px;*/
-    /*position: fixed;*/
-    /*top: 0;*/
-    /*right: 0;*/
-    /*bottom: 0;*/
-    /*left: 0;*/
-    /*z-index: 1040;*/
-    /*display: none;*/
-    /*overflow: hidden;*/
-    /*-webkit-overflow-scrolling: touch;*/
-    /*outline: 0;*/
-
-/*}*/

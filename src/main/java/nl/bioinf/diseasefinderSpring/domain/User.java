@@ -27,20 +27,19 @@ public class User {
      * Username may not be empty.
      * Username size needs to be between 5 and 30 characters in size.
      */
-    @NotEmpty
     @Size(min = 5, max = 30)
     private String username;
 
     /**
      * Password needs to be between 5 and 30 characters in size.
      */
-    @Size(min = 5)
+    @Size(min = 5, max = 240)
     private String password;
 
     /**
      * Password needs to be between 5 and 30 characters in size.
      */
-    @Size(min = 5)
+    @Size(min = 5, max = 240)
     private String confirmPassword;
 
     /**

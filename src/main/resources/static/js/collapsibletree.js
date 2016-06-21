@@ -1,5 +1,7 @@
 function createTree(selected, parents) {
 
+    console.log("print")
+
     // Clear the subtree that is currently shown on the html page
     $("#subtree").empty();
 
@@ -85,8 +87,6 @@ function createTree(selected, parents) {
                 }
             }
         }
-
-
 
         // Create the tree with the list of nodes
         createTree(listOfNodes)

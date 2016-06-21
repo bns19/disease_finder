@@ -1,14 +1,11 @@
 package nl.bioinf.diseasefinderSpring.treehandler;
 
-import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOJsonObjectCreatorSecondaryTree;
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOTerm;
-import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOgetParentInformation;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**

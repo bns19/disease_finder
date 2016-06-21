@@ -26,6 +26,7 @@ public class TermsToPrimaryTreeProcessor {
                 id = node.getId();
             }
         }
+
         while (!id.equals("HP:0000001")) {
             HPOTerm term = (HPOTerm) collection.get(id);
             nodesToShow.put(term.getId());

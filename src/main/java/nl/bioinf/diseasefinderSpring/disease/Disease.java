@@ -6,7 +6,7 @@
  */
 package nl.bioinf.diseasefinderSpring.disease;
 
-import nl.bioinf.diseasefinderSpring.controllers.DiseaseInformation;
+import nl.bioinf.diseasefinderSpring.beans.DiseaseInformation;
 
 import java.util.Iterator;
 import java.util.List;

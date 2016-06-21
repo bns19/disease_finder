@@ -16,7 +16,7 @@
         <li><a href="#about" data-toggle="modal" data-target=".bs-modal-sm-about">About </a></li>
         <li><a href="#howto" data-toggle="modal" data-target=".bs-modal-sm-howTo">How to </a></li>
         <li><a href="#singnin" data-toggle="modal" data-target=".bs-modal-sm-signIn">Sign in </a></li>
-        <li><a href="#signup" data-toggle="modal" data-target=".bs-modal-sm">Register </a></li>
+        <li><a href="#signup" data-toggle="modal" data-target=".bs-modal-sm-signup">Register </a></li>
         <li><a th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" /></a></li>
     </ul>
 </div>
@@ -26,8 +26,6 @@
 <div class="textcon">
 
         <leftfield th:replace="includes/leftfield"></leftfield>
-
-
         <rightfield th:replace="includes/rightfield"></rightfield>
 
 </div>
@@ -113,18 +111,8 @@
      aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <!--<br>-->
-            <!--<div class="bs-example bs-example-tabs">-->
-                <!--<ul id="myTab" class="nav nav-tabs">-->
-                    <!--<li class="active"><a href="#signin" data-toggle="tab">Sign In</a></li>-->
-                    <!--<li class=""><a href="#signup" data-toggle="tab">Register</a></li>-->
-                <!--</ul>-->
-            <!--</div>-->
             <div class="modal-body">
                 <div id="signInContent" class="tab-content">
-
-                    <!--<div class="tab-pane fade active in" id="signin">-->
-
                         <h1> Login </h1>
 
                     <div th:if="${param.error}" class="alert alert-error">
@@ -132,20 +120,18 @@
                     </div>
 
                         <table>
-                            <form th:action="@{/login}" method="post">
+                            <form name= "loginform" th:action="@{/login}" method="post" onsubmit="return validateLoginForm()" required="required">
                                 <tr>
-                                    <td><label> User Name : <input type="text" name="username"/> </label></td>
+                                    <td><label> User Name : <input type="text" name="username" required="required"/> </label></td>
                                 </tr>
                                 <tr>
-                                    <td><label> Password: <input type="password" name="password"/> </label></td>
+                                    <td><label> Password: <input type="password" name="password" required="required"/> </label></td>
                                 </tr>
                                 <tr>
                                     <td><input type="submit" value="Sign In"/></td>
                                 </tr>
                             </form>
                         </table>
-                    <!--</div>-->
-
                 </div>
             </div>
             <div class="modal-footer">
@@ -159,56 +145,46 @@
 
 
 
-    <div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    <div class="modal fade bs-modal-sm-signup" id="myModalSignup" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-lm">
             <div class="modal-content">
-                <!--<br>-->
-                <!--<div class="bs-example bs-example-tabs">-->
-                <!--<ul id="myTab" class="nav nav-tabs">-->
-                <!--<li class="active"><a href="#signin" data-toggle="tab">Sign In</a></li>-->
-                <!--<li class=""><a href="#signup" data-toggle="tab">Register</a></li>-->
-                <!--</ul>-->
-                <!--</div>-->
                 <div class="modal-body">
                     <div id="myTabContent" class="tab-content">
 
+                        <h1> Register </h1>
+
                         <div th:if="${param.error}" class="alert alert-error">
                             Invalid username and password. </div>
-
-                        <!--<div class="tab-pane fade" id="signup">-->
-                 <form action="#" th:action="@{/form}" th:object="${user}" method="post">
+                 <form onsubmit="return validateRegisterForm()" name="registerform" action="#" th:action="@{/form}" th:object="${user}" method="post" >
                         <table>
                             <tr>
                                 <td>Username:*</td>
-                                <td><input type="text" th:field="*{username}"/></td>
+                                <td><input name="username" id="username" type="text" th:field="*{username}" required="required"/></td>
                                 <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username</td>
                             </tr>
                             <tr>
                                 <td>Email:*</td>
-                                <td><input type="email" th:field="*{email}"/></td>
+                                <td><input name="email" type="email" th:field="*{email}" required="required"/></td>
                                 <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email</td>
                             </tr>
                             <tr>
                                 <td>Password:*</td>
-                                <td><input type="password" th:field="*{password}"/></td>
+                                <td><input name="password" type="password" th:field="*{password}" required="required"/></td>
                                 <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password</td>
                             </tr>
                             <tr>
                                 <td>Confirm password:*</td>
-                                <td><input type="password" th:field="*{confirmPassword}"/></td>
+                                <td><input name="confirmPassword" type="password" th:field="*{confirmPassword}" required="required"/></td>
                                 <td th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">confirm password</td>
                             </tr>
                             <tr>
                                 <td>
-                                    <button type="submit">Submit</button>
+                                    <button type="submit" name="registerform">Submit</button>
                                 </td>
                             </tr>
                         </table>
                     </form>
-
-                        <!--</div>-->
-
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -227,7 +203,6 @@
             <p>PheDiMap 2.0 version created By Bas Sikkema and Henri Du Pon (2016). Original application by Mariska Slofstra and Arne Roeters (2015)</p>
         </div>
 </body>
-
 
 
 </html>
