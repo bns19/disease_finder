@@ -10,7 +10,6 @@ import nl.bioinf.diseasefinderSpring.connection.OmimDataRetriever;
 import nl.bioinf.diseasefinderSpring.beans.DiseaseInformation;
 import nl.bioinf.diseasefinderSpring.datafinder.DiseasePhenotypeGetter;
 import org.json.JSONException;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;

@@ -1,3 +1,9 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by Mariska Slofstra & Arne Roeters
+ * Created by hjdupon on 1-5-16.
+ */
 package nl.bioinf.diseasefinderSpring.domain;
 
 import javax.persistence.AttributeConverter;

@@ -1,4 +1,9 @@
-// made by aroeters
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by Mariska Slofstra & Arne Roeters
+ * Adjusted by Bas Sikkema & Henri du Pon
+ */
 $(document).ready(initialize);
 
 function initialize() {
@@ -19,7 +24,7 @@ function initialize() {
         highlight: true,
 
 
-        //Hier word de data uit de hpoprocessor opgehaald
+        //The data from the selected node will be get from the connector.
         source: function(request, response) {
 
             $.ajax({

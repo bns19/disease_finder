@@ -10,7 +10,6 @@ import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.User;
 import nl.bioinf.diseasefinderSpring.domain.UserRepository;
 import nl.bioinf.diseasefinderSpring.security.EncryptPassword;
-//import nl.bioinf.diseasefinderSpring.symptomsdatabase.LoadSearchedSymptoms;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.LoadSearchedSymptoms;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomsCalculationInformation;
 import org.apache.tomcat.jdbc.pool.DataSource;
@@ -25,17 +24,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-import javax.swing.*;
 import javax.validation.Valid;
-import java.awt.*;
 import java.io.IOException;
-import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
 
-/**
+ /**
  * Gets the information from the registration form and saves this in the UserForm class.
  */
 @Controller
@@ -80,7 +75,7 @@ public class WebController extends WebMvcConfigurerAdapter {
     }
 
     /**
-     * @param user          data from the registration form.
+     * @param user data from the registration form.
      * @param bindingResult bindingResult.
      * @return the result page.
      */
@@ -90,8 +85,6 @@ public class WebController extends WebMvcConfigurerAdapter {
             System.out.println(bindingResult.getAllErrors());
 
             return "home";
-
-
         }
         if (!bindingResult.hasErrors()) {
             String encrypted = EncryptPassword.encryptPassword(user.getPassword());
@@ -108,6 +101,11 @@ public class WebController extends WebMvcConfigurerAdapter {
 
     }
 
+     /**
+      * @param username of the user at registration form.
+      * @return if the user already exists or not in String (True or False)
+      * @throws IOException
+      */
     @RequestMapping(value = "getRegisteredUsers", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public String RegisteredUser(String username) throws IOException {
@@ -116,7 +114,6 @@ public class WebController extends WebMvcConfigurerAdapter {
         System.out.println(userRepository.findByUsername(username));
 
         if (userRepository.findByUsername(username) == null) {
-            System.out.println("hier");
             return "False";
         } else {
             return "True";

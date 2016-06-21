@@ -1,9 +1,14 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by bas on 7-5-16.
+ */
 package nl.bioinf.diseasefinderSpring.hpoprocessor;
 
 import java.util.HashMap;
 
 /**
- * Created by bas on 7-5-16.
+ *
  */
 public class HPOFileLoader {
     private HPOFileLoader() {};

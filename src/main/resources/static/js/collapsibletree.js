@@ -1,6 +1,5 @@
-function createTree(selected, parents) {
-
-    console.log("print")
+//Created the secondary tree after it a node is selected in get Symptoms
+function createSecondaryTree(selected, parents) {
 
     // Clear the subtree that is currently shown on the html page
     $("#subtree").empty();
@@ -8,7 +7,7 @@ function createTree(selected, parents) {
     // Get the information of all the parent nodes
     getNodeInformation(selected)
 
-    // Create the tree structure
+    // Create the tree structure in a flat dictionary
     function createTree(arr) {
         var tree = [],
             mappedArr = {},
@@ -36,7 +35,7 @@ function createTree(selected, parents) {
             }
         }
 
-        // Execute the d3.js tree with the created list of nodes
+        // Execute the d3.js tree with the created Object of flat nodes.
         executeCreateTree(tree);
     }
 

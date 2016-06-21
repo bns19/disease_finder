@@ -1,3 +1,8 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by bnsikkema on 18-4-16.
+ */
 package nl.bioinf.diseasefinderSpring.controllers;
 
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOFileLoader;
@@ -6,13 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import java.io.IOException;
 import java.util.HashMap;
 
-/**
- * Created by bnsikkema on 18-4-16.
- */
 @Controller
 public class SymptomsSearchingController {
 

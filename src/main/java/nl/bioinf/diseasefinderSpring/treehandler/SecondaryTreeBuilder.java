@@ -1,25 +1,32 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by henridupon on 20-05-16.
+ */
 package nl.bioinf.diseasefinderSpring.treehandler;
 
-import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOJsonObjectCreator;
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOJsonObjectCreatorSecondaryTree;
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOTerm;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 
 /**
- * + * Created by henridupon on 20-05-16.
- * +
+ * Controls the information of the selected node and the parent nodes.
  */
 public class SecondaryTreeBuilder {
     JSONArray children = new JSONArray();
 
+    /**
+     * @param requestedNodeChildren
+     * @param collection
+     * @return
+     * @throws IOException
+     * @throws JSONException
+     */
     public String buildsecondaryTree(String requestedNodeChildren, final HashMap collection) throws IOException, JSONException {
         HPOJsonObjectCreatorSecondaryTree hj = new HPOJsonObjectCreatorSecondaryTree();
         String jsonChildren = "";
@@ -32,6 +39,11 @@ public class SecondaryTreeBuilder {
     }
 
 
+    /**
+     * Controls the information to get all the child nodes from the (selected) parent node.
+     * @param parent node (selected node).
+     * @param hj HPO file information.
+     */
     public void getAllChildrenNodes(HPOTerm parent, HPOJsonObjectCreatorSecondaryTree hj) {
         if (parent.getChildren() != null) {
             for (HPOTerm child : parent.getChildren()) {

@@ -1,13 +1,17 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by bas on 7-5-16.
+ */
 package nl.bioinf.diseasefinderSpring.treehandler;
 
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOTerm;
 import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by bas on 7-5-16.
+ * Autocompletes the symptoms that are searched in the search bar in the application.
  */
 public class AutoCompleteSystem {
     public AutoCompleteSystem(String query, HashMap collection) {

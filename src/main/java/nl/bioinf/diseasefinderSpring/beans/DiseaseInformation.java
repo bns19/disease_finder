@@ -1,7 +1,5 @@
 package nl.bioinf.diseasefinderSpring.beans;
 
-import java.util.List;
-
 /**
  * Created by bnsikkema on 2-6-16.
  */

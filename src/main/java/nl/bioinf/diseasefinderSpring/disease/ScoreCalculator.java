@@ -10,8 +10,6 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-//import nl.bioinf.DiseaseFinder.disease.Disease;
-//import nl.bioinf.DiseaseFinder.disease.DiseaseCollection;
 
 /**
  * This class will check if hits are true positive and score them.

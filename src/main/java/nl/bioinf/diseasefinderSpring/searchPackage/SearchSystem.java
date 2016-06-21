@@ -1,17 +1,9 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-package nl.bioinf.diseasefinderSpring.searchPackage;
-
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by henridupon on 3/1/2016.
  */
-//import model.Findtrait;
+package nl.bioinf.diseasefinderSpring.searchpackage;
 
 import model.Findtrait;
 
@@ -19,7 +11,6 @@ import model.Findtrait;
  *
  * @author jgboekhoudt and Bnsikkema
  */
-//public class NewMain {
 public class SearchSystem{
 
     private Findtrait results;

@@ -1,3 +1,8 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by henridupon & Bas Sikkema on 4/5/2016.
+ */
 package nl.bioinf.diseasefinderSpring.symptomsdatabase;
 
 import nl.bioinf.diseasefinderSpring.beans.StatisticalInformation;
@@ -8,15 +13,11 @@ import nl.bioinf.diseasefinderSpring.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
 
 /**
- * Created by henridupon on 5/5/2016.
+ * Is repsonsible for the caclculations that are given in the statistics tab in the application
  */
 public class SymptomsCalculationInformation {
 
@@ -26,20 +27,29 @@ public class SymptomsCalculationInformation {
 
     private StatisticalInformation statisticalInformation = new StatisticalInformation();
 
+    /**
+     * Is the main constructor of the class.
+     *
+     * @param userRepository          interface of the user.
+     * @param searchHistoryRepository interface of the search history.
+     */
     @Autowired
     public SymptomsCalculationInformation(UserRepository userRepository, SearchHistoryRepository searchHistoryRepository) {
         this.userRepository = userRepository;
         this.searchHistoryRepository = searchHistoryRepository;
     }
 
-    public void calculateSymptomsSearch(){
-
+    /**
+     * Calculates the symptoms that are searched.
+     */
+    public void calculateSymptomsSearch() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
 
-        Long totalSearches =  searchHistoryRepository.count();
+        Long totalSearches = searchHistoryRepository.count();
         SearchHistory historyObj = searchHistoryRepository.findById(totalSearches);
         String lastSearchedQuery;
+
         if (historyObj == null) {
             lastSearchedQuery = "";
         } else {
@@ -50,14 +60,17 @@ public class SymptomsCalculationInformation {
             calculatePercentageOfSymptomsSearchedByUser(lastSearchedQuery);
         }
 
-
         calculatePercentageOfSymptomsSearchedByTotal(lastSearchedQuery);
     }
 
-    private void calculatePercentageOfSymptomsSearchedByUser(String lastSearchedQuery){
+    /**
+     * Calculates the percentages of the symptoms that have been searched by the user.
+     * @param lastSearchedQuery
+     */
+    private void calculatePercentageOfSymptomsSearchedByUser(String lastSearchedQuery) {
+
         // Count number of searches total
         Long totalUserSearches = 0L;
-       // Long countUserSearches = searchHistoryRepository.count();
 
         totalUserSearches = searchHistoryRepository.countByUser_id(user.getId());
         this.statisticalInformation.setTotalUserSearches(totalUserSearches);
@@ -67,8 +80,6 @@ public class SymptomsCalculationInformation {
 
             Long totalSearchesQueryUser = searchHistoryRepository.countByQueryContainingAndUser_id(lastSearchedQuery, user.getId());
             this.statisticalInformation.setTotalQuerySearchesUser(totalSearchesQueryUser);
-
-
 
             if (totalUserSearches > 0) {
                 double searchedSymptomsPercentageUser = (double) 100 / totalUserSearches * totalSearchesQueryUser;
@@ -83,7 +94,11 @@ public class SymptomsCalculationInformation {
         }
     }
 
-    private void calculatePercentageOfSymptomsSearchedByTotal(String lastSearchedQuery){
+    /**
+     * Calculates the searched percentages of the symptoms that have been searched by all the users.
+     * @param lastSearchedQuery
+     */
+    private void calculatePercentageOfSymptomsSearchedByTotal(String lastSearchedQuery) {
         Long totalSearches = searchHistoryRepository.count();
         this.statisticalInformation.setTotalSearches(totalSearches);
         if (!lastSearchedQuery.equals("")) {
@@ -98,32 +113,24 @@ public class SymptomsCalculationInformation {
         }
     }
 
+    /**
+     * Rounds the numbers to a whole.
+     * @param percentage
+     * @return
+     */
     private double roundNumbers(final double percentage) {
         DecimalFormat df = new DecimalFormat("#.###");
-       String roundedPercentage = df.format(percentage);
-        roundedPercentage = roundedPercentage.replace(",",".");
+        String roundedPercentage = df.format(percentage);
+        roundedPercentage = roundedPercentage.replace(",", ".");
         return Double.parseDouble(roundedPercentage);
 
     }
 
+    /**
+     * @return
+     */
     public StatisticalInformation getStatisticalInformation() {
         return this.statisticalInformation;
     }
 
 }
-
-
-//    @RequestMapping(value = "getRegisteredUsers", method = RequestMethod.GET, produces = "application/json")
-//    @ResponseBody
-//    public String RegisteredUser(String username) throws IOException {
-//        user = userRepository.findByUsername(username);
-//
-//        System.out.println(user.getUsername());
-//
-//        System.out.println(username);
-//
-//        String BoolUser = "";
-//
-//        return BoolUser;
-//
-//    }

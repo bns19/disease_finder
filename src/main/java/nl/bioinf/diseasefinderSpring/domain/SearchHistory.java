@@ -1,13 +1,18 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by Mariska Slofstra & Arne Roeters
+ * Created by hjdupon on 1-5-16.
+ */
 package nl.bioinf.diseasefinderSpring.domain;
 
 import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
-/*Note of Bas: I have changed date and user to Strings */
-
+/**
+ * Database information about the search history.
+ */
 @Entity
 public class SearchHistory {
 
@@ -18,8 +23,6 @@ public class SearchHistory {
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
-
-
     @NotNull
     @Type(type="text")
     private String query;
@@ -27,9 +30,6 @@ public class SearchHistory {
     @NotNull
     @Type(type="text")
     private String longQuery;
-
-//    @NotNull
-//    private LocalDateTime createdAt;
 
     @NotNull
     private String createdAt;
@@ -46,18 +46,32 @@ public class SearchHistory {
         this.createdAt = createdAt;
     }
 
+    /**
+     * @return id of user.
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Set id of user.
+     * @param id
+     */
     public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * @return user object.
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Set user object.
+     * @param user
+     */
     public void setUser(User user) {
         this.user = user;
     }
@@ -66,22 +80,40 @@ public class SearchHistory {
         return longQuery;
     }
 
+    /**
+     * Set querys inputted by user.
+     * @param longQuery
+     */
     public void setLongQuery(String longQuery) {
         this.longQuery = longQuery;
     }
 
+    /**
+     * @return querys inputted by user.
+     */
     public String getQuery() {
         return query;
     }
 
+    /**
+     * Set short query inputted by user.
+     * @param query
+     */
     public void setQuery(String query) {
         this.query = query;
     }
 
+    /**
+     * @return date when created.
+     */
     public String getCreatedAt() {
         return createdAt;
     }
 
+    /**
+     * Set creation date.
+     * @param createdAt
+     */
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }

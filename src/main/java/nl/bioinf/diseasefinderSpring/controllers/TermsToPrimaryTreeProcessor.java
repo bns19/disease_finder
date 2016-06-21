@@ -1,12 +1,16 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by bas on 7-5-16.
+ */
 package nl.bioinf.diseasefinderSpring.controllers;
 
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOTerm;
 import org.json.JSONArray;
-
 import java.util.HashMap;
 
 /**
- * Created by bas on 7-5-16.
+ *
  */
 public class TermsToPrimaryTreeProcessor {
 

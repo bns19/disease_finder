@@ -1,8 +1,9 @@
 /**
+ * Project: Disease Finder
+ * Theme 11/12
  * Created by hjdupon on 1-6-16.
  */
-
-//************** Generate the tree diagram	 *****************
+//**************  Generate the tree diagram	 *****************
 function executeCreateTree(treeData) {
 
     for (is in treeData){

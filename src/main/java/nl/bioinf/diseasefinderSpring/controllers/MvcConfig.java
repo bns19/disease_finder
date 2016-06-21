@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * This class regulates some  view buisness.
+ * This class regulates the views of websites when controllers return a page.
  */
 @Configuration
 public class MvcConfig extends WebMvcConfigurerAdapter {

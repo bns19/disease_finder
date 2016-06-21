@@ -11,8 +11,6 @@ function initialize() {
     //by aroeters (lists made by mkslofstra)
     $("#ontology-tree").on('changed.jstree', function (e, data) {
 
-
-
         localStorage.setItem("shortSymptoms", "")
         var i, j, selectedNodes = [], selectedIds = [];
         var shortSymptomsList = [];
@@ -20,10 +18,9 @@ function initialize() {
         var parentObjectList = new Array;
 
         //run through all selected nodes
-
         for (i = 0, j = data.selected.length; i < j; i++) {
-            //get the selected node
 
+            //get the selected node
             var selected = data.instance.get_node(data.selected[i]);
 
             if ($.inArray(selected.id, selectedNodes) === -1 && selected.text !== "All") {
@@ -44,7 +41,7 @@ function initialize() {
             parents = selected.parents;
 
             //The if makes sure that the parents are more than one, so if it
-            //is one word, it will not be divided in characters
+            //It is one word, it will not be divided in characters
             if (parents.length !== 1) {
                 //check for each parent, if the parent is in the array of
                 //selected nodes
@@ -74,13 +71,9 @@ function initialize() {
         console.log("selected: " + selected.id.toString())
         console.log("parents : " + parents.toString())
 
-
-        var nodeId = $("#ontology-tree").jstree("get_selected");
-        //var selectedId = selected.id;
-        createTree(nodeId, parents);
-
-         //document.getElementById("selectedTreeNode").innerHTML = selected.name;
-
+        // CreateSecondaryTree is activated when a node is selected in the primary tree with the selected node id.
+        var selectedNodeId = $("#ontology-tree").jstree("get_selected");
+        createSecondaryTree(selectedNodeId, parents);
 
         //by mkslofstra make buttons of the selected symptoms which on click deselect the symptoms
         $('#event_result').html('Selected symptoms:<br/>');
@@ -169,11 +162,11 @@ function initialize() {
 }
 
 
-
 function resendQuery(longQuery) {
     localStorage.setItem("symptoms", longQuery)
     sendSymptoms()
 }
+
 
 //by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
@@ -340,10 +333,6 @@ function loadDisease() {
         }
 
 
-
-
-
-
         $(".closeDiseaseTab").click(function () {
             matchId = localStorage.getItem("ids").match(idPat);
             var close_id = $(this).data("close");
@@ -379,8 +368,9 @@ function loadDisease() {
             $(".highlight").toggleClass("highlighted");
         });
     });
-}
-;
+};
+
+
 //by mkslofstra
 function saveResults() {
     var results = $("#resultTab").text();
@@ -408,8 +398,7 @@ function saveResults() {
     var resultFile = new Blob(["Title;OmimNumber;Score;Hits;Matches\n" + result], {type: "text/plain;charset=utf-8"});
     //save the file
     saveAs(resultFile, "results.csv");
-}
-;
+};
 
 
 //under construction

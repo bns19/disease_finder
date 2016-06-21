@@ -1,12 +1,17 @@
 /**
- * Created by hjdupon on 26-4-16.
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by hjdupon & Bas Sikkema on 26-4-16.
  */
+
+// Loads the history of the user by getting it from the controller
 function executeLoadHistory(){
     var controller = "/history";
 
     $.get(controller, null, function (history){
         returnHistory(history);
     });
+
 
     function returnHistory(history) {
         if (history.length < 1) {
@@ -18,10 +23,11 @@ function executeLoadHistory(){
             //console.log(processedHistory)
 
             $("#historyContent").html(processedHistory);
-
         }
     }
-    //weh have a json array
+
+
+    // Present the history back to the user from a Json array.
     function procesHistory(userSearchHistory) {
        // console.log(userSearchHistory)
         var processedHistory = [];
@@ -41,7 +47,6 @@ function executeLoadHistory(){
             historyString+=historyObj['createdAt'];
             historyString+='\n';
             historyString+='\n';
-
         }
 
         var historyStringProcessed =  historyString.replace(',','\n');
@@ -50,11 +55,6 @@ function executeLoadHistory(){
         processedHistory.push(dates);
        // return processedHistory;
         return historyStringProcessed;
-
     }
-
-
-
-
 }
 

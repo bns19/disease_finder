@@ -10,7 +10,7 @@ import nl.bioinf.diseasefinderSpring.beans.DiseaseInformation;
 import nl.bioinf.diseasefinderSpring.disease.DiseaseCollection;
 import nl.bioinf.diseasefinderSpring.domain.SearchHistoryRepository;
 import nl.bioinf.diseasefinderSpring.domain.UserRepository;
-import nl.bioinf.diseasefinderSpring.searchPackage.SearchSystem;
+import nl.bioinf.diseasefinderSpring.searchpackage.SearchSystem;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SaveSearchedSymptoms;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomProcessor;
 import nl.bioinf.diseasefinderSpring.symptomsdatabase.SymptomsCalculationInformation;

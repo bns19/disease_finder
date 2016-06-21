@@ -1,19 +1,15 @@
 /**
  * Project: Disease Finder
  * Theme 11/12
- * Created by Mariska Slofstra & Arne Roeters
- * Adjusted by Bas Sikkema & Henri du Pon
+ * Created at 15-6-2016
  */
 package nl.bioinf.diseasefinderSpring.hpoprocessor;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
- * @author aroeters
+ * A class that is responsible for the information about the parents that are selected in the primary tree.
  */
 public class HPOJsonObjectCreatorSecondaryTree {
 
@@ -25,7 +21,6 @@ public class HPOJsonObjectCreatorSecondaryTree {
 
     /**
      * The constructor of the class.
-     *
      * @throws IOException when the file is not found
      */
     public HPOJsonObjectCreatorSecondaryTree() throws IOException {

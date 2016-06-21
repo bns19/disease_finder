@@ -1,15 +1,19 @@
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by bas on 7-5-16.
+ */
 package nl.bioinf.diseasefinderSpring.treehandler;
 
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOJsonObjectCreator;
 import nl.bioinf.diseasefinderSpring.hpoprocessor.HPOTerm;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.HashMap;
 
 /**
- * Created by bas on 7-5-16.
+ *
  */
 public class PrimaryTreeBuilder {
     public PrimaryTreeBuilder() {
