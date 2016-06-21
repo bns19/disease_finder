@@ -9,18 +9,16 @@
 
 <div class="nav">
     <ul>
-        <div id= "loginname" th:if="${#httpServletRequest.remoteUser}"> <!-- if customer is anonymous-->
-             <p th:inline="text">Logged in as: [[${#httpServletRequest.remoteUser}]]</p>
+        <div th:if="${#httpServletRequest.remoteUser}"> <!-- if customer is anonymous-->
+            <p th:inline="text">Logged in: [[${#httpServletRequest.remoteUser}]]</p>
         </div>
-
         <li><a href="/">Home</a></li>
         <li><a href="#about" data-toggle="modal" data-target=".bs-modal-sm-about">About </a></li>
         <li><a href="#howto" data-toggle="modal" data-target=".bs-modal-sm-howTo">How to </a></li>
         <li><a href="#singnin" data-toggle="modal" data-target=".bs-modal-sm-signIn">Sign in </a></li>
         <li><a href="#signup" data-toggle="modal" data-target=".bs-modal-sm-signup">Register </a></li>
-        <li><form th:action="@{/logout}" method="post"><input type="submit" id="signout" value="Sign Out"/></form></li>
+        <li><a th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" /></a></li>
     </ul>
-
 </div>
 
 
@@ -158,33 +156,38 @@
 
                         <div th:if="${param.error}" class="alert alert-error">
                             Invalid username and password. </div>
-                 <form onsubmit="return validateRegisterForm()" name="registerform" action="#" th:action="@{/form}" th:object="${user}" method="post" >
-                        <table>
+
+                        <form name="registerform" action="#" th:action="@{/form}" th:object="${user}" method="post" >
+
+                     <table>
                             <tr>
                                 <td>Username:*</td>
-                                <td><input name="username" id="username" type="text" th:field="*{username}" required="required"/></td>
+                                <td><input name="username" id="username" type="text" th:field="*{username}"  onchange="getRegistered()" required="required"/></td>
                                 <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username</td>
                             </tr>
-                            <tr>
-                                <td>Email:*</td>
-                                <td><input name="email" type="email" th:field="*{email}" required="required"/></td>
-                                <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email</td>
-                            </tr>
+
                             <tr>
                                 <td>Password:*</td>
-                                <td><input name="password" type="password" th:field="*{password}" required="required"/></td>
+                                <td><input name="password" type="password" th:field="*{password}" onchange="checkPasswords(this)" required="required"/></td>
                                 <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password</td>
                             </tr>
                             <tr>
                                 <td>Confirm password:*</td>
-                                <td><input name="confirmPassword" type="password" th:field="*{confirmPassword}" required="required"/></td>
+                                <td><input name="confirmPassword" type="password" th:field="*{confirmPassword}" onchange="checkPasswords(this)" required="required"/></td>
                                 <td th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}">confirm password</td>
                             </tr>
+                             <tr>
+                                 <td>Email:*</td>
+                                 <td><input name="email" type="email" th:field="*{email}" required="required"/></td>
+                                 <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email</td>
+                             </tr>
                             <tr>
                                 <td>
-                                    <button type="submit" name="registerform">Submit</button>
+                                    <button type="submit" id="registerform" name="registerform" >Submit</button>
                                 </td>
                             </tr>
+
+
                         </table>
                     </form>
                     </div>
