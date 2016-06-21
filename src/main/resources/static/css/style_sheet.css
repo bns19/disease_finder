@@ -51,6 +51,7 @@ body {
     padding: 0;
     width: 80%;
     margin:0 auto;
+    opacity: 0.9;
     border: 1px solid #808080;
 }
 
@@ -208,3 +209,24 @@ body{
 
 }
 
+/*input[type=text] {*/
+    /*padding:5px;*/
+    /*border:2px solid #ccc;*/
+    /*-webkit-border-radius: 5px;*/
+    /*border-radius: 5px;*/
+/*}*/
+
+/*input[type=text]:hover {*/
+    /*background-color: #005f5f;*/
+/*}*/
+
+/*input[type=submit] {*/
+    /*list-style: none;*/
+    /*background-color: lightblue;*/
+    /*text-align: center;*/
+    /*padding: 0;*/
+    /*width: 80%;*/
+    /*margin:0 auto;*/
+    /*opacity: 0.9;*/
+    /*border: lightblue;*/
+/*}*/

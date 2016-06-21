@@ -129,7 +129,7 @@ h2 small{
     border-bottom-right-radius: 15px;
     width: 80%;
     margin: auto;
-    text-align: center;
+    padding: 5px 5px 5px 5px;
     overflow:auto;
     border: 1px solid #808080;
     opacity: 0.9;
