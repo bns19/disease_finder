@@ -8,10 +8,8 @@ package nl.bioinf.diseasefinderSpring.domain;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
@@ -34,6 +32,7 @@ public class User {
      * Username may not be empty.
      * Username size needs to be between 5 and 30 characters in size.
      */
+    @Column(unique = true)
     @Size(min = 5, max = 30)
     private String username;
 

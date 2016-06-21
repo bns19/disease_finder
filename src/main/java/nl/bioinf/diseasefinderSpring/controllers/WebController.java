@@ -84,7 +84,7 @@ public class WebController extends WebMvcConfigurerAdapter {
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors());
 
-            return "home";
+            return "redirect:/";
         }
         if (!bindingResult.hasErrors()) {
             String encrypted = EncryptPassword.encryptPassword(user.getPassword());
@@ -93,11 +93,15 @@ public class WebController extends WebMvcConfigurerAdapter {
             user.setConfirmPassword(encrypted);
             user.setEnabled(true);
             user.setCreatedAt(LocalDateTime.now());
-
-            userRepository.save(user);
-            return "home";
+            try {
+                userRepository.save(user);
+            } catch(Exception e){
+            }
+            //return "home";
+            return "redirect:/";
         }
-        return "home";
+//        return "home";
+        return "redirect:/";
 
     }
 
