@@ -13,23 +13,21 @@ function executeLoadHistory(){
     });
 
 
+    // Return the history
     function returnHistory(history) {
         if (history.length < 1) {
             //return "No former searches";
             $("#historyContent").html("No former searches");
         }
         else {
-            var processedHistory = procesHistory(history);
-            //console.log(processedHistory)
-
+            var processedHistory = processHistory(history);
             $("#historyContent").html(processedHistory);
         }
     }
 
 
     // Present the history back to the user from a Json array.
-    function procesHistory(userSearchHistory) {
-       // console.log(userSearchHistory)
+    function processHistory(userSearchHistory) {
         var processedHistory = [];
         var dates = [];
         var queries = [];
@@ -38,8 +36,6 @@ function executeLoadHistory(){
 
         for (var i = 0; userSearchHistory.length > i; i++) {
             var historyObj = userSearchHistory[i];
-            //queries.push(historyObj['query']);
-            //dates.push(historyObj['createdAt'])
             historyString+="search terms:  "
             historyString+=historyObj['query'];
             historyString+="\n";
@@ -53,7 +49,8 @@ function executeLoadHistory(){
 
         processedHistory.push(queries);
         processedHistory.push(dates);
-       // return processedHistory;
+
+        // return processedHistory;
         return historyStringProcessed;
     }
 }
