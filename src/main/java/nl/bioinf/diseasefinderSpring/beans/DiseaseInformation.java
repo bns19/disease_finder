@@ -2,27 +2,27 @@ package nl.bioinf.diseasefinderSpring.beans;
 
 /**
  * Created by bnsikkema on 2-6-16.
- * This beanclass contains all information regaring the disease
+ * This bean class contains all information regaring the disease
  */
 public class DiseaseInformation {
     /**
-     * title.
+     * title title.
      */
     private String title;
     /**
-     * omimNumber.
+     * omimNumber omimnumber.
      */
     private String omimNumber;
     /**
-     * score.
+     * score score.
      */
     private double score;
     /**
-     * hits.
+     * hits hits.
      */
     private double hits;
     /**
-     * matches.
+     * matches matches.
      */
     private String matches;
     /**
@@ -31,7 +31,7 @@ public class DiseaseInformation {
     private String information;
 
     /**
-     * getTitle.
+     * getter of the title.
      * @return title
      */
     public String getTitle() {
@@ -39,15 +39,15 @@ public class DiseaseInformation {
     }
 
     /**
-     * setTitle.
-     * @param title
+     * setter of the title.
+     * @param title title
      */
     public void setTitle(final String title) {
         this.title = title;
     }
 
     /**
-     * getOmimNumber.
+     * getOmimNumber omimnumber.
      * @return omimNumber
      */
     public String getOmimNumber() {
@@ -55,15 +55,15 @@ public class DiseaseInformation {
     }
 
     /**
-     * setOmimNumber.
-     * @param omimNumber
+     * the setter of the omimNumber.
+     * @param omimNumber omimnumber
      */
     public void setOmimNumber(final String omimNumber) {
         this.omimNumber = omimNumber;
     }
 
     /**
-     * getScore.
+     * the getter of the score.
      * @return score
      */
     public double getScore() {
@@ -71,31 +71,31 @@ public class DiseaseInformation {
     }
 
     /**
-     * setScore.
-     * @param score
+     * the setter of the score.
+     * @param score score
      */
     public void setScore(final double score) {
         this.score = score;
     }
 
     /**
-     * getHits.
-     * @return hits
+     * the getter of the hits.
+     * @return hits hits
      */
     public double getHits() {
         return hits;
     }
 
     /**
-     * sethits.
-     * @param hits
+     * the setter of the hits.
+     * @param hits hits
      */
     public void setHits(final double hits) {
         this.hits = hits;
     }
 
     /**
-     * getMatches.
+     * the getter of the matches.
      * @return matches
      */
     public String getMatches() {
@@ -103,15 +103,15 @@ public class DiseaseInformation {
     }
 
     /**
-     * setmatches.
-     * @param matches
+     * the setter of the matches.
+     * @param matches matches
      */
     public void setMatches(final String matches) {
         this.matches = matches;
     }
 
     /**
-     * getInformation.
+     * the getter of the information.
      * @return information of the disease
      */
     public String getInformation() {
@@ -119,8 +119,8 @@ public class DiseaseInformation {
     }
 
     /**
-     * setInformation.
-     * @param information
+     * te setter of the information.
+     * @param information information of the disease
      */
     public void setInformation(final String information) {
         this.information = information;
