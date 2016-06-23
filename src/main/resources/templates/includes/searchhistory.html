@@ -1,11 +1,10 @@
+<!--created by bnsikkema-->
 <searchhis xmlns:th="" th:fragment="showsearchhis">
 <h1> your search history </h1>
 
 <div th:if="${#httpServletRequest.remoteUser != null}">
 
     <td th:text="${application.executeHis}" >42</td>
-
-
 
     <div id="userHistory">
         <table class="table table-striped" id="historyTable">
@@ -24,15 +23,10 @@
         </table>
     </div>
 
-
-
     <table>
         <caption><b></b></caption>
         <tr>
-
             <td id="historyContent"></td>
-
-
         </tr>
     </table>
 </div>

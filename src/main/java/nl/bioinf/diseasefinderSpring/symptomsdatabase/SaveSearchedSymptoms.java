@@ -1,7 +1,7 @@
 /**
  * Project: Disease Finder
  * Theme 11/12
- * Created by hjdupon on 21-4-16.
+ * Created by hjdupon and bnsikkema on 21-4-16.
  */
 package nl.bioinf.diseasefinderSpring.symptomsdatabase;
 
@@ -15,15 +15,26 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.time.LocalDateTime;
 
 /**
- * Is responsible for saving the searched symptoms in the MySQL database.
+ * This function ss responsible for saving the searched symptoms in the MySQL database.
  */
 public class SaveSearchedSymptoms {
-
+    /**
+     * userRepository interface.
+     */
     UserRepository userRepository;
+    /**
+     * searchHistoryRepository interface.
+     */
     SearchHistoryRepository searchHistoryRepository;
 
-        @Autowired
-        public SaveSearchedSymptoms(UserRepository userRepository, SearchHistoryRepository searchHistoryRepository) {
+    /**
+     * Public constructor.
+     * @param userRepository userRepository interface
+     * @param searchHistoryRepository searchHistoryRepository interface.
+     */
+    @Autowired
+        public SaveSearchedSymptoms(final UserRepository userRepository,
+                                    final SearchHistoryRepository searchHistoryRepository) {
             this.userRepository = userRepository;
             this.searchHistoryRepository = searchHistoryRepository;
         }
@@ -33,7 +44,7 @@ public class SaveSearchedSymptoms {
      * @param shortSymptoms is a list of one symptom that is selected
      * @param symptoms is a list of several symptoms from selected to the root.
      */
-    public void saveSymptoms(String shortSymptoms,String symptoms) {
+    public void saveSymptoms(final String shortSymptoms, final String symptoms) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         User user = userRepository.findByUsername(username);

@@ -1,7 +1,7 @@
 /**
  * Project: Disease Finder
  * Theme 11/12
- * Created by hjdupon on 1-6-16.
+ * Created by hjdupon
  */
 //**************  Generate the tree diagram	 *****************
 function executeCreateTree(treeData) {
@@ -26,15 +26,11 @@ function executeCreateTree(treeData) {
             return [d.y, d.x];
         });
 
-    //if(!document.getElementById('secondTree'+ treeData[0])) {}
-
     var svg = d3.select("#subtree").append("svg")
         .attr("width", width + margin.right + margin.left)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-
 
     root = treeData[0];
     root.x0 = height / 1.5;

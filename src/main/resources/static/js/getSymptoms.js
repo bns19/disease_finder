@@ -1,5 +1,7 @@
 /**
- * Created by mkslofstra and aroeters, addditions and adjustments by bnsikkema
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by mkslofstra, aroeters, bnsikkema & hjdupon
  */
 
 $(document).ready(initialize);
@@ -84,17 +86,17 @@ function initialize() {
 
             var this_node = $("#ontology-tree").jstree("get_node", selectedIds[i]);
             var icon = this_node.icon;
-            if ($.inArray(selectedNodes[i],shortSymptomsList) >-1) {
+            if ($.inArray(selectedNodes[i], shortSymptomsList) > -1) {
                 shortSymptomCounter++;
                 var negaButtonValue = i;
                 $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
-                    + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button><button class='negateButton' id='negateButton' value="+shortSymptomCounter+" >negate</button>");
+                    + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button><button class='negateButton' id='negateButton' value=" + shortSymptomCounter + " >negate</button>");
                 //$("#labels").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
                 //    + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button><button class='negateButton' id='negateButton' value="+shortSymptomCounter+" >negate</button>");
 
             }
 
-            else{
+            else {
                 $("#event_result").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
                     + selectedNodes[i] + " <span class=\"closeSymptom\"> X </span></button>");
                 //$("#labels").append("<button class=\"btn btn-default dontClick\"data-close=\"" + selectedIds[i] + "\"> <img alt=\"" + icon + "\" src=\"" + icon + "\"> "
@@ -114,27 +116,27 @@ function initialize() {
             var symptomToNegate = shortSymptomList[index];
 
             var longIndex = longSymptomList.indexOf(symptomToNegate);
-            console.log(localStorage.getItem("shortSymptoms")+ "                  eerste short symptoms")
-            if (symptomToNegate.substring(0,4) != "non ") {
-                var negatedSymptom = "non "+symptomToNegate;
-                shortSymptomList[index]=negatedSymptom;
+            console.log(localStorage.getItem("shortSymptoms") + "                  eerste short symptoms")
+            if (symptomToNegate.substring(0, 4) != "non ") {
+                var negatedSymptom = "non " + symptomToNegate;
+                shortSymptomList[index] = negatedSymptom;
                 localStorage.removeItem("shortSymptoms");
                 localStorage.setItem("shortSymptoms", shortSymptomList.toString())
 
 
-                longSymptomList[longIndex]=negatedSymptom;
+                longSymptomList[longIndex] = negatedSymptom;
                 localStorage.removeItem("symptoms");
                 localStorage.setItem("symptoms", longSymptomList.toString())
                 console.log(localStorage.getItem("shortSymptoms") + "=")
             }
 
-            if (symptomToNegate.substring(0,4) == "non " && symptomToNegate.substring(4,6) != "non") {
-                var nonNegatedSymptom = symptomToNegate.substring(4,symptomToNegate.length);
-                shortSymptomList[index]=nonNegatedSymptom;
+            if (symptomToNegate.substring(0, 4) == "non " && symptomToNegate.substring(4, 6) != "non") {
+                var nonNegatedSymptom = symptomToNegate.substring(4, symptomToNegate.length);
+                shortSymptomList[index] = nonNegatedSymptom;
                 localStorage.removeItem("shortSymptoms");
                 localStorage.setItem("shortSymptoms", shortSymptomList.toString())
                 console.log(localStorage.getItem("shortSymptoms") + "+")
-                longSymptomList[longIndex]=nonNegatedSymptom;
+                longSymptomList[longIndex] = nonNegatedSymptom;
                 localStorage.removeItem("symptoms");
                 localStorage.setItem("symptoms", longSymptomList.toString())
             }
@@ -163,6 +165,7 @@ function initialize() {
 
 
 function resendQuery(longQuery) {
+    //function is called when a search history query is searched for again
     localStorage.setItem("symptoms", longQuery)
     sendSymptoms()
 }
@@ -171,11 +174,11 @@ function resendQuery(longQuery) {
 //by mkslofstra and bnsikkema: this function will send data to the servlet and get diseases back
 function sendSymptoms(symptoms) {
     console.log(localStorage.getItem("symptoms") + "alle symptomen");
-    //localStorage.setItem("symptoms", symptoms);
     var symptomSet = symptoms;
 
     var algorithm = document.getElementById('algorithmType').value;
 
+    //given parameters are extracted
     localStorage.setItem("algorithm", algorithm);
     var runtime = document.getElementById('runtime').value;
     var queryType = document.getElementById('query').value;
@@ -187,19 +190,21 @@ function sendSymptoms(symptoms) {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     //use the mapped controller
-    $.post(controller, {"symptoms": localStorage.getItem("symptoms"), "shortSymptoms": localStorage.getItem("shortSymptoms"), "algorithm": algorithm,"runtime": runtime, "queryType": queryType, _csrf: token}, function (diseases) {
-        console.log("backend gepasseerd")
+    $.post(controller, {
+        "symptoms": localStorage.getItem("symptoms"),
+        "shortSymptoms": localStorage.getItem("shortSymptoms"),
+        "algorithm": algorithm,
+        "runtime": runtime,
+        "queryType": queryType,
+        _csrf: token
+    }, function (diseases) {
         var diseaseSummary = "";
-
-
         $("#resultTab").text("");
         $("#resultTab").append("<br/><br/><ul>");
-        // $("#resultTab").append(diseases);
 
         for (var disease in diseases) {
+            //The html code below will represent the content of the results tab
             var values = diseases[disease];
-            //localStorage.setItem("matches", value[2]);
-            // var matches = getMatches(values[2]);
             diseaseSummary = "<li class =\"disease\">"
                 + "<table>"
                 + "<tr class=\"diseaseTitle\">"
@@ -228,7 +233,7 @@ function sendSymptoms(symptoms) {
                     + values[3]
                     + "</td></tr>"
             }
-            diseaseSummary+= "<tr><td class=\"label\">Matches: "
+            diseaseSummary += "<tr><td class=\"label\">Matches: "
                 + "</td><td class=\"value\">"
                 + values[2]
                 + "</td></tr>"
@@ -256,36 +261,26 @@ function sendSymptoms(symptoms) {
 }
 
 
-
 //by mkslofstra and bnsikkema
 function loadDisease() {
     var diseaseServlet = "/diseaseInformation";
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     var theMatches = $(this).attr("value");
-    console.log(theMatches + "matches")
-    //console.log(this.value + "matches")
-    //var matchesFromFrontpage =
+
     $.post(diseaseServlet, {
         "omimNumber": localStorage.getItem("omimNumber"),
         "symptoms": localStorage.getItem("symptoms"),
-        "algorithm":localStorage.getItem("algorithm"),
+        "algorithm": localStorage.getItem("algorithm"),
         _csrf: token
     }, function (disease) {
         var title = disease["title"];
-
-        //var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
-        //var pattern = /<h2>([\w 1234567890,;.-]+)<\/h2>/;
-        //var title = disease.match(pattern)[1];
-        ////sommige ziekten worden niet gematched
         var id = title.replace(/[ ,;.-]* /g, "");
         var idPat = new RegExp(id);
-        console.log(id)
-        console.log(idPat)
-        /////////////////////////////////////////////////////////////
         var matchId = localStorage.getItem("ids").match(idPat);
         //make sure, the tab is only created one time
         if (matchId === null) {
+            //the HTML code below represents the content of a disease page
             localStorage.setItem("ids", localStorage.getItem("ids") + id);
             title = title.charAt(0) + title.substring(1, title.length).toLowerCase();
             if (title.length > 10) {
@@ -296,7 +291,6 @@ function loadDisease() {
                 + "\" role=\"tab\" data-toggle=\"tab\" id=\"" + id + "Tab\" class=\"tab\">" + title + " <button class=\"closeDiseaseTab\" data-close=\"" + id + "\">X</button></a></li>");
             $("#tabcontent").append("<div role=\"tabpanel\" class=\"tab-pane\" id=\"" + id + "\"></div>");
             $("#" + id).append("<br/><br/>");
-
 
             diseaseInformationSummary = "<h2>" + disease["title"] + "</h2><div id =\"disease\">"
                 + "<b>Omim number : </b>"
@@ -309,28 +303,13 @@ function loadDisease() {
                 disease["omimNumber"] +
                 "</a>"
 
-            if (disease["score"]) {
-
-                diseaseInformationSummary += "<br/><b>Matches: </b>" +
-                    disease["matches"] + "<br/>"
-                    + "<b><a data"
-                    + "-toggle=\"tooltip\" title=\"The number of matched "
-                    + "symptoms.\"data-placement=\"right\">Hits :</a></b> "
-                    + "hits" + "<br/><b><a data"
-                    + "-toggle=\"tooltip\" title=\"The score is calculated through:"
-                    + " The sum of 1 / occurence of each match through the search"
-                    + ".\"data-placement=\"right\">Score: </a></b>"
-                    + score + "<br/><br/><button id=\"highlightButton\""
-                    + " class=\"button btn btn-info\">"
-                    + "Highlight matches</button>"
-
-        }
             diseaseInformationSummary += disease["information"] +
                 "</div>"
             $("#" + id).append(diseaseInformationSummary);
 
             $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease as .txt</button>");
-            $("#" + id).append("<br/><button class = \"saveDiseaseAsPdf btn btn-default\" data-disease_id = \"" + id + "\">Save this disease as .pdf</button>");        }
+            $("#" + id).append("<br/><button class = \"saveDiseaseAsPdf btn btn-default\" data-disease_id = \"" + id + "\">Save this disease as .pdf</button>");
+        }
 
 
         $(".closeDiseaseTab").click(function () {
@@ -343,16 +322,12 @@ function loadDisease() {
                 tab.parentNode.removeChild(tab);
                 $('.nav-tabs a[href="#resultTab"]').tab('show');
 
-                //////////////////////////////////////////////////////////
                 // remove string from id list, so that it can be opened again
                 var idString = localStorage.getItem("ids");
                 var firstPart = idString.substring(0, matchId.index);
                 var lastPart = idString.substring(matchId.index + id.length, idString.length);
                 localStorage.setItem("ids", firstPart + lastPart);
-                //////////////////////////////////////////////////////////////
-
             }
-            // }
         });
 
 
@@ -363,8 +338,6 @@ function loadDisease() {
 
         $(".saveDiseaseAsPdf").click(function () {
             localStorage.setItem("disease2save", $(this).data("disease_id"));
-
-
             saveDiseaseAsPdf();
         });
 
@@ -408,34 +381,37 @@ function saveResults() {
     saveAs(resultFile, "results.csv");
 };
 
-
-//under construction
+//by bnsikkema
 function saveResultsAsPdf() {
+    //the results information is manipulated to make them as readable as possible before putting them in a pdf with JSPDF
     var results = $("#resultTab").html();
 
     var omimMatch = /Omim/.exec(results);
+    //insert linebreaks
     results = [results.slice(0, omimMatch.index), "</br>", results.slice(omimMatch.index)].join('');
-
+    //insert linebreaks
     var omimNumberMatch = /\d{3,10}/.exec(results);
 
     var omimNumber = omimNumberMatch.join();
-    results = results.replace(omimNumber,omimNumber+"</br>")
-    var garbagePattern2 = /Save this/.exec(results)
-    results = results.substring(0,garbagePattern2.index)
 
-    while(stickyWords = /[a-z][A-Z]/.exec(results)) {
-        results = results.replace(stickyWords,stickyWords.join()[0] + "</br>" + stickyWords.join()[1])
+    results = results.replace(omimNumber, omimNumber + "</br>")
+    //insert linebreaks
+    var garbagePattern2 = /Save this/.exec(results)
+    //delete save buttons
+    results = results.substring(0, garbagePattern2.index)
+    //insert linebreaks
+    while (stickyWords = /[a-z][A-Z]/.exec(results)) {
+        results = results.replace(stickyWords, stickyWords.join()[0] + "</br>" + stickyWords.join()[1])
     }
-    while(stickyNumbers = /\d[A-Z]/.exec(results)) {
-        results = results.replace(stickyNumbers,stickyNumbers.join()[0] + "</br>" + stickyNumbers.join()[1])
+    while (stickyNumbers = /\d[A-Z]/.exec(results)) {
+        results = results.replace(stickyNumbers, stickyNumbers.join()[0] + "</br>" + stickyNumbers.join()[1])
     }
     var doc = new jsPDF();
-
 
     doc.fromHTML((results), 15, 15, {
         'width': 170
     });
-        doc.save('search_results');
+    doc.save('search_results');
 
 };
 
@@ -471,36 +447,37 @@ function saveDisease() {
 
 }
 
+//by bnsikkema
 function saveDiseaseAsPdf() {
+    //the disease information is manipulated to make them as readable as possible before putting them in a pdf with JSPDF
     var disease = $("#" + localStorage.getItem("disease2save"));
     var disease_info = disease.text();
 
     var omimMatch = /Omim/.exec(disease_info);
+    //insert linebreaks
     disease_info = [disease_info.slice(0, omimMatch.index), "</br>", disease_info.slice(omimMatch.index)].join('');
 
     var omimNumberMatch = /\d{3,10}/.exec(disease_info);
 
     var omimNumber = omimNumberMatch.join();
-    disease_info = disease_info.replace(omimNumber,omimNumber+"</br>")
+    //insert linebreaks
+    disease_info = disease_info.replace(omimNumber, omimNumber + "</br>")
 
 
-    while(stickyWords = /[a-z][A-Z]/.exec(disease_info)) {
-        disease_info = disease_info.replace(stickyWords,stickyWords.join()[0] + "</br>" + stickyWords.join()[1])
+    while (stickyWords = /[a-z][A-Z]/.exec(disease_info)) {
+        disease_info = disease_info.replace(stickyWords, stickyWords.join()[0] + "</br>" + stickyWords.join()[1])
     }
-    while(disease_info.indexOf(";") > -1 ){
+    while (disease_info.indexOf(";") > -1) {
         disease_info = disease_info.replace(";", "</br>")
     }
+    //insert linebreaks
     disease_info = disease_info.replace(";", "</br>")
     var garbagePattern = /Save this/.exec(disease_info)
-    disease_info = disease_info.substring(0,garbagePattern.index)
+    //delete savebutton
+    disease_info = disease_info.substring(0, garbagePattern.index)
 
-
-    //while(spaces = /\s{2,}/.exec(disease_info)) {
-    //    disease_info = disease_info.replace(spaces, "</br>")
-    //}
-
-    var doc = new jsPDF('1','mm',[200, 900]);
-    doc.fromHTML((disease_info),  {
+    var doc = new jsPDF('1', 'mm', [200, 900]);
+    doc.fromHTML((disease_info), {
         //'width': 170
     });
     doc.save('search_results');

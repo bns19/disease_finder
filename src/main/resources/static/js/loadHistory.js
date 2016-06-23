@@ -1,7 +1,7 @@
 /**
  * Project: Disease Finder
  * Theme 11/12
- * Created by hjdupon & Bas Sikkema on 26-4-16.
+ * Created by hjdupon & bnsikkema
  */
 
 // Loads the history of the user by getting it from the controller
@@ -11,7 +11,6 @@ function executeLoadHistory(){
     $.get(controller, null, function (history){
         returnHistory(history);
     });
-
 
     // Return the history
     function returnHistory(history) {

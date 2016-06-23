@@ -20,11 +20,23 @@ import java.util.List;
  */
 public class LoadSearchedSymptoms {
 
+    /**
+     * UserRepository interface.
+     */
     UserRepository userRepository;
+    /**
+     * SearchHistoryRepository interface.
+     */
     SearchHistoryRepository searchHistoryRepository;
 
+    /**
+     * Public constructor.
+     * @param userRepository  UserRepository interface.
+     * @param searchHistoryRepository  SearchHistoryRepository interface.
+     */
     @Autowired
-    public LoadSearchedSymptoms(UserRepository userRepository, SearchHistoryRepository searchHistoryRepository) {
+    public LoadSearchedSymptoms(final UserRepository userRepository,
+                                final SearchHistoryRepository searchHistoryRepository) {
         this.userRepository = userRepository;
         this.searchHistoryRepository = searchHistoryRepository;
     }

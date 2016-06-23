@@ -15,3 +15,5 @@ save results to txt-format. This is visible when the ```save results``` button i
 (the button appears after diseases are found).
 
 
+***jspdf.min***
+This plugin is used to extract pdf files with information about search results and specific diseases.

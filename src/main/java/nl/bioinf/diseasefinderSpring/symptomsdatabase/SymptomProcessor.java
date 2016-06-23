@@ -22,13 +22,14 @@ public class SymptomProcessor {
 
     /**
      * public constructor.
-     *
-     * @param symptoms the given symptoms as string
      */
     public SymptomProcessor() {
-
-//        processSymptoms(symptoms);
     }
+
+    /**
+     * start function.
+     * @param symptoms the symptoms given by the user.
+     */
     public void startProcessing(final String symptoms) {
         processSymptoms(symptoms);
     }
@@ -37,6 +38,9 @@ public class SymptomProcessor {
      * the retrieved diseases based on the given symptoms.
      */
     private String diseases;
+    /**
+     * List of disease data.
+     */
     private List<List> diseaseData = new ArrayList();
 
     /**
@@ -76,7 +80,7 @@ public class SymptomProcessor {
     }
 
     /**
-     * diseasegetter.
+     * disease getter.
      *
      * @return the diseases
      */
@@ -84,11 +88,19 @@ public class SymptomProcessor {
         return this.diseases;
     }
 
+    /**
+     * diseasedata getter.
+     * @return the disease data
+     */
     public List getDiseaseData() {
         return this.diseaseData;
     }
 
-    public void setDiseaseData(List diseaseDataII) {
+    /**
+     * disease data setter.
+     * @param diseaseDataII the disease data.
+     */
+    public void setDiseaseData(final List diseaseDataII) {
         this.diseaseData.add(diseaseDataII);
     }
 
