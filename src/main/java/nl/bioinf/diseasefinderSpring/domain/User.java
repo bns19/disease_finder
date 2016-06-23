@@ -71,6 +71,9 @@ public class User {
      */
     private String role = "USER";
 
+    /**
+     * the date and time this user was registered.
+     */
     private LocalDateTime createdAt;
 
     /**
@@ -80,8 +83,19 @@ public class User {
         super();
     }
 
-
-    public User(String username, String password, String confirmPassword, String email, String authority, String enabled, String role, LocalDateTime createdAt) {
+    /**
+     * this functioncreates the user.
+     * @param username username
+     * @param password passsword
+     * @param confirmPassword password confirmation
+     * @param email email
+     * @param authority authority
+     * @param enabled isEnabled
+     * @param role role
+     * @param createdAt date of creation
+     */
+    public User(final String username, final String password, final String confirmPassword, final String email,
+                final String authority, final String enabled, final String role, final LocalDateTime createdAt) {
         this.username = username;
         this.password = password;
         this.confirmPassword = confirmPassword;
@@ -102,9 +116,9 @@ public class User {
 
     /**
      * Set the user id.
-     * @param id
+     * @param id id
      */
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -118,9 +132,9 @@ public class User {
 
     /**
      * Set username.
-     * @param username
+     * @param username username
      */
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
@@ -135,21 +149,25 @@ public class User {
 
     /**
      * Set the user password.
-     * @param password
+     * @param password password
      */
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
+    /**
+     * get the confirmed pasdsword.
+     * @return confirmed password
+     */
     public String getConfirmPassword() {
         return confirmPassword;
     }
 
     /**
      * Set the user confirmed password.
-     * @param confirmPassword
+     * @param confirmPassword confirmed password
      */
-    public void setConfirmPassword(String confirmPassword) {
+    public void setConfirmPassword(final String confirmPassword) {
         this.confirmPassword = confirmPassword;
         checkPassword(); //check
     }
@@ -164,9 +182,9 @@ public class User {
 
     /**
      * Set user email.
-     * @param email
+     * @param email email
      */
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -180,14 +198,14 @@ public class User {
 
     /**
      * Set user authority.
-     * @param authority
+     * @param authority authority
      */
-    public void setAuthority(String authority) {
+    public void setAuthority(final String authority) {
         this.authority = authority;
     }
 
     /**
-     * Get if the user account is enabled or not (True or False)
+     * Get if the user account is enabled or not (True or False).
      * @return enabled.
      */
     public boolean getEnabled() {
@@ -196,9 +214,9 @@ public class User {
 
     /**
      * Set if the account is enabled.
-     * @param enabled
+     * @param enabled isEnabled
      */
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(final boolean enabled) {
 
         this.enabled = true;
     }
@@ -213,9 +231,9 @@ public class User {
 
     /**
      * Set the creation date.
-     * @param createdAt
+     * @param createdAt date and time of creation
      */
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(final LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -240,9 +258,9 @@ public class User {
 
     /**
      * Set the role of the user.
-     * @param role
+     * @param role role
      */
-    public void setRole(String role) {
+    public void setRole(final String role) {
         this.role = role;
     }
 }

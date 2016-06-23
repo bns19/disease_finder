@@ -19,12 +19,12 @@ import java.time.LocalDate;
 public class LocalDatePersistanceConverter implements AttributeConverter<LocalDate, Date> {
 
     @Override
-    public Date convertToDatabaseColumn(LocalDate entityValue) {
+    public Date convertToDatabaseColumn(final LocalDate entityValue) {
         return Date.valueOf(entityValue);
     }
 
     @Override
-    public LocalDate convertToEntityAttribute(Date databaseValue) {
+    public LocalDate convertToEntityAttribute(final Date databaseValue) {
         return databaseValue.toLocalDate();
     }
 }

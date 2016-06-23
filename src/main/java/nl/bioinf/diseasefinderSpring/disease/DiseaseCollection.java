@@ -182,10 +182,13 @@ public class DiseaseCollection {
      *
      * @param omimNumber is the OMIM number of the disease a person wants
      *                   information of.
+     * @param algorithm the algorithm the user provided
+     * @throws IOException IOException in the case the OMIM-database can't be opened.
      * @return info the information about the disease.
-     * @author mkslofstra
+     * @author mkslofstra and bnsikkema
      */
-    public final DiseaseInformation getInfoOfDisease(final String omimNumber, final String algorithm) throws IOException{
+    public final DiseaseInformation getInfoOfDisease(final String omimNumber, final String algorithm)
+            throws IOException {
         //String info = this.diseaseCollection.get(omimNumber).toString();
         DiseaseInformation dinf = new DiseaseInformation();
 //       if (algorithm.equals("j")) {

@@ -330,7 +330,7 @@ function loadDisease() {
             $("#" + id).append(diseaseInformationSummary);
 
             $("#" + id).append("<br/><button class = \"saveDisease btn btn-default\" data-disease_id = \"" + id + "\">Save this disease as .txt</button>");
-        }
+            $("#" + id).append("<br/><button class = \"saveDiseaseAsPdf btn btn-default\" data-disease_id = \"" + id + "\">Save this disease as .pdf</button>");        }
 
 
         $(".closeDiseaseTab").click(function () {
@@ -360,6 +360,14 @@ function loadDisease() {
             localStorage.setItem("disease2save", $(this).data("disease_id"));
             saveDisease();
         });
+
+        $(".saveDiseaseAsPdf").click(function () {
+            localStorage.setItem("disease2save", $(this).data("disease_id"));
+
+
+            saveDiseaseAsPdf();
+        });
+
         //go to the disease tab
         $('.nav-tabs a[href="#' + id + '"]').tab('show');
         //set the bootstrap styling on the tooltip
@@ -403,45 +411,32 @@ function saveResults() {
 
 //under construction
 function saveResultsAsPdf() {
-    var results = $("#resultTab").text();
-    console.log(results)
-    //for nice formating of the results
-    var pattern = /\d[H|M|S]/g;
-    var last = 0;
-    var myArray;
-    var print = "";
-    while ((myArray = pattern.exec(results)) !== null) {
-        print += results.substring(last, pattern.lastIndex - 1);
-        print += ";";
-        var last = pattern.lastIndex - 1;
+    var results = $("#resultTab").html();
 
+    var omimMatch = /Omim/.exec(results);
+    results = [results.slice(0, omimMatch.index), "</br>", results.slice(omimMatch.index)].join('');
+
+    var omimNumberMatch = /\d{3,10}/.exec(results);
+
+    var omimNumber = omimNumberMatch.join();
+    results = results.replace(omimNumber,omimNumber+"</br>")
+    var garbagePattern2 = /Save this/.exec(results)
+    results = results.substring(0,garbagePattern2.index)
+
+    while(stickyWords = /[a-z][A-Z]/.exec(results)) {
+        results = results.replace(stickyWords,stickyWords.join()[0] + "</br>" + stickyWords.join()[1])
     }
-    //add last matches, without the save button
-    print += results.substring(last, results.length - 16);
-    //remove the semicolons in the title, this can cause problems in the csv format
-    var result = print.replace(/;/g, "");
-    //make a csv format table (labels are not needed)
-    result = result.replace(/\nOmimnumber: /g, ";");
-    result = result.replace(/Score: /g, ";");
-    result = result.replace(/Hits: /g, ";");
-    result = result.replace(/Matches: /g, ";");
-    console.log(result+ "      results")
+    while(stickyNumbers = /\d[A-Z]/.exec(results)) {
+        results = results.replace(stickyNumbers,stickyNumbers.join()[0] + "</br>" + stickyNumbers.join()[1])
+    }
+    var doc = new jsPDF();
 
 
+    doc.fromHTML((results), 15, 15, {
+        'width': 170
+    });
+        doc.save('search_results');
 
-
-    //console.log("pdf")
-    //var results = $("#resultTab").text();
-    //console.log(results)
-    //var doc = new jsPDF();
-    //var specialElementHandlers = {
-    //    '#editor': function (element, renderer) {
-    //        return true;
-    //    }}
-    //doc.fromHTML($('#resultTab').html(), 15, 15, {
-    //    'width': 170,
-    //    'elementHandlers': specialElementHandlers
-    //});
 };
 
 //by mkslofstra
@@ -475,4 +470,45 @@ function saveDisease() {
     saveAs(diseaseFile, localStorage.getItem("disease2save") + ".txt");
 
 }
+
+function saveDiseaseAsPdf() {
+    var disease = $("#" + localStorage.getItem("disease2save"));
+    var disease_info = disease.text();
+
+    var omimMatch = /Omim/.exec(disease_info);
+    disease_info = [disease_info.slice(0, omimMatch.index), "</br>", disease_info.slice(omimMatch.index)].join('');
+
+    var omimNumberMatch = /\d{3,10}/.exec(disease_info);
+
+    var omimNumber = omimNumberMatch.join();
+    disease_info = disease_info.replace(omimNumber,omimNumber+"</br>")
+
+
+    while(stickyWords = /[a-z][A-Z]/.exec(disease_info)) {
+        disease_info = disease_info.replace(stickyWords,stickyWords.join()[0] + "</br>" + stickyWords.join()[1])
+    }
+    while(disease_info.indexOf(";") > -1 ){
+        disease_info = disease_info.replace(";", "</br>")
+    }
+    disease_info = disease_info.replace(";", "</br>")
+    var garbagePattern = /Save this/.exec(disease_info)
+    disease_info = disease_info.substring(0,garbagePattern.index)
+
+
+    //while(spaces = /\s{2,}/.exec(disease_info)) {
+    //    disease_info = disease_info.replace(spaces, "</br>")
+    //}
+
+    var doc = new jsPDF('1','mm',[200, 900]);
+    doc.fromHTML((disease_info),  {
+        //'width': 170
+    });
+    doc.save('search_results');
+
+};
+
+
+
+
+
 

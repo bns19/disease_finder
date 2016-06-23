@@ -27,8 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class now contains the controller responsible for finding diseases based on (dummy) symptoms given by the user.
- * The functionality is successfully ported.
+ * This class now contains the controller responsible for finding diseases based on  symptoms given by the user.
+ * It also contains the disease information retrieving controller.
  *
  */
 @Controller
@@ -37,6 +37,11 @@ public class SymptomProcessingController {
     UserRepository userRepository;
     SearchHistoryRepository searchHistoryRepository;
 
+    /**
+     *
+     * @param userRepository
+     * @param searchHistoryRepository
+     */
     @Autowired
     public SymptomProcessingController(UserRepository userRepository, SearchHistoryRepository searchHistoryRepository) {
         this.userRepository = userRepository;
@@ -56,7 +61,12 @@ public class SymptomProcessingController {
      * This requestmapping method takes the symptom(s) provided by the user and uses them to find the corresponding
      * disease(s).
      * @param symptoms the given symptoms (in plain text)
-     * @return The disease(s) in HTML-format (for now).
+     * @param shortSymptoms the leafsymptoms
+     * @param algorithm the user specified algorithm
+     * @param runtime the user specified runtime
+     * @param queryType the type of query that has to be used (short symptoms or symptoms)
+     * @return The list of founded diseases
+     * @Throws Exception an exception for the case the database has not been implemented well
      */
     @RequestMapping(value = "/sendSymptoms",  method = RequestMethod.POST)
     @ResponseBody
@@ -68,7 +78,9 @@ public class SymptomProcessingController {
             SymptomsCalculationInformation symptomsCalculationInformation =
                     new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
             symptomsCalculationInformation.calculateSymptomsSearch();
-        } catch(Exception e) {}
+        } catch(Exception e) {
+            System.out.println("Database was not implemented");
+        }
         String symptomsToSearch;
         if (queryType.equals("long")) {
             symptomsToSearch = symptoms;
@@ -81,10 +93,8 @@ public class SymptomProcessingController {
             SearchSystem ss = new SearchSystem(symptomsToSearch, runtime);
             Findtrait diseases = ss.getResults();
             System.out.println(diseases.getFinalres().keySet()+ "jeunards keyset");
-            int count=0;
             for (List<String> i : diseases.getFinalres().keySet()) {
                 List<String> bridgeList = new ArrayList();
-                count++;
                 for (String contents : i) {
                     bridgeList.add(contents);
                 }
@@ -94,7 +104,6 @@ public class SymptomProcessingController {
                 System.out.println("Disorder    " + i.get(1));
                 System.out.println("id    " + i.get(0));
                 System.out.println("match    " + diseases.getFinalres().get(i) + "\n");
-                System.out.println(count);
             }
             returnableDiseaseList = diseasesList;
 //            System.out.println(returnableDiseaseList);

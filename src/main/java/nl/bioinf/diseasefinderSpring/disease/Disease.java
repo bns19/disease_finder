@@ -13,11 +13,11 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Disease collects all the information about one disease which is found. The
- * toString method and summary method of this class print html, so the servlets
+ * Disease collects all the information about one disease which is found.
+ * The toString method and summary method of this class print html, so the servlets
  * can use this output.
  *
- * @author mkslofstra
+ * @author mkslofstra and bnsikkema
  */
 public class Disease implements Comparable {
 
@@ -54,6 +54,9 @@ public class Disease implements Comparable {
 
     }
 
+    /**
+     *
+     */
     private DiseaseInformation diseaseInformation = new DiseaseInformation();
 
     /**
@@ -87,8 +90,13 @@ public class Disease implements Comparable {
      * @return hits the number of hits a disease has.
      */
 
-    public final DiseaseInformation getDiseaseInformation() { return this.diseaseInformation; }
+    public final DiseaseInformation getDiseaseInformation() {
+        return this.diseaseInformation; }
 
+    /**
+     * getHits.
+     * @return hits the hits of the disease
+     */
     public final Integer getHits() {
         return hits;
     }
@@ -111,7 +119,9 @@ public class Disease implements Comparable {
         return score;
     }
 
-
+    /**
+     * This function collects most of the information about the disease.
+     */
     public void createDiseaseInformation() {
 
         StringBuilder sb = new StringBuilder();
@@ -153,7 +163,6 @@ public class Disease implements Comparable {
                 diseaseInfo = diseaseInfo.replaceAll("(?i)" + match.toLowerCase(),
                         "<span class=\"highlight\">" + match + "</span>");
             }
-            //      this.diseaseInformation.setMatches(this.matches);
             this.diseaseInformation.setMatches(convertMatchesToString());
         }
         this.diseaseInformation.setInformation(diseaseInfo);
@@ -161,9 +170,13 @@ public class Disease implements Comparable {
 
     }
 
+    /**
+     * This function turns the list of matches into a string of matches.
+     * @return string of matches
+     */
     private String convertMatchesToString() {
         StringBuilder sb1 = new StringBuilder();
-        for (String match : this.matches ) {
+        for (String match : this.matches) {
             sb1.append(match);
             if (this.matches.size() > 1 && this.matches.indexOf(match) != this.matches.size()) {
                 sb1.append(",");
@@ -341,7 +354,7 @@ public class Disease implements Comparable {
      * @return if the comparison is the same more or less.
      */
     @Override
-    public final int compareTo(Object otherDisease) {
+    public final int compareTo(final Object otherDisease) {
         Disease disease = (Disease) otherDisease;
         int comparison = Double.compare(disease.getScore(), this.score);
         return comparison;

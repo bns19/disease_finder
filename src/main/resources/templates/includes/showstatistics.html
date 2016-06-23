@@ -8,8 +8,8 @@
             <caption><p>Global statistics</p></caption>
             <tr>
                 <th>Number of total searches</th>
-                <th>number of searches by you</th>
-                <th>percentage of searches by you</th>
+                <th>Number of searches by you</th>
+                <th>Percentage of searches by you</th>
             </tr>
 
             <tr th:if="${statistics}">
@@ -36,11 +36,11 @@
 
 
             <tr>
-                <th>number of times searched</th>
-                <th>percentage of total searches</th>
+                <th>Number of times searched</th>
+                <th>Percentage of total searches</th>
                 <!--if logged in, show statistics beneath-->
-                <th>number of times searched by you</th>
-                <th>percentage of your search</th>
+                <th>Number of times searched by you</th>
+                <th>Percentage of your search</th>
             </tr>
             <tr th:if="${statistics}">
                 <td th:text="${statistics.getTotalQuerySearches()}"></td>

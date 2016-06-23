@@ -2,6 +2,7 @@
  * Project: Disease Finder
  * Theme 11/12
  * Created by bnsikkema en Henri du Pon on 18-4-16.
+ * This class regulates the secondary tree.
  */
 package nl.bioinf.diseasefinderSpring.controllers;
 
@@ -17,17 +18,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Controller annotation.
+ */
 @Controller
+
 public class D3TreeController {
 
     /**
-     * @param autoCompleteResult
-     * @return
-     * @throws IOException
+     * @param autoCompleteResult results.
+     * @return tTPTP, pointer of the nodes
+     * @throws IOException IOexception
      */
     @RequestMapping(value = "termsToTree", method = RequestMethod.GET)
     @ResponseBody
-    public JSONArray processRequest(String autoCompleteResult) throws IOException {
+    public JSONArray processRequest(final String autoCompleteResult) throws IOException {
 
         HashMap collection = HPOFileLoader.LoadHPOFile();
         String autoComp = autoCompleteResult.toLowerCase();
@@ -40,11 +45,11 @@ public class D3TreeController {
      * @param id of the selected node in the primary tree.
      * @param icon of the selected node in the primary tree.
      * @return list of children of the node.
-     * @throws IOException
+     * @throws IOException IOexception
      */
     @RequestMapping(value = "treeBuilder", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String buildBaseTree(String id, String icon) throws IOException {
+    public String buildBaseTree(final String id, final String icon) throws IOException {
 
         HashMap collection = HPOFileLoader.LoadHPOFile();
         String requestedNodeChildren = id;
@@ -57,12 +62,12 @@ public class D3TreeController {
     /**
      * @param ids is a list to string of all the parent nodes of the selected node in the primary tree.
      * @return a list to Json-string of all the parents with id, parent, children, text/name.
-     * @throws IOException
-     * @throws JSONException
+     * @throws IOException IOException
+     * @throws JSONException JSONException
      */
     @RequestMapping(value = "parentTreeBuilder", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public String getParentInformation(String ids) throws IOException, JSONException {
+    public String getParentInformation(final String ids) throws IOException, JSONException {
 
         List<String> items = new LinkedList<String>(Arrays.asList(ids.split("\\s*,\\s*")));
         ArrayList<String> jsonChildrenList = new ArrayList<String>();
@@ -70,7 +75,7 @@ public class D3TreeController {
 
         for (String item : items) {
 
-            // remove the root (#)
+            /* remove the root (#)*/
             if (item.equals("#")) {
                 items.remove(item);
             } else {

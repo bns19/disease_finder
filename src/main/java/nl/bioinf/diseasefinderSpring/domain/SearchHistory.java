@@ -16,21 +16,39 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class SearchHistory {
 
+    /**
+     * ID annotation.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    /**
+     * oneToOne annotation.
+     */
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
+    /**
+     * not null annotation.
+     */
     @NotNull
-    @Type(type="text")
+    /**
+     * type annotation.
+     */
+    @Type(type = "text")
     private String query;
 
+    /**
+     * not null annotation.
+     */
     @NotNull
-    @Type(type="text")
+    @Type(type = "text")
     private String longQuery;
 
+    /**
+     * not null annotation.
+     */
     @NotNull
     private String createdAt;
     /**
@@ -39,7 +57,14 @@ public class SearchHistory {
     public SearchHistory() {
     }
 
-    public SearchHistory(User user, String query, String longQuery, String createdAt) {
+    /**
+     * public constructor.
+     * @param user user
+     * @param query query (leafs)
+     * @param longQuery longquery (leafs with parents)
+     * @param createdAt date and time of creation
+     */
+    public SearchHistory(final User user, final String query, final String longQuery, final String createdAt) {
         this.user = user;
         this.query = query;
         this.longQuery = longQuery;
@@ -55,9 +80,9 @@ public class SearchHistory {
 
     /**
      * Set id of user.
-     * @param id
+     * @param id the id
      */
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -70,21 +95,25 @@ public class SearchHistory {
 
     /**
      * Set user object.
-     * @param user
+     * @param user the user
      */
-    public void setUser(User user) {
+    public void setUser(final User user) {
         this.user = user;
     }
 
+    /**
+     *  getlongQuery.
+     * @return longQuery
+     */
     public String getLongQuery() {
         return longQuery;
     }
 
     /**
      * Set querys inputted by user.
-     * @param longQuery
+     * @param longQuery the longQuery
      */
-    public void setLongQuery(String longQuery) {
+    public void setLongQuery(final String longQuery) {
         this.longQuery = longQuery;
     }
 
@@ -97,9 +126,9 @@ public class SearchHistory {
 
     /**
      * Set short query inputted by user.
-     * @param query
+     * @param query the query
      */
-    public void setQuery(String query) {
+    public void setQuery(final String query) {
         this.query = query;
     }
 
@@ -112,9 +141,9 @@ public class SearchHistory {
 
     /**
      * Set creation date.
-     * @param createdAt
+     * @param createdAt data and time of creation
      */
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(final String createdAt) {
         this.createdAt = createdAt;
     }
 
