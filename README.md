@@ -23,10 +23,9 @@ If you have followed the first 7 steps successfully, you will only have to run t
    > 1. Press the following key combination in IntelliJ: ```control+shift+alt+s```.
    > 2. A pop up appears. Click on the little green plus sign in ```dependencies``` under ```modules``` and select ```JARs or directories```.
    > 3. Navigate to the folder ```Lib``` (this folder is delivered with this application directly under the main map) and select the following JARs
-   > ```Weka.Jar```,    ```Model.jar```,```mysql-connector-java-5.1.38-bin.jar``` and ```mysql-connector-java-5.1.35.jar```.
+   > ```Weka.Jar```,    ```Model.jar```,```mysql-connector-java-5.1.38-bin.jar``` and ```mysql-connector-java-5.1.35.jar```. and add add them by clicking on the ```apply``` button.
 
-You now have the application and all dependencies added.
-### now follow the following steps
+
 4. Download the files ```Disease.sql, Wek1.csv and Omimdata.csv``` (delivered within the download section of this repository) and place them all in the same directory  open a terminal in this same directory.
 
 5. Enter the following line in the command line: mysql -u "your username" -D "your database" -p --local-infile "yourDatabase"<Disease.sql 
