@@ -25,6 +25,7 @@ If you have followed the first 7 steps successfully, you will only have to run t
    > 3 Navigate to the folder ```Lib``` (this folder is delivered with this application directly under the main map) and select the following JARs
    > ```Weka.Jar```,   > ```Model.jar```,```mysql-connector-java-5.1.38-bin.jar``` and ```mysql-connector-java-5.1.35.jar```.
 4. Download the files ```Disease.sql, Wek1.csv and Omimdata.csv``` (delivered within the download section of this repository) and place them all in the same directory  open a terminal in this same directory.
+###
 5. Enter the following line in the commandline: mysql -u "your username" -D "your database" -p --local-infile "yourDatabase"<Disease.sql 
    for example: mysql -u john -D Johndatabase -p --local-infile Johndatabase<Disease.sql
 
