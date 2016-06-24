@@ -12,7 +12,7 @@ The requirements the user has to cope with to run the application
 4. The user needs to have IntelliJ installed.
 5. The user needs to have a Mysql account with a available database.
 
-How to run the application
+###How to run the application
 To run this application the following steps need to be followed. If you are running this new version of the application for the first time, then follow all steps.
 If you have followed the first 7 steps successfully, you will only have to run the last two steps for every new run.
 1. Install IntelliJ.
@@ -30,4 +30,4 @@ If you have followed the first 7 steps successfully, you will only have to run t
 8. Start the application by pressing right mousebutton on the ```Application.java``` file and selecting ```Run 'application'```.
 9. Open a browser and type: http://localhost:8086
 
-You have now successfully started the application. the next paragraph describes some possible options.
+You have now successfully started the application. 
