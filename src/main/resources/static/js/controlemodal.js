@@ -1,4 +1,8 @@
-
+/**
+ * Project: Disease Finder
+ * Theme 11/12
+ * Created by hjdupon
+ */
 function checkPasswords() {
     var password = document.forms["registerform"]["password"].value;
     var confirmPassword = document.forms["registerform"]["confirmPassword"].value;
@@ -20,14 +24,6 @@ function checkPasswords() {
 
 
 function process(userdata) {
-    //console.log(userdata)
-    //if (userdata == "False") {
-    //    booleanRegistered = false;
-    //}
-    //else {
-    //    alert("Username already in use");
-    //    booleanRegistered = true;
-    //}
 }
 
 

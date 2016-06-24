@@ -60,6 +60,7 @@ public class SymptomProcessor {
                     .getDiseaseCollection();
             Iterator it = hashMapOfDiseases.entrySet().iterator();
             while (it.hasNext()) {
+                /**/
                 List<Object> featuresOfCurrentDisease = new ArrayList();
                 Map.Entry pair = (Map.Entry) it.next();
                 Disease disease = (Disease) pair.getValue();

@@ -97,10 +97,8 @@ public class WebController extends WebMvcConfigurerAdapter {
                 userRepository.save(user);
             } catch(Exception e){
             }
-            //return "home";
             return "redirect:/";
         }
-//        return "home";
         return "redirect:/";
 
     }

@@ -173,7 +173,6 @@ public class DiseaseCollection {
         if (mimNumber != null && disease != null) {
             diseaseCollection.put(mimNumber, disease);
         }
-        // this is covered later
     }
 
     /**
@@ -189,25 +188,11 @@ public class DiseaseCollection {
      */
     public final DiseaseInformation getInfoOfDisease(final String omimNumber, final String algorithm)
             throws IOException {
-        //String info = this.diseaseCollection.get(omimNumber).toString();
         DiseaseInformation dinf = new DiseaseInformation();
-//       if (algorithm.equals("j")) {
-           Disease theDisease = this.getDiseaseContent(omimNumber);
-           theDisease.createDiseaseInformation();
-           DiseaseInformation diseaseInformation2 = theDisease.getDiseaseInformation();
-           dinf = diseaseInformation2;
-//       } else {
-//            this.diseaseCollection.get(omimNumber).createDiseaseInformation();
-//            DiseaseInformation diseaseInformation = this.diseaseCollection.get(omimNumber).getDiseaseInformation();
-//            dinf = diseaseInformation;
-//    }
+        Disease theDisease = this.getDiseaseContent(omimNumber);
+        theDisease.createDiseaseInformation();
+        DiseaseInformation diseaseInformation2 = theDisease.getDiseaseInformation();
+        dinf = diseaseInformation2;
         return dinf;
-//    public final String getInfoOfDisease(final String omimNumber) {
-//        //String info = this.diseaseCollection.get(omimNumber).toString();
-//      //  this.diseaseCollection.get(omimNumber).createDiseaseInformation();
-//        String diseaseInformation = this.diseaseCollection.get(omimNumber).toString();
-//
-//       // System.out.println(diseaseInformation.getTitle());
-//        return diseaseInformation;
     }
 }

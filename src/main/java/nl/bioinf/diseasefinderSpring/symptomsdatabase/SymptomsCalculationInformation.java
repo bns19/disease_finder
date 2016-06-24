@@ -17,7 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.text.DecimalFormat;
 
 /**
- * Is repsonsible for the caclculations that are given in the statistics tab in the application
+ * Is responsible for the caclculations that are given in the statistics tab in the application
  */
 public class SymptomsCalculationInformation {
 
