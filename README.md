@@ -32,11 +32,11 @@ If you have followed the first 7 steps successfully, you will only have to run t
 
 6. Navigate to the file ```database.properties``` under the directory ```properties``` in the project and replace the database credentials there with your own.
 7. Navigate to the file ```application.properties``` under the directory ```resources``` in the project and replace the database credentials there with your own.
-8. Start the application by pressing right mousebutton on the ```Application.java``` file and selecting ```Run 'application'```.
+8. Start the application by pressing right mouse button on the ```Application.java``` file and selecting ```Run 'application'```.
 9. Open a browser and type: http://localhost:8086
 
 You have now successfully started the application. click on the tab: ```how to``` in the application for basic information about how to use the application.
 
 
 Important nodes. Due to a problem deep within the J-algorithm code. It is not possible to use this algorithm with databases outside of the mysql network. 
-While the rest of the application works fine everywhere this algorithm is dependent on the mysql network
+While the rest of the application works fine on all locations that have the right starting conditions, this algorithm is dependent on the mysql network.
