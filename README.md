@@ -5,7 +5,7 @@
 2. How to start the application.
 3. A small amount of information about the current options of the application. 
 
-The requirements the user has to cope with to run the application
+###The requirements the user has to cope with to run the application
 1. The user need to have access to a working Internet connection. 
 2. The user needs to have access to a valid OMIM-key (provided by the application valid until a few weeks after activation and free to request again). 
 3. The user needs to have access to a browser. 
