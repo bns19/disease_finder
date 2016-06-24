@@ -15,7 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.time.LocalDateTime;
 
 /**
- * This function ss responsible for saving the searched symptoms in the MySQL database.
+ * This class is responsible for saving searched symptoms in the database. Called in the SymptomProcessingController.
  */
 public class SaveSearchedSymptoms {
     /**

@@ -36,12 +36,21 @@ import java.util.List;
 @Controller
 public class WebController extends WebMvcConfigurerAdapter {
 
+     /**
+      * the search history database.
+      */
     @Autowired
     SearchHistoryRepository searchHistoryRepository;
 
+     /**
+      * the search history database.
+      */
     @Autowired
     UserRepository userRepository;
 
+     /**
+      * the jdbc template.
+      */
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -52,21 +61,27 @@ public class WebController extends WebMvcConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
+     /**
+      * on page load, the history and statistics models are updated by extracting data from database and updating model.
+      * @param model the Thymeleaf model
+      * @param user the username
+      * @return homepage
+      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String showForm(Model model, final User user) {
-        //session.setAttribute("mySessionAttribute", "someValue");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
         SymptomsCalculationInformation symptomsCalculationInformation =
                 new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
         try {
+            /*calculate statistics*/
             symptomsCalculationInformation.calculateSymptomsSearch();
-
+            /*place updated information on model.*/
             model.addAttribute("statistics", symptomsCalculationInformation.getStatisticalInformation());
         } catch (Exception e) {
         }
+        /*if user is logged in the search history of his account is updated and placed on the model*/
         if (!username.equals("anonymousUser")) {
-
             LoadSearchedSymptoms loadHistory = new LoadSearchedSymptoms(userRepository, searchHistoryRepository);
             List<SearchHistory> searchHistory = loadHistory.loadSearchedSymptoms();
             model.addAttribute("history", searchHistory);
@@ -88,11 +103,12 @@ public class WebController extends WebMvcConfigurerAdapter {
         }
         if (!bindingResult.hasErrors()) {
             String encrypted = EncryptPassword.encryptPassword(user.getPassword());
-
+            /*password is encrypted*/
             user.setPassword(encrypted);
             user.setConfirmPassword(encrypted);
             user.setEnabled(true);
             user.setCreatedAt(LocalDateTime.now());
+            /*if there are no errors. The user gets the standardvalues plus date and time of creation*/
             try {
                 userRepository.save(user);
             } catch(Exception e){
@@ -106,15 +122,12 @@ public class WebController extends WebMvcConfigurerAdapter {
      /**
       * @param username of the user at registration form.
       * @return if the user already exists or not in String (True or False)
-      * @throws IOException
+      * @throws IOException IOexception
       */
     @RequestMapping(value = "getRegisteredUsers", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public String RegisteredUser(String username) throws IOException {
-        System.out.println(username);
-
-        System.out.println(userRepository.findByUsername(username));
-
+        /*checks if username already exists*/
         if (userRepository.findByUsername(username) == null) {
             return "False";
         } else {

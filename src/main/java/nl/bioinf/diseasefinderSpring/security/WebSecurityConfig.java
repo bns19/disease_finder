@@ -40,16 +40,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     /**
-     * Provides a utility class for easy DataSource access, a PlatformTransactionManager for a single DataSource,
-     * and various simple DataSource implementations.
+     * Provides a utility class for easy DataSource access, a PlatformTransactionManager for a single DataSource.
+     * Plus also various simple DataSource implementations.
      */
     @Autowired
     DataSource dataSource;
 
     /**
+     * authorization of web pages.
      * @param http is similar to Spring Security's XML element in the namespace configuration.
      *             It allows configuring web based security for specific http requests.
-     * @throws Exception
+     * @throws Exception in the case of a spring error
      */
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
@@ -69,8 +70,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     *
-     * @param auth
+     * checks if user credentials are right.
+     * @param auth authentication
      * @throws Exception
      */
     @Autowired
@@ -86,7 +87,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * passwordEncoder encodes the password given by the user.
-     *
      * @return encoded password
      */
     @Bean

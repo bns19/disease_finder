@@ -74,7 +74,7 @@ public class SymptomProcessingController {
         try {
             SaveSearchedSymptoms saveSymptoms = new SaveSearchedSymptoms(userRepository, searchHistoryRepository);
             saveSymptoms.saveSymptoms(shortSymptoms, symptoms);
-
+            /*symptoms saved in database*/
             SymptomsCalculationInformation symptomsCalculationInformation =
                     new SymptomsCalculationInformation(userRepository, searchHistoryRepository);
             symptomsCalculationInformation.calculateSymptomsSearch();
@@ -83,32 +83,34 @@ public class SymptomProcessingController {
         }
         String symptomsToSearch;
         if (queryType.equals("long")) {
+            /*query type that is selected is checked here*/
             symptomsToSearch = symptoms;
         } else {
             symptomsToSearch = shortSymptoms;
         }
         List returnableDiseaseList;
         if (algorithm.equals("j")) {
+            /*if J-algorithm is selected, this will happen*/
             List<List> diseasesList = new ArrayList();
             SearchSystem ss = new SearchSystem(symptomsToSearch, runtime);
             Findtrait diseases = ss.getResults();
-            System.out.println(diseases.getFinalres().keySet()+ "jeunards keyset");
             for (List<String> i : diseases.getFinalres().keySet()) {
+                /*the matches of the J-algorithm are placed in a List*/
                 List<String> bridgeList = new ArrayList();
                 for (String contents : i) {
+                    /*to prevent current modification exceptions this bridgelist is used*/
                     bridgeList.add(contents);
                 }
-
                 bridgeList.add(diseases.getFinalres().get(i));
                 diseasesList.add(bridgeList);
+                /*diseases and matches added to diseases*/
                 System.out.println("Disorder    " + i.get(1));
                 System.out.println("id    " + i.get(0));
                 System.out.println("match    " + diseases.getFinalres().get(i) + "\n");
             }
             returnableDiseaseList = diseasesList;
-//            System.out.println(returnableDiseaseList);
-
         } else {
+            /*if AM-algorithm is selected, this will happen*/
             SymptomProcessor sp = new SymptomProcessor();
             sp.startProcessing(symptomsToSearch);
             returnableDiseaseList =  sp.getDiseaseData();
@@ -118,7 +120,7 @@ public class SymptomProcessingController {
 
     /**
      * loadDisease.
-     * This requestmapping method loads the diseaseinformation of the disease that the user selected.
+     * This requestmapping method loads the disease information of the disease that the user selected.
      * @param omimNumber the omimnumber of the disease.
      * @param symptoms the symptoms of the disease.
      * @return The information of the disease in HTML-format.
@@ -131,6 +133,7 @@ public class SymptomProcessingController {
             String[] symptomSet = symptoms.split(",");
             DiseaseCollection diseases = new DiseaseCollection(symptomSet);
             DiseaseInformation information = diseases.getInfoOfDisease(omimNumber, algorithm);
+            /*disease information is extracted and returned*/
             return information;
     }
 }

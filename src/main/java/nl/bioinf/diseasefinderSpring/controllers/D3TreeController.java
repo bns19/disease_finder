@@ -68,20 +68,16 @@ public class D3TreeController {
     @RequestMapping(value = "parentTreeBuilder", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
     public String getParentInformation(final String ids) throws IOException, JSONException {
-
         List<String> items = new LinkedList<String>(Arrays.asList(ids.split("\\s*,\\s*")));
         ArrayList<String> jsonChildrenList = new ArrayList<String>();
         String jsonChildren = "";
-
         for (String item : items) {
-
             /* remove the root (#)*/
             if (item.equals("#")) {
                 items.remove(item);
             } else {
                 HashMap collection = HPOFileLoader.LoadHPOFile();
                 ParentInformation parentInf = new ParentInformation();
-
                 jsonChildren = parentInf.getParentInformation(item, collection);
                 jsonChildrenList.add(jsonChildren);
             }

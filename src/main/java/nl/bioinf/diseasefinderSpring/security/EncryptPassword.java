@@ -30,7 +30,6 @@ public final class EncryptPassword {
         } else {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String hashedPassword = passwordEncoder.encode(password);
-
             return hashedPassword;
         }
     }

@@ -26,19 +26,18 @@ public class SearchSystem {
      */
      public SearchSystem(final String symptoms, final int runtime) throws Exception {
         Findtrait bb = new Findtrait();
+         /*if cutoff value is given (not 0), apply it*/
          if (runtime > 0) {
              bb.setCutoffTime(runtime);
          }
-         System.out.println("eentestofhijhierkomt");
          bb.setDiseases(symptoms);
-         System.out.println("test2222");
-         System.out.println(bb.getFinalres() + "results");
+
          this.results = bb;
 
     }
 
     /**
-     * getResults.
+     * the getter of the results.
      * @return results the findtrait object containing the results.
      */
     public Findtrait getResults() {

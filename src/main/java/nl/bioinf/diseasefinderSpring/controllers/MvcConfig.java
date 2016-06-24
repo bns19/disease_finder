@@ -17,10 +17,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     /**
+     * map view controller.
      * Map a view controller to the given URL path (or pattern) in order to render a response with a pre-configured
      * status code and view.
      *
-     * @param registry
+     * @param registry regstry
      * @ViewControllerRegistry Assists with the registration of simple automated controllers pre-configured with status
      * code and/or a view.
      */

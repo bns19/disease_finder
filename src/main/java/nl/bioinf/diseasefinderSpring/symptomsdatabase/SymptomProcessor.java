@@ -50,9 +50,7 @@ public class SymptomProcessor {
      */
     private void processSymptoms(final String symptoms) {
         StringBuilder sb = new StringBuilder();
-
         String[] symptomsList = symptoms.split(",");
-
         try {
             DiseaseCollection diseases = new DiseaseCollection(symptomsList);
             ScoreCalculator scoreCalculator = new ScoreCalculator(diseases);
@@ -60,7 +58,8 @@ public class SymptomProcessor {
                     .getDiseaseCollection();
             Iterator it = hashMapOfDiseases.entrySet().iterator();
             while (it.hasNext()) {
-                /**/
+                /*loops through founded diseases and extracts their information followed by the adding of these features
+                * to an object list*/
                 List<Object> featuresOfCurrentDisease = new ArrayList();
                 Map.Entry pair = (Map.Entry) it.next();
                 Disease disease = (Disease) pair.getValue();
@@ -69,7 +68,6 @@ public class SymptomProcessor {
                 featuresOfCurrentDisease.add(disease.getMatches());
                 featuresOfCurrentDisease.add(disease.getHits());
                 featuresOfCurrentDisease.add(disease.getScore());
-
                 this.diseaseData.add(featuresOfCurrentDisease);
             }
         } catch (JSONException e) {
@@ -81,7 +79,7 @@ public class SymptomProcessor {
     }
 
     /**
-     * disease getter.
+     * getter of the diseases.
      *
      * @return the diseases
      */
@@ -90,7 +88,7 @@ public class SymptomProcessor {
     }
 
     /**
-     * diseasedata getter.
+     * getter of disease data.
      * @return the disease data
      */
     public List getDiseaseData() {
@@ -98,7 +96,7 @@ public class SymptomProcessor {
     }
 
     /**
-     * disease data setter.
+     * setter of disease data.
      * @param diseaseDataII the disease data.
      */
     public void setDiseaseData(final List diseaseDataII) {
