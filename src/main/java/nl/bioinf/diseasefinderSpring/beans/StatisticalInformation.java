@@ -1,7 +1,7 @@
 package nl.bioinf.diseasefinderSpring.beans;
 
 /**
- * Created by bnsikkema on 19-5-16.
+ * Created by Bas Sikkema on 19-5-16.
  * This bean class contains all the statistical information calculated.
  */
 public class StatisticalInformation {

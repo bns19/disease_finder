@@ -1,7 +1,7 @@
 /**
  * Project: Disease Finder
  * Theme 11/12
- * Created by bnsikkema on 8-4-16.
+ * Created by Bas Sikkema on 8-4-16.
  * Part of code created by mslofstra
  */
 package nl.bioinf.diseasefinderSpring.symptomsdatabase;

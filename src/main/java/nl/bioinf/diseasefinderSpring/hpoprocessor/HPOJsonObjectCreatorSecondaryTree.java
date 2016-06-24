@@ -2,6 +2,7 @@
  * Project: Disease Finder
  * Theme 11/12
  * Created at 15-6-2016
+ * Henri du Pon
  */
 package nl.bioinf.diseasefinderSpring.hpoprocessor;
 

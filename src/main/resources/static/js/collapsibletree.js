@@ -1,15 +1,17 @@
 /**
  * Project: Disease Finder
  * Theme 11/12
- * Created by hjdupon
+ * Created by Henri du Pon
  */
 //Created the secondary tree after it a node is selected in get Symptoms
 function createSecondaryTree(selected, parents) {
+
     // Clear the subtree that is currently shown on the html page
     $("#subtree").empty();
 
     // Get the information of all the parent nodes
     getNodeInformation(selected)
+
     // Create the tree structure in a flat dictionary
     function createTree(arr) {
         var tree = [],

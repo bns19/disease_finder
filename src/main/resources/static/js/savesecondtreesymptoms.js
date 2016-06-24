@@ -1,7 +1,7 @@
 /**
  * Project: Disease Finder
  * Theme 11/12
- * Created by hjdupon
+ * Created by Henri du Pon
  */
 function savesecondtreesymptoms() {
     var selectedTreeNode = document.getElementById("selectedTreeNode").innerHTML;

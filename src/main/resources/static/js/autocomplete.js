@@ -2,7 +2,7 @@
  * Project: Disease Finder
  * Theme 11/12
  * Created by mkslofstra & aroeters
- * Adjusted by bnsikkema & hjdupon
+ * Adjusted by Bas Sikkema & Henri du Pon
  */
 $(document).ready(initialize);
 
