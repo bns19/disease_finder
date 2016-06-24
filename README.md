@@ -17,7 +17,7 @@ To run this application the following steps need to be followed. If you are runn
 If you have followed the first 7 steps successfully, you will only have to run the last two steps of the second enumeration of steps every new run.
 
 
-### follow the following steps
+### follow the following enumeration of steps
 1. Install IntelliJ.
 2. Clone this repository to IntelliJ.
 3. Add the required dependencies by following the following steps
@@ -29,9 +29,9 @@ If you have followed the first 7 steps successfully, you will only have to run t
 
 You now have the application and all dependencies added.
 ###Now follow the next enumeration of steps.
-4. Download the files ```Disease.sql, Wek1.csv and Omimdata.csv``` (delivered within the download section of this repository) and place them all in the same directory  open a terminal in this same directory.
+4. Download the files ```Disease.sql, Wek1.csv and Omimdata.csv``` (delivered within the download section of this repository) and place them all in the same directory and  open a terminal in this same directory.
 
-5. Enter the following line in the command line: mysql -u "your username" -D "your database" -p --local-infile "yourDatabase"<Disease.sql 
+5. Enter the following line in the command line of the opened terminal: mysql -u "your username" -D "your database" -p --local-infile "yourDatabase"<Disease.sql 
    for example: mysql -u john -D Johndatabase -p --local-infile Johndatabase<Disease.sql
 
 6. Navigate to the file ```database.properties``` under the directory ```properties```  in the project and replace the database credentials there with your own.(Due to some problems there still are some more database.properties files in the application. These can be ignored since they have no function, only the one in the ```properties``` file counts)
