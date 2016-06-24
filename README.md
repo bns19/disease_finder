@@ -42,5 +42,5 @@ You now have the application and all dependencies added.
 You have now successfully started the application, and added your personal database information. click on the tab: ```how to``` in the application for basic information about how to use the application.
 
 
-Important nodes. Due to a problem deep within the J-algorithm code. It is not possible to use this algorithm with databases outside of the mysql network. 
+Important node: Due to a problem deep within the J-algorithm code. It is not possible to use this algorithm with databases outside of the mysql network. 
 While the rest of the application works fine on all locations that have the right starting conditions, this algorithm is dependent on the mysql network.
