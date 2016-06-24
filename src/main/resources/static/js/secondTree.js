@@ -1,7 +1,7 @@
 /**
  * Project: Disease Finder
  * Theme 11/12
- * Created by hjdupon
+ * Created by Henri du Pon
  */
 //**************  Generate the tree diagram	 *****************
 function executeCreateTree(treeData) {

@@ -1,7 +1,7 @@
 /**
  * Project: Disease Finder
  * Theme 11/12
- * Created by bnsikkema en Henri du Pon on 18-4-16.
+ * Created by Bas Sikkema en Henri du Pon on 18-4-16.
  * This class regulates the secondary tree.
  */
 package nl.bioinf.diseasefinderSpring.controllers;

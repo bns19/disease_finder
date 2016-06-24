@@ -1,7 +1,7 @@
 /**
  * Project: Disease Finder
  * Theme 11/12
- * Created by hjdupon on 24-2-16.
+ * Created by Bas Sikkema on 24-2-16.
  */
 package nl.bioinf.diseasefinderSpring.controllers;
 

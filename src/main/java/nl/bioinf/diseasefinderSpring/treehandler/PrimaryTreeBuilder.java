@@ -1,7 +1,7 @@
 /**
  * Project: Disease Finder
  * Theme 11/12
- * Created by bas on 7-5-16.
+ * Created by Bas Sikkema on 7-5-16.
  */
 package nl.bioinf.diseasefinderSpring.treehandler;
 

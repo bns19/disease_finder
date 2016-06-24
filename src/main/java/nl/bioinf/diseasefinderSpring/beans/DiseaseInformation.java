@@ -1,8 +1,8 @@
 package nl.bioinf.diseasefinderSpring.beans;
 
 /**
- * Created by bnsikkema on 2-6-16.
- * This bean class contains all information regaring the disease
+ * Created by Bas Sikkema on 2-6-16.
+ * This bean class contains all information regarding the disease
  */
 public class DiseaseInformation {
     /**

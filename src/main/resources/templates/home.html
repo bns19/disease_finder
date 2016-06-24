@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="includes/header :: head">
     <title>PheDiMap</title>
 </head>
@@ -17,7 +16,6 @@
         <li><a href="#howto" data-toggle="modal" data-target=".bs-modal-sm-howTo">How to </a></li>
         <li><a href="#singnin" data-toggle="modal" data-target=".bs-modal-sm-signIn">Sign in </a></li>
         <li><a href="#signup" data-toggle="modal" data-target=".bs-modal-sm-signup">Register </a></li>
-        <!--<li><a th:action="@{/logout}" method="post"><input type="submit" value="Sign Out" /></a></li>-->
         <li><form th:action="@{/logout}" method="post"><input type="submit" id="signout" value="Sign Out"/></form></li>
     </ul>
 </div>
