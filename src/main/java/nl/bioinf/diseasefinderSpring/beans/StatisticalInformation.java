@@ -130,30 +130,58 @@ public class StatisticalInformation {
         return percentageSearchesUser;
     }
 
+    /**
+     * Set the percentage number of the searches the user searched for.
+     * @param percentageSearchesUser from the user.
+     */
     public void setPercentageSearchesUser(final double percentageSearchesUser) {
         this.percentageSearchesUser = percentageSearchesUser;
     }
 
-    public double getPercentageQuerySearchesUser() {
+    /**
+     * Get the percentage of queries from the user.
+     * @return percentageQuerySearchesUser.
+     */
+    public double getPercentageQuerzySearchesUser() {
         return percentageQuerySearchesUser;
     }
 
+    /**
+     *Set the percentage number of the queruies the user searched for.
+     * @param percentageQuerySearchesUser from the user.
+     */
     public void setPercentageQuerySearchesUser(final double percentageQuerySearchesUser) {
         this.percentageQuerySearchesUser = percentageQuerySearchesUser;
     }
 
+    /**
+     * Get the percentage of the queries of the total.
+     * @return the percentage of the queries that are being searched of the total.
+     */
     public double getPercentageQuerySearchesUserOverAll() {
         return percentageQuerySearchesUserOverAll;
     }
 
+    /**
+     * Set the percentage of queries of the total.
+     * @param percentageQuerySearchesUserOverAll percentage of the queries of the total.
+     */
     public void setPercentageQuerySearchesUserOverAll(final double percentageQuerySearchesUserOverAll) {
         this.percentageQuerySearchesUserOverAll = percentageQuerySearchesUserOverAll;
     }
 
+    /**
+     * Get the query in the search field from the user.
+     * @return the query.
+     */
     public String getQuery() {
         return query;
     }
 
+    /**
+     * Set the query in te search field from the user.
+     * @param query searched for by the user
+     */
     public void setQuery(final String query) {
         this.query = query;
     }
