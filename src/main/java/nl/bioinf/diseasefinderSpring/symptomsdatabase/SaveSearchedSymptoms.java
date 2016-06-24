@@ -12,6 +12,7 @@ import nl.bioinf.diseasefinderSpring.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+
 import java.time.LocalDateTime;
 
 /**
@@ -29,20 +30,22 @@ public class SaveSearchedSymptoms {
 
     /**
      * Public constructor.
-     * @param userRepository userRepository interface
+     *
+     * @param userRepository          userRepository interface
      * @param searchHistoryRepository searchHistoryRepository interface.
      */
     @Autowired
-        public SaveSearchedSymptoms(final UserRepository userRepository,
-                                    final SearchHistoryRepository searchHistoryRepository) {
-            this.userRepository = userRepository;
-            this.searchHistoryRepository = searchHistoryRepository;
-        }
+    public SaveSearchedSymptoms(final UserRepository userRepository,
+                                final SearchHistoryRepository searchHistoryRepository) {
+        this.userRepository = userRepository;
+        this.searchHistoryRepository = searchHistoryRepository;
+    }
 
     /**
      * Saves the short and long symptoms in the MySQL database.
+     *
      * @param shortSymptoms is a list of one symptom that is selected
-     * @param symptoms is a list of several symptoms from selected to the root.
+     * @param symptoms      is a list of several symptoms from selected to the root.
      */
     public void saveSymptoms(final String shortSymptoms, final String symptoms) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

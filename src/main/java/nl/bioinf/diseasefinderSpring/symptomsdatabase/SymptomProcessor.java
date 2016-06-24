@@ -28,6 +28,7 @@ public class SymptomProcessor {
 
     /**
      * start function.
+     *
      * @param symptoms the symptoms given by the user.
      */
     public void startProcessing(final String symptoms) {
@@ -89,6 +90,7 @@ public class SymptomProcessor {
 
     /**
      * getter of disease data.
+     *
      * @return the disease data
      */
     public List getDiseaseData() {
@@ -97,6 +99,7 @@ public class SymptomProcessor {
 
     /**
      * setter of disease data.
+     *
      * @param diseaseDataII the disease data.
      */
     public void setDiseaseData(final List diseaseDataII) {

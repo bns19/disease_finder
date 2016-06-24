@@ -77,6 +77,7 @@ public class SymptomsCalculationInformation {
 
     /**
      * Calculates the percentages of the symptoms that have been searched by the user.
+     *
      * @param lastSearchedQuery the last searched query
      */
     private void calculatePercentageOfSymptomsSearchedByUser(String lastSearchedQuery) {
@@ -96,12 +97,10 @@ public class SymptomsCalculationInformation {
             if (totalUserSearches > 0) {
                 /*calculates the percentage of searches by the user against total */
                 double searchedSymptomsPercentageUser = (double) 100 / totalUserSearches * totalSearchesQueryUser;
-                /*rounds the searches to three decimals*/
                 searchedSymptomsPercentageUser = roundNumbers(searchedSymptomsPercentageUser);
                 this.statisticalInformation.setPercentageQuerySearchesUser(searchedSymptomsPercentageUser);
                 /*calculate percentage of searches by user*/
                 double percentageSearchesUser = (double) totalUserSearches / totalSearches * 100;
-                /*rounds to three decimals*/
                 percentageSearchesUser = roundNumbers(percentageSearchesUser);
                 this.statisticalInformation.setPercentageSearchesUser(percentageSearchesUser);
             }
@@ -111,6 +110,7 @@ public class SymptomsCalculationInformation {
 
     /**
      * Calculates the searched percentages of the symptoms that have been searched by all the users.
+     *
      * @param lastSearchedQuery the query last searched for
      */
     private void calculatePercentageOfSymptomsSearchedByTotal(String lastSearchedQuery) {
@@ -130,8 +130,9 @@ public class SymptomsCalculationInformation {
     }
 
     /**
-     * Rounds the numbers to a whole.
-     * @param percentage the number to round
+     * Rounds the numbers.
+     *
+     * @param percentage the number to be rounded
      * @return the rounded number
      */
     private double roundNumbers(final double percentage) {
@@ -145,6 +146,7 @@ public class SymptomsCalculationInformation {
 
     /**
      * getter of statistical information.
+     *
      * @return statistical information object
      */
     public StatisticalInformation getStatisticalInformation() {

@@ -142,7 +142,7 @@ public class StatisticalInformation {
      * Get the percentage of queries from the user.
      * @return percentageQuerySearchesUser.
      */
-    public double getPercentageQuerzySearchesUser() {
+    public double getPercentageQuerySearchesUser() {
         return percentageQuerySearchesUser;
     }
 

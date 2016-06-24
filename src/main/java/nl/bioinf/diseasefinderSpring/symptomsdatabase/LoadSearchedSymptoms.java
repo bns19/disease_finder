@@ -31,8 +31,9 @@ public class LoadSearchedSymptoms {
 
     /**
      * Public constructor.
-     * @param userRepository  UserRepository interface.
-     * @param searchHistoryRepository  SearchHistoryRepository interface.
+     *
+     * @param userRepository          UserRepository interface.
+     * @param searchHistoryRepository SearchHistoryRepository interface.
      */
     @Autowired
     public LoadSearchedSymptoms(final UserRepository userRepository,
@@ -43,6 +44,7 @@ public class LoadSearchedSymptoms {
 
     /**
      * Gives back the searched symptoms of the user.
+     *
      * @return A list with user history
      */
     public List<SearchHistory> loadSearchedSymptoms() {
@@ -54,8 +56,6 @@ public class LoadSearchedSymptoms {
         return usersHistory;
 
     }
-
-
 
 
 }
