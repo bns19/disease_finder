@@ -14,8 +14,10 @@
 
 ###How to run the application
 To run this application the following steps need to be followed. If you are running this new version of the application for the first time, then follow all steps.
-If you have followed the first 7 steps successfully, you will only have to run the last two steps for every new run.
-###
+If you have followed the first 7 steps successfully, you will only have to run the last two steps of the second enumeration of steps every new run.
+
+
+### follow the following steps
 1. Install IntelliJ.
 2. Clone this repository to IntelliJ.
 3. Add the required dependencies by following the following steps
@@ -25,7 +27,8 @@ If you have followed the first 7 steps successfully, you will only have to run t
    > 3. Navigate to the folder ```Lib``` (this folder is delivered with this application directly under the main map) and select the following JARs
    > ```Weka.Jar```,    ```Model.jar```,```mysql-connector-java-5.1.38-bin.jar``` and ```mysql-connector-java-5.1.35.jar```. and add add them by clicking on the ```apply``` button.
 
-
+###You now have the application and all dependencies added.
+Now follow the next enumeration of steps.
 4. Download the files ```Disease.sql, Wek1.csv and Omimdata.csv``` (delivered within the download section of this repository) and place them all in the same directory  open a terminal in this same directory.
 
 5. Enter the following line in the command line: mysql -u "your username" -D "your database" -p --local-infile "yourDatabase"<Disease.sql 
