@@ -42,7 +42,7 @@ dependencies {
 	compile('org.json:json:20160212')
 	runtime("mysql:mysql-connector-java")
  	compile("com.h2database:h2")
-
+    compile files('Lib/model.jar')
 
 }
 
